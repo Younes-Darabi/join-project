@@ -1,0 +1,25 @@
+<img src="/assets/img/logo1.svg">
+<nav>
+    <ul>
+        <li (click)="setActive('summary')" [class.active]="activeSection === 'summary'">
+            <img src="/assets/icons/navbar/summary.svg">
+            <p>Summary</p>
+        </li>
+        <li (click)="setActive('add-task')" [class.active]="activeSection === 'add-task'">
+            <img src="/assets/icons/navbar/add-task.svg">
+            <p>Add Task</p>
+        </li>
+        <li (click)="setActive('board')" [class.active]="activeSection === 'board'">
+            <img src="/assets/icons/navbar/board.svg">
+            <p>Board</p>
+        </li>
+        <li (click)="setActive('contacts')" [class.active]="activeSection === 'contacts'">
+            <img src="/assets/icons/navbar/contacts.svg">
+            <p>Contacts</p>
+        </li>
+    </ul>
+</nav>
+<div>
+    <a>Privacy Policy</a>
+    <a>Legal notice</a>
+</div>
