@@ -1,12 +1,13 @@
 <div class="title">
     <div>
         <img src="/assets/img/logo1.svg">
-        <p><span>Edi</span>t contact</p>
+        <h2>Add contact</h2>
+        <h3><span>Tasks a</span>re better with a team!</h3>
     </div>
 </div>
 <div class="detail">
     <div class="left">
-        <p>TW</p>
+        <img src="/assets/icons/contact/person-add.svg">
     </div>
     <div class="right">
         <div class="close">
@@ -14,7 +15,7 @@
                 <img src="/assets/icons/contact/close.svg" alt="close">
             </div>
         </div>
-        <form (ngSubmit)="onSubmit(user)" #editForm="ngForm">
+        <form (ngSubmit)="onSubmit(user)" #addForm="ngForm">
             <div>
                 <img src="/assets/icons/contact/person.svg" class="icon_name" alt="icon name">
                 <input ngModel #name="ngModel" [(ngModel)]="user.name"
@@ -37,8 +38,8 @@
                     placeholder="Phone" required>
             </div>
             <div class="button">
-                <button class="delete" (click)="deleteUser(user)">Delete</button>
-                <button type="submit" name="submit" class="save">Save<img src="/assets/icons/contact/check.svg"
+                <button class="cancel">Cancel<img src="/assets/icons/contact/close.svg" alt="close"></button>
+                <button type="submit" name="submit" class="create">Create contact<img src="/assets/icons/contact/check.svg"
                         alt="icon check"></button>
             </div>
         </form>
