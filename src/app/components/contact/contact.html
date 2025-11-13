@@ -1,1 +1,7 @@
-<p>contact works!</p>
+<div>
+        <ul class="note_containter">
+            @for (item of this.getList(); track item) {
+            <app-contact-list [contact]="item"></app-contact-list>
+            }
+        </ul>
+    </div>

@@ -1,13 +1,13 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { collection, doc, Firestore, onSnapshot, query, updateDoc } from '@angular/fire/firestore';
-import { Contact } from '../../components/contact/contact';
+import { ContactInterface } from '../interfaces/contact-list.interface';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactService implements OnDestroy {
-  contactList: Contact[] = [];
+  contactList: ContactInterface[] = [];
   unsubContacts: () => void = () => {};
   firestore: Firestore = inject(Firestore);
 
@@ -40,7 +40,7 @@ export class ContactService implements OnDestroy {
     });
   }
 
-  mapToContact(obj: any, id: string): Contact {
+  mapToContact(obj: any, id: string): ContactInterface {
     return {
       id: id || '',
       email: obj.email || '',
@@ -52,7 +52,7 @@ export class ContactService implements OnDestroy {
   }
 
 
-  async updateContact(contact: Contact) {
+  async updateContact(contact: ContactInterface) {
     if (contact.id) {
       const docRef = this.getSingleDocRef(this.getCollectionId(contact), contact.id);
       const cleanContact = this.getCleanJson(contact);
@@ -62,7 +62,7 @@ export class ContactService implements OnDestroy {
     }
   }
 
-  getCleanJson(contact: Contact): {} {
+  getCleanJson(contact: ContactInterface): {} {
     return {
       email: contact.email,
       firstname: contact.firstname,
@@ -72,7 +72,7 @@ export class ContactService implements OnDestroy {
     }
   }
 
-  getCollectionId(contact: Contact): string {
+  getCollectionId(contact: ContactInterface): string {
     return 'users';
   }
 

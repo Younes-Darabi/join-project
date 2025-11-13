@@ -1,4 +1,4 @@
-interface Contact {
+interface ContactInterface {
     id?: string;
     email: string;
     firstname: string;
