@@ -1,0 +1,12 @@
+.contact_list_wrapper {
+    height: calc(100vh - 128px - 100px);
+    overflow-y: scroll;
+    background-color: #06171E;
+    padding: 16px;
+    >div:nth-child(2){
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+}

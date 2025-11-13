@@ -10,7 +10,7 @@ import { ContactService } from '../../services/contact-service';
   selector: 'app-contact',
   imports: [CommonModule, ContactList],
   templateUrl: './contact.html',
-  styleUrl: './contact.scss',
+  styleUrls: ['./contact.scss'],
 })
 export class Contact {
   constructor(private ContactService: ContactService) {}
