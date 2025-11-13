@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { Edit } from "./edit/edit";
 
 @Component({
   selector: 'app-contact',
-  imports: [],
+  imports: [Edit],
   templateUrl: './contact.html',
   styleUrl: './contact.scss',
 })
