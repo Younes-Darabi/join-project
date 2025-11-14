@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FirebaseService } from './../../../service/firebase/firebase';
+import { User } from '../../../interfaces/user';
+
+
 @Component({
   selector: 'app-add',
   imports: [FormsModule, CommonModule],
@@ -8,13 +12,20 @@ import { CommonModule } from '@angular/common';
   styleUrl: './add.scss',
 })
 export class Add {
-  user = {
+  firebaseService = inject(FirebaseService);
+
+  user: User = {
     name: '',
     email: '',
     phone: ''
   };
 
-  onSubmit(user: any) {
-
+  onSubmit() {
+    this.firebaseService.addUser(this.user);
+    this.user.name='';
+    this.user.email='';
+    this.user.phone='';
   }
+
+
 }
