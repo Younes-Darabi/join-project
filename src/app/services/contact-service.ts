@@ -1,5 +1,5 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { collection, doc, Firestore, onSnapshot, query, updateDoc } from '@angular/fire/firestore';
+import { collection, doc, Firestore, onSnapshot, query, setDoc, updateDoc } from '@angular/fire/firestore';
 import { ContactInterface } from '../interfaces/contact-list.interface';
 
 
@@ -51,6 +51,13 @@ export class ContactService implements OnDestroy {
     };
   }
 
+  async addContact(contact: ContactInterface) {
+    const contactId = contact.id || `${contact.firstname}_${contact.lastname}_${Date.now()}`;
+    const cleanContact = this.getCleanJson(contact);
+    await setDoc(doc(this.firestore, "users", contactId), cleanContact)
+      .then(() => { console.log('Contact successfully added'); })
+      .catch((err) => { console.error(err); });
+  }
 
   async updateContact(contact: ContactInterface) {
     if (contact.id) {
@@ -76,5 +83,7 @@ export class ContactService implements OnDestroy {
     return 'users';
   }
 
+
+  
 
 }
