@@ -1,2 +1,9 @@
-<app-add/>
-<!-- <app-edit/> -->
+<div class="contact_list_wrapper">
+<div>
+        <ul class="note_containter">
+            @for (item of this.getList(); track item) {
+            <app-contact-list [contactList]="[item]"></app-contact-list>
+            }
+        </ul>
+    </div>
+</div>
