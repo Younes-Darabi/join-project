@@ -1,0 +1,84 @@
+<div  *ngIf="isEdited && contact" class="overlay_content" (click)="closeDialog()">
+    <div class="custom-dialog">
+        <!-- <app-edit-contact-dialog [contact]="contact" (closeDialogEvent)="closeDialog()"
+            (click)="stopPropagation($event)"></app-edit-contact-dialog> -->
+    </div>
+</div>
+
+    <div *ngIf="isDeleteOpen && contact"class="overlay_content" (click)="closeDialog()">
+        <div class="custom-dialog">
+            <!-- <app-delete-dialog  
+            [contact]="contact"  (closeDialogEvent)="closeDialog()" (contactDeletedEvent)="handleContactDeleted()" (click)="stopPropagation($event)"></app-delete-dialog> -->
+        </div>
+    </div>
+
+
+<div *ngIf="contact" class="content section_wrapper">
+    <div class="headline-position">
+        <div class="headline">
+            <h1 id="contactUpstairs">Contacts</h1>
+            <div class="line">
+                <img src="./assets/contact/line.svg" alt="blue line">
+            </div>
+            <h3>Better with a team</h3>
+        </div>
+        <div class="arrow" (click)="toggleCloseDetails()"><img src="assets/help/arrow.svg" alt=""></div>
+    </div>
+    <div class="main_info">
+        <div class="avatar" [ngStyle]="{'background-color': contact.color}">
+            <h2>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</h2>
+        </div>
+        <div class="fullname">
+            <h2>{{ contact.fullname | titlecase }}</h2>
+            <div class="icons">
+                <div class="actions" >
+                    <img src="./assets/contact/edit.svg" alt="">
+                    <p>edit</p>
+                </div>
+                <div class="actions" >
+                    <img src="./assets/contact/delete.svg" alt="">
+                    <p>delete</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="details">
+        <h4>Contact information</h4>
+        <p class="bold_text">Email</p>
+        <p class="blue_color">{{ contact.email}}</p>
+        <p class="bold_text">Phone</p>
+        <p>{{ contact.phone}}</p>
+    </div>
+</div>
+<div class="three_dot_menu" (click)="toggleMenu()">
+    <img src="./assets/contact/three_dots.svg" alt="">
+    <div class="dropdown_menu" *ngIf="menuOpen">
+        <div class="actions" (click)="openEditDialog(); toggleMenu()">
+            <img src="./assets/contact/edit.svg" alt="">
+            <p>edit</p>
+        </div>
+        <div class="actions" (click)="openDeleteContact(); toggleMenu()">
+            <img src="./assets/contact/delete.svg" alt="">
+            <p>delete</p>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #detailStart>
+    <div class="content section_wrapper">
+        <div class="headline">
+            <h1>Contacts</h1>
+            <div class="line">
+                <img src="./assets/contact/line.svg" alt="">
+            </div>
+            <h3>Better with a team</h3>
+        </div>
+    </div>
+    
+</ng-template>
+
+<div *ngIf="contactIsSuccessfully" class="succesfull_content">
+    Contact successfully created
+</div>
+
