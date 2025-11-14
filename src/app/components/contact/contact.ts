@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ContactList } from './contact-list/contact-list';
 import { CommonModule } from '@angular/common';
-import { ContactInterface } from '../../interfaces/contact-list.interface';
-import { ContactService } from '../../services/contact-service';
+import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
+import { ContactService } from '../../services/contact/contact-service';
 import { Edit } from "./edit/edit";
 import { Add } from "./add/add";
 
@@ -19,3 +19,4 @@ export class Contact {
       return this.ContactService.contactList;
   }
 }
+
