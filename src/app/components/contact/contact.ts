@@ -9,6 +9,12 @@ import { ContactService } from '../../services/contact-service';
 @Component({
   selector: 'app-contact',
   imports: [CommonModule, ContactList],
+import { Edit } from "./edit/edit";
+import { Add } from "./add/add";
+
+@Component({
+  selector: 'app-contact',
+  imports: [Edit, Add],
   templateUrl: './contact.html',
   styleUrls: ['./contact.scss'],
 })
