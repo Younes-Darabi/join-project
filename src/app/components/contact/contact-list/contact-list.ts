@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ContactInterface } from '../../../interfaces/contact-list.interface';
+import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
 
 @Component({
   selector: 'app-contact-list',

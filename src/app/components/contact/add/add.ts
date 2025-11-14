@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { User } from '../../../interfaces/user';
-import { ContactService } from '../../../services/contact-service';
+import { User } from '../../../interfaces/contact/user';
+import { ContactService } from '../../../services/contact/contact-service';
 
 
 @Component({

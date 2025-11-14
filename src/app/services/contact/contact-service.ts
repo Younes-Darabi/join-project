@@ -1,7 +1,7 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { collection, doc, Firestore, onSnapshot, query, setDoc, updateDoc } from '@angular/fire/firestore';
-import { ContactInterface } from '../interfaces/contact-list.interface';
-import { User } from '../interfaces/user';
+import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
+import { User } from '../../interfaces/contact/user';
 
 
 @Injectable({
