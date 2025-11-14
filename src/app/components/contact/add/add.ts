@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FirebaseService } from './../../../service/firebase/firebase';
 import { User } from '../../../interfaces/user';
+import { ContactService } from '../../../services/contact-service';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { User } from '../../../interfaces/user';
   styleUrl: './add.scss',
 })
 export class Add {
-  firebaseService = inject(FirebaseService);
+  firebaseService = inject(ContactService);
 
   user: User = {
     name: '',
