@@ -32,11 +32,11 @@
             <h2>{{ contact.fullname | titlecase }}</h2>
             <div class="icons">
                 <div class="actions" >
-                    <img src="./assets/contact/edit.svg" alt="">
+                    <img src="./assets/icons/contact/edit.svg" alt="">
                     <p>edit</p>
                 </div>
                 <div class="actions" >
-                    <img src="./assets/contact/delete.svg" alt="">
+                    <img src="./assets/icons/contact/delete.svg" alt="">
                     <p>delete</p>
                 </div>
             </div>
@@ -51,14 +51,14 @@
     </div>
 </div>
 <div class="three_dot_menu" (click)="toggleMenu()">
-    <img src="./assets/contact/three_dots.svg" alt="">
+    <img src="./assets/icons/contact/three_dots.svg" alt="">
     <div class="dropdown_menu" *ngIf="menuOpen">
         <div class="actions" (click)="openEditDialog(); toggleMenu()">
-            <img src="./assets/contact/edit.svg" alt="">
+            <img src="./assets/icons/contact/edit.svg" alt="">
             <p>edit</p>
         </div>
         <div class="actions" (click)="openDeleteContact(); toggleMenu()">
-            <img src="./assets/contact/delete.svg" alt="">
+            <img src="./assets/icons/contact/delete.svg" alt="">
             <p>delete</p>
         </div>
     </div>
@@ -70,7 +70,7 @@
         <div class="headline">
             <h1>Contacts</h1>
             <div class="line">
-                <img src="./assets/contact/line.svg" alt="">
+                <img src="./assets/icons/contact/line.svg" alt="">
             </div>
             <h3>Better with a team</h3>
         </div>
@@ -81,4 +81,3 @@
 <div *ngIf="contactIsSuccessfully" class="succesfull_content">
     Contact successfully created
 </div>
-
