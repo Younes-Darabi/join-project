@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostBinding, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { User } from '../../../interfaces/contact/user';
 import { ContactService } from '../../../services/contact/contact-service';
+import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
 
 
 @Component({
@@ -13,19 +13,27 @@ import { ContactService } from '../../../services/contact/contact-service';
 })
 export class Add {
   firebaseService = inject(ContactService);
+  @HostBinding('style.display') display = 'flex';
 
-  user: User = {
-    name: '',
+  user: ContactInterface = {
+    id: '',
+    firstname: '',
+    lastname: '',
     email: '',
-    phone: ''
+    phone: '',
+    type: '',
   };
 
-  onSubmit() {
+  addContact() {
     this.firebaseService.addUser(this.user);
-    this.user.name='';
-    this.user.email='';
-    this.user.phone='';
+    this.user.firstname = '';
+    this.user.lastname = '';
+    this.user.email = '';
+    this.user.phone = '';
+    this.close();
   }
 
-
+  close() {
+    this.display = 'none';
+  }
 }

@@ -12,21 +12,21 @@
     <div class="right">
         <div class="close">
             <div>
-                <img src="/assets/icons/contact/close.svg" alt="close">
+                <img (click)="close()" src="/assets/icons/contact/close.svg" alt="close">
             </div>
         </div>
-        <form (ngSubmit)="onSubmit()" #addForm="ngForm">
+        <form (ngSubmit)="addForm.valid && addContact()" #addForm="ngForm">
             <div class="div_name">
                 <div>
-                    <input ngModel #name="ngModel" [(ngModel)]="user.name"
-                        [ngClass]="{'error': name.invalid && name.touched}" name="name" type="text" minlength="3"
-                        [placeholder]="name.invalid && name.touched ? 'Enter first name' : 'First name'" required>
+                    <input ngModel #fisrtName="ngModel" [(ngModel)]="user.firstname"
+                        [ngClass]="{'error': fisrtName.invalid && fisrtName.touched}" name="fisrtName" type="text" minlength="3"
+                        [placeholder]="fisrtName.invalid && fisrtName.touched ? 'Enter first name' : 'First name'" required>
                 </div>
                 <div>
                     <img src="/assets/icons/contact/person.svg" class="icon_name" alt="icon name">
-                    <input ngModel #name="ngModel" [(ngModel)]="user.name"
-                        [ngClass]="{'error': name.invalid && name.touched}" name="name" type="text" minlength="3"
-                        [placeholder]="name.invalid && name.touched ? 'Enter last name' : 'Last name'" required>
+                    <input ngModel #lastName="ngModel" [(ngModel)]="user.lastname"
+                        [ngClass]="{'error': lastName.invalid && lastName.touched}" name="lastName" type="text" minlength="3"
+                        [placeholder]="lastName.invalid && lastName.touched ? 'Enter last name' : 'Last name'" required>
                 </div>
             </div>
             <div>
@@ -44,8 +44,8 @@
                     placeholder="Phone" required>
             </div>
             <div class="button">
-                <button class="cancel">Cancel<img src="/assets/icons/contact/close.svg" alt="close"></button>
-                <button type="submit" name="submit" class="create">Create contact<img
+                <button class="cancel" type="button" (click)="close()">Cancel<img src="/assets/icons/contact/close.svg" alt="close"></button>
+                <button type="submit" name="submit" class="create" [disabled]="!addForm.valid">Create contact<img
                         src="/assets/icons/contact/check.svg" alt="icon check"></button>
             </div>
         </form>

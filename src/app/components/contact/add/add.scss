@@ -1,5 +1,13 @@
 :host {
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff2a;
 
     .error {
         outline: 1px solid red;
@@ -141,6 +149,8 @@
                             outline: 1px solid #29ABE2;
                         }
                     }
+
+
                 }
 
 
@@ -234,6 +244,11 @@
                         &:hover {
                             background: #29ABE2;
                             cursor: pointer;
+                        }
+
+                        &:disabled{
+                            background: #666;
+                            cursor:no-drop;
                         }
 
                         img {

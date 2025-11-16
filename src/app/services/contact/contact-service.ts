@@ -1,7 +1,6 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { collection, doc, Firestore, onSnapshot, query, setDoc, updateDoc } from '@angular/fire/firestore';
+import { collection, deleteDoc, doc, Firestore, onSnapshot, query, setDoc, updateDoc } from '@angular/fire/firestore';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
-import { User } from '../../interfaces/contact/user';
 
 
 @Injectable({
@@ -9,7 +8,7 @@ import { User } from '../../interfaces/contact/user';
 })
 export class ContactService implements OnDestroy {
   contactList: ContactInterface[] = [];
-  unsubContacts: () => void = () => {};
+  unsubContacts: () => void = () => { };
   firestore: Firestore = inject(Firestore);
 
   constructor() {
@@ -85,10 +84,14 @@ export class ContactService implements OnDestroy {
   }
 
 
-   async addUser(user: User) {
-    const userId = `${user.name}_${Date.now()}`;
+  async addUser(user: ContactInterface) {
+    const userId = `${user.firstname}_${Date.now()}`;
     await setDoc(doc(this.firestore, "users", userId), user);
   }
 
-
+  async deleteContact(user: ContactInterface) {
+    if (user.id) {
+      await deleteDoc(doc(this.firestore, "users", user.id));
+    }
+  }
 }
