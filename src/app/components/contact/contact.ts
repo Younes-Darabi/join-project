@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
 import { ContactService } from '../../services/contact/contact-service';
+import { Edit } from "./edit/edit";
+import { Add } from "./add/add";
+import { ContactDetailsComponent } from './contact-details/contact-details.component';
+
+@Component({
+  selector: 'app-contact',
+  imports: [Edit, Add, ContactList, CommonModule, ContactDetailsComponent],
 
 @Component({
   selector: 'app-contact',
