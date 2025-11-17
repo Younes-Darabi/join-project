@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
 import { ContactService } from '../../services/contact/contact-service';
+import { ContactList } from './contact-list/contact-list';
+
 
 @Component({
   selector: 'app-contact',
   standalone: true,
+  imports: [ContactList],
   templateUrl: './contact.html',
   styleUrls: ['./contact.scss'],
 })
