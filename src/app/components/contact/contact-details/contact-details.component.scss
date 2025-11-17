@@ -1,0 +1,392 @@
+@use '../../../../styles.scss' as styles;
+
+
+.content {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   position: relative;
+    z-index: 3;
+   animation: slideInFromRight 125ms ease-out forwards;
+
+   >.section_wrapper {
+      width: 100%;
+   }
+}
+
+.headline {
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+}
+
+.main_info {
+   height: 120px;
+   display: flex;
+   justify-content: flex-start;
+   gap: 54px;
+   align-items: center;
+   margin-top: 32px;
+}
+
+.avatar {
+   border-radius: 50%;
+   height: 120px;
+   width: 120px;
+   padding: 10px;
+   border: 2px solid white;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   h2 {
+      color: white;
+   }
+}
+
+.fullname {
+   display: flex;
+   flex-direction: column;
+}
+
+
+.icons {
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+   gap: 24px;
+   padding-top: 16px;
+}
+
+
+.actions {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 8px;
+   cursor: pointer;
+
+   &:hover {
+      color: #2aaae2;
+
+      &:hover img {
+         filter: brightness(0) saturate(100%) invert(55%) sepia(97%) saturate(482%) hue-rotate(167deg) brightness(94%) contrast(89%);
+      }
+   }
+}
+
+.details {
+   margin-top: 24px;
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+
+   >.bold_text {
+      font-weight: 400;
+   }
+
+   >.blue_color {
+      color: #2aaae2;
+   }
+}
+
+h4 {
+   padding-top: 24px;
+   padding-bottom: 24px;
+}
+
+.succesfull_content {
+   width: 326px;
+   height: 74px;
+   background-color: #2A3647;
+   border-radius: 20px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: #fff;
+   font-size: 20px;
+   position: absolute;
+   bottom: 120px;
+   left: 100px;
+   animation: slideInFromRight 125ms ease-out forwards;
+}
+
+.custom-dialog {
+   position: fixed;
+   top: 0;
+   right: 0;
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 100;
+   animation: slideInFromRight 125ms ease-out forwards;
+}
+
+.overlay_content {
+   background-color: rgba(0, 0, 0, 0.349);
+   position: fixed;
+   top: 0;
+   right: 0;
+   width: 100%;
+   height: 100vh;
+   z-index: 1000;
+}
+
+.hidden {
+   display: none;
+}
+
+.line {
+   transform: rotate(90deg);
+}
+
+.dropdown_menu {
+   position: absolute;
+   right: 0;
+   background-color: white;
+   color: black;
+   border-radius: 18px;
+   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+   width: 150px;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   padding: 20px;
+   z-index: 10;
+   margin-right: 10px;
+}
+
+.three_dot_menu {
+   cursor: pointer;
+   margin-left: auto;
+   width: fit-content;
+   padding-right: 16px;
+   bottom: 29px;
+}
+
+.three_dot_menu>img:hover {
+   content: url('../../../../../public/assets/icons/contact/three_dots_hover.svg');
+}
+
+.dropdown_menu img {
+   content: none;
+}
+
+@keyframes slideInFromRight {
+   0% {
+      transform: translateX(100%);
+   }
+
+   100% {
+      transform: translateX(0);
+   }
+}
+
+@keyframes slideOutToRight {
+   0% {
+      transform: translateX(0);
+   }
+
+   100% {
+      transform: translateX(100%);
+   }
+}
+
+.dialog-closed {
+   animation: slideOutToRight 0.5s ease-in forwards;
+}
+
+@media (min-width:900px) {
+   .arrow {
+      display: none;
+   }
+
+   .three_dot_menu {
+      display: none;
+   }
+}
+
+@media (max-width:1490px) {
+   .section_wrapper {
+      padding-right: 80px;
+      padding-left: 80px;
+   }
+}
+
+@media (max-width:1190px) {
+   .section_wrapper {
+      padding-right: 30px;
+      padding-left: 30px;
+   }
+
+   h1 {
+      font-size: 43px;
+   }
+
+   h3 {
+      font-size: 20px;
+   }
+}
+
+@media (max-width: 1190px) {
+   .list-wrapper {
+      padding: 16px;
+   }
+
+   .contact_info_wrapper {
+      padding: 16px 8px;
+      gap: 16px;
+   }
+
+   .single_letter {
+      padding: 16px;
+      padding-bottom: 8px;
+   }
+
+   .main_info {
+      justify-content: flex-start;
+   }
+
+   .avatar {
+      height: 100px;
+      width: 100px;
+   }
+
+   h2 {
+      font-size: 42px;
+      text-wrap: nowrap;
+   }
+}
+
+@media (max-width: 1090px) {
+   .main_info {
+      h2 {
+         font-size: 36px;
+      }
+
+      .avatar {
+         width: 80px;
+         height: 80px;
+      }
+   }
+}
+
+@media (max-width: 995px) {
+   .main_info {
+      gap: 16px;
+   }
+
+   .headline {
+      flex-direction: column;
+      align-items: flex-start;
+   }
+
+   .line {
+      order: 3;
+      transform: none;
+   }
+}
+
+@media (max-width:900px) {
+   h1 {
+      font-size: 52px;
+   }
+
+   .avatar {
+      height: 80px;
+      width: 80px;
+
+      h2 {
+         font-size: 24px;
+      }
+   }
+
+   .icons {
+      display: none;
+   }
+
+   .headline-position {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+   }
+
+   .headline {
+      flex-direction: column;
+      align-items: flex-start;
+   }
+
+   .arrow {
+      display: block;
+      cursor: pointer;
+   }
+
+   .arrow img {
+      padding-right: 20px;
+   }
+
+   .line {
+      order: 3;
+      transform: none;
+   }
+
+   .section_wrapper {
+      padding-left: 16px;
+      padding-right: 0;
+      padding-top: 16px;
+      height: 66vh;
+   }
+
+   .main_info {
+      gap: 20px;
+   }
+
+   .three_dot_menu {
+      display: flex;
+   }
+}
+
+@media (max-width: 450px) {
+   .main_info h2 {
+      font-size: 24px;
+   }
+
+   .main_info .avatar {
+      height: 60px;
+      width: 60px;
+   }
+}
+
+// @media (max-width: 360px) and (max-height: 740px) {
+//    .section_wrapper {
+//       height: 65vh;
+//    }
+// }
+
+@media (max-width: 450px) and (max-height: 700px) {
+   .section_wrapper {
+      height: 55vh;
+   }
+}
+
+@media (max-width: 340px) {
+   .main_info h2 {
+      font-size: 20px;
+   }
+
+   .main_info .avatar {
+      height: 40px;
+      width: 40px;
+      font-size: 16px;
+   }
+
+   .main_info {
+      gap: 8px;
+   }
+
+   h4 {
+      font-size: 18px;
+   }
+}
