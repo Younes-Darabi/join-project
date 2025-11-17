@@ -1,7 +1,8 @@
 <div class="title">
     <div>
+        <img class="close_w" (click)="close()" src="/assets/icons/contact/close-w.svg" alt="close">
         <img src="/assets/img/logo1.svg">
-        <p><span>Edi</span>t contact</p>
+        <p><span>Edit</span> contact</p>
     </div>
 </div>
 <div class="detail">
@@ -14,7 +15,7 @@
                 <img (click)="close()" src="/assets/icons/contact/close.svg" alt="close">
             </div>
         </div>
-        <form (ngSubmit)="editForm.valid && editContact()"  #editForm="ngForm">
+        <form (ngSubmit)="editForm.valid && editContact()" #editForm="ngForm">
             <div class="div_name">
                 <div>
                     <input ngModel #fisrtName="ngModel" [(ngModel)]="user.firstname"
@@ -47,8 +48,8 @@
             </div>
             <div class="button">
                 <button class="delete" (click)="deleteContact()">Delete</button>
-                <button type="submit" name="submit" class="save" [disabled]="!editForm.valid">Save<img src="/assets/icons/contact/check.svg"
-                        alt="icon check"></button>
+                <button type="submit" name="submit" class="save" [disabled]="!editForm.valid">Save<img
+                        src="/assets/icons/contact/check.svg" alt="icon check"></button>
             </div>
         </form>
     </div>
