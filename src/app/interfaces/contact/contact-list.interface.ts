@@ -1,8 +1,8 @@
 export interface ContactInterface {
     id?: string;
-    email: string;
     firstname: string;
     lastname: string;
+    email: string;
     phone: string;
     type: string;
 }

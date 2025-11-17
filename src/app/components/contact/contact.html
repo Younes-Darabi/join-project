@@ -1,3 +1,17 @@
+<div class="contact_list_wrapper">
+  <div>
+    <ul class="note_containter">
+      @for (item of this.getList(); track item) {
+      <app-contact-list [contactList]="[item]"></app-contact-list>
+      }
+    </ul>
+  </div>
+</div>
+
+<app-contact-details class="contact-details"></app-contact-details>
+
+<!-- <app-edit></app-edit>
+<app-add></app-add> -->
 <div class="contact_container">
     <button class="btn_add">
         Add new contact <img src="./assets/icons/contact/person_add_two.svg" alt="">
