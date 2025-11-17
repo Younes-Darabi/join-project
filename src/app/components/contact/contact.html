@@ -1,11 +1,19 @@
 <div class="contact_list_wrapper">
-<div>
-        <ul class="note_containter">
-            @for (item of this.getList(); track item) {
-            <app-contact-list [contactList]="[item]"></app-contact-list>
-            }
-        </ul>
+    <div class="contact_header">
+        <h1>Contacts</h1>
+        <button class="btn-add" routerLink="add">+ Add Contact</button>
     </div>
+
+    <div class="contact_container">
+  @if (contactService.contactList.length === 0) {
+    <p class="no-contacts">No contacts available</p>
+  }
+  <ul class="note_containter">
+    @for (item of contactService.contactList; track item.id) {
+      <app-contact-list [contactList]="[item]"></app-contact-list>
+    }
+  </ul>
 </div>
-<app-edit></app-edit>
-<app-add></app-add>
+</div>
+<!-- <app-edit></app-edit>
+<app-add></app-add> -->

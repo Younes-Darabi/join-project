@@ -5,18 +5,19 @@ import { ContactInterface } from '../../interfaces/contact/contact-list.interfac
 import { ContactService } from '../../services/contact/contact-service';
 import { Edit } from "./edit/edit";
 import { Add } from "./add/add";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-contact',
-  imports: [Edit, Add, ContactList, CommonModule],
+  imports: [Edit, Add, ContactList, CommonModule, RouterLink],
   templateUrl: './contact.html',
   styleUrls: ['./contact.scss'],
 })
 export class Contact {
-  constructor(private ContactService: ContactService) {}
+  contactlist: ContactInterface[] = [];
+  constructor(public contactService: ContactService) {}
 
-  getList(): ContactInterface[] {
-      return this.ContactService.contactList;
-  }
+  
 }
+
 

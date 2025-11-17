@@ -9,11 +9,11 @@ import { User } from '../../interfaces/contact/user';
 })
 export class ContactService implements OnDestroy {
   contactList: ContactInterface[] = [];
-  unsubContacts: () => void = () => {};
+  unsubContacts;
   firestore: Firestore = inject(Firestore);
 
   constructor() {
-    this.unsubContacts = this.subscribeToContacts();
+    this.unsubContacts = this.subContactsList();
   }
 
   getContactsRef() {
@@ -25,23 +25,27 @@ export class ContactService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.unsubContacts) {
       this.unsubContacts();
     }
-  }
+  
 
-  subscribeToContacts() {
+  subContactsList() {
     const q = query(this.getContactsRef());
-    return onSnapshot(q, (list) => {
-      this.contactList = [];
-      list.forEach(element => {
-        this.contactList.push(this.mapToContact(element.data(), element.id));
-
-      });
-    });
+    return onSnapshot(q, 
+      (list) => {
+        this.contactList = [];
+        list.forEach(element => {
+          this.contactList.push(this.setContactObject(element.data(), element.id));
+        });
+       console.debug('ContactService: loaded contacts:', this.contactList.length);
+      },
+      (error) => {
+        console.error('Error subscribing to contacts:', error);
+      }
+    );
   }
 
-  mapToContact(obj: any, id: string): ContactInterface {
+  setContactObject(obj: any, id: string): ContactInterface {
     return {
       id: id || '',
       email: obj.email || '',
@@ -62,7 +66,7 @@ export class ContactService implements OnDestroy {
 
   async updateContact(contact: ContactInterface) {
     if (contact.id) {
-      const docRef = this.getSingleDocRef(this.getCollectionId(contact), contact.id);
+      const docRef = this.getSingleDocRef("users", contact.id);
       const cleanContact = this.getCleanJson(contact);
       await updateDoc(docRef, cleanContact)
         .then(() => { console.log('Contact successfully updated'); })
@@ -78,10 +82,6 @@ export class ContactService implements OnDestroy {
       phone: contact.phone,
       type: contact.type
     }
-  }
-
-  getCollectionId(contact: ContactInterface): string {
-    return 'users';
   }
 
 

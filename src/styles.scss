@@ -15,7 +15,12 @@
 }
 
 body{
-    margin: 0;
     font-family: Inter;
     background-color: #E0E0E0;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
