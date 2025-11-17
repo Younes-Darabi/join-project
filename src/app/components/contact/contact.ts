@@ -1,22 +1,35 @@
-import { Component } from '@angular/core';
-import { ContactList } from './contact-list/contact-list';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
 import { ContactService } from '../../services/contact/contact-service';
 import { Edit } from "./edit/edit";
 import { Add } from "./add/add";
+import { ContactDetailsComponent } from './contact-details/contact-details.component';
 
 @Component({
   selector: 'app-contact',
-  imports: [Edit, Add, ContactList, CommonModule],
+  imports: [Edit, Add, ContactList, CommonModule, ContactDetailsComponent],
+
+@Component({
+  selector: 'app-contact',
+  standalone: true,
   templateUrl: './contact.html',
   styleUrls: ['./contact.scss'],
 })
-export class Contact {
-  constructor(private ContactService: ContactService) {}
+export class Contact implements OnInit {
+  groupedContacts: Record<string, ContactInterface[]> = {};
+  groupedKeys: string[] = [];
 
-  getList(): ContactInterface[] {
-      return this.ContactService.contactList;
+  constructor(public contactService: ContactService) { }
+
+  ngOnInit() {
+    this.contactService.subContactsList();
+    setTimeout(() => {
+      this.updateGrouping();
+    }, 500);
+  }
+
+  updateGrouping() {
+    this.groupedContacts = this.contactService.getGroupedContacts();
+    this.groupedKeys = Object.keys(this.groupedContacts);
   }
 }
-

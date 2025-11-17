@@ -1,5 +1,6 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { collection, deleteDoc, doc, Firestore, onSnapshot, query, setDoc, updateDoc } from '@angular/fire/firestore';
+import { collection, doc, Firestore, onSnapshot, query, setDoc} from '@angular/fire/firestore';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
 
 
@@ -8,11 +9,11 @@ import { ContactInterface } from '../../interfaces/contact/contact-list.interfac
 })
 export class ContactService implements OnDestroy {
   contactList: ContactInterface[] = [];
-  unsubContacts: () => void = () => { };
+  unsubContacts;
   firestore: Firestore = inject(Firestore);
 
   constructor() {
-    this.unsubContacts = this.subscribeToContacts();
+    this.unsubContacts = this.subContactsList();
   }
 
   getContactsRef() {
@@ -29,18 +30,21 @@ export class ContactService implements OnDestroy {
     }
   }
 
-  subscribeToContacts() {
+  subContactsList() {
     const q = query(this.getContactsRef());
-    return onSnapshot(q, (list) => {
-      this.contactList = [];
-      list.forEach(element => {
-        this.contactList.push(this.mapToContact(element.data(), element.id));
-
-      });
-    });
+    return onSnapshot(q,
+      (list) => {
+        this.contactList = [];
+        list.forEach(element => {
+          this.contactList.push(this.setContactObject(element.data(), element.id));
+        });
+      },
+      (error) => {
+      }
+    );
   }
 
-  mapToContact(obj: any, id: string): ContactInterface {
+  setContactObject(obj: any, id: string): ContactInterface {
     return {
       id: id || '',
       email: obj.email || '',
@@ -55,18 +59,7 @@ export class ContactService implements OnDestroy {
     const contactId = contact.id || `${contact.firstname}_${contact.lastname}_${Date.now()}`;
     const cleanContact = this.getCleanJson(contact);
     await setDoc(doc(this.firestore, "users", contactId), cleanContact)
-      .then(() => { console.log('Contact successfully added'); })
-      .catch((err) => { console.error(err); });
-  }
-
-  async updateContact(contact: ContactInterface) {
-    if (contact.id) {
-      const docRef = this.getSingleDocRef(this.getCollectionId(contact), contact.id);
-      const cleanContact = this.getCleanJson(contact);
-      await updateDoc(docRef, cleanContact)
-        .then(() => { console.log('Contact successfully updated'); })
-        .catch((err) => { console.error(err); });
-    }
+      .catch((err) => { });
   }
 
   getCleanJson(contact: ContactInterface): {} {
@@ -93,5 +86,37 @@ export class ContactService implements OnDestroy {
     if (user.id) {
       await deleteDoc(doc(this.firestore, "users", user.id));
     }
+  async addUser(user: User) {
+    const userId = `${user.name}_${Date.now()}`;
+    await setDoc(doc(this.firestore, "users", userId), user);
+  }
+
+  getFirstLetter(contact: ContactInterface): string {
+    return contact.firstname?.charAt(0).toUpperCase() || '';
+  }
+
+  getGroupedContacts(): Record<string, ContactInterface[]> {
+    const grouped: Record<string, ContactInterface[]> = {};
+
+    this.contactList.forEach(contact => {
+      const letter = this.getFirstLetter(contact);
+      if (!grouped[letter]) {
+        grouped[letter] = [];
+      }
+      grouped[letter].push(contact);
+    });
+
+    Object.keys(grouped).forEach(letter => {
+      grouped[letter].sort((a, b) => a.firstname.localeCompare(b.firstname));
+    });
+
+    const sortedGrouped = Object.keys(grouped)
+      .sort()
+      .reduce((acc, key) => {
+        acc[key] = grouped[key];
+        return acc;
+      }, {} as Record<string, ContactInterface[]>);
+
+    return sortedGrouped;
   }
 }

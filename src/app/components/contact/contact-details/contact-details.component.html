@@ -1,14 +1,14 @@
 <div  *ngIf="isEdited && contact" class="overlay_content" (click)="closeDialog()">
     <div class="custom-dialog">
-        <!-- <app-edit-contact-dialog [contact]="contact" (closeDialogEvent)="closeDialog()"
-            (click)="stopPropagation($event)"></app-edit-contact-dialog> -->
+        <span (closeDialogEvent)="closeDialog()"
+            (click)="stopPropagation($event)"></span>
     </div>
 </div>
 
     <div *ngIf="isDeleteOpen && contact"class="overlay_content" (click)="closeDialog()">
         <div class="custom-dialog">
-            <!-- <app-delete-dialog  
-            [contact]="contact"  (closeDialogEvent)="closeDialog()" (contactDeletedEvent)="handleContactDeleted()" (click)="stopPropagation($event)"></app-delete-dialog> -->
+            <span  
+             (closeDialogEvent)="closeDialog()" (contactDeletedEvent)="handleContactDeleted()" (click)="stopPropagation($event)"></span>
         </div>
     </div>
 

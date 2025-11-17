@@ -1,11 +1,44 @@
-<!-- <div class="contact_list_wrapper">
-<div>
-        <ul class="note_containter">
-            @for (item of this.getList(); track item) {
-            <app-contact-list [contactList]="[item]"></app-contact-list>
+<div class="contact_list_wrapper">
+  <div>
+    <ul class="note_containter">
+      @for (item of this.getList(); track item) {
+      <app-contact-list [contactList]="[item]"></app-contact-list>
+      }
+    </ul>
+  </div>
+</div>
+
+<app-contact-details class="contact-details"></app-contact-details>
+
+<!-- <app-edit></app-edit>
+<app-add></app-add> -->
+<div class="contact_container">
+    <button class="btn_add">
+        Add new contact <img src="./assets/icons/contact/person_add_two.svg" alt="">
+    </button>
+    <p>Debug: {{ contactService.contactList.length }} contacts loaded</p>
+
+    <ul class="list_container">
+        @for (letter of groupedKeys; track letter) {
+        <li>
+            <h3>{{ letter }}</h3>
+            <hr>
+            @for (item of groupedContacts[letter]; track item.id) {
+            <div class="name_container">
+                <p class="name_icon"></p>
+                <p>
+                    {{ item.firstname }} {{ item.lastname }} <br>
+                    <a href="">{{ item.email }}</a>
+                </p>
+            </div>
             }
-        </ul>
-    </div>
-</div> -->
-<app-edit></app-edit>
-<!-- <app-add></app-add> -->
+        </li>
+        } @empty {
+        <p>No contacts</p>
+        }
+    </ul>
+</div>
+
+
+<!-- <app-edit></app-edit>
+<app-add></app-add> -->
