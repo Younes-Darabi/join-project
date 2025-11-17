@@ -1,6 +1,5 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { collection, deleteDoc, doc, Firestore, onSnapshot, query, setDoc, updateDoc } from '@angular/fire/firestore';
-import { collection, doc, Firestore, onSnapshot, query, setDoc} from '@angular/fire/firestore';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
 
 
@@ -76,6 +75,15 @@ export class ContactService implements OnDestroy {
     return 'users';
   }
 
+  async updateContact(contact: ContactInterface) {
+    if (contact.id) {
+      const docRef = this.getSingleDocRef(this.getCollectionId(contact), contact.id);
+      const cleanContact = this.getCleanJson(contact);
+      await updateDoc(docRef, cleanContact)
+        .then(() => { console.log('Contact successfully updated'); })
+        .catch((err) => { console.error(err); });
+    }
+  }
 
   async addUser(user: ContactInterface) {
     const userId = `${user.firstname}_${Date.now()}`;
@@ -86,9 +94,6 @@ export class ContactService implements OnDestroy {
     if (user.id) {
       await deleteDoc(doc(this.firestore, "users", user.id));
     }
-  async addUser(user: User) {
-    const userId = `${user.name}_${Date.now()}`;
-    await setDoc(doc(this.firestore, "users", userId), user);
   }
 
   getFirstLetter(contact: ContactInterface): string {
