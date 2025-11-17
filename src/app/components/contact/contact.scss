@@ -1,31 +1,28 @@
-.contact_list_wrapper {
-    height: 88vh;
-    padding: 20px;
+.contact_container {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px 60px;
+    max-width: 450px;
+    height: 100vh;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
 
-.contact_header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #e0e0e0;
-
-    h1 {
-        font-size: 28px;
-        font-weight: 600;
-        color: #333;
-        margin: 0;
+    a {
+        color: rgba(0, 124, 238, 1);
     }
 
-    .btn-add {
+    .no_contacts {
+        text-align: center;
+        color: #666;
+        font-size: 18px;
+        padding: 40px;
+    }
+
+    .btn_add {
         padding: 10px 20px;
-        background-color: #4CAF50;
+        background-color: rgba(42, 54, 71, 1);
         color: white;
         border: none;
         border-radius: 5px;
@@ -33,34 +30,38 @@
         font-size: 16px;
         transition: background-color 0.3s;
 
+        img {
+            height: 20px;
+            width: 30px;
+            margin-left: 10px;
+        }
+
         &:hover {
             background-color: #45a049;
         }
     }
 }
 
-.contact_container {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 20px;
-    min-height: 400px;
+.name_container {
+    display: flex;
+    gap: 40px;
 
-    .no-contacts {
-        text-align: center;
-        color: #666;
-        font-size: 18px;
-        padding: 40px;
+    .name_icon {
+        height: 42px;
+        width: 42px;
+        border-radius: 100px;
+        background-color: #007CEE;
     }
 }
 
-.note_containter {
+.list_containter {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: grid;
-    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 
-    // Responsive: 1 Spalte auf mobil, 2 auf tablet, 3 auf desktop
     @media (min-width: 768px) {
         grid-template-columns: repeat(2, 1fr);
     }

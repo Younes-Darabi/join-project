@@ -1,5 +1,5 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { collection, doc, Firestore, onSnapshot, query, setDoc, updateDoc } from '@angular/fire/firestore';
+import { collection, doc, Firestore, onSnapshot, query, setDoc} from '@angular/fire/firestore';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
 import { User } from '../../interfaces/contact/user';
 
@@ -25,22 +25,21 @@ export class ContactService implements OnDestroy {
   }
 
   ngOnDestroy() {
+    if (this.unsubContacts) {
       this.unsubContacts();
     }
-  
+  }
 
   subContactsList() {
     const q = query(this.getContactsRef());
-    return onSnapshot(q, 
+    return onSnapshot(q,
       (list) => {
         this.contactList = [];
         list.forEach(element => {
           this.contactList.push(this.setContactObject(element.data(), element.id));
         });
-       console.debug('ContactService: loaded contacts:', this.contactList.length);
       },
       (error) => {
-        console.error('Error subscribing to contacts:', error);
       }
     );
   }
@@ -60,18 +59,7 @@ export class ContactService implements OnDestroy {
     const contactId = contact.id || `${contact.firstname}_${contact.lastname}_${Date.now()}`;
     const cleanContact = this.getCleanJson(contact);
     await setDoc(doc(this.firestore, "users", contactId), cleanContact)
-      .then(() => { console.log('Contact successfully added'); })
-      .catch((err) => { console.error(err); });
-  }
-
-  async updateContact(contact: ContactInterface) {
-    if (contact.id) {
-      const docRef = this.getSingleDocRef("users", contact.id);
-      const cleanContact = this.getCleanJson(contact);
-      await updateDoc(docRef, cleanContact)
-        .then(() => { console.log('Contact successfully updated'); })
-        .catch((err) => { console.error(err); });
-    }
+      .catch((err) => { });
   }
 
   getCleanJson(contact: ContactInterface): {} {
@@ -84,11 +72,37 @@ export class ContactService implements OnDestroy {
     }
   }
 
-
-   async addUser(user: User) {
+  async addUser(user: User) {
     const userId = `${user.name}_${Date.now()}`;
     await setDoc(doc(this.firestore, "users", userId), user);
   }
 
+  getFirstLetter(contact: ContactInterface): string {
+    return contact.firstname?.charAt(0).toUpperCase() || '';
+  }
 
+  getGroupedContacts(): Record<string, ContactInterface[]> {
+    const grouped: Record<string, ContactInterface[]> = {};
+
+    this.contactList.forEach(contact => {
+      const letter = this.getFirstLetter(contact);
+      if (!grouped[letter]) {
+        grouped[letter] = [];
+      }
+      grouped[letter].push(contact);
+    });
+
+    Object.keys(grouped).forEach(letter => {
+      grouped[letter].sort((a, b) => a.firstname.localeCompare(b.firstname));
+    });
+
+    const sortedGrouped = Object.keys(grouped)
+      .sort()
+      .reduce((acc, key) => {
+        acc[key] = grouped[key];
+        return acc;
+      }, {} as Record<string, ContactInterface[]>);
+
+    return sortedGrouped;
+  }
 }

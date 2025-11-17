@@ -1,19 +1,30 @@
-<div class="contact_list_wrapper">
-    <div class="contact_header">
-        <h1>Contacts</h1>
-        <button class="btn-add" routerLink="add">+ Add Contact</button>
-    </div>
+<div class="contact_container">
+    <button class="btn_add">
+        Add new contact <img src="./assets/icons/contact/person_add_two.svg" alt="">
+    </button>
+    <p>Debug: {{ contactService.contactList.length }} contacts loaded</p>
 
-    <div class="contact_container">
-  @if (contactService.contactList.length === 0) {
-    <p class="no-contacts">No contacts available</p>
-  }
-  <ul class="note_containter">
-    @for (item of contactService.contactList; track item.id) {
-      <app-contact-list [contactList]="[item]"></app-contact-list>
-    }
-  </ul>
+    <ul class="list_container">
+        @for (letter of groupedKeys; track letter) {
+        <li>
+            <h3>{{ letter }}</h3>
+            <hr>
+            @for (item of groupedContacts[letter]; track item.id) {
+            <div class="name_container">
+                <p class="name_icon"></p>
+                <p>
+                    {{ item.firstname }} {{ item.lastname }} <br>
+                    <a href="">{{ item.email }}</a>
+                </p>
+            </div>
+            }
+        </li>
+        } @empty {
+        <p>No contacts</p>
+        }
+    </ul>
 </div>
-</div>
+
+
 <!-- <app-edit></app-edit>
 <app-add></app-add> -->
