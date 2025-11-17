@@ -75,6 +75,15 @@ export class ContactService implements OnDestroy {
     return 'users';
   }
 
+  async updateContact(contact: ContactInterface) {
+    if (contact.id) {
+      const docRef = this.getSingleDocRef(this.getCollectionId(contact), contact.id);
+      const cleanContact = this.getCleanJson(contact);
+      await updateDoc(docRef, cleanContact)
+        .then(() => { console.log('Contact successfully updated'); })
+        .catch((err) => { console.error(err); });
+    }
+  }
 
   async addUser(user: ContactInterface) {
     const userId = `${user.firstname}_${Date.now()}`;
