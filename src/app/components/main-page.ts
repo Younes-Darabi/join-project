@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Contact } from "./contact/contact";
+
 
 @Component({
   selector: 'app-main-page',
-  imports: [Contact],
+  imports: [],
   templateUrl: './main-page.html',
-  styleUrl: './main-page.scss',
+  styleUrls: ['./main-page.scss'],
 })
 export class MainPage {
 
