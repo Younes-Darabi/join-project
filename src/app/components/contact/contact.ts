@@ -12,6 +12,7 @@ import { ContactDetailsComponent } from './contact-details/contact-details.compo
 @Component({
   selector: 'app-contact',
   standalone: true,
+  imports: [ContactList],
   templateUrl: './contact.html',
   styleUrls: ['./contact.scss'],
 })
