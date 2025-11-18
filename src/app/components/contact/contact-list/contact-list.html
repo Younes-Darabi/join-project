@@ -2,8 +2,6 @@
     <button class="btn_add" (click)="openAddContact()">
         Add new contact <img src="./assets/icons/contact/person_add_two.svg" alt="">
     </button>
-    <p>Debug: {{ contactService.contactList.length }} contacts loaded</p>
-
     <ul class="list_container">
         @for (letter of groupedKeys; track letter) {
         <li class="list_element">
