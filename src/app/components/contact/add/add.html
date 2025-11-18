@@ -16,7 +16,7 @@
                 <img (click)="close()" src="/assets/icons/contact/close.svg" alt="close">
             </div>
         </div>
-        <form (ngSubmit)="addForm.valid && addContact()" #addForm="ngForm">
+        <form (ngSubmit)="addForm.valid && addUser()" #addForm="ngForm">
             <div class="div_name">
                 <div>
                     <input ngModel #fisrtName="ngModel" [(ngModel)]="user.firstname"

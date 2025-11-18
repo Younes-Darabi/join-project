@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Edit } from "./edit/edit";
-import { Add } from "./add/add";
-import { CommonModule } from '@angular/common';
+
+import { ContactDetailsComponent } from './contact-details/contact-details.component';
 import { ContactList } from './contact-list/contact-list';
 import { Details } from "./details/details";
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
@@ -9,7 +9,7 @@ import { ContactInterface } from '../../interfaces/contact/contact-list.interfac
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [Edit, Add, ContactList, CommonModule, Details],
+  imports: [ContactList, Edit, ContactDetailsComponent],
   templateUrl: './contact.html',
   styleUrls: ['./contact.scss'],
 })

@@ -37,7 +37,7 @@
         }
 
         &:hover {
-            background-color: #45a049;
+            background-color: #29ABE2;
         }
     }
 }
@@ -45,12 +45,17 @@
 .name_container {
     display: flex;
     gap: 40px;
+    margin: 20px 0;
 
     .name_icon {
         height: 42px;
         width: 42px;
         border-radius: 100px;
         background-color: #007CEE;
+        text-align: center;
+        line-height: 42px;
+        color: white;
+        
     }
 }
 
@@ -68,4 +73,8 @@
     @media (min-width: 1024px) {
         grid-template-columns: repeat(3, 1fr);
     }
+}
+
+.list_element{
+    list-style: none;
 }
