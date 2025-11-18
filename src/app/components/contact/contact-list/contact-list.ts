@@ -5,6 +5,7 @@ import { ContactService } from '../../../services/contact/contact-service';
 import { Add } from '../add/add';
 
 
+
 @Component({
   selector: 'app-contact-list',
   standalone: true,
