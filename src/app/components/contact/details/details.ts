@@ -22,8 +22,9 @@ export class Details {
   shortName: string = '';
   @Output() editClicked = new EventEmitter<ContactInterface>();
 
-  getContact($event: ContactInterface) {
+  showDetail($event: ContactInterface) {
     this.contact = $event;
+    this.shortName = this.contact.firstname.substring(0, 1) + this.contact.lastname.substring(0, 1);
   }
 
   showEdit() {

@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="detail">
-    <div class="left {{this.contactColor}}">
+    <div class="left" [style.background-color]="firebaseService.getColorForContact(user)">
         <p>{{this.shortName}}</p>
     </div>
     <div class="right">

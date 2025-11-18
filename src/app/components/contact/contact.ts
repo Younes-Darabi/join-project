@@ -14,9 +14,14 @@ import { ContactInterface } from '../../interfaces/contact/contact-list.interfac
 
 export class Contact {
   @ViewChild(Edit) Edit!: Edit;
+  @ViewChild(Details) Details!: Details;
 
-  showEdit($event:ContactInterface) {
+  showEdit($event: ContactInterface) {
     this.Edit.showEdit($event);
+  }
+
+  showDetail($event: ContactInterface) {
+    this.Details.showDetail($event);
   }
 
 }
