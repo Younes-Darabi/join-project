@@ -12,24 +12,26 @@ import { ContactInterface } from '../../../interfaces/contact/contact-list.inter
 })
 
 export class Edit {
+
   firebaseService = inject(ContactService);
-  @HostBinding('style.display') display = 'flex';
+  @HostBinding('style.display') display = 'none';
 
-  user: ContactInterface;
+  user: ContactInterface = {
+    id: '',
+    firstname: '',
+    lastname: '',
+    email: '',
+    phone: '',
+    type: '',
+  };
+  shortName: string = '';
+  contactColor: string = '';
 
-  // constructor(contact: ContactInterface) {
-  //   this.user = contact;
-  // }
-
-  constructor() {
-    this.user = {
-      id: 'sara.müller@gmail.com',
-      firstname: 'Sara Müller',
-      lastname: 'Mueller',
-      email: '',
-      phone: '+41763457669',
-      type: '',
-    };
+  showEdit($event: ContactInterface) {
+    this.user = $event;
+    this.display = 'flex';
+    this.shortName = this.user.firstname.substring(0, 1)+this.user.lastname.substring(0, 1);
+    this.contactColor = this.user.firstname.substring(0, 1);
   }
 
   editContact() {
@@ -42,10 +44,7 @@ export class Edit {
     this.close();
   }
 
-
   close() {
     this.display = 'none';
   }
-
 }
-
