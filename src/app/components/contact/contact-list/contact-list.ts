@@ -1,31 +1,53 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, DOCUMENT, Inject, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
 import { ContactService } from '../../../services/contact/contact-service';
+import { Add } from '../add/add';
+
 
 @Component({
   selector: 'app-contact-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Add],
   templateUrl: './contact-list.html',
   styleUrls: ['./contact-list.scss'],
 })
 export class ContactList implements OnInit {
   groupedContacts: Record<string, ContactInterface[]> = {};
   groupedKeys: string[] = [];
+  isClicked: boolean = false;
+  constructor(public contactService: ContactService,
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document) { }
 
-  constructor(public contactService: ContactService) { }
-
-   ngOnInit() {
+  ngOnInit() {
     this.contactService.subContactsList();
-    setTimeout(() => {
-      this.updateGrouping();
-    }, 500);
+  }
+
+  ngDoCheck() {
+    this.updateGrouping();
   }
 
   updateGrouping() {
     this.groupedContacts = this.contactService.getGroupedContacts();
     this.groupedKeys = Object.keys(this.groupedContacts);
   }
+
+  getInitials(firstname: string, lastname: string): string {
+    const firstInitial = firstname?.charAt(0).toUpperCase() || '';
+    const lastInitial = lastname?.charAt(0).toUpperCase() || '';
+    return `${firstInitial}${lastInitial}`;
+  }
+
+  openAddContact() {
+    this.isClicked = true;
+    this.renderer.addClass(this.document.body, 'contact_open')
+  }
+
+  handleClose() {
+    this.isClicked = false;
+    this.renderer.removeClass(this.document.body, 'contact_open');
+  }
+
 }
 

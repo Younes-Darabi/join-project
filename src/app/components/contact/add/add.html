@@ -1,8 +1,9 @@
 <div class="title">
     <div>
+        <img class="close_w" (click)="close()" src="/assets/icons/contact/close-w.svg" alt="close">
         <img src="/assets/img/logo1.svg">
         <h2>Add contact</h2>
-        <h3><span>Tasks a</span>re better with a team!</h3>
+        <h3><span>Tasks are</span> better with a team!</h3>
     </div>
 </div>
 <div class="detail">
@@ -15,17 +16,20 @@
                 <img (click)="close()" src="/assets/icons/contact/close.svg" alt="close">
             </div>
         </div>
-        <form (ngSubmit)="addForm.valid && addContact()" #addForm="ngForm">
+        <form (ngSubmit)="addForm.valid && addUser()" #addForm="ngForm">
             <div class="div_name">
                 <div>
                     <input ngModel #fisrtName="ngModel" [(ngModel)]="user.firstname"
-                        [ngClass]="{'error': fisrtName.invalid && fisrtName.touched}" name="fisrtName" type="text" minlength="3"
-                        [placeholder]="fisrtName.invalid && fisrtName.touched ? 'Enter first name' : 'First name'" required>
+                        [ngClass]="{'error': fisrtName.invalid && fisrtName.touched}" name="fisrtName" type="text"
+                        minlength="3"
+                        [placeholder]="fisrtName.invalid && fisrtName.touched ? 'Enter first name' : 'First name'"
+                        required>
                 </div>
                 <div>
                     <img src="/assets/icons/contact/person.svg" class="icon_name" alt="icon name">
                     <input ngModel #lastName="ngModel" [(ngModel)]="user.lastname"
-                        [ngClass]="{'error': lastName.invalid && lastName.touched}" name="lastName" type="text" minlength="3"
+                        [ngClass]="{'error': lastName.invalid && lastName.touched}" name="lastName" type="text"
+                        minlength="3"
                         [placeholder]="lastName.invalid && lastName.touched ? 'Enter last name' : 'Last name'" required>
                 </div>
             </div>
@@ -44,7 +48,8 @@
                     placeholder="Phone" required>
             </div>
             <div class="button">
-                <button class="cancel" type="button" (click)="close()">Cancel<img src="/assets/icons/contact/close.svg" alt="close"></button>
+                <button class="cancel" type="button" (click)="close()">Cancel<img src="/assets/icons/contact/close.svg"
+                        alt="close"></button>
                 <button type="submit" name="submit" class="create" [disabled]="!addForm.valid">Create contact<img
                         src="/assets/icons/contact/check.svg" alt="icon check"></button>
             </div>
