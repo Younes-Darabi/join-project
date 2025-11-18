@@ -9,10 +9,6 @@
     flex-direction: column;
     gap: 15px;
 
-    a {
-        color: rgba(0, 124, 238, 1);
-    }
-
     .no_contacts {
         text-align: center;
         color: #666;
@@ -46,6 +42,7 @@
     display: flex;
     gap: 40px;
     margin: 20px 0;
+    cursor: pointer;
 
     .name_icon {
         height: 42px;
@@ -55,7 +52,17 @@
         text-align: center;
         line-height: 42px;
         color: white;
-        
+
+    }
+
+    .email {
+        color: rgba(0, 124, 238, 1);
+        display: inline-block;
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: bottom;
     }
 }
 
@@ -75,6 +82,6 @@
     }
 }
 
-.list_element{
+.list_element {
     list-style: none;
 }
