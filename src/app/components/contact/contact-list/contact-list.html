@@ -1,17 +1,17 @@
 <div class="contact_container">
-    <button class="btn_add">
+    <button class="btn_add" (click)="openAddContact()">
         Add new contact <img src="./assets/icons/contact/person_add_two.svg" alt="">
     </button>
     <p>Debug: {{ contactService.contactList.length }} contacts loaded</p>
 
     <ul class="list_container">
         @for (letter of groupedKeys; track letter) {
-        <li>
+        <li class="list_element">
             <h3>{{ letter }}</h3>
             <hr>
             @for (item of groupedContacts[letter]; track item.id) {
             <div class="name_container">
-                <p class="name_icon"></p>
+                <p class="name_icon" [style.background-color]="contactService.getColorForContact(item)">{{ getInitials(item.firstname, item.lastname) }}</p>
                 <p>
                     {{ item.firstname }} {{ item.lastname }} <br>
                     <a href="">{{ item.email }}</a>
@@ -24,3 +24,6 @@
         }
     </ul>
 </div>
+@if (isClicked) {
+<app-add (closeAddContact)="handleClose()"></app-add>
+}
