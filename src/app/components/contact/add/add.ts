@@ -13,7 +13,7 @@ import { ContactInterface } from '../../../interfaces/contact/contact-list.inter
 })
 export class Add {
   firebaseService = inject(ContactService);
-  @HostBinding('style.display') display = 'flex';
+  @HostBinding('style.display') display = 'none';
 
   user: ContactInterface = {
     id: '',
@@ -34,5 +34,9 @@ export class Add {
 
   close() {
     this.closeAddContact.emit();
+  }
+
+  show() {
+    this.display = 'flex';
   }
 }

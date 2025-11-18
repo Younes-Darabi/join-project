@@ -3,7 +3,7 @@
     border-radius: 8px;
     padding: 20px 60px;
     max-width: 450px;
-    height:calc(100vh - 98px);
+    height: calc(100vh - 96px);
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -60,7 +60,6 @@
 }
 
 .list_containter {
-    list-style: none;
     padding: 0;
     margin: 0;
     display: flex;

@@ -1,0 +1,101 @@
+:host {
+
+    margin: 50px;
+
+    .title {
+        display: flex;
+        align-items: center;
+
+        h2 {
+            font-size: 61px;
+            padding-right: 20px;
+            border-right: 3px solid #29ABE2
+        }
+
+        p {
+            font-size: 27px;
+            margin-left: 20px;
+        }
+    }
+
+    .contact {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        margin-top: 30px;
+
+        .info_title {
+            display: flex;
+            flex-direction: column;
+
+            h3 {
+                font-weight: 500;
+                font-size: 47px;
+            }
+
+            .edit_delete {
+                display: flex;
+                align-items: center;
+                gap: 30px;
+                margin-top: 10px;
+
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    transition: all 250ms ease-in-out;
+
+                    &:hover {
+                        cursor: pointer;
+                        color: #29ABE2
+                    }
+                }
+            }
+        }
+
+        .short_name {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 120px;
+            height: 120px;
+            background-color: #FF7A00;
+            border: 3px solid #ffffff;
+            outline: 1px solid #e7e7e7;
+            border-radius: 50%;
+            font-size: 47px;
+            color: white;
+            font-weight: 500;
+
+            p {
+                color: #ffffff;
+                font-size: 47px;
+            }
+        }
+    }
+
+    h4 {
+        font-weight: 400;
+        font-size: 20px;
+        padding: 40px 0;
+    }
+
+    .email {
+        font-weight: 400;
+        font-style: Regular;
+        font-size: 16px;
+        color: #007CEE;
+        padding: 15px 0;
+    }
+
+    h5 {
+        font-size: 16px;
+    }
+
+    .phone {
+        font-size: 16px;
+        padding: 15px 0;
+    }
+
+}
