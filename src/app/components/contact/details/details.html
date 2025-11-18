@@ -4,7 +4,7 @@
 </div>
 @if (this.contact.id !='') {
 <div class="contact">
-    <div class="short_name">{{this.shortName}}</div>
+    <div class="short_name" [style.background-color]="firebaseService.getColorForContact(contact)">{{this.shortName}}</div>
     <div class="info_title">
         <h3>{{contact.firstname}} {{contact.lastname}}</h3>
         <div class="edit_delete">
