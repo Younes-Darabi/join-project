@@ -1,4 +1,4 @@
-import { Component, DOCUMENT, Inject, OnInit, Renderer2 } from '@angular/core';
+import { Component, DOCUMENT, EventEmitter, Inject, OnInit, Output, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
 import { ContactService } from '../../../services/contact/contact-service';
@@ -14,6 +14,7 @@ import { Add } from '../add/add';
   styleUrls: ['./contact-list.scss'],
 })
 export class ContactList implements OnInit {
+  @Output() detailClicked = new EventEmitter<ContactInterface>();
   groupedContacts: Record<string, ContactInterface[]> = {};
   groupedKeys: string[] = [];
   isClicked: boolean = false;
@@ -50,5 +51,8 @@ export class ContactList implements OnInit {
     this.renderer.removeClass(this.document.body, 'contact_open');
   }
 
+  showDetails(item: ContactInterface) {
+    this.detailClicked.emit(item);
+  }
 }
 
