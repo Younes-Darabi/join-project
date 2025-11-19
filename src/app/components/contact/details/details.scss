@@ -120,9 +120,11 @@
 
                             &:hover {
                                 cursor: pointer;
-                                color: #007CEE;
-                                .icon_edit {
-                                transition: all 200ms ease-in-out;
+                                color: #29ABE2;
+                            }
+
+                            .icon_edit {
+                                transition: all 250ms ease-in-out;
                                 cursor: pointer;
                                 content: url('../../../../../public/assets/icons/contact/edit_hover.svg');
                             }
