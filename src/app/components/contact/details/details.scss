@@ -116,24 +116,25 @@
                             display: flex;
                             align-items: center;
                             gap: 10px;
-                            transition: all 250ms ease-in-out;
+                            transition: all 100ms ease-in-out;
 
                             &:hover {
                                 cursor: pointer;
                                 color: #007CEE;
-                            }
-
-                            .icon_edit {
-                                transition: all 250ms ease-in-out;
+                                .icon_edit {
+                                transition: all 200ms ease-in-out;
                                 cursor: pointer;
                                 content: url('../../../../../public/assets/icons/contact/edit_hover.svg');
                             }
 
                             .icon_delete {
-                                transition: all 250ms ease-in-out;
+                                transition: all 200ms ease-in-out;
                                 cursor: pointer;
                                 content: url('../../../../../public/assets/icons/contact/delete_hover.svg');
                             }
+                            }
+
+                            
                         }
                     }
                 }
