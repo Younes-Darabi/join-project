@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { ContactService } from '../../../services/contact/contact-service';
 import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
 
-
 @Component({
   selector: 'app-add',
   standalone: true,
@@ -13,6 +12,7 @@ import { ContactInterface } from '../../../interfaces/contact/contact-list.inter
   styleUrls: ['./add.scss'],
 })
 export class Add {
+  success: boolean = false;
   firebaseService = inject(ContactService);
   user: ContactInterface = {
     id: '',
@@ -26,7 +26,12 @@ export class Add {
   addUser() {
     this.firebaseService.addContact(this.user);
     this.firebaseService.contactList.push(JSON.parse(JSON.stringify(this.user)));
-    this.close();
+
+    this.success = true;
+    setTimeout(() => {
+      this.close();
+      this.success = false;
+    }, 1000);
   }
 
   @Output() closeAddContact = new EventEmitter<void>();

@@ -1,15 +1,16 @@
 :host {
-  margin: 50px;
+    margin: 50px;
+    width: 100%;
 
-  .title {
-    display: flex;
-    align-items: center;
+    .title {
+        display: flex;
+        align-items: center;
 
-    h2 {
-      font-size: 61px;
-      padding-right: 20px;
-      border-right: 3px solid #29abe2;
-    }
+        h2 {
+            font-size: 61px;
+            padding-right: 20px;
+            border-right: 3px solid #007CEE;
+        }
 
         p {
             font-size: 27px;

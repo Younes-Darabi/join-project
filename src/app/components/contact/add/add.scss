@@ -9,6 +9,18 @@
     height: 100vh;
     background-color: #ffffff2a;
 
+    .success {
+        display: none;
+        position: absolute;
+        right: 50px;
+        bottom: 50px;
+        font-size: 20px;
+        color: #FFFFFF;
+        background: #2A3647;
+        padding: 25px 30px;
+        border-radius: 20px;
+    }
+
     .error {
         outline: 1px solid red;
 
@@ -265,19 +277,26 @@
         }
     }
 }
+
 @media(max-width:1300px) {
-:host {
-    .title {
-        width: 400px;
-    }
-    .detail {
-        width: 600px;
+    :host {
+        .title {
+            width: 400px;
+        }
+
+        .detail {
+            width: 600px;
+        }
     }
 }
-}
+
 @media(max-width:1000px) {
     :host {
         flex-direction: column;
+
+        .success {
+            font-size: 16px;
+        }
 
         .title {
             align-items: flex-start;
@@ -382,12 +401,18 @@
 }
 
 @media(max-width:550px) {
-:host {
-    .title {
-        width: 95%;
+    :host {
+        .title {
+            width: 95%;
+        }
+
+        .detail {
+            width: 95%;
+        }
+
+        .success {
+            right: 25px;
+            bottom: 50px;
+        }
     }
-    .detail {
-        width: 95%;
-    }
-}
 }

@@ -1,4 +1,4 @@
-<div class="title">
+<div [ngStyle]="{'display' : success ? 'none' : 'flex' }" class="title">
     <div>
         <img class="close_w" (click)="close()" src="/assets/icons/contact/close-w.svg" alt="close">
         <img src="/assets/img/logo1.svg">
@@ -6,7 +6,7 @@
         <h3><span>Tasks are</span> better with a team!</h3>
     </div>
 </div>
-<div class="detail">
+<div class="detail" [ngStyle]="{'display' : success ? 'none' : 'flex' }">
     <div class="left">
         <img src="/assets/icons/contact/person-add.svg">
     </div>
@@ -56,3 +56,4 @@
         </form>
     </div>
 </div>
+<p data-aos="fade-left" class="success" [ngStyle]="{'display' : !success ? 'none' : 'flex' }">Contact succesfully created </p>
