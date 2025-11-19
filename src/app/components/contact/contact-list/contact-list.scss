@@ -24,7 +24,7 @@
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
-        transition: background-color 0.3s;
+        transition: all 0.3s ease-in-out;
 
         img {
             height: 20px;
@@ -40,10 +40,10 @@
 
 .name_container {
     display: flex;
-    gap: 40px;
-    margin: 20px 0;
+    gap: 30px;
+    margin: 5px 0;
     cursor: pointer;
-    padding: 15px 24px;
+    padding: 15px 20px;
     transition: all 250ms ease-in-out;
 
     &:hover {
@@ -67,12 +67,15 @@
     .email {
         color: rgba(0, 124, 238, 1);
         display: inline-block;
-        max-width: 150px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         vertical-align: bottom;
     }
+}
+
+.btn_add_responsive {
+    display: none;
 }
 
 .list_containter {
@@ -91,12 +94,36 @@
     }
 }
 
+
 .list_element {
     list-style: none;
+}
+
+@media (max-width: 1000px) {
+.btn_add{
+    display: none;
+}
+
+.btn_add_responsive{
+    position: absolute;
+    bottom: 80px;
+    right: 30px;
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    background-color: rgba(42, 54, 71, 1);
+    img{
+        width: 20px;
+        height: 20px;
+        margin-left: 2px;
+    }
+}
 
     h3 {
-        margin-left: 36px;
-        margin-bottom: 20px;
+        margin-left: 32px;
+        margin-top: 10px;
+        margin-bottom: 10px;
         font-weight: 400;
         font-size: 20px;
     }
@@ -105,5 +132,15 @@
 @media(max-width:1000px) {
     .contact_container {
         height: calc(100vh - 160px);
+    }
+}
+
+@media(max-width:900px) {
+    :host {
+        width: 100%;
+        .contact_container {
+            max-width: unset;
+            width: 100%;
+        }
     }
 }
