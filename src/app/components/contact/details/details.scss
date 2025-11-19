@@ -107,18 +107,20 @@
                 font-size: 47px;
             }
 
-            .edit_delete {
-                display: flex;
-                align-items: center;
-                gap: 30px;
-                margin-top: 10px;
+  .contact {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-top: 30px;
 
+    .info_title {
+      display: flex;
+      flex-direction: column;
 
-                a {
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    transition: all 250ms ease-in-out;
+      h3 {
+        font-weight: 500;
+        font-size: 47px;
+      }
 
                     &:hover {
                         cursor: pointer;
@@ -146,7 +148,9 @@
                 color: #ffffff;
                 font-size: 47px;
             }
+          }
         }
+      }
     }
 
     h4 {
