@@ -1,17 +1,13 @@
 .contact_container {
     background-color: #f9f9f9;
     border-radius: 8px;
-    padding: 20px 60px;
+    padding: 20px 40px;
     max-width: 450px;
     height: calc(100vh - 96px);
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
     gap: 15px;
-
-    a {
-        color: rgba(0, 124, 238, 1);
-    }
 
     .no_contacts {
         text-align: center;
@@ -46,16 +42,36 @@
     display: flex;
     gap: 40px;
     margin: 20px 0;
+    cursor: pointer;
+    padding: 15px 24px;
+    transition: all 250ms ease-in-out;
+
+    &:hover {
+        border-radius: 10px;
+        background: #2A3647;
+        color: white;
+    }
 
     .name_icon {
         height: 42px;
         width: 42px;
         border-radius: 100px;
         background-color: #007CEE;
+        outline: 2px solid white;
         text-align: center;
         line-height: 42px;
         color: white;
-        
+
+    }
+
+    .email {
+        color: rgba(0, 124, 238, 1);
+        display: inline-block;
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: bottom;
     }
 }
 
@@ -75,6 +91,19 @@
     }
 }
 
-.list_element{
+.list_element {
     list-style: none;
+
+    h3 {
+        margin-left: 36px;
+        margin-bottom: 20px;
+        font-weight: 400;
+        font-size: 20px;
+    }
+}
+
+@media(max-width:1000px) {
+    .contact_container {
+        height: calc(100vh - 160px);
+    }
 }

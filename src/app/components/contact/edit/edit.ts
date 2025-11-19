@@ -25,13 +25,11 @@ export class Edit {
     type: '',
   };
   shortName: string = '';
-  contactColor: string = '';
 
   showEdit($event: ContactInterface) {
     this.user = $event;
     this.display = 'flex';
     this.shortName = this.user.firstname.substring(0, 1)+this.user.lastname.substring(0, 1);
-    this.contactColor = this.user.firstname.substring(0, 1);
   }
 
   editContact() {

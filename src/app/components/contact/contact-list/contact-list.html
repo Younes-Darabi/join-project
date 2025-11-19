@@ -8,11 +8,12 @@
             <h3>{{ letter }}</h3>
             <hr>
             @for (item of groupedContacts[letter]; track item.id) {
-            <div class="name_container">
-                <p class="name_icon" [style.background-color]="contactService.getColorForContact(item)">{{ getInitials(item.firstname, item.lastname) }}</p>
+            <div class="name_container" (click)="showDetails(item)">
+                <p class="name_icon" [style.background-color]="contactService.getColorForContact(item)">{{
+                    getInitials(item.firstname, item.lastname) }}</p>
                 <p>
                     {{ item.firstname }} {{ item.lastname }} <br>
-                    <a href="">{{ item.email }}</a>
+                <span class="email">{{ item.email }}</span>
                 </p>
             </div>
             }
