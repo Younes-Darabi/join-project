@@ -106,26 +106,27 @@
         height: calc(100vh - 160px);
     }
 
-.btn_add{
-    display: none;
-}
-
-.btn_add_responsive{
-    position: absolute;
-    bottom: 100px;
-    right: 30px;
-    display: block;
-    width: 56px;
-    height: 56px;
-    border: none;
-    border-radius: 100px;
-    background-color: rgba(42, 54, 71, 1);
-    img{
-        width: 32px;
-        height: 32px;
-        margin-left: 2px;
+    .btn_add {
+        display: none;
     }
-}
+
+    .btn_add_responsive {
+        position: absolute;
+        bottom: 100px;
+        right: 30px;
+        display: block;
+        width: 56px;
+        height: 56px;
+        border: none;
+        border-radius: 100px;
+        background-color: rgba(42, 54, 71, 1);
+
+        img {
+            width: 32px;
+            height: 32px;
+            margin-left: 2px;
+        }
+    }
 
     h3 {
         margin-left: 32px;
@@ -137,15 +138,15 @@
 }
 
 @media(max-width:900px) {
-    
-        
-        .contact_container {
-            max-width: unset;
-            width: 100%;
-        }
-    }
 
-    @media (max-width: 610px) {
+
+    .contact_container {
+        max-width: unset;
+        width: 100%;
+    }
+}
+
+@media (max-width: 610px) {
     .name_container {
         gap: 15px;
         padding: 10px 15px;
@@ -166,10 +167,12 @@
 @media (max-width: 585px) {
     .contact_container {
         width: 300px;
+        padding: 0 15px;
+
     }
 }
 
-@media (max-width: 480px){
+@media (max-width: 480px) {
     .contact_container {
         width: 100vw;
         padding: 15px 20px;
