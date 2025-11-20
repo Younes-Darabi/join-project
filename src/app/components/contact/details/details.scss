@@ -2,6 +2,22 @@
   margin: 50px;
   width: 100%;
 
+  .back_btn {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    border: none;
+    border-radius: 100px;
+    background: none;
+    cursor: pointer;
+
+    &:active {
+      scale: 1.2;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+  }
+
   .title {
     display: flex;
     align-items: center;
@@ -77,13 +93,39 @@
     gap: 4px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: all 250ms ease-in-out;
+  .menu-btn {
+    display: none;
+    position: absolute;
+    bottom: 100px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: #2a3647;
+    border-radius: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 250ms ease-in-out;
 
     &:hover {
       cursor: pointer;
       background: #29abe2;
     }
   }
+    &:hover {
+      cursor: pointer;
+      background: #29abe2;
+    }
+  }
 
+  .menu-btn span {
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+  }
   .menu-btn span {
     width: 6px;
     height: 6px;
@@ -152,13 +194,14 @@
       color: white;
       font-weight: 500;
 
-      p {
-        color: #ffffff;
-        font-size: 47px;
-      }
-    }
-  }
-}
+                    p {
+                        color: #ffffff;
+                        font-size: 47px;
+                    }
+                }
+            }
+        
+
 
 h4 {
   font-weight: 400;
@@ -194,6 +237,10 @@ h5 {
   :host {
     margin: 30px;
 
+    .title {
+      // display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     .title {
       // display: flex;
       flex-direction: column;
@@ -246,7 +293,15 @@ h5 {
     }
   }
 }
+    h4 {
+      padding: 30px 0;
+    }
+  }
+}
 
+@media (max-width: 900px) {
+  :host {
+    display: none;
 @media (max-width: 900px) {
   :host {
     display: none;
@@ -254,10 +309,22 @@ h5 {
     .edit_res {
       display: flex;
     }
+    .edit_res {
+      display: flex;
+    }
 
     .arrow {
       display: flex;
     }
+    .arrow {
+      display: flex;
+    }
+
+    .menu-btn {
+      display: flex;
+    }
+  }
+}
 
     .menu-btn {
       display: flex;
