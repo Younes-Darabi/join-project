@@ -67,6 +67,7 @@
     .email {
         color: rgba(0, 124, 238, 1);
         display: inline-block;
+        width: 150px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -116,6 +117,7 @@
     display: block;
     width: 56px;
     height: 56px;
+    border: none;
     border-radius: 100px;
     background-color: rgba(42, 54, 71, 1);
     img{
@@ -142,3 +144,35 @@
             width: 100%;
         }
     }
+
+    @media (max-width: 610px) {
+    .name_container {
+        gap: 15px;
+        padding: 10px 15px;
+
+        .name_icon {
+            height: 36px;
+            width: 36px;
+            line-height: 36px;
+            font-size: 18px;
+        }
+
+        h3 {
+            font-size: 16px;
+        }
+    }
+}
+
+@media (max-width: 585px) {
+    .contact_container {
+        width: 300px;
+    }
+}
+
+@media (max-width: 480px){
+    .contact_container {
+        width: 100vw;
+        padding: 15px 20px;
+        z-index: 10;
+    }
+}
