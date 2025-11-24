@@ -16,8 +16,8 @@ export class Edit {
 
   // WICHTIG: Input für die Daten vom Parent
   @Input() user!: ContactInterface;
-   @Output() closeing = new EventEmitter<void>();
-  
+  @Output() closeing = new EventEmitter<void>();
+  @Output() closeEditContact = new EventEmitter<void>();
 
   shortName: string = '';
 
@@ -38,8 +38,6 @@ export class Edit {
     this.firebaseService.deleteContact(this.user);
     this.closeing.emit();
   }
-
-  @Output() closeEditContact = new EventEmitter<void>();
 
   close() {
     this.closeEditContact.emit();

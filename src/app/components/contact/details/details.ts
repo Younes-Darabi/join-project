@@ -19,7 +19,7 @@ export class Details {
 
   // Events
   @Output() close = new EventEmitter<void>();
- 
+
 
   // Getter für Initialen
   get shortName(): string {
@@ -29,7 +29,7 @@ export class Details {
       : '';
   }
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef) { }
 
   toggleMenu() {
     this.menuOpen.update(v => !v);
