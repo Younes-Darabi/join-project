@@ -30,8 +30,9 @@ export class ContactService implements OnDestroy {
           this.contactList.push(this.setContactObject(element.data(), element.id));
         });
       },
-      (error) => {console.error(error);
-      
+      (error) => {
+        console.error(error);
+
       }
     );
   }
@@ -83,18 +84,44 @@ export class ContactService implements OnDestroy {
     return doc(collection(this.firestore, colId), docId);
   }
 
+  
+
   setContactObject(obj: any, id: string): ContactInterface {
+    let initials = '';
+    if (obj.firstname && obj.lastname) {
+      initials = `${obj.firstname.charAt(0)}${obj.lastname.charAt(0)}`.toUpperCase();
+    }
+    let color = this.getColorForContact(obj);
     return {
       id: id || '',
       email: obj.email || '',
       firstname: obj.firstname || '',
       lastname: obj.lastname || '',
       phone: obj.phone || '',
-      type: obj.type || 'contact'
+      type: obj.type || 'contact',
+      initials: initials,
+      color: color
     };
   }
 
-  readonly colors = ['#FF7A00', '#6E52FF', '#FC71FF', '#FFBB2B', '#1FD7C1', '#462F8A', '#FF4646', '#00BEE8'];
+  readonly colors = [
+    '#FF7A00', 
+    '#FF5EB3', 
+    '#9327FF', 
+    '#6E52FF', 
+    '#FC71FF', 
+    '#FFE62B', 
+    '#FFBB2B', 
+    '#C3FF2B', 
+    '#1FD7C1', 
+    '#462F8A', 
+    '#FF4646', 
+    '#00BEE8',
+    '#FF745E',
+    '#FFA35E', 
+    '#FFC701', 
+    '#0038FF'
+  ];
 
   getColorForContact(contact: ContactInterface): string {
     const key = (contact.firstname + contact.lastname) || '';
@@ -107,6 +134,12 @@ export class ContactService implements OnDestroy {
     const index = Math.abs(hash) % this.colors.length;
     return this.colors[index];
   }
+
+  getInitials(firstName: string, lastName: string): string {
+    let firstInitial = firstName?.charAt(0).toUpperCase() || '';
+    let lastInitial = lastName?.charAt(0).toUpperCase() || '';
+    return `${firstInitial}${lastInitial}`;
+}
 
   getGroupedContacts(): Record<string, ContactInterface[]> {
     const grouped = new Map<string, ContactInterface[]>();

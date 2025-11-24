@@ -35,11 +35,6 @@ export class ContactList implements OnInit {
     this.groupedKeys = Object.keys(this.groupedContacts);
   }
 
-  getInitials(firstname: string, lastname: string): string {
-    const f = firstname?.charAt(0).toUpperCase() || '';
-    const l = lastname?.charAt(0).toUpperCase() || '';
-    return `${f}${l}`;
-  }
 
   openAddContact() {
     this.isClicked = true;
