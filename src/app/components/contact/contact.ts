@@ -13,14 +13,14 @@ import { ContactInterface } from '../../interfaces/contact/contact-list.interfac
 export class Contact {
 
   // Responsive Signal
-  isMobile = signal(window.innerWidth <= 480);
+  isMobile = signal(window.innerWidth <= 800);
 
   // Aktuell ausgewählter Kontakt
   selectedContact = signal<ContactInterface | null>(null);
 
   constructor() {
     window.addEventListener('resize', () => {
-      this.isMobile.set(window.innerWidth <= 480);
+      this.isMobile.set(window.innerWidth <= 800);
     });
   }
 

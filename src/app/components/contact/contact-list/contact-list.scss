@@ -105,6 +105,16 @@
 
 .list_element {
     list-style: none;
+
+    h3 {
+        margin-left: 20px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-weight: 400;
+        font-size: 20px;
+        width: 42px;
+        text-align: center;
+    }
 }
 
 @media (max-width: 1300px) {
@@ -147,14 +157,6 @@
             margin-left: 2px;
         }
     }
-
-    h3 {
-        margin-left: 32px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-weight: 400;
-        font-size: 20px;
-    }
 }
 
 @media(max-width:900px) {
@@ -178,7 +180,8 @@
 
         .email {
             width: 100%;
-            span{
+
+            span {
                 width: 100%;
             }
         }

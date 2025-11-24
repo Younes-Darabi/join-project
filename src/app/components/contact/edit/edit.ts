@@ -21,6 +21,7 @@ export class Edit {
 
   shortName: string = '';
 
+
   ngOnChanges() {
     if (this.user) {
       this.shortName =
