@@ -135,14 +135,12 @@
           display: flex;
           align-items: center;
           gap: 10px;
-          transition: all 250ms ease-in-out;
           width: 80px;
 
           &:hover {
             cursor: pointer;
             color: #29abe2;
             font-weight: 700;
-            scale: 1.05;
 
             .icon_edit {
               cursor: pointer;
