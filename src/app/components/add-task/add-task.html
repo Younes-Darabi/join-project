@@ -1,1 +1,63 @@
-<p>add-task works!</p>
+<div class="add_task_wrapper">
+    <header>
+        <h1 class="add_task_title">Add Task</h1>
+    </header>
+    <main>
+        <div class="add_task_container">
+            <div class="add_task_form">
+                <label>
+                    Title <span>*</span>
+                    <input type="text">
+                </label>
+                <label>
+                    Description
+                    <input type="text">
+                </label>
+                <label class="date_input">
+                    Due date <span>*</span>
+                    <input type="date">
+                </label>
+            </div>
+            <div class="separator"></div>
+            <div class="add_task_form">
+                <label>
+                    Priority
+                    <div class="add_task_priority">
+                        <button class="priority_btn urgent">Urgent</button>
+                        <button class="priority_btn medium">Medium</button>
+                        <button class="priority_btn low">Low</button>
+                    </div>
+                </label>
+                <div class="assigned_dropdown">
+                    <input type="text" />
+
+                    <div class="assigned_dropdown_list">
+
+                        <label class="assigned_dropdown_option">
+                            <input type="checkbox" />
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <label>
+                    Category <span>*</span>
+                    <input type="text">
+                </label>
+                <label class="subtasks_input">
+                    Subtask
+                    <input type="text">
+                </label>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="add_task_actions">
+            <p class="add_task_info">Please fill out all required fields.</p>
+            <button class="add_task_btn_cancel">Cancel</button>
+            <button class="add_task_btn_submit">Add Task</button>
+        </div>
+    </footer>
+</div>
