@@ -30,12 +30,17 @@ export class AddTask {
     }));
   }
 
+  sortContactsAlphabetically(contacts: ContactInterface[]): ContactInterface[] {
+    return contacts.slice().sort((a, b) => a.firstname.localeCompare(b.firstname));
+  }
+
   async ngOnInit() {
     let collectionRef = this.contactService.getContactsRef();
     let snapshot = await getDocs(collectionRef);
-    this.contactList = snapshot.docs.map(doc =>
+    let loadedContacts = snapshot.docs.map(doc =>
       this.contactService.setContactObject(doc.data(), doc.id)
     );
+    this.contactList = this.sortContactsAlphabetically(loadedContacts);
     this.setIsYouForContacts();
     document.addEventListener('click', this.handleOutsideClick.bind(this));
   }
@@ -62,12 +67,14 @@ export class AddTask {
     let searchTerm = this.search.trim().toLowerCase();
     if (!searchTerm) {
       this.open = true;
+      this.contactList = this.sortContactsAlphabetically(this.contactList);
       return;
     }
-    this.contactList = this.contactList.map(contact => ({
+    let filteredContacts = this.contactList.map(contact => ({
       ...contact,
       visible: `${contact.firstname} ${contact.lastname}`.toLowerCase().includes(searchTerm)
     }));
+    this.contactList = this.sortContactsAlphabetically(filteredContacts);
   }
 
   toggleSelect(contact: ContactInterface) {
