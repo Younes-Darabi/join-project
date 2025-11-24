@@ -19,12 +19,13 @@ export class ContactList implements OnInit {
   groupedKeys: string[] = [];
 
   isClicked: boolean = false;
+  activeSection: any = '';
 
   constructor(
     public contactService: ContactService,
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.contactService.subContactsList();
@@ -53,5 +54,7 @@ export class ContactList implements OnInit {
 
   showDetails(item: ContactInterface) {
     this.detailClicked.emit(item);
+    this.activeSection = item.id;
+    
   }
 }

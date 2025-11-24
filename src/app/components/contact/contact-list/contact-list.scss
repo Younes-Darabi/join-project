@@ -1,6 +1,5 @@
 .contact_container {
-    background-color: #f9f9f9;
-    border-radius: 8px;
+    background-color: #ffffff;
     padding: 20px 40px;
     width: 456px;
     height: calc(100vh - 96px);
@@ -47,6 +46,11 @@
     transition: all 250ms ease-in-out;
 
     &:hover {
+        border-radius: 10px;
+        background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
+    }
+
+    &.active {
         border-radius: 10px;
         background: #2A3647;
         color: white;
@@ -169,20 +173,20 @@
 @media(max-width:800px) {
     :host {
         width: 100%;
-    }
 
-    .contact_container {
-        width: 100%;
-    }
+        .contact_container {
+            width: 100%;
+        }
 
-    .name_container {
-        width: 100%;
-
-        .email {
+        .name_container {
             width: 100%;
 
-            span {
+            .email {
                 width: 100%;
+
+                span {
+                    width: 100%;
+                }
             }
         }
     }

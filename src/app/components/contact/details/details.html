@@ -1,16 +1,16 @@
-@if (contact.id !== '') { <button class="back_btn" (click)="close.emit()"><img src="./assets/icons/contact/arrow.svg" alt=""></button> }
+@if (this.showDetail) { <button class="back_btn" (click)="back()"><img src="./assets/icons/contact/arrow.svg" alt=""></button> }
 
-<div class="title">
+<div class="title" >
     <h2>Contacts</h2>
-    <p>Better with a team</p>
+    <p><span>Better wit</span>h a team</p>
 </div>
 
 <img class="arrow" src="./assets/icons/contact/arrow.svg">
-<div class="menu_btn" (click)="toggleMenu()">
+@if (this.showDetail) {<div class="menu_btn" (click)="toggleMenu()">
   <span></span>
   <span></span>
   <span></span>
-</div>
+</div>}
 
 @if (menuOpen()) {
   <div class="edit_res">
@@ -23,7 +23,7 @@
   </div>
 }
 
-@if (this.contact.id !='') {
+@if (this.showDetail) {
 <div class="contact">
     <div class="short_name" [style.background-color]="firebaseService.getColorForContact(contact)">{{this.shortName}}
     </div>

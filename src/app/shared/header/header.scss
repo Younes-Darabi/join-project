@@ -61,6 +61,8 @@
 
 @media(max-width:1000px) {
     :host {
+        position: fixed;
+        top: 0;
         width: 100%;
         min-height: 80px;
         display: flex;
@@ -70,17 +72,13 @@
 
         .title {
             display: none;
-            // font-size: 20px;
-            // margin-left: 100px;
         }
 
         div {
-            // display: flex;
             width: 95%;
             justify-content: space-between;
             align-items: center;
             margin-right: 0;
-            // gap: 20px;
 
             .logo {
                 display: flex;
@@ -90,38 +88,11 @@
 
             img {
                 display: none;
-                // width: 20px;
-                // height: 20px;
-                // transition: all 0.3s ease-in-out;
-
-                // &:hover {
-                //     scale: 1.1;
-                //     cursor: pointer;
-                // }
             }
 
             .name {
-                // display: flex;
-                // justify-content: center;
-                // align-items: center;
                 width: 45px;
                 height: 45px;
-                // border: 3px solid #2A3647;
-                // border-radius: 50%;
-                // transition: all 0.3s ease-in-out;
-
-                // p {
-                //     color: #29ABE2;
-                //     font-weight: 700;
-                //     font-size: 16px;
-                //     margin: 0;
-                //     padding: 10px;
-                // }
-
-                // &:hover {
-                //     cursor: pointer;
-                //     background: #E1E6EC;
-                // }
             }
         }
     }
