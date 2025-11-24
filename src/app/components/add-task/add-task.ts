@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-task',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './add-task.html',
   styleUrl: './add-task.scss',
 })
