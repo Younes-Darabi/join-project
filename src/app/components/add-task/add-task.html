@@ -29,19 +29,46 @@
                     </div>
                 </label>
                 <div class="assigned_dropdown">
-                    <input type="text" />
-
-                    <div class="assigned_dropdown_list">
-
-                        <label class="assigned_dropdown_option">
-                            <input type="checkbox" />
-
-                        </label>
-
+                    <label for="assigned_dropdown_input" class="assigned_dropdown_label">Assigned to</label>
+                    <div class="assigned_dropdown_input_wrapper">
+                        <input
+                            id="assigned_dropdown_input"
+                            type="text"
+                            class="assigned_dropdown_input"
+                            placeholder="Person auswählen..."
+                            [(ngModel)]="search"
+                            (focus)="open = true"
+                            (input)="filterUsers()"
+                            autocomplete="off"
+                        />
+                        <span class="assigned_dropdown_arrow">&#9662;</span>
                     </div>
-
+                    @if (open) {
+                        <ul class="assigned_dropdown_list">
+                            @for (singleContact of contactList; track singleContact.id; let index = $index) {
+                                <li class="assigned_dropdown_item" 
+                                    [ngClass]="getDropdownItemClass(singleContact)" 
+                                    (click)="toggleSelect(singleContact)">
+                                    <span
+                                        class="assigned_dropdown_avatar"
+                                        [style.background-color]="singleContact.color"
+                                    >
+                                        {{ singleContact.initials }}
+                                    </span>
+                                    <span class="assigned_dropdown_name">
+                                        {{ singleContact.firstname }} {{ singleContact.lastname }}
+                                        @if (singleContact.isYou) { <span class="you">(You)</span> }
+                                    </span>
+                                    <input
+                                        type="checkbox"
+                                        [checked]="isContactSelected(singleContact)"
+                                        class="assigned_dropdown_checkbox"
+                                    />
+                                </li>
+                            }
+                        </ul>
+                    }
                 </div>
-
                 <label>
                     Category <span>*</span>
                     <input type="text">
