@@ -22,13 +22,13 @@
                     <input ngModel #fisrtName="ngModel" [(ngModel)]="user.firstname"
                         [ngClass]="{'error': fisrtName.invalid && fisrtName.touched}" name="fisrtName" type="text"
                         minlength="3"
-                        [placeholder]="fisrtName.invalid && fisrtName.touched ? 'Enter first name' : 'First name'" maxlength="15"
+                        [placeholder]="fisrtName.invalid && fisrtName.touched ? 'Enter first name' : 'First name'"
                         required>
                 </div>
                 <div>
                     <img src="./assets/icons/contact/person.svg" class="icon_name" alt="icon name">
                     <input ngModel #lastName="ngModel" [(ngModel)]="user.lastname"
-                        [ngClass]="{'error': lastName.invalid && lastName.touched}" name="lastName" type="text" maxlength="15"
+                        [ngClass]="{'error': lastName.invalid && lastName.touched}" name="lastName" type="text"
                         minlength="3"
                         [placeholder]="lastName.invalid && lastName.touched ? 'Enter last name' : 'Last name'" required>
                 </div>
@@ -38,12 +38,12 @@
                 <input ngModel #email="ngModel" [(ngModel)]="user.email"
                     [ngClass]="{'error': email.invalid && email.touched}" name="email" type="text" placeholder="Email"
                     [placeholder]="email.invalid && email.touched ? 'Enter your email address' : 'Email'"
-                    pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" maxlength="30" required>
+                    pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required>
             </div>
             <div>
                 <img src="./assets/icons/contact/call.svg" class="icon_phone" alt="icon phone">
                 <input ngModel #phone="ngModel" [(ngModel)]="user.phone"
-                    [ngClass]="{'error': phone.invalid && phone.touched}" name="phone" type="tel" minlength="5" maxlength="20"
+                    [ngClass]="{'error': phone.invalid && phone.touched}" name="phone" type="tel" minlength="5"
                     [placeholder]="phone.invalid && phone.touched ? 'Enter your phone number' : 'Phone'"
                     placeholder="Phone" required>
             </div>
