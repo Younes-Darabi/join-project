@@ -1,0 +1,324 @@
+@use './../../../../styles.scss' as *;
+
+section {
+    height: auto;
+    width: 100vw;
+    max-width: 480px;
+    display: flex;
+    padding: 20px;
+    border-radius: 15px;
+
+    .dialog_content {
+        background-color: #fff;
+        padding: 25px;
+        height: 659px;
+        width: 100%;
+        border-radius: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 10px;
+
+        h1 {
+            font-size: 57px;
+            color: #000000;
+            max-height: 2.5em;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            line-clamp: 2;
+            box-orient: vertical;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(165, 164, 164, 0.404) transparent;
+        }
+
+        h4 {
+            color: #000000;
+            font-weight: 400;
+            font-size: 18px;
+            max-height: 2.4em;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; 
+            -webkit-box-orient: vertical;
+            line-clamp: 2;
+            box-orient: vertical;
+            scrollbar-width: thin;
+            margin-top: 20px;
+            scrollbar-color: rgba(165, 164, 164, 0.404) transparent;
+        }
+    }
+}
+
+// .headline
+.headline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.close_btn {
+    img {
+        padding: 1px;
+        cursor: pointer;
+    }
+
+    img:hover {
+        background-color: #00000013;
+        border-radius: 50%;
+    }
+}
+
+.category {
+    color: #fff;
+    padding: 3px 20px;
+    border-radius: 5px;
+}
+
+.date_prio_content {
+    display: flex;
+    gap: 2px;
+    width: 100%;
+}
+
+.title2 {
+    width: 100px;
+    color: $darkblack;
+}
+
+.priority{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+// .assigned_content
+.assigned_content {
+    width: 100%;
+    padding-top: 10px;
+}
+
+.members_content {
+    height: 100%;
+    max-height: 130px;
+    width: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(165, 164, 164, 0.404) transparent;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.person_box {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 0px 0px 0px 20px;
+
+    .color_icon {
+        background-color: rgb(12, 170, 117);
+        border-radius: 50px;
+        border: 1px solid #fff;
+        width: 34px;
+        height: 34px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+}
+
+// subtasks_content
+.subtasks_content {
+    width: 100%; 
+      
+    .show_subtask {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        max-height: 3.5em;
+        overflow: auto;
+        overflow-x: hidden; 
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        line-clamp: 2;
+        box-orient: vertical;display: -webkit-box;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(165, 164, 164, 0.404) transparent;
+        margin-top: 10px;
+        gap: 10px;
+
+        label{
+            padding-bottom: 8px;
+        }
+
+    }
+
+    .checkbox_content {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        margin: 0px 0px 0px 10px;
+        padding: 2px 15px 2px 10px;
+
+        &:hover {
+            background-color: #0000000e;
+            border-radius: 5px;
+        }
+    }
+}
+
+.checkbox_content input {
+    display: none;
+}
+
+.checkbox_content .unchecked {
+    display: block;
+
+}
+
+.checkbox_content .checked {
+    display: none;
+}
+
+.checkbox_content input:checked+.unchecked {
+    display: none;
+}
+
+.checkbox_content input:checked~.checked {
+    display: block;
+}
+
+
+
+// delete_edit_content
+.delete_edit_content {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+    gap: 15px;
+    padding: 20px 10px 0 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+
+    .delete_box {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+
+        &:hover {
+            color: $light_blue;
+
+            &:hover img {
+                filter: brightness(0) saturate(100%) invert(55%) sepia(97%) saturate(482%) hue-rotate(167deg) brightness(94%) contrast(89%);
+            }
+        }
+    }
+
+    .edit_box {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+
+        &:hover {
+            color: $light_blue;
+
+            &:hover img {
+                filter: brightness(0) saturate(100%) invert(55%) sepia(97%) saturate(482%) hue-rotate(167deg) brightness(94%) contrast(89%);
+            }
+        }
+    }
+}
+
+
+
+// open card dialog
+.custom-dialog {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+// delete-dialog
+.delet-dialog{
+    height: 100vh;
+    width: 100%;
+    background-color: #0000008e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutToRight {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.dialog-closed {
+    animation: slideOutToRight 0.5s ease-in forwards;
+}
+
+@media (max-width:900px) {
+section{
+    .dialog_content{
+        h1{
+            font-size: 47px;
+        }
+    }
+}
+}
+
+@media (max-width: 375px) and (max-height: 667px) {
+    section {
+        .dialog_content {
+            height: 95vh;
+        }
+    }
+}
+
+
+@media (max-width: 470px) {
+    section{
+        .dialog_content{
+            h1{
+                font-size: 35px;
+            }
+        }
+    }
+}

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CardComponent } from './card/card.component';
 
 import {
   CdkDragDrop,
@@ -20,7 +21,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-board',
-  imports: [CommonModule, FormsModule, CdkDropList, CdkDrag],
+  imports: [CommonModule, FormsModule, CdkDropList, CdkDrag, CardComponent],
   templateUrl: './board.html',
   styleUrl: './board.scss',
 })
