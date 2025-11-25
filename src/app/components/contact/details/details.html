@@ -1,47 +1,47 @@
-@if (contact.id !== '') { <button class="back_btn" (click)="close.emit()"><img src="./assets/icons/contact/arrow.svg" alt=""></button> }
 
-<div class="title">
-    <h2>Contacts</h2>
-    <p>Better with a team</p>
-</div>
+    <div class="title">
+        <h2 class="headline">Contacts</h2>
+        <p>Better with a team</p>
+    </div>
 
-<!-- <img class="arrow" src="./assets/icons/contact/arrow.svg"> -->
-<div class="menu_btn" (click)="toggleMenu()">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
+    @if(contact.id){
 
-@if (menuOpen()) {
-  <div class="edit_res">
-    <a (click)="showEdit()">
-      <img class="icon_edit" src="./assets/icons/contact/edit.svg">Edit
-    </a>
-    <a (click)="deleteContact()">
-      <img class="icon_delete" src="./assets/icons/contact/delete.svg">Delete
-    </a>
+  <button class="back_btn" (click)="close.emit()">
+    <img src="./assets/icons/contact/arrow.svg" alt="">
+  </button>
+  <div class="menu_btn" (click)="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
-}
-
-@if (this.contact.id !='') {
-<div class="contact">
-    <div class="short_name" [style.background-color]="firebaseService.getColorForContact(contact)">{{this.shortName}}
+  @if (menuOpen()) {
+    <div class="edit_res">
+      <a (click)="showEdit()">
+        <img class="icon_edit" src="./assets/icons/contact/edit.svg">Edit
+      </a>
+      <a (click)="deleteContact()">
+        <img class="icon_delete" src="./assets/icons/contact/delete.svg">Delete
+      </a>
+    </div>
+  }
+  <div class="contact">
+    <div class="short_name" [style.background-color]="firebaseService.getColorForContact(contact)">
+      {{this.shortName}}
     </div>
     <div class="info_title">
-        <h3>{{contact.firstname}} {{contact.lastname}}</h3>
-        <div class="edit_delete">
-            <a (click)="showEdit()"><img class ="icon_edit" src="./assets/icons/contact/edit.svg">Edit</a>
-            <a (click)="deleteContact()"><img class ="icon_delete" src="./assets/icons/contact/delete.svg">Delete</a>
-        </div>
+      <h3>{{contact.firstname}} {{contact.lastname}}</h3>
+      <div class="edit_delete">
+        <a (click)="showEdit()"><img class="icon_edit" src="./assets/icons/contact/edit.svg">Edit</a>
+        <a (click)="deleteContact()"><img class="icon_delete" src="./assets/icons/contact/delete.svg">Delete</a>
+      </div>
     </div>
-</div>
-<h4>Contact Information</h4>
-<h5>Email</h5>
-<a class="email" href="mailto::{{contact.email}}">{{contact.email}}</a>
-<h5>Phone</h5>
-<a class="phone" href="tel:{{contact.phone}}">{{contact.phone}}</a>
-}
-
-@if (isClicked){
-<app-edit [user]="contact" (closeEditContact)="handleClose()" ></app-edit>
+  </div>
+  <h4>Contact Information</h4>
+  <h5>Email</h5>
+  <a class="email" href="mailto:{{contact.email}}">{{contact.email}}</a>
+  <h5>Phone</h5>
+  <a class="phone" href="tel:{{contact.phone}}">{{contact.phone}}</a>
+  @if (isClicked) {
+    <app-edit [user]="contact" (closeEditContact)="handleClose()" ></app-edit>
+  }
 }

@@ -1,18 +1,6 @@
-<!-- LISTE anzeigen: 
-    - Desktop IMMER
-    - Mobile nur wenn KEIN Kontakt ausgewählt ist -->
 @if (!isMobile() || selectedContact() === null) {
-  <app-contact-list 
-    (detailClicked)="showDetail($event)">
-  </app-contact-list>
+<app-contact-list (detailClicked)="showDetail($event)">
+</app-contact-list>
 }
-
-<!-- DETAILS anzeigen:
-    - Desktop IMMER (Kontakt wird rechts gezeigt)
-    - Mobile NUR wenn ein Kontakt ausgewählt ist -->
-@if (selectedContact() !== null) {
-  <app-details
-    [contact]="selectedContact()!"
-    (close)="closeView()">
-  </app-details>
-}
+<app-details  [contact]="selectedContact()!" (close)="closeView()"></app-details>
+    
