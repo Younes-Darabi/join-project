@@ -2,11 +2,13 @@ import { Component, signal, ViewChild } from '@angular/core';
 import { ContactList } from './contact-list/contact-list';
 import { Details } from './details/details';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
+import { FormsModule } from '@angular/forms';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [ContactList, Details],
+  imports: [ContactList, Details, FormsModule, NgClass],
   templateUrl: './contact.html',
   styleUrls: ['./contact.scss']
 })
@@ -27,7 +29,9 @@ export class Contact {
 
   showDetail(contact: ContactInterface) {
     this.selectedContact.set(contact);
-    this.Details.showDetailRes();
+    if (this.isMobile()) {
+      this.Details.showDetailRes();
+    }
   }
 
   closeView() {

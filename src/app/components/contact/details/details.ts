@@ -2,12 +2,11 @@ import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, 
 import { ContactService } from '../../../services/contact/contact-service';
 import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
 import { Edit } from '../edit/edit';
-import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [Edit, NgStyle],
+  imports: [Edit],
   templateUrl: './details.html',
   styleUrls: ['./details.scss'],
 })
@@ -20,7 +19,7 @@ export class Details {
   // Events
   @Output() close = new EventEmitter<void>();
   showDetail: boolean = false;
-  @HostBinding('style.display') display = 'block';
+ 
   contactTitleShow: boolean = false;
   // Getter für Initialen
   get shortName(): string {
@@ -78,12 +77,10 @@ export class Details {
 
   showDetailRes() {
     this.showDetail = true;
-    this.display = 'block';
     this.contactTitleShow = true;
   }
 
   back() {
-    this.display = 'none';
     this.close.emit();
     this.contactTitleShow = false;
   }
