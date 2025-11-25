@@ -11,7 +11,7 @@
             <div class="name_container" [class.active]="activeSection === item.id"
                 (click)="showDetails(item)">
                 <p class="name_icon" [style.background-color]="contactService.getColorForContact(item)">{{
-                    getInitials(item.firstname, item.lastname) }}</p>
+                    contactService.getInitials(item.firstname, item.lastname) }}</p>
                 <p class="name_email">
                     {{ item.firstname }} {{ item.lastname }} <br>
                     <span class="email">{{ item.email }}</span>
