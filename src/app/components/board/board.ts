@@ -7,17 +7,45 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 
+interface Task {
+  title: string;
+  description: string;
+  dueDate: string;
+  priority: string;
+  assignedTo: string[];
+  category: string;
+  subtasks: string[];
+}
+
 @Component({
   selector: 'app-board',
   imports: [CdkDropList, CdkDrag],
   templateUrl: './board.html',
-  styleUrl: './board.scss',     
+  styleUrl: './board.scss',
 })
-export class Board { 
-  toDoList: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
-  inProgressList: string[] = ['Item 5', 'Item 6', 'Item 7', 'Item 8'];
-  awaitFeedbackList: string[] = ['Item 9', 'Item 10', 'Item 11', 'Item 12'];
-  doneList: string[] = ['Item 13', 'Item 14', 'Item 15', 'Item 16'];
+export class Board {
+// {
+//     title: 'CSS Architecture Planning',
+//     description: 'Define CSS naming conventions and structure.',
+//     dueDate: '02/09/2023',
+//     priority: 'Urgent',
+//     assignedTo: ['Sofia Müller', 'Benedikt Ziegler'],
+//     category: 'Technical Task',
+//     subtasks: ['Establish CSS Methodology', 'Setup Base Styles'],
+//   }, {
+//     title: 'Kochwelt Page & Recipe Recommender',
+//     description: 'Build start page with recipe recommendation.',
+//     dueDate: '10/05/2023',
+//     priority: 'Medium',
+//     assignedTo: ['Emmanuel Mauer', 'Marcel Bauer', 'Anton Mayer'],
+//     category: 'User Story',
+//     subtasks: ['Implement Recipe Recommendation', 'Start Page Layout'],
+//   }
+
+  toDoList: string[] = [];
+  inProgressList: string[] = [];
+  awaitFeedbackList: string[] = [];
+  doneList: string[] = [];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
