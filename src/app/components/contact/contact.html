@@ -1,6 +1,10 @@
 @if (!isMobile() || selectedContact() === null) {
-<app-contact-list (detailClicked)="showDetail($event)">
-</app-contact-list>
+  <app-contact-list 
+    (detailClicked)="showDetail($event)">
+  </app-contact-list>
 }
-<app-details  [contact]="selectedContact()!" (close)="closeView()"></app-details>
-    
+<app-details
+  [contact]="selectedContact()!"
+  (close)="closeView()"
+  [ngClass]="{ 'details_hidden': isMobile() && selectedContact() === null, 'details_visible': isMobile() && selectedContact() !== null }">
+</app-details>
