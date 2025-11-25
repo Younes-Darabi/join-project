@@ -10,9 +10,9 @@
 <!-- DETAILS anzeigen:
     - Desktop IMMER (Kontakt wird rechts gezeigt)
     - Mobile NUR wenn ein Kontakt ausgewählt ist -->
-@if (selectedContact() !== null) {
+<!-- @if (selectedContact() !== null) { -->
   <app-details
     [contact]="selectedContact()!"
     (close)="closeView()">
   </app-details>
-}
+<!-- } -->

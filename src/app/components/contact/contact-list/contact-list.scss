@@ -1,8 +1,7 @@
 .contact_container {
-    background-color: #f9f9f9;
-    border-radius: 8px;
+    background-color: #ffffff;
     padding: 20px 40px;
-    max-width: 450px;
+    width: 456px;
     height: calc(100vh - 96px);
     overflow-y: scroll;
     display: flex;
@@ -48,13 +47,18 @@
 
     &:hover {
         border-radius: 10px;
+        background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
+    }
+
+    &.active {
+        border-radius: 10px;
         background: #2A3647;
         color: white;
     }
 
     .name_icon {
-        height: 42px;
-        width: 42px;
+        min-height: 42px;
+        min-width: 42px;
         border-radius: 100px;
         background-color: #007CEE;
         outline: 2px solid white;
@@ -64,10 +68,17 @@
 
     }
 
+    .name_email {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .email {
         color: rgba(0, 124, 238, 1);
         display: inline-block;
-        width: 150px;
+        width: 100%;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -98,6 +109,23 @@
 
 .list_element {
     list-style: none;
+
+    h3 {
+        margin-left: 20px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-weight: 400;
+        font-size: 20px;
+        width: 42px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 1300px) {
+    .contact_container {
+        padding: 20px;
+        width: 400px;
+    }
 }
 
 @media (max-width: 1000px) {
@@ -120,6 +148,12 @@
         border: none;
         border-radius: 100px;
         background-color: rgba(42, 54, 71, 1);
+        transition: all 250ms ease-in-out;
+
+        &:hover {
+            background-color: #29ABE2;
+            cursor: pointer;
+        }
 
         img {
             width: 32px;
@@ -127,55 +161,67 @@
             margin-left: 2px;
         }
     }
-
-    h3 {
-        margin-left: 32px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-weight: 400;
-        font-size: 20px;
-    }
 }
 
 @media(max-width:900px) {
-
-
     .contact_container {
         max-width: unset;
+        width: 400px;
+    }
+}
+
+@media(max-width:800px) {
+    :host {
         width: 100%;
-    }
-}
 
-@media (max-width: 610px) {
-    .name_container {
-        gap: 15px;
-        padding: 10px 15px;
-
-        .name_icon {
-            height: 36px;
-            width: 36px;
-            line-height: 36px;
-            font-size: 18px;
+        .contact_container {
+            width: 100%;
         }
 
-        h3 {
-            font-size: 16px;
+        .name_container {
+            width: 100%;
+
+            .email {
+                width: 100%;
+
+                span {
+                    width: 100%;
+                }
+            }
         }
     }
 }
 
-@media (max-width: 585px) {
-    .contact_container {
-        width: 300px;
-        padding: 0 15px;
+// @media (max-width: 610px) {
+//     .name_container {
+//         gap: 15px;
+//         padding: 10px 15px;
 
-    }
-}
+//         .name_icon {
+//             height: 36px;
+//             width: 36px;
+//             line-height: 36px;
+//             font-size: 18px;
+//         }
 
-@media (max-width: 480px) {
-    .contact_container {
-        width: 100vw;
-        padding: 15px 20px;
-        z-index: 10;
-    }
-}
+//         h3 {
+//             font-size: 16px;
+//         }
+//     }
+// }
+
+// @media (max-width: 585px) {
+//     .contact_container {
+//         width: 300px;
+//         padding: 0 15px;
+
+//     }
+// }
+
+// @media (max-width: 480px) {
+//     .contact_container {
+//         width: 100vw;
+//         padding: 15px 20px;
+//         z-index: 10;
+//     }
+// }

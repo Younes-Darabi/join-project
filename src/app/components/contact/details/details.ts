@@ -1,12 +1,13 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output, inject, signal } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output, inject, signal } from '@angular/core';
 import { ContactService } from '../../../services/contact/contact-service';
 import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
 import { Edit } from '../edit/edit';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [Edit],
+  imports: [Edit, NgStyle],
   templateUrl: './details.html',
   styleUrls: ['./details.scss'],
 })
@@ -16,11 +17,11 @@ export class Details {
   menuOpen = signal(false);
   // Input vom Parent
   @Input() contact!: ContactInterface;
-
   // Events
   @Output() close = new EventEmitter<void>();
- 
-
+  showDetail: boolean = false;
+  @HostBinding('style.display') display = 'block';
+  contactTitleShow: boolean = false;
   // Getter für Initialen
   get shortName(): string {
     return this.contact
@@ -29,7 +30,7 @@ export class Details {
       : '';
   }
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef) { }
 
   toggleMenu() {
     this.menuOpen.update(v => !v);
@@ -71,5 +72,17 @@ export class Details {
 
   handleClose() {
     this.isClicked = false;
+  }
+
+  showDetailRes() {
+    this.showDetail = true;
+    this.display = 'block';
+    this.contactTitleShow = true;
+  }
+
+  back() {
+    this.display = 'none';
+    this.close.emit();
+    this.contactTitleShow = false;
   }
 }

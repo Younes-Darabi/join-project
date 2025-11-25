@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ViewChild } from '@angular/core';
 import { ContactList } from './contact-list/contact-list';
 import { Details } from './details/details';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
@@ -11,21 +11,23 @@ import { ContactInterface } from '../../interfaces/contact/contact-list.interfac
   styleUrls: ['./contact.scss']
 })
 export class Contact {
+  @ViewChild(Details) Details!: Details;
 
   // Responsive Signal
-  isMobile = signal(window.innerWidth <= 480);
+  isMobile = signal(window.innerWidth <= 800);
 
   // Aktuell ausgewählter Kontakt
   selectedContact = signal<ContactInterface | null>(null);
 
   constructor() {
     window.addEventListener('resize', () => {
-      this.isMobile.set(window.innerWidth <= 480);
+      this.isMobile.set(window.innerWidth <= 800);
     });
   }
 
   showDetail(contact: ContactInterface) {
     this.selectedContact.set(contact);
+    this.Details.showDetailRes();
   }
 
   closeView() {
