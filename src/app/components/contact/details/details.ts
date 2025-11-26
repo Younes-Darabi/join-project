@@ -16,7 +16,7 @@ export class Details {
   menuOpen = signal(false);
   // Input vom Parent
   @Input() contact!: ContactInterface;
-  // Events
+  @Input() contactClicked: boolean = false;
   @Output() close = new EventEmitter<void>();
   showDetail: boolean = false;
  

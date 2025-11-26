@@ -20,6 +20,7 @@ export class Contact {
 
   // Aktuell ausgewählter Kontakt
   selectedContact = signal<ContactInterface | null>(null);
+  selectedContactOpen = signal<boolean>(false);
 
   constructor() {
     window.addEventListener('resize', () => {
@@ -29,6 +30,7 @@ export class Contact {
 
   showDetail(contact: ContactInterface) {
     this.selectedContact.set(contact);
+    this.selectedContactOpen.set(true);
     if (this.isMobile()) {
       this.Details.showDetailRes();
     }

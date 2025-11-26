@@ -124,7 +124,7 @@ export class ContactService implements OnDestroy {
   ];
 
   getColorForContact(contact: ContactInterface): string {
-    const key = (contact.firstname + contact.lastname) || '';
+    const key = (contact.firstname + contact.lastname);
     let hash = 0;
 
     for (let i = 0; i < key.length; i++) {

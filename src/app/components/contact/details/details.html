@@ -3,7 +3,7 @@
   <p><span>Better with</span> a team</p>
 </div>
 
-@if(contact.id){
+@if(contactClicked){
 
   <button class="back_btn" (click)="close.emit()">
     <img src="./assets/icons/contact/arrow.svg" alt="">
@@ -47,6 +47,4 @@
 @if (isClicked) {
 <app-edit [user]="contact" (closeEditContact)="handleClose()"></app-edit>
 }
-} @else{
-<p>No contact selected.</p>
 }
