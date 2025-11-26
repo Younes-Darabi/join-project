@@ -5,6 +5,7 @@
 }
 <app-details
   [contact]="selectedContact()!"
+  [contactClicked]="selectedContactOpen()"
   (close)="closeView()"
   [ngClass]="{ 'details_hidden': isMobile() && selectedContact() === null, 'details_visible': isMobile() && selectedContact() !== null }">
 </app-details>
