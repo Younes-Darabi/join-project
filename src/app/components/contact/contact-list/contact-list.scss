@@ -134,33 +134,9 @@
         height: calc(100vh - 160px);
     }
 
-    .btn_add {
-        display: none;
-    }
 
-    .btn_add_responsive {
-        position: absolute;
-        bottom: 100px;
-        right: 30px;
-        display: block;
-        width: 56px;
-        height: 56px;
-        border: none;
-        border-radius: 100px;
-        background-color: rgba(42, 54, 71, 1);
-        transition: all 250ms ease-in-out;
 
-        &:hover {
-            background-color: #29ABE2;
-            cursor: pointer;
-        }
 
-        img {
-            width: 32px;
-            height: 32px;
-            margin-left: 2px;
-        }
-    }
 }
 
 @media(max-width:900px) {
@@ -176,6 +152,34 @@
 
         .contact_container {
             width: 100%;
+        }
+
+        .btn_add {
+            display: none;
+        }
+
+        .btn_add_responsive {
+            position: absolute;
+            bottom: 100px;
+            right: 30px;
+            display: block;
+            width: 56px;
+            height: 56px;
+            border: none;
+            border-radius: 100px;
+            background-color: rgba(42, 54, 71, 1);
+            transition: all 250ms ease-in-out;
+
+            &:hover {
+                background-color: #29ABE2;
+                cursor: pointer;
+            }
+
+            img {
+                width: 32px;
+                height: 32px;
+                margin-left: 2px;
+            }
         }
 
         .name_container {
