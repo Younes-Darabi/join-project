@@ -36,13 +36,20 @@
         @if (toDoList.length > 0) {
         @for (item of toDoList; track $index) {
         <div class="frame" cdkDrag>
-          <p class="frame_category">{{item.category}}</p>
+          <p [ngStyle]="{'background' : item.category === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
+            {{item.category}}</p>
           <p class="frame_title">{{item.title}}</p>
           <p class="frame_description">{{item.description}}</p>
-          <!-- <p class="frame_subtasks">{{item.subtasks}}</p> -->
-          <!-- <div class="priority_assignedTo">
-            <p class="frame_assignedTo">{{item.assignedTo}}</p>
-            <p class="frame_priority">{{item.priority}}</p>
+          <!-- <p class="frame_subtasks">{{item.subtasks}}</p>
+          <div class="priority_assignedTo">
+
+            @for (user of item.assignedTo; track $index) {
+            <p class="name_icon" [style.background-color]="contactService.getColorForContact(user)">{{
+              contactService.getInitials(user.firstname, user.lastname) }}</p>
+            }
+            <img [src]="item.priority === 'Urgent' ? './assets/icons/board/Prio alta.svg' :
+         item.priority === 'Medium' ? './assets/icons/board/Prio media.svg' :
+         './assets/icons/board/Prio baja.svg'" [alt]="item.priority" class="frame_priority">
           </div> -->
         </div>
         }
@@ -69,16 +76,22 @@
         @if (inProgressList.length > 0) {
         @for (item of inProgressList; track $index) {
         <div class="frame" cdkDrag>
-          <p class="frame_category">{{item.category}}</p>
+          <p [ngStyle]="{'background' : item.category === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
+            {{item.category}}</p>
           <p class="frame_title">{{item.title}}</p>
           <p class="frame_description">{{item.description}}</p>
-          <!-- <p class="frame_subtasks">{{item.subtasks}}</p> -->
-          <!-- <div class="priority_assignedTo">
-            <p class="frame_assignedTo">{{item.assignedTo}}</p>
-            <p class="frame_priority">{{item.priority}}</p>
+          <!-- <p class="frame_subtasks">{{item.subtasks}}</p>
+          <div class="priority_assignedTo">
+
+            @for (user of item.assignedTo; track $index) {
+            <p class="name_icon" [style.background-color]="contactService.getColorForContact(user)">{{
+              contactService.getInitials(user.firstname, user.lastname) }}</p>
+            }
+            <img [src]="item.priority === 'Urgent' ? './assets/icons/board/Prio alta.svg' :
+         item.priority === 'Medium' ? './assets/icons/board/Prio media.svg' :
+         './assets/icons/board/Prio baja.svg'" [alt]="item.priority" class="frame_priority">
           </div> -->
-        </div>
-        }
+        </div> }
         } @else {
         <div class="no_tasks_card">
           <p>No tasks in progress</p>
@@ -102,16 +115,22 @@
         @if (awaitFeedbackList.length > 0) {
         @for (item of awaitFeedbackList; track $index) {
         <div class="frame" cdkDrag>
-          <p class="frame_category">{{item.category}}</p>
+          <p [ngStyle]="{'background' : item.category === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
+            {{item.category}}</p>
           <p class="frame_title">{{item.title}}</p>
           <p class="frame_description">{{item.description}}</p>
-          <!-- <p class="frame_subtasks">{{item.subtasks}}</p> -->
-          <!-- <div class="priority_assignedTo">
-            <p class="frame_assignedTo">{{item.assignedTo}}</p>
-            <p class="frame_priority">{{item.priority}}</p>
+          <!-- <p class="frame_subtasks">{{item.subtasks}}</p>
+          <div class="priority_assignedTo">
+
+            @for (user of item.assignedTo; track $index) {
+            <p class="name_icon" [style.background-color]="contactService.getColorForContact(user)">{{
+              contactService.getInitials(user.firstname, user.lastname) }}</p>
+            }
+            <img [src]="item.priority === 'Urgent' ? './assets/icons/board/Prio alta.svg' :
+         item.priority === 'Medium' ? './assets/icons/board/Prio media.svg' :
+         './assets/icons/board/Prio baja.svg'" [alt]="item.priority" class="frame_priority">
           </div> -->
-        </div>
-        }
+        </div> }
         } @else {
         <div class="no_tasks_card">
           <p>No tasks in progress</p>
@@ -137,16 +156,22 @@
         @if (doneList.length > 0) {
         @for (item of doneList; track $index) {
         <div class="frame" cdkDrag>
-          <p class="frame_category">{{item.category}}</p>
+          <p [ngStyle]="{'background' : item.category === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
+            {{item.category}}</p>
           <p class="frame_title">{{item.title}}</p>
           <p class="frame_description">{{item.description}}</p>
-          <!-- <p class="frame_subtasks">{{item.subtasks}}</p> -->
-          <!-- <div class="priority_assignedTo">
-            <p class="frame_assignedTo">{{item.assignedTo}}</p>
-            <p class="frame_priority">{{item.priority}}</p>
+          <!-- <p class="frame_subtasks">{{item.subtasks}}</p>
+          <div class="priority_assignedTo">
+
+            @for (user of item.assignedTo; track $index) {
+            <p class="name_icon" [style.background-color]="contactService.getColorForContact(user)">{{
+              contactService.getInitials(user.firstname, user.lastname) }}</p>
+            }
+            <img [src]="item.priority === 'Urgent' ? './assets/icons/board/Prio alta.svg' :
+         item.priority === 'Medium' ? './assets/icons/board/Prio media.svg' :
+         './assets/icons/board/Prio baja.svg'" [alt]="item.priority" class="frame_priority">
           </div> -->
-        </div>
-        }
+        </div> }
         } @else {
         <div class="no_tasks_card">
           <p>No tasks in progress</p>
