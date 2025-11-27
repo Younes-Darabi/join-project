@@ -200,3 +200,57 @@ app-task-card {
   align-items: center;
   justify-content: center;
 }
+
+.main_box{
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.box{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.frame {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: rgb(255, 255, 255);
+  border-radius: 24px;
+  padding: 16px;
+  gap: 15px;
+
+  .frame_category {
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-size: 16px;
+    background: #0038FF;
+    color: #FFFFFF;
+  }
+
+  .frame_title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2A3647;
+  }
+
+  .frame_description {
+    font-size: 16px;
+    font-weight: 400;
+    color: #A8A8A8;
+
+  }
+
+  .frame_subtasks {}
+
+  .priority_assignedTo {}
+
+  .frame_assignedTo {}
+
+  .frame_priority {}
+
+}
