@@ -103,7 +103,7 @@ section {
   display: flex;
   justify-content: space-between;
   gap: 24px;
-  max-height: 73vh;
+  max-height: calc(100vh - 296px);
   height: auto;
   overflow-y: auto;
   width: auto;
@@ -201,14 +201,14 @@ app-task-card {
   justify-content: center;
 }
 
-.main_box{
+.main_box {
   width: 250px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.box{
+.box {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -247,7 +247,23 @@ app-task-card {
 
   .frame_subtasks {}
 
-  .priority_assignedTo {}
+  .priority_assignedTo {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+    .name_icon {
+      min-height: 42px;
+      min-width: 42px;
+      border-radius: 100px;
+      background-color: #007CEE;
+      outline: 2px solid white;
+      text-align: center;
+      line-height: 42px;
+      color: white;
+    }
+  }
 
   .frame_assignedTo {}
 

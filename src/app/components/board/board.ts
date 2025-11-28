@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   CdkDrag,
   CdkDragDrop,
@@ -6,51 +7,78 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { CardComponent } from "./card/card.component";
-
-interface Task {
-  title: string;
-  description: string;
-  dueDate: string;
-  priority: string;
-  assignedTo: string[];
-  category: string;
-  subtasks: string[];
-}
+import { BoardService } from '../../services/board/board-service';
+import { BoardInterface } from '../../interfaces/board/board.interface';
+import { collection, onSnapshot, query } from 'firebase/firestore';
 
 @Component({
   selector: 'app-board',
-  imports: [CdkDropList, CdkDrag, CardComponent],
+  imports: [CdkDropList, CdkDrag, CommonModule],
   templateUrl: './board.html',
-  styleUrl: './board.scss',
+  styleUrls: ['./board.scss'],
 })
-export class Board {
+export class Board implements OnInit {
+  boardService = inject(BoardService);
 
-  toDoList: Task[] = [
-    {
-      title: 'CSS Architecture Planning',
-      description: 'Define CSS naming conventions and structure.',
-      dueDate: '02/09/2023',
-      priority: 'Urgent',
-      assignedTo: ['Sofia Müller', 'Benedikt Ziegler'],
-      category: 'Technical Task',
-      subtasks: ['Establish CSS Methodology', 'Setup Base Styles'],
-    },
-    {
-      title: 'Kochwelt Page & Recipe Recommender',
-      description: 'Build start page with recipe recommendation.',
-      dueDate: '10/05/2023',
-      priority: 'Medium',
-      assignedTo: ['Emmanuel Mauer', 'Marcel Bauer', 'Anton Mayer'],
-      category: 'User Story',
-      subtasks: ['Implement Recipe Recommendation', 'Start Page Layout'],
+  toDoList: BoardInterface[] = [];
+  inProgressList: BoardInterface[] = [];
+  awaitFeedbackList: BoardInterface[] = [];
+  doneList: BoardInterface[] = [];
+  // unsubTasks;
+
+  ngOnInit() {
+    // unsubTasks = onSnapshot(query(collection(this.boardService.firestore, 'tasks')), (snapshot) => {
+      this.toDoList = [];
+      this.inProgressList = [];
+      this.awaitFeedbackList = [];
+      this.doneList = [];
+
+      this.boardService.tasks.forEach(task => {
+        console.log('task:' + task);
+        
+        switch (task.status) {
+          case 'toDo':
+            this.toDoList.push(task);
+            break;
+          case 'inProgress':
+            this.inProgressList.push(task);
+            break;
+          case 'awaitFeedback':
+            this.awaitFeedbackList.push(task);
+            break;
+          case 'done':
+            this.doneList.push(task);
+            break;
+        }
+      });
+
+      // snapshot.forEach((doc) => {
+      //   const task: BoardInterface = doc.data() as BoardInterface;
+      //   switch (task.status) {
+      //     case 'toDo':
+      //       this.toDoList.push(task);
+      //       break;
+      //     case 'inProgress':
+      //       this.inProgressList.push(task);
+      //       break;
+      //     case 'awaitFeedback':
+      //       this.awaitFeedbackList.push(task);
+      //       break;
+      //     case 'done':
+      //       this.doneList.push(task);
+      //       break;
+      //   }
+      // });
+
+      console.log(this.toDoList);
+      console.log(this.inProgressList);
+      console.log(this.awaitFeedbackList);
+      console.log(this.doneList);
     }
-  ];
-  inProgressList: Task[] = [];
-  awaitFeedbackList: Task[] = [];
-  doneList: Task[] = [];
+  // );
+  // }
 
-  drop(event: CdkDragDrop<Task[]>) {
+  drop(event: CdkDragDrop<BoardInterface[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -63,4 +91,3 @@ export class Board {
     }
   }
 }
-
