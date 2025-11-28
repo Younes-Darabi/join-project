@@ -1,4 +1,11 @@
+<div *ngIf="isDialogOpen" class="overlay_content" (click)="closeDialog()">
+  <div class="card-dialog">
+      <app-card [item]="selectedItem" (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-card>
+  </div>
+</div>
+
 <section>
+  <div id="board">
   <div class="headline_content" id="boardUpstairs">
     <div class="headline_box">
       <h2 class="title">Board</h2>
@@ -35,7 +42,7 @@
 
         @if (boardService.toDoList) {
         @for (item of boardService.toDoList; track $index) {
-        <div class="frame" cdkDrag>
+        <app-task-card class="frame" cdkDrag (click)="openCardDialog(item)">
           <p [ngStyle]="{'background' : item.taskCategory === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
             {{item.taskCategory}}</p>
           <p class="frame_title">{{item.title}}</p>
@@ -51,7 +58,7 @@
          item.priority === 'Medium' ? './assets/icons/board/Prio media.svg' :
          './assets/icons/board/Prio baja.svg'" [alt]="item.priority" class="frame_priority">
           </div> -->
-        </div>
+        </app-task-card>
         }
         } @else {
         <div class="no_tasks_card">
@@ -59,9 +66,10 @@
         </div>
         }
       </div>
+      </div>
 
 
-    </div>
+  
 
     <!-- In progress -->
     <div class="main_box">
@@ -75,7 +83,7 @@
 
         @if (boardService.inProgressList.length > 0) {
         @for (item of boardService.inProgressList; track $index) {
-        <div class="frame" cdkDrag>
+        <app-task-card class="frame" cdkDrag>
           <p [ngStyle]="{'background' : item.taskCategory === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
             {{item.taskCategory}}</p>
           <p class="frame_title">{{item.title}}</p>
@@ -91,7 +99,7 @@
          item.priority === 'Medium' ? './assets/icons/board/Prio media.svg' :
          './assets/icons/board/Prio baja.svg'" [alt]="item.priority" class="frame_priority">
           </div> -->
-        </div> }
+        </app-task-card> }
         } @else {
         <div class="no_tasks_card">
           <p>No tasks in progress</p>
@@ -114,7 +122,7 @@
 
         @if (boardService.awaitFeedbackList.length > 0) {
         @for (item of boardService.awaitFeedbackList; track $index) {
-        <div class="frame" cdkDrag>
+        <app-task-card class="frame" cdkDrag>
           <p [ngStyle]="{'background' : item.taskCategory === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
             {{item.taskCategory}}</p>
           <p class="frame_title">{{item.title}}</p>
@@ -130,7 +138,7 @@
          item.priority === 'Medium' ? './assets/icons/board/Prio media.svg' :
          './assets/icons/board/Prio baja.svg'" [alt]="item.priority" class="frame_priority">
           </div> -->
-        </div> }
+        </app-task-card> }
         } @else {
         <div class="no_tasks_card">
           <p>No tasks in progress</p>
@@ -155,7 +163,7 @@
 
         @if (boardService.doneList.length > 0) {
         @for (item of boardService.doneList; track $index) {
-        <div class="frame" cdkDrag>
+        <app-task-card class="frame" cdkDrag>
           <p [ngStyle]="{'background' : item.taskCategory === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
             {{item.taskCategory}}</p>
           <p class="frame_title">{{item.title}}</p>
@@ -171,7 +179,7 @@
          item.priority === 'Medium' ? './assets/icons/board/Prio media.svg' :
          './assets/icons/board/Prio baja.svg'" [alt]="item.priority" class="frame_priority">
           </div> -->
-        </div> }
+        </app-task-card> }
         } @else {
         <div class="no_tasks_card">
           <p>No tasks in progress</p>
@@ -181,5 +189,7 @@
 
 
     </div>
+  </div>
+  
   </div>
 </section>
