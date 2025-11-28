@@ -4,34 +4,64 @@ import { ContactService } from '../../services/contact/contact-service';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
 import { getDocs } from 'firebase/firestore';
 import { NgClass } from '@angular/common';
+import { TaskInterface } from '../../interfaces/board/task.interface';
+import { BoardService } from '../../services/board/board-service';
+
 
 @Component({
   selector: 'app-add-task',
-  standalone: true,
   imports: [FormsModule, NgClass],
   templateUrl: './add-task.html',
   styleUrls: ['./add-task.scss'],
 })
 export class AddTask {
+  boardService = inject(BoardService);
   contactService = inject(ContactService);
-
+  taskList: TaskInterface[] = [];
   contactList: ContactInterface[] = [];
   search: string = '';
   open: boolean = false;
   selected: ContactInterface[] = [];
 
-  // Beispiel: Deine eigene E-Mail-Adresse
   yourEmail: string = 'deine@email.de';
+
+  newTask: TaskInterface = {
+    id: '',
+    title: '',
+    description: '',
+    assignedTo: [],
+    dueDate: new Date(),
+    status: 'todo',
+    priority: '',
+    taskCategory: 'User Story',
+    subTasks: []
+  };
+
+  async saveTask(task: TaskInterface) {
+    await this.boardService.addTask(task);
+  }
+
+  async loadTasks(): Promise<void> {
+    this.taskList = [];
+    let tasks = this.boardService.taskList;
+    if (tasks && tasks.length > 0) {
+      this.taskList = tasks;
+    }
+  }
+
+  async updateTask(task: TaskInterface): Promise<void> {
+    await this.boardService.updateTaskInFirebase(task);
+  }
+
+  sortContactsAlphabetically(contact: ContactInterface[]) {
+    return this.contactService.sortContacts(contact);
+  }
 
   setIsYouForContacts() {
     this.contactList = this.contactList.map(contact => ({
       ...contact,
       isYou: contact.email === this.yourEmail
     }));
-  }
-
-  sortContactsAlphabetically(contacts: ContactInterface[]): ContactInterface[] {
-    return contacts.slice().sort((a, b) => a.firstname.localeCompare(b.firstname));
   }
 
   async ngOnInit() {
@@ -94,7 +124,3 @@ export class AddTask {
     return this.isContactSelected(contact) ? 'assigned_dropdown_item_active' : '';
   }
 }
-// ich muss auf die contatclist aus dem contactservice zugreifen
-
-// Das dropdown Menü mit html tags schreiben
-// Die Kontakte anzeigen lassen mit checkbox
