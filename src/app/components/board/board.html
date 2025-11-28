@@ -29,15 +29,15 @@
         <button class="plus_btn">+</button>
       </div>
 
-      <div class="box" cdkDropList #toDoListRef="cdkDropList" [cdkDropListData]="toDoList"
+      <div class="box" cdkDropList #toDoListRef="cdkDropList" [cdkDropListData]="boardService.toDoList"
         [cdkDropListConnectedTo]="[inProgressListRef, awaitFeedbackListRef, doneListRef]"
         (cdkDropListDropped)="drop($event)">
 
-        @if (toDoList.length > 0) {
-        @for (item of toDoList; track $index) {
+        @if (boardService.toDoList) {
+        @for (item of boardService.toDoList; track $index) {
         <div class="frame" cdkDrag>
-          <p [ngStyle]="{'background' : item.category === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
-            {{item.category}}</p>
+          <p [ngStyle]="{'background' : item.taskCategory === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
+            {{item.taskCategory}}</p>
           <p class="frame_title">{{item.title}}</p>
           <p class="frame_description">{{item.description}}</p>
           <!-- <p class="frame_subtasks">{{item.subtasks}}</p>
@@ -70,14 +70,14 @@
         <button class="plus_btn">+</button>
       </div>
 
-      <div class="box" cdkDropList #inProgressListRef="cdkDropList" [cdkDropListData]="inProgressList"
+      <div class="box" cdkDropList #inProgressListRef="cdkDropList" [cdkDropListData]="boardService.inProgressList"
         [cdkDropListConnectedTo]="[toDoListRef, awaitFeedbackListRef, doneListRef]" (cdkDropListDropped)="drop($event)">
 
-        @if (inProgressList.length > 0) {
-        @for (item of inProgressList; track $index) {
+        @if (boardService.inProgressList.length > 0) {
+        @for (item of boardService.inProgressList; track $index) {
         <div class="frame" cdkDrag>
-          <p [ngStyle]="{'background' : item.category === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
-            {{item.category}}</p>
+          <p [ngStyle]="{'background' : item.taskCategory === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
+            {{item.taskCategory}}</p>
           <p class="frame_title">{{item.title}}</p>
           <p class="frame_description">{{item.description}}</p>
           <!-- <p class="frame_subtasks">{{item.subtasks}}</p>
@@ -109,14 +109,14 @@
         <button class="plus_btn">+</button>
       </div>
 
-      <div class="box" cdkDropList #awaitFeedbackListRef="cdkDropList" [cdkDropListData]="awaitFeedbackList"
+      <div class="box" cdkDropList #awaitFeedbackListRef="cdkDropList" [cdkDropListData]="boardService.awaitFeedbackList"
         [cdkDropListConnectedTo]="[toDoListRef, inProgressListRef, doneListRef]" (cdkDropListDropped)="drop($event)">
 
-        @if (awaitFeedbackList.length > 0) {
-        @for (item of awaitFeedbackList; track $index) {
+        @if (boardService.awaitFeedbackList.length > 0) {
+        @for (item of boardService.awaitFeedbackList; track $index) {
         <div class="frame" cdkDrag>
-          <p [ngStyle]="{'background' : item.category === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
-            {{item.category}}</p>
+          <p [ngStyle]="{'background' : item.taskCategory === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
+            {{item.taskCategory}}</p>
           <p class="frame_title">{{item.title}}</p>
           <p class="frame_description">{{item.description}}</p>
           <!-- <p class="frame_subtasks">{{item.subtasks}}</p>
@@ -149,15 +149,15 @@
         <button class="plus_btn">+</button>
       </div>
 
-      <div class="box" cdkDropList #doneListRef="cdkDropList" [cdkDropListData]="doneList"
+      <div class="box" cdkDropList #doneListRef="cdkDropList" [cdkDropListData]="boardService.doneList"
         [cdkDropListConnectedTo]="[toDoListRef, inProgressListRef, awaitFeedbackListRef]"
         (cdkDropListDropped)="drop($event)">
 
-        @if (doneList.length > 0) {
-        @for (item of doneList; track $index) {
+        @if (boardService.doneList.length > 0) {
+        @for (item of boardService.doneList; track $index) {
         <div class="frame" cdkDrag>
-          <p [ngStyle]="{'background' : item.category === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
-            {{item.category}}</p>
+          <p [ngStyle]="{'background' : item.taskCategory === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
+            {{item.taskCategory}}</p>
           <p class="frame_title">{{item.title}}</p>
           <p class="frame_description">{{item.description}}</p>
           <!-- <p class="frame_subtasks">{{item.subtasks}}</p>

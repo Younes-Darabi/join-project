@@ -8,8 +8,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { BoardService } from '../../services/board/board-service';
-import { BoardInterface } from '../../interfaces/board/board.interface';
-import { collection, onSnapshot, query } from 'firebase/firestore';
+import { TaskInterface } from '../../interfaces/board/task.interface';
 
 @Component({
   selector: 'app-board',
@@ -17,68 +16,14 @@ import { collection, onSnapshot, query } from 'firebase/firestore';
   templateUrl: './board.html',
   styleUrls: ['./board.scss'],
 })
-export class Board implements OnInit {
+export class Board {
   boardService = inject(BoardService);
 
-  toDoList: BoardInterface[] = [];
-  inProgressList: BoardInterface[] = [];
-  awaitFeedbackList: BoardInterface[] = [];
-  doneList: BoardInterface[] = [];
-  // unsubTasks;
+  show() {
+    console.log(this.boardService.taskList);
+  }
 
-  ngOnInit() {
-    // unsubTasks = onSnapshot(query(collection(this.boardService.firestore, 'tasks')), (snapshot) => {
-      this.toDoList = [];
-      this.inProgressList = [];
-      this.awaitFeedbackList = [];
-      this.doneList = [];
-
-      this.boardService.tasks.forEach(task => {
-        console.log('task:' + task);
-        
-        switch (task.status) {
-          case 'toDo':
-            this.toDoList.push(task);
-            break;
-          case 'inProgress':
-            this.inProgressList.push(task);
-            break;
-          case 'awaitFeedback':
-            this.awaitFeedbackList.push(task);
-            break;
-          case 'done':
-            this.doneList.push(task);
-            break;
-        }
-      });
-
-      // snapshot.forEach((doc) => {
-      //   const task: BoardInterface = doc.data() as BoardInterface;
-      //   switch (task.status) {
-      //     case 'toDo':
-      //       this.toDoList.push(task);
-      //       break;
-      //     case 'inProgress':
-      //       this.inProgressList.push(task);
-      //       break;
-      //     case 'awaitFeedback':
-      //       this.awaitFeedbackList.push(task);
-      //       break;
-      //     case 'done':
-      //       this.doneList.push(task);
-      //       break;
-      //   }
-      // });
-
-      console.log(this.toDoList);
-      console.log(this.inProgressList);
-      console.log(this.awaitFeedbackList);
-      console.log(this.doneList);
-    }
-  // );
-  // }
-
-  drop(event: CdkDragDrop<BoardInterface[]>) {
+  drop(event: CdkDragDrop<TaskInterface[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
