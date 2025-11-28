@@ -5,17 +5,18 @@ import { BoardInterface } from '../../interfaces/board/board.interface';
 @Injectable({
   providedIn: 'root'
 })
+
 export class BoardService implements OnDestroy {
   firestore: Firestore = inject(Firestore);
   unsubTasks;
-  tasks: BoardInterface[] = [];
+  // tasks: BoardInterface[] = [];
 
   constructor() {
     this.unsubTasks = onSnapshot(query(collection(this.firestore, 'tasks')), (snapshot) => {
-      this.tasks = [];
+      // this.tasks = [];
       snapshot.forEach((doc) => {
-        this.tasks.push(doc.data() as BoardInterface);
-        console.table(this.tasks);
+        // this.tasks.push(doc.data() as BoardInterface);
+        console.table(doc.data());
       });
     });
   }
