@@ -35,7 +35,7 @@
 
         @if (boardService.toDoList) {
         @for (item of boardService.toDoList; track $index) {
-        <div class="frame" cdkDrag>
+        <div class="frame" cdkDrag (click)="openTaskDetail(item)">
           <p [ngStyle]="{'background' : item.taskCategory === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
             {{item.taskCategory}}</p>
           <p class="frame_title">{{item.title}}</p>
@@ -183,3 +183,4 @@
     </div>
   </div>
 </section>
+<app-card></app-card>

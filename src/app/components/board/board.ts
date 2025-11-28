@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   CdkDrag,
@@ -9,18 +9,20 @@ import {
 } from '@angular/cdk/drag-drop';
 import { BoardService } from '../../services/board/board-service';
 import { TaskInterface } from '../../interfaces/board/task.interface';
+import { CardComponent } from "./card/card.component";
 
 @Component({
   selector: 'app-board',
-  imports: [CdkDropList, CdkDrag, CommonModule],
+  imports: [CdkDropList, CdkDrag, CommonModule, CardComponent],
   templateUrl: './board.html',
   styleUrls: ['./board.scss'],
 })
 export class Board {
   boardService = inject(BoardService);
-
-  show() {
-    console.log(this.boardService.taskList);
+  @ViewChild(CardComponent) CardComponent!: CardComponent;
+  
+  openTaskDetail(task: TaskInterface) {
+    this.CardComponent.showTaskDetail(task);
   }
 
   drop(event: CdkDragDrop<TaskInterface[]>) {

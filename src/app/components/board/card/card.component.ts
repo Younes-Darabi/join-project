@@ -1,17 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { Injectable} from '@angular/core';
-import { Firestore } from 'firebase/firestore';
-import { BoardService } from '../../../services/board/board-service';
+import { Component, HostBinding } from '@angular/core';
+import { TaskInterface } from '../../../interfaces/board/task.interface';
 
-
-
-/**
- * @component CardComponent
- * 
- * This component represents a task card within the task management system.
- * It allows task editing, deletion, and status updates.
- */
 @Component({
   selector: 'app-card',
   standalone: true,
@@ -19,7 +9,17 @@ import { BoardService } from '../../../services/board/board-service';
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
+
 export class CardComponent {
- 
-  
+  @HostBinding('style.display') display = 'felx';
+  task: TaskInterface | undefined;
+
+closeTaskDetail() {
+  this.display = 'none';
+}
+
+showTaskDetail(task: TaskInterface) {
+  this.task = task;
+  this.display = 'flex';
+}
 }

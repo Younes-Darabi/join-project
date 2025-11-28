@@ -1,25 +1,21 @@
-
-
 <section>
-
     <div class="dialog_content">
-
         <div class="headline">
             <div class="category" >
                 User Story
             </div>
-            
-            <div class="close_btn" >
-                <img src="./join-project/public/assets/icons/contact/close.svg" alt="close">
+        
+            <div class="close_btn" (click)="closeTaskDetail()">
+                <img src="./assets/icons/contact/close.svg" alt="close">
             </div>
         </div>
 
-        <h1 class="title_content">Create test cases</h1>
+        <h1 class="title_content">{{this.task?.title}}</h1>
         <h4>Read requirements and create test cases from it</h4>
 
         <div class="date_prio_content">
             <p class="title2">Due date:</p>
-            <p>30.11.2025</p>
+            <p>{{this.task?.dueDate}}</p>
         </div>
         <div class="date_prio_content">
             <p class="title2">Priority:</p>
@@ -72,7 +68,4 @@
             </div>
         </div>
     </div>
-
-      
-
 </section>

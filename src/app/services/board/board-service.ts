@@ -31,9 +31,7 @@ export class BoardService implements OnDestroy {
       this.awaitFeedbackList = [];
       this.doneList = [];
 
-      this.taskList.forEach(task => {
-        console.log('task:' + task);
-        
+      this.taskList.forEach(task => {        
         switch (task.status) {
           case 'todo':
             this.toDoList.push(task);

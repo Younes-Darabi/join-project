@@ -224,6 +224,10 @@ app-task-card {
   padding: 16px;
   gap: 15px;
 
+  &:hover{
+    cursor: pointer;
+  }
+
   .frame_category {
     padding: 10px 20px;
     border-radius: 15px;
