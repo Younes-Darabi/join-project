@@ -1,71 +1,61 @@
 <section>
     <div class="dialog_content">
         <div class="headline">
-            <div class="category" >
-                User Story
-            </div>
-        
+            <p class="category"
+                [ngStyle]="{'background' : this.task?.taskCategory === 'Technical Task' ? '#1FD7C1' : '#0038FF'}">
+                {{this.task?.taskCategory}}</p>
+
             <div class="close_btn" (click)="closeTaskDetail()">
                 <img src="./assets/icons/contact/close.svg" alt="close">
             </div>
         </div>
 
         <h1 class="title_content">{{this.task?.title}}</h1>
-        <h4>Read requirements and create test cases from it</h4>
+        <h4>{{this.task?.description}}</h4>
 
         <div class="date_prio_content">
-            <p class="title2">Due date:</p>
-            <p>{{this.task?.dueDate}}</p>
+            <p class="title2"><span>Due date:</span>{{this.task?.dueDate}}</p>
         </div>
         <div class="date_prio_content">
-            <p class="title2">Priority:</p>
-            <div class="priority"> <p>Urgent</p>                
-                <img src="./assets/icons/board/Prio alta.svg" alt="">                
-            </div>           
+            <p class="title2">Priority: {{this.task?.priority}} <img [src]="this.task?.priority === 'urgent' ? './assets/icons/board/Prio alta.svg' :
+         this.task?.priority === 'medium' ? './assets/icons/board/Prio media.svg' :
+         './assets/icons/board/Prio baja.svg'" alt=""></p>
+
         </div>
 
         <div class="assigned_content">
             <p class="title2">Assigned To:</p>
             <div class="members_content">
-                <div class="assigned_to">                    
+                <div class="assigned_to">
                     <div class="person_box">
-                        <div class="color_icon" >
+                        <div class="color_icon">
                             <p>MK</p>
                         </div>
-                    <p>Mario Keller</p>
+                        <p>Mario Keller</p>
                     </div>
-                      
+
                 </div>
-            
+
             </div>
         </div>
 
         <div class="subtasks_content">
             <p class="title2">Subtasks</p>
-    
-            <div class="show_subtask" >
-                <label class="checkbox_content" >
-                    <input 
-                        type="checkbox"          
-                    >
-                    <img class="unchecked" src="./assets/icons/board/checkbox-unchecked.svg" alt="unchecked" >
-                    <img class="checked" src="./assets/icons/board/checkbox-checked.svg" alt="checked" >
+
+            <div class="show_subtask">
+                <label class="checkbox_content">
+                    <input type="checkbox">
+                    <img class="unchecked" src="./assets/icons/board/checkbox-unchecked.svg" alt="unchecked">
+                    <img class="checked" src="./assets/icons/board/checkbox-checked.svg" alt="checked">
                     <p>Read carefully the requirements and formulate questions</p>
                 </label>
             </div>
         </div>
-        
+
 
         <div class="delete_edit_content">
-            <div class="delete_box" >
-                           <img src="./assets/icons/board/delete.svg" alt="delete">
-                <p>Delete</p>
-            </div>
-            <img src="/assets/icons/board/Vector 3.svg" alt="">
-            <div class="edit_box" >
-                <img src="./assets/icons/board/edit.svg" alt="edit">
-                <p>Edit</p>
-            </div>
+            <p class="delete_box"><img src="./assets/icons/board/delete.svg" alt="delete"> Delete</p>
+            <p class="edit_box"><img src="./assets/icons/board/edit.svg" alt="edit"> Edit</p>
         </div>
     </div>
 </section>
