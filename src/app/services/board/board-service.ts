@@ -18,6 +18,7 @@ export class BoardService implements OnDestroy {
     this.unsubTasks = this.getTasksFromFirebase();
   }
 
+  // funktion fürs sortieren
   ngOnDestroy() {
     if (this.unsubTasks) {
       this.unsubTasks();

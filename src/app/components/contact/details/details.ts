@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output, inject, signal } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output, inject, signal } from '@angular/core';
 import { ContactService } from '../../../services/contact/contact-service';
 import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
 import { Edit } from '../edit/edit';
@@ -16,11 +16,11 @@ export class Details {
   menuOpen = signal(false);
   // Input vom Parent
   @Input() contact!: ContactInterface;
-
-  // Events
+  @Input() contactClicked: boolean = false;
   @Output() close = new EventEmitter<void>();
+  showDetail: boolean = false;
  
-
+  contactTitleShow: boolean = false;
   // Getter für Initialen
   get shortName(): string {
     return this.contact
@@ -29,7 +29,9 @@ export class Details {
       : '';
   }
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef) {
+
+  }
 
   toggleMenu() {
     this.menuOpen.update(v => !v);
@@ -71,5 +73,15 @@ export class Details {
 
   handleClose() {
     this.isClicked = false;
+  }
+
+  showDetailRes() {
+    this.showDetail = true;
+    this.contactTitleShow = true;
+  }
+
+  back() {
+    this.close.emit();
+    this.contactTitleShow = false;
   }
 }

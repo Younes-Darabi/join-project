@@ -12,9 +12,9 @@ import { TaskInterface } from '../../interfaces/board/task.interface';
 
 @Component({
   selector: 'app-board',
-  imports: [],
+  imports: [CdkDropList, CdkDrag, CommonModule],
   templateUrl: './board.html',
-  styleUrl: './board.scss',
+  styleUrls: ['./board.scss'],
 })
 export class Board {
   boardService = inject(BoardService);
