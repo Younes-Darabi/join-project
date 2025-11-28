@@ -4,8 +4,8 @@ export interface TaskInterface {
   description: string;
   assignedTo: string[]; // Array of contact IDs
   dueDate: Date;
-  status: 'todo' | 'in-progress' | 'done';
+  status: 'todo' | 'in-progress' | 'await-feedback' | 'done';
   priority: string;
-  taskCategory: 'Technocal Task' | 'User Story';
+  taskCategory: 'Technical Task' | 'User Story';
   subTasks: string[];
 }

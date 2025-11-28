@@ -9,6 +9,10 @@ export class BoardService implements OnDestroy {
   taskList: TaskInterface[] = [];
   firestore: Firestore = inject(Firestore);
   unsubTasks;
+  toDoList: TaskInterface[] = [];
+  inProgressList: TaskInterface[] = [];
+  awaitFeedbackList: TaskInterface[] = [];
+  doneList: TaskInterface[] = [];
 
   constructor() {
     this.unsubTasks = this.getTasksFromFirebase();
@@ -19,6 +23,33 @@ export class BoardService implements OnDestroy {
       this.unsubTasks();
     }
   }
+
+  sortTasksByStatus() {
+    this.toDoList = [];
+      this.inProgressList = [];
+      this.awaitFeedbackList = [];
+      this.doneList = [];
+
+      this.taskList.forEach(task => {
+        console.log('task:' + task);
+        
+        switch (task.status) {
+          case 'todo':
+            this.toDoList.push(task);
+            break;
+          case 'in-progress':
+            this.inProgressList.push(task);
+            break;
+          case 'await-feedback':
+            this.awaitFeedbackList.push(task);
+            break;
+          case 'done':
+            this.doneList.push(task);
+            break;
+        }
+      });
+    }
+  
 
   async addTask(task: TaskInterface) {
     let cleantask = this.getCleanTaskJson(task);
@@ -41,7 +72,7 @@ export class BoardService implements OnDestroy {
           this.taskList.push(this.setTasksObject(element.data(), element.id));
         });
 
-        // logik fürs sortieren nach status kann hier rein
+        this.sortTasksByStatus()
       },
       (error) => {
         console.error(error);
