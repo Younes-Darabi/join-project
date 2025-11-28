@@ -24,16 +24,18 @@ export class Board implements OnInit {
   inProgressList: BoardInterface[] = [];
   awaitFeedbackList: BoardInterface[] = [];
   doneList: BoardInterface[] = [];
+  // unsubTasks;
 
   ngOnInit() {
-    onSnapshot(query(collection(this.boardService.firestore, 'tasks')), (snapshot) => {
+    // unsubTasks = onSnapshot(query(collection(this.boardService.firestore, 'tasks')), (snapshot) => {
       this.toDoList = [];
       this.inProgressList = [];
       this.awaitFeedbackList = [];
       this.doneList = [];
 
-      snapshot.forEach((doc) => {
-        const task: BoardInterface = doc.data() as BoardInterface;
+      this.boardService.tasks.forEach(task => {
+        console.log('task:' + task);
+        
         switch (task.status) {
           case 'toDo':
             this.toDoList.push(task);
@@ -50,12 +52,31 @@ export class Board implements OnInit {
         }
       });
 
-      console.table(this.toDoList);
-      console.table(this.inProgressList);
-      console.table(this.awaitFeedbackList);
-      console.table(this.doneList);
-    });
-  }
+      // snapshot.forEach((doc) => {
+      //   const task: BoardInterface = doc.data() as BoardInterface;
+      //   switch (task.status) {
+      //     case 'toDo':
+      //       this.toDoList.push(task);
+      //       break;
+      //     case 'inProgress':
+      //       this.inProgressList.push(task);
+      //       break;
+      //     case 'awaitFeedback':
+      //       this.awaitFeedbackList.push(task);
+      //       break;
+      //     case 'done':
+      //       this.doneList.push(task);
+      //       break;
+      //   }
+      // });
+
+      console.log(this.toDoList);
+      console.log(this.inProgressList);
+      console.log(this.awaitFeedbackList);
+      console.log(this.doneList);
+    }
+  // );
+  // }
 
   drop(event: CdkDragDrop<BoardInterface[]>) {
     if (event.previousContainer === event.container) {

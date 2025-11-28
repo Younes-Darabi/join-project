@@ -9,18 +9,20 @@ import { BoardInterface } from '../../interfaces/board/board.interface';
 export class BoardService implements OnDestroy {
   firestore: Firestore = inject(Firestore);
   unsubTasks;
-  // tasks: BoardInterface[] = [];
+  tasks: BoardInterface[] = [];
 
   constructor() {
     this.unsubTasks = onSnapshot(query(collection(this.firestore, 'tasks')), (snapshot) => {
-      // this.tasks = [];
+      this.tasks = [];
       snapshot.forEach((doc) => {
-        // this.tasks.push(doc.data() as BoardInterface);
-        console.table(doc.data());
+        this.tasks.push(doc.data() as BoardInterface);
+        console.log(doc.data());
       });
+      //hier logik fürs sortieren
     });
   }
 
+  // funktion fürs sortieren
   ngOnDestroy() {
     if (this.unsubTasks) {
       this.unsubTasks();
