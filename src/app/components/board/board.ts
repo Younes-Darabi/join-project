@@ -9,20 +9,21 @@ import {
 } from '@angular/cdk/drag-drop';
 import { BoardService } from '../../services/board/board-service';
 import { TaskInterface } from '../../interfaces/board/task.interface';
-import { CardComponent } from "./card/card.component";
+import { CardDetails } from './card-detail/card-details';
+import { CardTask } from "./card-task/card-task";
 
 @Component({
   selector: 'app-board',
-  imports: [CdkDropList, CdkDrag, CommonModule, CardComponent],
+  imports: [CdkDropList, CdkDrag, CommonModule, CardDetails, CardTask],
   templateUrl: './board.html',
   styleUrls: ['./board.scss'],
 })
 export class Board {
   boardService = inject(BoardService);
-  @ViewChild(CardComponent) CardComponent!: CardComponent;
+  @ViewChild(CardDetails) CardDetails!: CardDetails;
   
   openTaskDetail(task: TaskInterface) {
-    this.CardComponent.showTaskDetail(task);
+    this.CardDetails.showTaskDetail(task);
   }
 
   drop(event: CdkDragDrop<TaskInterface[]>) {

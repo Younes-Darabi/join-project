@@ -3,14 +3,14 @@ import { Component, HostBinding } from '@angular/core';
 import { TaskInterface } from '../../../interfaces/board/task.interface';
 
 @Component({
-  selector: 'app-card',
+  selector: 'app-card-details',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './card.component.html',
-  styleUrl: './card.component.scss'
+  templateUrl: './card-details.html',
+  styleUrl: './card-details.scss'
 })
 
-export class CardComponent {
+export class CardDetails {
   @HostBinding('style.display') display = 'felx';
   task: TaskInterface | undefined;
 
