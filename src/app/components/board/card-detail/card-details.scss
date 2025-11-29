@@ -9,7 +9,19 @@
     background-color: #00000062;
     position: absolute;
 
-    section {
+    .close_btn {
+        img {
+            padding: 1px;
+            cursor: pointer;
+        }
+
+        img:hover {
+            background-color: #00000013;
+            border-radius: 50%;
+        }
+    }
+
+    .section_details {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -95,18 +107,6 @@
             width: 100%;
         }
 
-        .close_btn {
-            img {
-                padding: 1px;
-                cursor: pointer;
-            }
-
-            img:hover {
-                background-color: #00000013;
-                border-radius: 50%;
-            }
-        }
-
         .category {
             font-weight: 400;
             font-size: 20px;
@@ -120,21 +120,24 @@
             gap: 2px;
             width: 100%;
 
-            span {
-                color: #2A3647;
-                font-size: 18px;
-            }
-
             img {
                 width: 17px;
                 height: 6.3px;
                 margin-left: 10px;
+                margin-top: 4px;
             }
         }
 
         .title2 {
+            display: flex;
+            align-items: center;
             color: #2A3647;
             font-size: 18px;
+            margin-bottom: 5px;
+
+            span{
+                color: black;
+            }
         }
 
         .priority {
@@ -166,9 +169,9 @@
 
         .person_box {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             align-items: center;
-            padding: 0px 0px 0px 20px;
+            margin-left: 10px;
 
             .color_icon {
                 background-color: rgb(12, 170, 117);
@@ -203,25 +206,19 @@
                 display: -webkit-box;
                 scrollbar-width: thin;
                 scrollbar-color: rgba(165, 164, 164, 0.404) transparent;
-                margin-top: 10px;
                 gap: 10px;
-
-                label {
-                    padding-bottom: 8px;
-                }
-
             }
 
             .checkbox_content {
                 display: flex;
-                flex-direction: row;
+                align-items: center;
                 gap: 10px;
-                margin: 0px 0px 0px 10px;
-                padding: 2px 15px 2px 10px;
+                padding: 8px 10px;
 
                 &:hover {
                     background-color: #0000000e;
                     border-radius: 5px;
+                    cursor: pointer;
                 }
             }
         }
@@ -247,4 +244,16 @@
             display: block;
         }
     }
+
+    .section_edit {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        width: 450px;
+        height: 500px;
+        padding: 20px;
+        border-radius: 15px;
+        background-color: #ffffff;
+    }
+
 }

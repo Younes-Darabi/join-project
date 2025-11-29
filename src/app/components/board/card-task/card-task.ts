@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
-import { Component, Input } from "@angular/core";
+import { Component, inject, Input } from "@angular/core";
 import { TaskInterface } from "../../../interfaces/board/task.interface";
+import { BoardService } from "../../../services/board/board-service";
 
 
 @Component({
@@ -13,5 +14,6 @@ import { TaskInterface } from "../../../interfaces/board/task.interface";
 
 export class CardTask {
   @Input() task!: TaskInterface;
+  BoardService = inject(BoardService);
 
 }

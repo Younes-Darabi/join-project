@@ -1,15 +1,16 @@
 <p [ngStyle]="{'background' : task.taskCategory === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
-    {{task.taskCategory}}</p>
+  {{task.taskCategory}}</p>
 <p class="frame_title">{{task.title}}</p>
 <p class="frame_description">{{task.description}}</p>
-<!-- <p class="frame_subtasks">{{task.subtasks}}</p> -->
+<p class="frame_subtasks">1/{{task.subTasks.length}} Subtasks</p>
 <div class="priority_assignedTo">
 
-    <!-- @for (user of task.assignedTo; track $index) {
-            <p class="name_icon" [style.background-color]="contactService.getColorForContact(user)">{{
-              contactService.getInitials(user.firstname, user.lastname) }}</p>
-            } -->
-    <img [src]="task.priority === 'urgent' ? './assets/icons/board/Prio alta.svg' :
+  @for (contact of task.assignedTo; track $index) {
+  <!-- <div class="short_name" [style.background-color]="ContactService.getColorForContact('JsuW0PKqRMQi92YMT5cR')">
+    KH
+  </div> -->
+  }
+  <img [src]="task.priority === 'urgent' ? './assets/icons/board/Prio alta.svg' :
          task.priority === 'medium' ? './assets/icons/board/Prio media.svg' :
          './assets/icons/board/Prio baja.svg'" [alt]="task.priority" class="frame_priority">
 </div>

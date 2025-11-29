@@ -13,6 +13,7 @@ import { TaskInterface } from '../../../interfaces/board/task.interface';
 export class CardDetails {
   @HostBinding('style.display') display = 'felx';
   task: TaskInterface | undefined;
+  editPageShow: boolean = false;
 
 closeTaskDetail() {
   this.display = 'none';
