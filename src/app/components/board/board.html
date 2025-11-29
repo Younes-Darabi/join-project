@@ -33,7 +33,7 @@
         (cdkDropListDropped)="drop($event)">
         @if (boardService.toDoList) {
         @for (item of boardService.toDoList; track $index) {
-        <app-card-task class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
+        <app-card-task [task]=item class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
         }
         } @else {
         <div class="no_tasks_card">
@@ -53,7 +53,7 @@
         [cdkDropListConnectedTo]="[toDoListRef, awaitFeedbackListRef, doneListRef]" (cdkDropListDropped)="drop($event)">
         @if (boardService.inProgressList.length > 0) {
         @for (item of boardService.inProgressList; track $index) {
-        <app-card-task class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
+        <app-card-task [task]=item class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
         }
         } @else {
         <div class="no_tasks_card">
@@ -74,7 +74,7 @@
         [cdkDropListConnectedTo]="[toDoListRef, inProgressListRef, doneListRef]" (cdkDropListDropped)="drop($event)">
         @if (boardService.awaitFeedbackList.length > 0) {
         @for (item of boardService.awaitFeedbackList; track $index) {
-        <app-card-task class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
+        <app-card-task [task]=item class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
         }
         } @else {
         <div class="no_tasks_card">
@@ -95,7 +95,7 @@
         (cdkDropListDropped)="drop($event)">
         @if (boardService.doneList.length > 0) {
         @for (item of boardService.doneList; track $index) {
-        <app-card-task class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
+        <app-card-task [task]=item class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
         }
         } @else {
         <div class="no_tasks_card">

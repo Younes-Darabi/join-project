@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { TaskInterface } from "../../../interfaces/board/task.interface";
 
 
@@ -12,6 +12,6 @@ import { TaskInterface } from "../../../interfaces/board/task.interface";
 })
 
 export class CardTask {
-  task: TaskInterface | undefined;
+  @Input() task!: TaskInterface;
 
 }
