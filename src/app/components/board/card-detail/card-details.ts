@@ -1,26 +1,40 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, inject } from '@angular/core';
 import { TaskInterface } from '../../../interfaces/board/task.interface';
+import { BoardService } from '../../../services/board/board-service';
 
 @Component({
   selector: 'app-card-details',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './card-details.html',
-  styleUrl: './card-details.scss'
+  styleUrls: ['./card-details.scss']
 })
 
 export class CardDetails {
-  @HostBinding('style.display') display = 'felx';
-  task: TaskInterface | undefined;
-  editPageShow: boolean = false;
+  boardService = inject(BoardService);
+  @HostBinding('style.display') display = 'none';
+  task: TaskInterface = {
+    id: '',
+    title: '',
+    description: '',
+    assignedTo: [],
+    dueDate: null,
+    status: 'todo',
+    priority: '',
+    taskCategory: 'User Story',
+    subTasks: [],
+  }
 
-closeTaskDetail() {
-  this.display = 'none';
-}
+  editPageShow: boolean = false
 
-showTaskDetail(task: TaskInterface) {
-  this.task = task;
-  this.display = 'flex';
-}
+
+  closeTaskDetail() {
+    this.display = 'none';
+  }
+
+  showTaskDetail(task: TaskInterface) {
+    this.task = task;
+    this.display = 'flex';
+  }
 }

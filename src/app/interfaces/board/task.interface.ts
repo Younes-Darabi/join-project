@@ -3,7 +3,7 @@ export interface TaskInterface {
   title: string;
   description: string;
   assignedTo: string[]; // Array of contact IDs
-  dueDate: Date;
+  dueDate: Date | null;
   status: 'todo' | 'in-progress' | 'await-feedback' | 'done';
   priority: string;
   taskCategory: 'Technical Task' | 'User Story';

@@ -21,7 +21,7 @@ import { CardTask } from "./card-task/card-task";
 export class Board {
   boardService = inject(BoardService);
   @ViewChild(CardDetails) CardDetails!: CardDetails;
-  
+
   openTaskDetail(task: TaskInterface) {
     this.CardDetails.showTaskDetail(task);
   }
@@ -30,6 +30,19 @@ export class Board {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+
+      const movedItem = event.previousContainer.data[event.previousIndex];
+      if (event.container.id === 'todoList') {
+        movedItem.status = 'todo';
+      } else if (event.container.id === 'inProgressList') {
+        movedItem.status = 'in-progress';
+      } else if (event.container.id === 'awaitFeedbackList') {
+        movedItem.status = 'await-feedback';
+      } else{
+        movedItem.status = 'done';
+      }
+      this.boardService.updateTaskInFirebase(movedItem);
+
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,

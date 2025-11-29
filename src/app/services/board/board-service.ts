@@ -49,7 +49,6 @@ export class BoardService implements OnDestroy {
       });
     }
   
-
   async addTask(task: TaskInterface) {
     let cleantask = this.getCleanTaskJson(task);
     await addDoc(this.getTaskRef(), cleantask)
@@ -96,7 +95,7 @@ export class BoardService implements OnDestroy {
   async deleteTaskFromFirebase(task: TaskInterface) {
     if (task.id) {
       await deleteDoc(this.getSingleTaskDocRef(this.getTaskCollectionId(task), task.id));
-    }
+    } 
   }
 
   setTasksObject(obj: any, id: string): TaskInterface {
