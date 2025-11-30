@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   CdkDrag,
@@ -9,61 +9,40 @@ import {
 } from '@angular/cdk/drag-drop';
 import { BoardService } from '../../services/board/board-service';
 import { TaskInterface } from '../../interfaces/board/task.interface';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { CardComponent } from './card/card.component';
-import { TaskCardComponent } from './task-card/task-card.component';
+import { CardDetails } from './card-detail/card-details';
+import { CardTask } from "./card-task/card-task";
 
 @Component({
   selector: 'app-board',
-  imports: [CdkDropList, CdkDrag, CommonModule, CardComponent, TaskCardComponent],
+  imports: [CdkDropList, CdkDrag, CommonModule, CardDetails, CardTask],
   templateUrl: './board.html',
   styleUrls: ['./board.scss'],
 })
 export class Board {
   boardService = inject(BoardService);
-  selectedItem!: TaskInterface;
-  isDialogOpen: boolean = false;
-  isAddDialogOpen: boolean = false;
+  @ViewChild(CardDetails) CardDetails!: CardDetails;
 
-  show() {
-    console.log(this.boardService.taskList);
-  }
-
-  openCardDialog(item: TaskInterface) {
-    this.selectedItem = item;
-    this.isDialogOpen = true;
-    this.toggle();
-  }
-
-  closeDialog() {
-    const dialogElement = document.querySelector('.custom-dialog');
-    if (dialogElement) {
-      dialogElement.classList.add('dialog-closed');
-      setTimeout(() => {
-        this.isDialogOpen = false;
-      }, 500);
-    } else {
-      this.isDialogOpen = false;
-    }
-  }
-
-  receiveEmitFromDialog(dialogClosed: boolean) {
-    this.isAddDialogOpen = false;
-  }
-
-  stopPropagation(event: Event) {
-    event.stopPropagation();
-  }
-  toggle() {
-    const board = document.getElementById('board') as HTMLElement | null;
-    if (!board) return;
-    board.style.display = board.style.display === 'none' ? '' : 'none';
+  openTaskDetail(task: TaskInterface) {
+    this.CardDetails.showTaskDetail(task);
   }
 
   drop(event: CdkDragDrop<TaskInterface[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+
+      const movedItem = event.previousContainer.data[event.previousIndex];
+      if (event.container.id === 'todoList') {
+        movedItem.status = 'todo';
+      } else if (event.container.id === 'inProgressList') {
+        movedItem.status = 'in-progress';
+      } else if (event.container.id === 'awaitFeedbackList') {
+        movedItem.status = 'await-feedback';
+      } else{
+        movedItem.status = 'done';
+      }
+      this.boardService.updateTaskInFirebase(movedItem);
+
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,

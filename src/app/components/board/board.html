@@ -1,9 +1,3 @@
-<div *ngIf="isDialogOpen" class="overlay_content" (click)="closeDialog()">
-  <div class="card-dialog">
-      <app-card [item]="selectedItem" (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-card>
-  </div>
-</div>
-
 <section>
   <div id="board">
   <div class="headline_content" id="boardUpstairs">
@@ -35,41 +29,20 @@
         <h5 id="toDoSection">To do</h5>
         <button class="plus_btn">+</button>
       </div>
-
-      <div class="box" cdkDropList #toDoListRef="cdkDropList" [cdkDropListData]="boardService.toDoList"
+      <div id="todoList" class="box" cdkDropList #toDoListRef="cdkDropList" [cdkDropListData]="boardService.toDoList"
         [cdkDropListConnectedTo]="[inProgressListRef, awaitFeedbackListRef, doneListRef]"
         (cdkDropListDropped)="drop($event)">
-
-        @if (boardService.toDoList) {
+        @if (boardService.toDoList.length > 0) {
         @for (item of boardService.toDoList; track $index) {
-        <app-task-card class="frame" cdkDrag (click)="openCardDialog(item)">
-          <p [ngStyle]="{'background' : item.taskCategory === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
-            {{item.taskCategory}}</p>
-          <p class="frame_title">{{item.title}}</p>
-          <p class="frame_description">{{item.description}}</p>
-          <!-- <p class="frame_subtasks">{{item.subtasks}}</p>
-          <div class="priority_assignedTo">
-
-            @for (user of item.assignedTo; track $index) {
-            <p class="name_icon" [style.background-color]="contactService.getColorForContact(user)">{{
-              contactService.getInitials(user.firstname, user.lastname) }}</p>
-            }
-            <img [src]="item.priority === 'Urgent' ? './assets/icons/board/Prio alta.svg' :
-         item.priority === 'Medium' ? './assets/icons/board/Prio media.svg' :
-         './assets/icons/board/Prio baja.svg'" [alt]="item.priority" class="frame_priority">
-          </div> -->
-        </app-task-card>
+        <app-card-task [task]=item class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
         }
         } @else {
         <div class="no_tasks_card">
-          <p>No tasks in progress</p>
+          <p>No tasks in To do</p>
         </div>
         }
       </div>
-      </div>
-
-
-  
+    </div>
 
     <!-- In progress -->
     <div class="main_box">
@@ -77,37 +50,19 @@
         <h5 id="inProgressSection">In progress</h5>
         <button class="plus_btn">+</button>
       </div>
-
-      <div class="box" cdkDropList #inProgressListRef="cdkDropList" [cdkDropListData]="boardService.inProgressList"
+      <div id="inProgressList" class="box" cdkDropList #inProgressListRef="cdkDropList"
+        [cdkDropListData]="boardService.inProgressList"
         [cdkDropListConnectedTo]="[toDoListRef, awaitFeedbackListRef, doneListRef]" (cdkDropListDropped)="drop($event)">
-
         @if (boardService.inProgressList.length > 0) {
         @for (item of boardService.inProgressList; track $index) {
-        <app-task-card class="frame" cdkDrag>
-          <p [ngStyle]="{'background' : item.taskCategory === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
-            {{item.taskCategory}}</p>
-          <p class="frame_title">{{item.title}}</p>
-          <p class="frame_description">{{item.description}}</p>
-          <!-- <p class="frame_subtasks">{{item.subtasks}}</p>
-          <div class="priority_assignedTo">
-
-            @for (user of item.assignedTo; track $index) {
-            <p class="name_icon" [style.background-color]="contactService.getColorForContact(user)">{{
-              contactService.getInitials(user.firstname, user.lastname) }}</p>
-            }
-            <img [src]="item.priority === 'Urgent' ? './assets/icons/board/Prio alta.svg' :
-         item.priority === 'Medium' ? './assets/icons/board/Prio media.svg' :
-         './assets/icons/board/Prio baja.svg'" [alt]="item.priority" class="frame_priority">
-          </div> -->
-        </app-task-card> }
+        <app-card-task [task]=item class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
+        }
         } @else {
         <div class="no_tasks_card">
           <p>No tasks in progress</p>
         </div>
         }
       </div>
-
-
     </div>
 
     <!-- Await feedback -->
@@ -116,39 +71,20 @@
         <h5 id="awaitFeedbackSection">Await feedback</h5>
         <button class="plus_btn">+</button>
       </div>
-
-      <div class="box" cdkDropList #awaitFeedbackListRef="cdkDropList" [cdkDropListData]="boardService.awaitFeedbackList"
+      <div id="awaitFeedbackList" class="box" cdkDropList #awaitFeedbackListRef="cdkDropList"
+        [cdkDropListData]="boardService.awaitFeedbackList"
         [cdkDropListConnectedTo]="[toDoListRef, inProgressListRef, doneListRef]" (cdkDropListDropped)="drop($event)">
-
         @if (boardService.awaitFeedbackList.length > 0) {
         @for (item of boardService.awaitFeedbackList; track $index) {
-        <app-task-card class="frame" cdkDrag>
-          <p [ngStyle]="{'background' : item.taskCategory === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
-            {{item.taskCategory}}</p>
-          <p class="frame_title">{{item.title}}</p>
-          <p class="frame_description">{{item.description}}</p>
-          <!-- <p class="frame_subtasks">{{item.subtasks}}</p>
-          <div class="priority_assignedTo">
-
-            @for (user of item.assignedTo; track $index) {
-            <p class="name_icon" [style.background-color]="contactService.getColorForContact(user)">{{
-              contactService.getInitials(user.firstname, user.lastname) }}</p>
-            }
-            <img [src]="item.priority === 'Urgent' ? './assets/icons/board/Prio alta.svg' :
-         item.priority === 'Medium' ? './assets/icons/board/Prio media.svg' :
-         './assets/icons/board/Prio baja.svg'" [alt]="item.priority" class="frame_priority">
-          </div> -->
-        </app-task-card> }
+        <app-card-task [task]=item class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
+        }
         } @else {
         <div class="no_tasks_card">
-          <p>No tasks in progress</p>
+          <p>No tasks in Await feedback</p>
         </div>
         }
       </div>
-
-
     </div>
-
 
     <!-- Done -->
     <div class="main_box">
@@ -156,40 +92,20 @@
         <h5 id="doneSection">Done</h5>
         <button class="plus_btn">+</button>
       </div>
-
-      <div class="box" cdkDropList #doneListRef="cdkDropList" [cdkDropListData]="boardService.doneList"
+      <div id="DoneList" class="box" cdkDropList #doneListRef="cdkDropList" [cdkDropListData]="boardService.doneList"
         [cdkDropListConnectedTo]="[toDoListRef, inProgressListRef, awaitFeedbackListRef]"
         (cdkDropListDropped)="drop($event)">
-
         @if (boardService.doneList.length > 0) {
         @for (item of boardService.doneList; track $index) {
-        <app-task-card class="frame" cdkDrag>
-          <p [ngStyle]="{'background' : item.taskCategory === 'Technical Task' ? '#1FD7C1' : ''}" class="frame_category">
-            {{item.taskCategory}}</p>
-          <p class="frame_title">{{item.title}}</p>
-          <p class="frame_description">{{item.description}}</p>
-          <!-- <p class="frame_subtasks">{{item.subtasks}}</p>
-          <div class="priority_assignedTo">
-
-            @for (user of item.assignedTo; track $index) {
-            <p class="name_icon" [style.background-color]="contactService.getColorForContact(user)">{{
-              contactService.getInitials(user.firstname, user.lastname) }}</p>
-            }
-            <img [src]="item.priority === 'Urgent' ? './assets/icons/board/Prio alta.svg' :
-         item.priority === 'Medium' ? './assets/icons/board/Prio media.svg' :
-         './assets/icons/board/Prio baja.svg'" [alt]="item.priority" class="frame_priority">
-          </div> -->
-        </app-task-card> }
+        <app-card-task [task]=item class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
+        }
         } @else {
         <div class="no_tasks_card">
-          <p>No tasks in progress</p>
+          <p>No tasks in Done</p>
         </div>
         }
       </div>
-
-
     </div>
   </div>
-  
-  </div>
 </section>
+<app-card-details />
