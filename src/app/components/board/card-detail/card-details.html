@@ -14,10 +14,12 @@
         <h4>{{this.task.description}}</h4>
 
         <div class="date_prio_content">
-            <p class="title2">Due date:<span [ngStyle]="{'margin-left' : '9px'}">{{this.task.dueDate}}</span></p>
+            <!-- <p class="title2">Due date:<span [ngStyle]="{'margin-left' : '9px'}">{{this.task.dueDate}}</span></p> -->
+            <p class="title2">Due date:<span [ngStyle]="{'margin-left' : '9px'}">11.30.2025</span></p>
         </div>
         <div class="date_prio_content">
-            <p class="title2">Priority: <span [ngStyle]="{'margin-left' : '25px'}">{{this.task.priority}}</span> <img [src]="this.task.priority === 'urgent' ? './assets/icons/board/Prio alta.svg' :
+            <p class="title2">Priority: <span [ngStyle]="{'margin-left' : '25px'}">{{this.task.priority}}</span> <img
+                    [src]="this.task.priority === 'urgent' ? './assets/icons/board/Prio alta.svg' :
          this.task.priority === 'medium' ? './assets/icons/board/Prio media.svg' :
          './assets/icons/board/Prio baja.svg'" alt=""></p>
 
@@ -56,7 +58,8 @@
         </div>
 
         <div class="delete_edit_content">
-            <p (click)="boardService.deleteTaskFromFirebase(this.task)" class="delete_box"><img src="./assets/icons/board/delete.svg" alt="delete"> Delete</p>
+            <p (click)="boardService.deleteTaskFromFirebase(this.task)" class="delete_box"><img
+                    src="./assets/icons/board/delete.svg" alt="delete"> Delete</p>
             <p (click)="editPageShow=true" class="edit_box"><img src="./assets/icons/board/edit.svg" alt="edit"> Edit
             </p>
         </div>

@@ -135,7 +135,7 @@
             font-size: 18px;
             margin-bottom: 5px;
 
-            span{
+            span {
                 color: black;
             }
         }
@@ -256,4 +256,37 @@
         background-color: #ffffff;
     }
 
+}
+
+@media (max-width: 750px) {
+    :host {
+
+        .section_details {
+            width: 100%;
+            max-width: 320px;
+            padding: 10px;
+
+            .dialog_content {
+                padding: 20px;
+                gap: 10px;
+
+                h1 {
+                    font-size: 36px;
+                }
+
+                h4 {
+                    font-size: 16px;
+                }
+            }
+
+            .category {
+                font-size: 16px;
+                padding: 3px 15px;
+            }
+
+            .title2 {
+                font-size: 16px;
+            }
+        }
+    }
 }
