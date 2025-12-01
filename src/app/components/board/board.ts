@@ -20,10 +20,25 @@ import { CardTask } from "./card-task/card-task";
 })
 export class Board {
   boardService = inject(BoardService);
+  searchQuery: string = '';
+  tasks: TaskInterface[] = [];
+  filteredTasks: TaskInterface[] = [];
   @ViewChild(CardDetails) CardDetails!: CardDetails;
 
   openTaskDetail(task: TaskInterface) {
     this.CardDetails.showTaskDetail(task);
+  }
+
+  filterTasks() {
+    const query = this.searchQuery.toLowerCase().trim();
+    if (!query) {
+      this.filteredTasks = [...this.tasks];
+      return;
+    }
+
+    this.filteredTasks = this.tasks.filter(task =>
+      task.title.toLowerCase().includes(query) || task.description?.toLowerCase().includes(query)
+    );
   }
 
   drop(event: CdkDragDrop<TaskInterface[]>) {
