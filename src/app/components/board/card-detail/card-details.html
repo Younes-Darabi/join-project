@@ -58,7 +58,7 @@
         </div>
 
         <div class="delete_edit_content">
-            <p (click)="boardService.deleteTaskFromFirebase(this.task)" class="delete_box"><img
+            <p (click)="boardService.deleteTaskFromFirebase(this.task);closeTaskDetail()" class="delete_box"><img
                     src="./assets/icons/board/delete.svg" alt="delete"> Delete</p>
             <p (click)="editPageShow=true" class="edit_box"><img src="./assets/icons/board/edit.svg" alt="edit"> Edit
             </p>
