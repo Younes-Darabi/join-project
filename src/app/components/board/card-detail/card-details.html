@@ -1,0 +1,81 @@
+<section class="section_details" [ngStyle]="{'display' : !editPageShow ? 'flex':'none'}">
+    <div class="dialog_content">
+        <div class="headline">
+            <p class="category"
+                [ngStyle]="{'background' : this.task.taskCategory === 'Technical Task' ? '#1FD7C1' : '#0038FF'}">
+                {{this.task.taskCategory}}</p>
+
+            <div class="close_btn" (click)="closeTaskDetail()">
+                <img src="./assets/icons/contact/close.svg" alt="close">
+            </div>
+        </div>
+
+        <h1 class="title_content">{{this.task.title}}</h1>
+        <h4>{{this.task.description}}</h4>
+
+        <div class="date_prio_content">
+            <!-- <p class="title2">Due date:<span [ngStyle]="{'margin-left' : '9px'}">{{this.task.dueDate}}</span></p> -->
+            <p class="title2">Due date:<span [ngStyle]="{'margin-left' : '9px'}">11.30.2025</span></p>
+        </div>
+        <div class="date_prio_content">
+            <p class="title2">Priority: <span [ngStyle]="{'margin-left' : '25px'}">{{this.task.priority}}</span> <img
+                    [src]="this.task.priority === 'urgent' ? './assets/icons/board/Prio alta.svg' :
+         this.task.priority === 'medium' ? './assets/icons/board/Prio media.svg' :
+         './assets/icons/board/Prio baja.svg'" alt=""></p>
+
+        </div>
+
+        <div class="assigned_content">
+            <p class="title2">Assigned To:</p>
+            <div class="members_content">
+                <div class="assigned_to">
+                    <div class="person_box">
+                        <div class="color_icon">
+                            <p>MK</p>
+                        </div>
+                        <p>Mario Keller</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="subtasks_content">
+            <p class="title2">Subtasks</p>
+
+            @for (subTask of this.task.subTasks; track $index) {
+            <div class="show_subtask">
+                <label class="checkbox_content">
+                    <input type="checkbox">
+                    <img class="unchecked" src="./assets/icons/board/checkbox-unchecked.svg" alt="unchecked">
+                    <img class="checked" src="./assets/icons/board/checkbox-checked.svg" alt="checked">
+                    <p>{{subTask}}</p>
+                </label>
+            </div>
+            }
+
+        </div>
+
+        <div class="delete_edit_content">
+            <p (click)="boardService.deleteTaskFromFirebase(this.task)" class="delete_box"><img
+                    src="./assets/icons/board/delete.svg" alt="delete"> Delete</p>
+            <p  class="edit_box"><img src="./assets/icons/board/edit.svg" alt="edit"> Edit
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section_edit" >
+    <div class="close_btn" (click)="openEditDialog(this.task)">
+        <img src="./assets/icons/contact/close.svg" alt="close">
+    </div>
+
+
+    <!-- Open Edit Dialog -->
+       <div *ngIf="isDialogOpen" class="overlay_content" (click)="closeEditDialog()">
+        <div class="custom-dialog">
+            <app-edit-dialog [item]="this.task"  (closeDialogEvent)="closeEditDialog()" (click)="stopPropagation($event)"></app-edit-dialog>
+        </div>
+    </div>
+</section>
