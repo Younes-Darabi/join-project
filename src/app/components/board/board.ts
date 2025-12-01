@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   CdkDrag,
