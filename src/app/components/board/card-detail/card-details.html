@@ -60,14 +60,22 @@
         <div class="delete_edit_content">
             <p (click)="boardService.deleteTaskFromFirebase(this.task)" class="delete_box"><img
                     src="./assets/icons/board/delete.svg" alt="delete"> Delete</p>
-            <p (click)="editPageShow=true" class="edit_box"><img src="./assets/icons/board/edit.svg" alt="edit"> Edit
+            <p  class="edit_box"><img src="./assets/icons/board/edit.svg" alt="edit"> Edit
             </p>
         </div>
     </div>
 </section>
-<section class="section_edit" [ngStyle]="{'display' : editPageShow ? 'flex':'none'}">
-    <div class="close_btn" (click)="editPageShow=false">
+
+<section class="section_edit" >
+    <div class="close_btn" (click)="openEditDialog(this.task)">
         <img src="./assets/icons/contact/close.svg" alt="close">
     </div>
-    <p>Edit page</p>
+
+
+    <!-- Open Edit Dialog -->
+       <div *ngIf="isDialogOpen" class="overlay_content" (click)="closeEditDialog()">
+        <div class="custom-dialog">
+            <app-edit-dialog [item]="this.task"  (closeDialogEvent)="closeEditDialog()" (click)="stopPropagation($event)"></app-edit-dialog>
+        </div>
+    </div>
 </section>
