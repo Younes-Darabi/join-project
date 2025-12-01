@@ -1,5 +1,15 @@
+// Flexbox Mixin
+@mixin flexbox($direction: row, $align: stretch, $justify: flex-start, $gap: 0) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: $align;
+    justify-content: $justify;
+    gap: $gap;
+}
+
 span {
     color: #FF8190;
+    // text-align: start;
 }
 
 .separator {
@@ -22,8 +32,7 @@ label {
 }
 
 .add_task_wrapper {
-    display: flex;
-    flex-direction: column;
+    @include flexbox(column, stretch, flex-start, 0);
     background: #f5f6f7;
     height: calc(100vh - 96px);
 
@@ -38,8 +47,7 @@ label {
 }
 
 .add_task_container {
-    display: flex;
-    gap: 48px;
+    @include flexbox(row, stretch, flex-start, 48px);
     padding: 40px 32px;
 
     margin: 0 auto;
@@ -54,10 +62,8 @@ label {
 
 // Formular
 .add_task_form {
+    @include flexbox(column, stretch, flex-start, 24px);
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
 
     input,
     textarea,
@@ -112,8 +118,7 @@ label {
 
 // Priority
 .add_task_priority {
-    display: flex;
-    gap: 12px;
+    @include flexbox(row, center, flex-start, 12px);
     margin-bottom: 16px;
 
     .priority_btn {
@@ -168,8 +173,7 @@ label {
     }
 
     .assigned_dropdown_input_wrapper {
-        display: flex;
-        align-items: center;
+        @include flexbox(row, center, flex-start, 0);
         position: relative;
     }
 
@@ -231,7 +235,7 @@ label {
             background: #2a3647;
             color: #fff;
 
-           
+
             .assigned_dropdown_name {
                 color: #fff;
 
@@ -239,6 +243,7 @@ label {
                     color: #ffffff;
                 }
             }
+
             .assigned_dropdown_checkbox {
                 accent-color: #fff;
                 border-color: #fff;
@@ -257,9 +262,6 @@ label {
         font-size: 14px;
         color: #fff;
         margin-right: 8px;
-        flex-shrink: 0;
-        background: #888; // fallback, wird überschrieben durch [style.background-color]
-        text-transform: uppercase;
     }
 
     .assigned_dropdown_name {
@@ -286,6 +288,59 @@ label {
         height: 18px;
         accent-color: #007cee;
         cursor: pointer;
+    }
+}
+
+// Kategorie Dropdown nutzt die gleichen Styles wie Assigned Dropdown
+.category_dropdown {
+    @extend .assigned_dropdown;
+    // Optional: Falls du spezifische Anpassungen für die Kategorie brauchst, hier ergänzen.
+}
+
+// Fehlernachricht
+.add_task_error_field {
+    color: #ff3b3b;
+    font-size: 13px;
+    margin-top: 2px;
+    display: block;
+}
+.add_task_actions {
+    @include flexbox(row, center, space-between, 12px);
+    padding: 24px 32px;
+    div {
+        @include flexbox(row, center, flex-start, 12px);
+    }
+}
+.add_task_btn_cancel{
+    background: transparent;
+    color: #2a3647;
+    border: 1px solid #2a3647;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover {
+        border-color: #29ABE2;
+        color: #29ABE2;
+    }
+}
+
+.add_task_btn_submit {
+    background: #2a3647;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+        background: #29ABE2;
     }
 }
 

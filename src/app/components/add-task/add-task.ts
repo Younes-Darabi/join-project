@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, HostListener } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ContactService } from '../../services/contact/contact-service';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
@@ -6,7 +6,6 @@ import { getDocs } from 'firebase/firestore';
 import { NgClass } from '@angular/common';
 import { TaskInterface } from '../../interfaces/board/task.interface';
 import { BoardService } from '../../services/board/board-service';
-
 
 @Component({
   selector: 'app-add-task',
@@ -33,23 +32,61 @@ export class AddTask {
     dueDate: new Date(),
     status: 'todo',
     priority: '',
-    taskCategory: 'User Story',
+    taskCategory: '',
     subTasks: []
   };
 
+  confirmationMessage: string = '';
+  errorMessage: string = '';
+
+  formSubmitted: boolean = false;
+
+  categoryDropdownOpen: boolean = false;
+  categoryOptions: TaskInterface['taskCategory'][] = ['User Story', 'Technical Task'];
+
   async saveTask(task: TaskInterface) {
+    this.formSubmitted = true;
+    if (!task.title || !task.dueDate || !task.taskCategory) {
+      return;
+    }
     await this.boardService.addTask(task);
+    this.resetForm();
+    this.showConfirmation('Task successfully created!');
+    this.formSubmitted = false;
   }
 
-  async loadTasks(): Promise<void> {
+  resetForm() {
+    this.newTask = {
+      id: '',
+      title: '',
+      description: '',
+      assignedTo: [],
+      dueDate: new Date(),
+      status: 'todo',
+      priority: '',
+      taskCategory: '',
+      subTasks: []
+    };
+    this.selected = [];
+    this.search = '';
+  }
+
+  showConfirmation(message: string) {
+    this.confirmationMessage = message;
+    setTimeout(() => {
+      this.confirmationMessage = '';
+    }, 2000);
+  }
+
+  async loadTasks() {
     this.taskList = [];
     let tasks = this.boardService.taskList;
     if (tasks && tasks.length > 0) {
       this.taskList = tasks;
     }
   }
-
-  async updateTask(task: TaskInterface): Promise<void> {
+  
+  async updateTask(task: TaskInterface) {
     await this.boardService.updateTaskInFirebase(task);
   }
 
@@ -65,32 +102,12 @@ export class AddTask {
   }
 
   async ngOnInit() {
-    let collectionRef = this.contactService.getContactsRef();
-    let snapshot = await getDocs(collectionRef);
-    let loadedContacts = snapshot.docs.map(doc =>
-      this.contactService.setContactObject(doc.data(), doc.id)
-    );
-    this.contactList = this.sortContactsAlphabetically(loadedContacts);
-    this.setIsYouForContacts();
-    document.addEventListener('click', this.handleOutsideClick.bind(this));
-  }
-
-  ngOnDestroy() {
-    document.removeEventListener('click', this.handleOutsideClick.bind(this));
-  }
-
-  handleOutsideClick(event: MouseEvent) {
-    let target = event.target as HTMLElement;
-    let input = document.getElementById('assigned_dropdown_input');
-    let dropdownList = document.querySelector('.assigned_dropdown_list');
-    if (
-      input &&
-      !input.contains(target) &&
-      dropdownList &&
-      !dropdownList.contains(target)
-    ) {
-      this.open = false;
+    // Kontakte im Service laden, falls noch nicht vorhanden
+    if (!this.contactService.contactList || this.contactService.contactList.length === 0) {
+      await this.contactService.loadContactsFromFirebase(); // Diese Methode muss im Service existieren!
     }
+    this.contactList = this.sortContactsAlphabetically(this.contactService.contactList);
+    this.setIsYouForContacts();
   }
 
   filterUsers() {
@@ -122,5 +139,26 @@ export class AddTask {
 
   getDropdownItemClass(contact: ContactInterface): string {
     return this.isContactSelected(contact) ? 'assigned_dropdown_item_active' : '';
+  }
+
+  toggleDropdown(event: MouseEvent) {
+    event.stopPropagation();
+    this.open = !this.open;
+  }
+
+  toggleCategoryDropdown(event: MouseEvent) {
+    event.stopPropagation();
+    this.categoryDropdownOpen = !this.categoryDropdownOpen;
+  }
+
+  selectCategory(category: TaskInterface['taskCategory']) {
+    this.newTask.taskCategory = category;
+    this.categoryDropdownOpen = false;
+  }
+
+  @HostListener('document:click')
+  closeDropdowns() {
+    this.open = false;
+    this.categoryDropdownOpen = false;
   }
 }

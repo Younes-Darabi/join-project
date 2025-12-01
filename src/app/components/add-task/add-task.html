@@ -1,90 +1,128 @@
 <div class="add_task_wrapper">
-    <header>
-        <h1 class="add_task_title">Add Task</h1>
-    </header>
-    <main>
-        <div class="add_task_container">
-            <div class="add_task_form">
-                <label>
-                    Title <span>*</span>
-                    <input type="text">
-                </label>
-                <label>
-                    Description
-                    <input type="text">
-                </label>
-                <label class="date_input">
-                    Due date <span>*</span>
-                    <input type="date">
-                </label>
-            </div>
-            <div class="separator"></div>
-            <div class="add_task_form">
-                <label>
-                    Priority
-                    <div class="add_task_priority">
-                        <button class="priority_btn urgent">Urgent</button>
-                        <button class="priority_btn medium">Medium</button>
-                        <button class="priority_btn low">Low</button>
-                    </div>
-                </label>
-                <div class="assigned_dropdown">
-                    <label for="assigned_dropdown_input" class="assigned_dropdown_label">Assigned to</label>
-                    <div class="assigned_dropdown_input_wrapper">
-                        <input
-                            id="assigned_dropdown_input"
-                            type="text"
-                            class="assigned_dropdown_input"
-                            placeholder="Person auswählen..."
-                            [(ngModel)]="search"
-                            (focus)="open = true"
-                            (input)="filterUsers()"
-                            autocomplete="off"
-                        />
-                        <span class="assigned_dropdown_arrow">&#9662;</span>
-                    </div>
-                    @if (open) {
-                        <ul class="assigned_dropdown_list">
-                            @for (singleContact of contactList; track singleContact.id; let index = $index) {
-                                <li class="assigned_dropdown_item" 
-                                    [ngClass]="getDropdownItemClass(singleContact)" 
-                                    (click)="toggleSelect(singleContact)">
-                                    <span
-                                        class="assigned_dropdown_avatar"
-                                        [style.background-color]="singleContact.color"
-                                    >
-                                        {{ singleContact.initials }}
-                                    </span>
-                                    <span class="assigned_dropdown_name">
-                                        {{ singleContact.firstname }} {{ singleContact.lastname }}
-                                        @if (singleContact.isYou) { <span class="you">(You)</span> }
-                                    </span>
-                                    <input
-                                        type="checkbox"
-                                        [checked]="isContactSelected(singleContact)"
-                                        class="assigned_dropdown_checkbox"
-                                    />
-                                </li>
-                            }
-                        </ul>
-                    }
-                </div>
-                <label>
-                    Category <span>*</span>
-                    <input type="text">
-                </label>
-                <label class="subtasks_input">
-                    Subtask
-                    <input type="text">
-                </label>
-            </div>
+ 
+    <h1 class="add_task_title">Add Task</h1>
+  
+  <div>
+    @if (confirmationMessage) {
+    <div class="add_task_confirmation">{{ confirmationMessage }}</div>
+    }
+    @if (errorMessage) {
+    <div class="add_task_error">{{ errorMessage }}</div>
+    }
+    <div class="add_task_container">
+      <div class="add_task_form">
+        <label>
+          Title <span>*</span>
+          <input type="text" [(ngModel)]="newTask.title" required />
+          @if (formSubmitted && !newTask.title) {
+          <span class="add_task_error_field">This field is required</span>
+          }
+        </label>
+        <label>
+          Description
+          <textarea [(ngModel)]="newTask.description"></textarea>
+        </label>
+        <label class="date_input">
+          Due date <span>*</span>
+          <input type="date" [(ngModel)]="newTask.dueDate" required />
+          @if (formSubmitted && !newTask.dueDate) {
+          <span class="add_task_error_field">This field is required</span>
+          }
+        </label>
+      </div>
+      <div class="separator"></div>
+      <div class="add_task_form">
+        <label>
+          Priority
+          <div class="add_task_priority">
+            <button class="priority_btn urgent" (click)="newTask.priority='urgent'">Urgent</button>
+            <button class="priority_btn medium" (click)="newTask.priority='medium'">Medium</button>
+            <button class="priority_btn low" (click)="newTask.priority='low'">Low</button>
+          </div>
+        </label>
+
+        <div class="assigned_dropdown">
+          <label for="assigned_dropdown_input" class="assigned_dropdown_label">Assigned to</label>
+          <div class="assigned_dropdown_input_wrapper" (click)="toggleDropdown($event)">
+            <input
+              id="assigned_dropdown_input"
+              type="text"
+              class="assigned_dropdown_input"
+              placeholder="Person auswählen..."
+              [(ngModel)]="search"
+              autocomplete="off"
+            />
+            <span class="assigned_dropdown_arrow">&#9662;</span>
+          </div>
+
+          @if (open) {
+          <ul class="assigned_dropdown_list" (click)="$event.stopPropagation()">
+            @if (contactList.length === 0) {
+            <li class="assigned_dropdown_item">No contacts available.</li>
+            }
+            @for (singleContact of contactList; track singleContact.id) {
+            <li
+              class="assigned_dropdown_item"
+              [ngClass]="getDropdownItemClass(singleContact)"
+              (click)="toggleSelect(singleContact)"
+            >
+              <span class="assigned_dropdown_avatar" [style.background-color]="singleContact.color">
+                {{ singleContact.initials }}
+              </span>
+              <span class="assigned_dropdown_name">
+                {{ singleContact.firstname }} {{ singleContact.lastname }}
+                @if (singleContact.isYou) { <span class="you">(You)</span> }
+              </span>
+              <input
+                type="checkbox"
+                [checked]="isContactSelected(singleContact)"
+                class="assigned_dropdown_checkbox"
+              />
+            </li>
+            }
+          </ul>
+          }
         </div>
-    </main>
-    <footer>
-        <div class="add_task_actions">
-            <p class="add_task_info">Please fill out all required fields.</p>
-            <button class="add_task_btn_cancel">Cancel</button>
-            <button class="add_task_btn_submit">Add Task</button>
-        </div>
-    </footer>
+
+        <label>
+          Category <span>*</span>
+          <div class="category_dropdown_input_wrapper" (click)="toggleCategoryDropdown($event)">
+            <input
+              id="category_dropdown_input"
+              type="text"
+              class="category_dropdown_input"
+              placeholder="Kategorie auswählen..."
+              [(ngModel)]="newTask.taskCategory"
+              readonly
+              autocomplete="off"
+            />
+            <span class="category_dropdown_arrow">&#9662;</span>
+          </div>
+          @if (categoryDropdownOpen) {
+            <ul class="category_dropdown_list" (click)="$event.stopPropagation()">
+              @for (option of categoryOptions; track option) {
+                <li class="category_dropdown_item" (click)="selectCategory(option)">
+                  {{ option }}
+                </li>
+              }
+            </ul>
+          }
+          @if (formSubmitted && !newTask.taskCategory) {
+          <span class="add_task_error_field">This field is required</span>
+          }
+        </label>
+        <label class="subtasks_input">
+          Subtask
+          <input type="text" />
+        </label>
+      </div>
+    </div>
+    <div class="add_task_actions">
+      <p class="add_task_info"><span>*</span>This field is required.</p>
+      <div>
+      <button class="add_task_btn_cancel">Clear</button>
+      <button class="add_task_btn_submit" (click)="saveTask(newTask)">Add Task</button>
+      </div>
+    </div>
+    </div>
 </div>

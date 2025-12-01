@@ -1,5 +1,5 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { collection, deleteDoc, doc, Firestore, onSnapshot, query, addDoc, updateDoc } from '@angular/fire/firestore';
+import { collection, deleteDoc, doc, Firestore, getDocs, onSnapshot, query, addDoc, updateDoc } from '@angular/fire/firestore';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
 
 
@@ -8,6 +8,7 @@ import { ContactInterface } from '../../interfaces/contact/contact-list.interfac
 })
 export class ContactService implements OnDestroy {
   contactList: ContactInterface[] = [];
+
   firestore: Firestore = inject(Firestore);
   unsubContacts;
   readonly colors = [
@@ -167,5 +168,13 @@ export class ContactService implements OnDestroy {
         acc[key] = list;
         return acc;
       }, {} as Record<string, T[]>);
+  }
+
+  async loadContactsFromFirebase() {
+    let collectionRef = this.getContactsRef();
+    let snapshot = await getDocs(collectionRef);
+    this.contactList = snapshot.docs.map(doc =>
+      this.setContactObject(doc.data(), doc.id)
+    );
   }
 }
