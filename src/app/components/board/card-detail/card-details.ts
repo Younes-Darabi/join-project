@@ -19,7 +19,7 @@ export class CardDetails {
     title: '',
     description: '',
     assignedTo: [],
-    dueDate: new Date(),
+    dueDate: null ,
     status: 'todo',
     priority: '',
     taskCategory: 'User Story',

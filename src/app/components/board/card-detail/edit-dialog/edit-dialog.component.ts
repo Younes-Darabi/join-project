@@ -18,7 +18,7 @@ export class EditDialogComponent {
     title: '',
     description: '',
     assignedTo: [],
-    dueDate: new Date(),
+    dueDate: null,
     status: 'todo',
     priority: '',
     taskCategory: 'User Story',
