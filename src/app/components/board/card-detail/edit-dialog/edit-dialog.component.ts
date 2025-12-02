@@ -48,35 +48,15 @@ export class EditDialogComponent {
    * The task being edited.
    */
   @Input() item?: TaskInterface;
-
-  /** Stores a copy of the task being edited */
   editedItem!: TaskInterface;
-
-  /** Controls dialog visibility */
   isDialogOpen: boolean = false;
-
-  /** Selected priority level */
   selectedPriority: string = 'medium';
-
-  /** Timeout reference for hiding input icon */
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
-
-  /** Tracks focus state of the subtask input field */
   subtaskInputFocused: boolean = false;
-
-  /** Input field for new subtasks */
   subtaskInput: string = '';
-
-  /** Stores the list of subtasks */
   subtasks: { name: string; isEditing: boolean }[] = [];
-
-  /** Controls the dropdown menu visibility */
   dropdownVisible: boolean = false;
-
-  /** Tracks form submission state */
   isEditFormSubmitted: boolean = false;
-
-  /** Stores the selected date */
   newDate: string = '';
 
   toggleDropdown() {
@@ -103,6 +83,7 @@ export class EditDialogComponent {
     this.selectedPriority = priority;
     this.task.priority = priority;
   }
+
   closeDialog() {
     this.closeDialogEvent.emit();
   }
@@ -140,6 +121,4 @@ export class EditDialogComponent {
     event.stopPropagation();
     this.toggleDropdown();
   }
-
-
 }

@@ -1,63 +1,66 @@
 .frame_category {
-    padding: 10px 20px;
-    border-radius: 15px;
-    font-size: 16px;
-    background: #0038FF;
-    color: #FFFFFF;
+  padding: 10px 20px;
+  border-radius: 15px;
+  font-size: 16px;
+  background: #0038ff;
+  color: #ffffff;
 }
 
 .frame_title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #2A3647;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2a3647;
 }
 
 .frame_description {
-    font-size: 16px;
-    font-weight: 400;
-    color: #A8A8A8;
+  font-size: 16px;
+  font-weight: 400;
+  color: #a8a8a8;
 }
 
-.frame_subtasks {}
+.frame_subtasks {
+}
 
 .priority_assignedTo {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+
+  .short_name {
     display: flex;
-    width: 100%;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    min-width: 120px;
+    min-height: 120px;
+    background-color: #ff7a00;
+    border: 3px solid #ffffff;
+    outline: 1px solid #e7e7e7;
+    border-radius: 50%;
+    font-size: 47px;
+    color: white;
+    font-weight: 500;
 
-    .short_name {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-width: 120px;
-        min-height: 120px;
-        background-color: #ff7a00;
-        border: 3px solid #ffffff;
-        outline: 1px solid #e7e7e7;
-        border-radius: 50%;
-        font-size: 47px;
-        color: white;
-        font-weight: 500;
-
-        p {
-            color: #ffffff;
-            font-size: 47px;
-        }
+    p {
+      color: #ffffff;
+      font-size: 47px;
     }
+  }
 
-    .name_icon {
-        min-height: 42px;
-        min-width: 42px;
-        border-radius: 100px;
-        background-color: #007CEE;
-        outline: 2px solid white;
-        text-align: center;
-        line-height: 42px;
-        color: white;
-    }
+  .name_icon {
+    min-height: 42px;
+    min-width: 42px;
+    border-radius: 100px;
+    background-color: #007cee;
+    outline: 2px solid white;
+    text-align: center;
+    line-height: 42px;
+    color: white;
+  }
 }
 
-.frame_assignedTo {}
+.frame_assignedTo {
+}
 
-.frame_priority {}
+.frame_priority {
+}
