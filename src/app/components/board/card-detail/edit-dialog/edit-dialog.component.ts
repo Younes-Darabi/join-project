@@ -12,7 +12,8 @@ import { TaskInterface } from '../../../../interfaces/board/task.interface';
   styleUrl: './edit-dialog.component.scss',
 })
 export class EditDialogComponent {
-  firebase = inject(BoardService);
+  boardService = inject(BoardService);
+
   task: TaskInterface = {
     id: '',
     title: '',
@@ -23,12 +24,12 @@ export class EditDialogComponent {
     priority: '',
     taskCategory: 'User Story',
     subTasks: [],
-  }
+  };
 
   showEditDetail(task: TaskInterface) {
     this.task = task;
   }
-  
+
   /**
    * @event closeDialogEvent
    * Emits an event when the edit dialog should be closed.
@@ -81,26 +82,26 @@ export class EditDialogComponent {
     this.dropdownVisible = !this.dropdownVisible;
   }
 
-  ngOnInit() {
-  
-}
+  ngOnInit() {}
 
-ngOnChanges() {
-  if (this.item) {
-    this.task = JSON.parse(JSON.stringify(this.item));
-    this.selectedPriority = this.task.priority || 'medium';
+  ngOnChanges() {
+    if (this.item) {
+      this.task = JSON.parse(JSON.stringify(this.item));
+      this.selectedPriority = this.task.priority || 'medium';
+    }
   }
-}
 
   saveChanges() {
-  this.saveChangesEvent.emit(this.task);
-  this.closeDialog();
-}
+    if (!this.task) return;
+    this.boardService.updateTaskInFirebase(this.task);
+    this.saveChangesEvent.emit(this.task);
+    this.closeDialogEvent.emit();
+  }
 
   selectPriority(priority: string) {
-  this.selectedPriority = priority;
-  this.task.priority = priority;
-}
+    this.selectedPriority = priority;
+    this.task.priority = priority;
+  }
   closeDialog() {
     this.closeDialogEvent.emit();
   }
@@ -135,7 +136,7 @@ ngOnChanges() {
   }
 
   onSelectContactsClick(event: Event) {
-  event.stopPropagation();
-  this.toggleDropdown();
-}
+    event.stopPropagation();
+    this.toggleDropdown();
+  }
 }
