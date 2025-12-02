@@ -185,6 +185,8 @@ section {
   width: 100%;
   flex-direction: column;
   gap: 20px;
+  overflow-y: auto;
+  margin-bottom: 10px;
 }
 
 .frame {

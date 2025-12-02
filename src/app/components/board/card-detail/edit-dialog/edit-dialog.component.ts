@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output, ChangeDetectorRef } from '@angular/core';
-import { TaskInterface } from '../../../interfaces/board/task.interface';
-import { BoardService } from '../../../services/board/board-service';
 import { FormsModule, NgForm } from '@angular/forms';
+import { BoardService } from '../../../../services/board/board-service';
+import { TaskInterface } from '../../../../interfaces/board/task.interface';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -13,8 +13,31 @@ import { FormsModule, NgForm } from '@angular/forms';
 })
 export class EditDialogComponent {
   firebase = inject(BoardService);
-  
+  task: TaskInterface = {
+    id: '',
+    title: '',
+    description: '',
+    assignedTo: [],
+    dueDate: new Date(),
+    status: 'todo',
+    priority: '',
+    taskCategory: 'User Story',
+    subTasks: [],
+  }
 
+  showEditDetail(task: TaskInterface) {
+    this.task = task;
+  }
+
+
+
+
+
+
+
+
+
+  
   /**
    * @event closeDialogEvent
    * Emits an event when the edit dialog should be closed.
