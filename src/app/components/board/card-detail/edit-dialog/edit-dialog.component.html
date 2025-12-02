@@ -1,120 +1,194 @@
-<p>Hi</p>
-<section *ngIf=item>
-    <div class="dialog_content">
-        <div class="headline">
-            <div class="category"
-                [ngStyle]="{'background-color': item.taskCategory === 'User Story' ? 'blue' : item.taskCategory === 'Technical Task' ? '#1fd7c1' : 'gray'}">
-                {{ item.taskCategory }}
-            </div>
-            <div class="close_btn" (click)="closeDialog()">
-                <img src="./assets/icons/contact/Close.svg" alt="close">
-            </div>
-        </div>
-        <form #taskForm="ngForm">
-            <p>Title</p>
-            <label class="input_content">
-                <input type="text" name="title" placeholder="Enter a title" [(ngModel)]="item.title">
-            </label>
-            <p>Description</p>
-            <label class="input_content">
-                <input type="text" name="description" placeholder="Enter a description" [(ngModel)]="item.description">
-            </label>
-            <div class="date_prio_content">
-                <label class="input_content" for="dueDate">Due date
-                    <input type="date" id="dueDate" [value]="item.dueDate" [(ngModel)]="item.dueDate" name="date">
-                </label>
-            </div>
-            <div class="date_prio_content">
-                <p class="title2">Priority</p>
-                <div class="prio_btns">
-                    <!-- urgent button -->
-                    <button type="button" class="prio urgent" [class.selected]="selectedPriority === 'urgent'"
-                        (click)="selectPriority('urgent')">
-                        <span>Urgent</span>
-                        <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M19.5708 14.755C19.3361 14.7554 19.1076 14.6805 18.9187 14.5414L10.6666 8.45824L2.4146 14.5414C2.29874 14.627 2.16716 14.6889 2.02736 14.7237C1.88756 14.7584 1.74228 14.7653 1.59981 14.7439C1.45734 14.7226 1.32048 14.6734 1.19703 14.5992C1.07359 14.525 0.965978 14.4272 0.880349 14.3114C0.79472 14.1957 0.732748 14.0642 0.697971 13.9245C0.663194 13.7848 0.656294 13.6396 0.677664 13.4973C0.720823 13.2097 0.876514 12.9511 1.11049 12.7783L10.0146 6.20786C10.2033 6.06826 10.4319 5.99292 10.6666 5.99292C10.9014 5.99292 11.13 6.06826 11.3187 6.20786L20.2228 12.7783C20.4087 12.9153 20.5466 13.1074 20.6168 13.3272C20.6869 13.5471 20.6858 13.7835 20.6135 14.0027C20.5411 14.2219 20.4014 14.4126 20.2141 14.5477C20.0269 14.6828 19.8017 14.7554 19.5708 14.755Z"
-                                fill="#FF3D00" />
-                            <path
-                                d="M19.5708 9.00581C19.3361 9.00621 19.1076 8.93136 18.9187 8.79226L10.6667 2.7091L2.4146 8.79226C2.18063 8.96507 1.88754 9.03793 1.59981 8.9948C1.31209 8.95167 1.05329 8.7961 0.880353 8.5623C0.707418 8.3285 0.63451 8.03563 0.677669 7.74811C0.720828 7.4606 0.876518 7.20199 1.11049 7.02919L10.0146 0.45871C10.2033 0.319119 10.4319 0.243774 10.6667 0.243774C10.9014 0.243774 11.13 0.319119 11.3187 0.45871L20.2228 7.02919C20.4087 7.1661 20.5466 7.35822 20.6168 7.5781C20.6869 7.79797 20.6858 8.03438 20.6135 8.25356C20.5412 8.47274 20.4014 8.6635 20.2141 8.79859C20.0269 8.93368 19.8017 9.0062 19.5708 9.00581Z"
-                                fill="#FF3D00" />
-                        </svg>
-                    </button>
-                    <!-- medium button -->
-                    <button type="button" class="prio medium" [class.selected]="selectedPriority === 'medium'"
-                        (click)="selectPriority('medium')">
-                        <span>Medium</span>
-                        <svg width="21" height="9" viewBox="0 0 21 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M19.4041 8.22552H1.59589C1.30524 8.22552 1.0265 8.10922 0.820979 7.90221C0.61546 7.6952 0.5 7.41443 0.5 7.12167C0.5 6.82891 0.61546 6.54814 0.820979 6.34113C1.0265 6.13412 1.30524 6.01782 1.59589 6.01782H19.4041C19.6948 6.01782 19.9735 6.13412 20.179 6.34113C20.3845 6.54814 20.5 6.82891 20.5 7.12167C20.5 7.41443 20.3845 7.6952 20.179 7.90221C19.9735 8.10922 19.6948 8.22552 19.4041 8.22552Z"
-                                fill="#FFA800" />
-                            <path
-                                d="M19.4041 2.98223H1.59589C1.30524 2.98223 1.0265 2.86594 0.820979 2.65892C0.61546 2.45191 0.5 2.17114 0.5 1.87839C0.5 1.58563 0.61546 1.30486 0.820979 1.09785C1.0265 0.890834 1.30524 0.774536 1.59589 0.774536L19.4041 0.774536C19.6948 0.774536 19.9735 0.890834 20.179 1.09785C20.3845 1.30486 20.5 1.58563 20.5 1.87839C20.5 2.17114 20.3845 2.45191 20.179 2.65892C19.9735 2.86594 19.6948 2.98223 19.4041 2.98223Z"
-                                fill="#FFA800" />
-                        </svg>
-                    </button>
-                    <!-- low button -->
-                    <button type="button" class="prio low" [class.selected]="selectedPriority === 'low'"
-                        (click)="selectPriority('low')">
-                        <span>Low</span>
-                        <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M10.333 9.00614C10.0984 9.00654 9.86988 8.9317 9.68103 8.79262L0.777921 2.22288C0.662083 2.13733 0.564243 2.02981 0.489988 1.90647C0.415732 1.78313 0.366516 1.64638 0.345148 1.50404C0.301994 1.21655 0.374893 0.923717 0.547809 0.689945C0.720726 0.456173 0.979494 0.300615 1.26719 0.257493C1.55488 0.21437 1.84794 0.287216 2.08188 0.460004L10.333 6.54248L18.5841 0.460004C18.7 0.374448 18.8315 0.312529 18.9713 0.277782C19.1111 0.243035 19.2564 0.236141 19.3988 0.257493C19.5413 0.278844 19.6781 0.328025 19.8016 0.402225C19.925 0.476425 20.0326 0.574193 20.1182 0.689945C20.2038 0.805697 20.2658 0.937168 20.3006 1.07685C20.3353 1.21653 20.3422 1.36169 20.3209 1.50404C20.2995 1.64638 20.2503 1.78313 20.176 1.90647C20.1018 2.02981 20.0039 2.13733 19.8881 2.22288L10.985 8.79262C10.7961 8.9317 10.5676 9.00654 10.333 9.00614Z"
-                                fill="#7AE229" />
-                            <path
-                                d="M10.333 14.7547C10.0984 14.7551 9.86988 14.6802 9.68103 14.5412L0.777921 7.97142C0.543975 7.79863 0.388302 7.54005 0.345148 7.25257C0.301994 6.96509 0.374893 6.67225 0.54781 6.43848C0.720726 6.20471 0.979494 6.04915 1.26719 6.00603C1.55488 5.96291 1.84794 6.03575 2.08188 6.20854L10.333 12.291L18.5841 6.20854C18.8181 6.03575 19.1111 5.96291 19.3988 6.00603C19.6865 6.04915 19.9453 6.20471 20.1182 6.43848C20.2911 6.67225 20.364 6.96509 20.3209 7.25257C20.2777 7.54005 20.122 7.79863 19.8881 7.97142L10.985 14.5412C10.7961 14.6802 10.5676 14.7551 10.333 14.7547Z"
-                                fill="#7AE229" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div class="assigned_content">
-                <div class="dropdown">
-                    <label for="assignedTo">Assigned to</label>
-                    <div class="select_contacts" (click)="toggleDropdown()" (click)="$event.stopPropagation()">
-                        <span class="like_placeholder" [ngClass] = "{ 'white' : dropdownVisible }">Select contacts to assign</span>
-                        <img src="./assets/icons/board/dropdown_arrow.svg" alt="little arrow" [ngClass]="{ 'rotate' : dropdownVisible }">
-                    </div>
-                    <div class="dropdown_menu" *ngIf="dropdownVisible" (click)="$event.stopPropagation()"></div>
-                       
-                
-                </div>
-            </div>
-<!-- subtask -->
-            <div class="subtasks_content">
-                <p class="title2">Subtasks</p>
-                <div class="input_content">
-                    <input id="subtask-input" class="subtask-input" [(ngModel)]="subtaskInput" name="subtaskInput"
-                        placeholder="Add new subtask"  (focus)="onSubtaskInputFocus()"
-                        (blur)="onSubtaskInputBlur()" />
-                    <div class="input-icon" 
-                    [ngClass]="{'hidden': subtaskInputFocused, 'visible': !subtaskInputFocused}"
-                        (click)="focusSubtaskInput()">
-                        <img src="./assets/icons/board/add-black.svg" alt="Add">
-                    </div>
-                    <div class="input-icons"
-                        [ngClass]="{'visible': subtaskInputFocused, 'hidden': !subtaskInputFocused}">
-                        <div (click)="clearSubtaskInput()">
-                            <img src="./assets/icons/board/close-black.svg" alt="Close">
-                        </div>
-                        <div >
-                            <img src="./assets/icons/board/check-black.svg" alt="Check">
-                        </div>
-                    </div>
-                </div>
-                
-                        <!-- Aktionen (Speichern/ Löschen) -->
-                        <div class="subtask-actions">
-                    
-            </div>
-            </div>
-<!-- save btn -->
-            <div class="save_edit_content" >
-                <div class="edit_box">
-                    <p>Ok</p>
-                    <img src="./assets/icons/board/check.svg" alt="save">
-                </div>
-            </div>
-        </form>
+<section *ngIf="task as currentTask">
+  <div class="dialog_content">
+    <div class="headline">
+      <div class="dropdown">
+        <label class="input_content">
+          <div
+            class="category"
+            [ngStyle]="{
+              'background-color':
+                task.taskCategory === 'User Story'
+                  ? 'blue'
+                  : task.taskCategory === 'Technical Task'
+                  ? '#1fd7c1'
+                  : 'gray'
+            }"
+          >
+            {{ task.taskCategory }}
+            <img
+              src="./assets/icons/board/dropdown_arrow.svg"
+              alt="little arrow"
+              [ngClass]="{ rotate: dropdownVisible }"
+            />
+          </div>
+        </label>
+      </div>
     </div>
+    <form #taskForm="ngForm">
+      <p>Title</p>
+      <label class="input_content">
+        <input type="text" name="title" placeholder="Enter a title" [(ngModel)]="task.title" />
+      </label>
+      <p>Description</p>
+      <label class="input_content">
+        <input
+          type="text"
+          name="description"
+          placeholder="Enter a description"
+          [(ngModel)]="task.description"
+        />
+      </label>
+      <div class="date_prio_content">
+        <label class="input_content" for="dueDate"
+          >Due date
+          <input type="date" id="dueDate" [(ngModel)]="task.dueDate" name="date" />
+        </label>
+      </div>
+      <div class="date_prio_content">
+        <p class="title2">Priority</p>
+        <div class="prio_btns">
+          <!-- urgent button -->
+          <button
+            type="button"
+            class="prio urgent"
+            [class.selected]="selectedPriority === 'urgent'"
+            (click)="selectPriority('urgent')"
+          >
+            <span>Urgent</span>
+            <svg
+              width="21"
+              height="15"
+              viewBox="0 0 21 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M19.5708 14.755C19.3361 14.7554 19.1076 14.6805 18.9187 14.5414L10.6666 8.45824L2.4146 14.5414C2.29874 14.627 2.16716 14.6889 2.02736 14.7237C1.88756 14.7584 1.74228 14.7653 1.59981 14.7439C1.45734 14.7226 1.32048 14.6734 1.19703 14.5992C1.07359 14.525 0.965978 14.4272 0.880349 14.3114C0.79472 14.1957 0.732748 14.0642 0.697971 13.9245C0.663194 13.7848 0.656294 13.6396 0.677664 13.4973C0.720823 13.2097 0.876514 12.9511 1.11049 12.7783L10.0146 6.20786C10.2033 6.06826 10.4319 5.99292 10.6666 5.99292C10.9014 5.99292 11.13 6.06826 11.3187 6.20786L20.2228 12.7783C20.4087 12.9153 20.5466 13.1074 20.6168 13.3272C20.6869 13.5471 20.6858 13.7835 20.6135 14.0027C20.5411 14.2219 20.4014 14.4126 20.2141 14.5477C20.0269 14.6828 19.8017 14.7554 19.5708 14.755Z"
+                fill="#FF3D00"
+              />
+              <path
+                d="M19.5708 9.00581C19.3361 9.00621 19.1076 8.93136 18.9187 8.79226L10.6667 2.7091L2.4146 8.79226C2.18063 8.96507 1.88754 9.03793 1.59981 8.9948C1.31209 8.95167 1.05329 8.7961 0.880353 8.5623C0.707418 8.3285 0.63451 8.03563 0.677669 7.74811C0.720828 7.4606 0.876518 7.20199 1.11049 7.02919L10.0146 0.45871C10.2033 0.319119 10.4319 0.243774 10.6667 0.243774C10.9014 0.243774 11.13 0.319119 11.3187 0.45871L20.2228 7.02919C20.4087 7.1661 20.5466 7.35822 20.6168 7.5781C20.6869 7.79797 20.6858 8.03438 20.6135 8.25356C20.5412 8.47274 20.4014 8.6635 20.2141 8.79859C20.0269 8.93368 19.8017 9.0062 19.5708 9.00581Z"
+                fill="#FF3D00"
+              />
+            </svg>
+          </button>
+          <!-- medium button -->
+          <button
+            type="button"
+            class="prio medium"
+            [class.selected]="selectedPriority === 'medium'"
+            (click)="selectPriority('medium')"
+          >
+            <span>Medium</span>
+            <svg
+              width="21"
+              height="9"
+              viewBox="0 0 21 9"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M19.4041 8.22552H1.59589C1.30524 8.22552 1.0265 8.10922 0.820979 7.90221C0.61546 7.6952 0.5 7.41443 0.5 7.12167C0.5 6.82891 0.61546 6.54814 0.820979 6.34113C1.0265 6.13412 1.30524 6.01782 1.59589 6.01782H19.4041C19.6948 6.01782 19.9735 6.13412 20.179 6.34113C20.3845 6.54814 20.5 6.82891 20.5 7.12167C20.5 7.41443 20.3845 7.6952 20.179 7.90221C19.9735 8.10922 19.6948 8.22552 19.4041 8.22552Z"
+                fill="#FFA800"
+              />
+              <path
+                d="M19.4041 2.98223H1.59589C1.30524 2.98223 1.0265 2.86594 0.820979 2.65892C0.61546 2.45191 0.5 2.17114 0.5 1.87839C0.5 1.58563 0.61546 1.30486 0.820979 1.09785C1.0265 0.890834 1.30524 0.774536 1.59589 0.774536L19.4041 0.774536C19.6948 0.774536 19.9735 0.890834 20.179 1.09785C20.3845 1.30486 20.5 1.58563 20.5 1.87839C20.5 2.17114 20.3845 2.45191 20.179 2.65892C19.9735 2.86594 19.6948 2.98223 19.4041 2.98223Z"
+                fill="#FFA800"
+              />
+            </svg>
+          </button>
+          <!-- low button -->
+          <button
+            type="button"
+            class="prio low"
+            [class.selected]="selectedPriority === 'low'"
+            (click)="selectPriority('low')"
+          >
+            <span>Low</span>
+            <svg
+              width="21"
+              height="15"
+              viewBox="0 0 21 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.333 9.00614C10.0984 9.00654 9.86988 8.9317 9.68103 8.79262L0.777921 2.22288C0.662083 2.13733 0.564243 2.02981 0.489988 1.90647C0.415732 1.78313 0.366516 1.64638 0.345148 1.50404C0.301994 1.21655 0.374893 0.923717 0.547809 0.689945C0.720726 0.456173 0.979494 0.300615 1.26719 0.257493C1.55488 0.21437 1.84794 0.287216 2.08188 0.460004L10.333 6.54248L18.5841 0.460004C18.7 0.374448 18.8315 0.312529 18.9713 0.277782C19.1111 0.243035 19.2564 0.236141 19.3988 0.257493C19.5413 0.278844 19.6781 0.328025 19.8016 0.402225C19.925 0.476425 20.0326 0.574193 20.1182 0.689945C20.2038 0.805697 20.2658 0.937168 20.3006 1.07685C20.3353 1.21653 20.3422 1.36169 20.3209 1.50404C20.2995 1.64638 20.2503 1.78313 20.176 1.90647C20.1018 2.02981 20.0039 2.13733 19.8881 2.22288L10.985 8.79262C10.7961 8.9317 10.5676 9.00654 10.333 9.00614Z"
+                fill="#7AE229"
+              />
+              <path
+                d="M10.333 14.7547C10.0984 14.7551 9.86988 14.6802 9.68103 14.5412L0.777921 7.97142C0.543975 7.79863 0.388302 7.54005 0.345148 7.25257C0.301994 6.96509 0.374893 6.67225 0.54781 6.43848C0.720726 6.20471 0.979494 6.04915 1.26719 6.00603C1.55488 5.96291 1.84794 6.03575 2.08188 6.20854L10.333 12.291L18.5841 6.20854C18.8181 6.03575 19.1111 5.96291 19.3988 6.00603C19.6865 6.04915 19.9453 6.20471 20.1182 6.43848C20.2911 6.67225 20.364 6.96509 20.3209 7.25257C20.2777 7.54005 20.122 7.79863 19.8881 7.97142L10.985 14.5412C10.7961 14.6802 10.5676 14.7551 10.333 14.7547Z"
+                fill="#7AE229"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="assigned_content">
+        <div class="dropdown">
+          <label for="assignedTo">Assigned to</label>
+          <div class="select_contacts" (click)="onSelectContactsClick($event)">
+            <span class="like_placeholder" [ngClass]="{ white: dropdownVisible }"
+              >Select contacts to assign</span
+            >
+            <img
+              src="./assets/icons/board/dropdown_arrow.svg"
+              alt="little arrow"
+              [ngClass]="{ rotate: dropdownVisible }"
+            />
+          </div>
+          <div
+            class="dropdown_menu"
+            *ngIf="dropdownVisible"
+            (click)="$event.stopPropagation()"
+          ></div>
+        </div>
+      </div>
+
+      <!-- subtask -->
+      <div class="subtasks_content">
+        <p class="title2">Subtasks</p>
+        <div class="input_content">
+          <input
+            id="subtask-input"
+            class="subtask-input"
+            [(ngModel)]="subtaskInput"
+            name="subtaskInput"
+            placeholder="Add new subtask"
+            (focus)="onSubtaskInputFocus()"
+            (blur)="onSubtaskInputBlur()"
+          />
+          <div
+            class="input-icon"
+            [ngClass]="{ hidden: subtaskInputFocused, visible: !subtaskInputFocused }"
+            (click)="focusSubtaskInput()"
+          >
+            <img src="./assets/icons/board/add-black.svg" alt="Add" />
+          </div>
+          <div
+            class="input-icons"
+            [ngClass]="{ visible: subtaskInputFocused, hidden: !subtaskInputFocused }"
+          >
+            <div (click)="clearSubtaskInput()">
+              <img src="./assets/icons/board/close-black.svg" alt="Close" />
+            </div>
+            <div>
+              <img src="./assets/icons/board/check-black.svg" alt="Check" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Aktionen (Speichern/ Löschen) -->
+        <div class="subtask-actions"></div>
+      </div>
+
+      <!-- save btn -->
+      <div class="save_edit_content">
+        <div class="edit_box" (click)="saveChanges()">
+          <p>Save</p>
+          <img src="./assets/icons/contact/check.svg" alt="save" />
+        </div>
+      </div>
+    </form>
+  </div>
 </section>

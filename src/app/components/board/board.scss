@@ -1,6 +1,6 @@
 section {
   height: calc(100vh - 96px);
-  background-color: #F6F7F8;
+  background-color: #f6f7f8;
 }
 
 .title {
@@ -79,7 +79,7 @@ section {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: #2A3647;
+  background: #2a3647;
   border: none;
   border-radius: 7px;
   color: #fff;
@@ -126,7 +126,7 @@ section {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: #2A3647;
+    color: #2a3647;
     transition: all 400ms ease;
 
     &:hover {
@@ -164,9 +164,9 @@ section {
 .no_tasks_card {
   width: 100%;
   height: 48px;
-  background-color: #E7E7E7;
-  border: 1px dashed #A8A8A8;
-  color: #A8A8A8;
+  background-color: #e7e7e7;
+  border: 1px dashed #a8a8a8;
+  color: #a8a8a8;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -268,7 +268,7 @@ section {
 
   .add_btn_respo {
     display: flex;
-    background: #2A3647;
+    background: #2a3647;
     width: 40px;
     height: 40px;
     border-radius: 10px;
@@ -278,7 +278,7 @@ section {
 
     &:hover {
       cursor: pointer;
-      background: #29ABE2;
+      background: #29abe2;
     }
   }
 }

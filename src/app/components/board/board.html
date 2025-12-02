@@ -10,7 +10,7 @@
 
       <div class="find_task_content">
         <div class="search_container">
-          <input type="text" placeholder="Find Task" class="search_input"  (input)="filterTasks()" />
+          <input type="text" placeholder="Find Task" class="search_input" (input)="filterTasks()" />
           <img src="./assets/icons/board/Vector 3.svg" alt="" />
           <button class="search_button">
             <img src="./assets/icons/board/search.svg" alt="search" />
@@ -24,7 +24,6 @@
     </div>
 
     <div class="task_container">
-
       <!-- To do -->
       <div class="main_box">
         <div class="title_content">
@@ -32,21 +31,28 @@
           <button class="plus_btn">+</button>
         </div>
 
-        <div id="todoList" class="box" cdkDropList #toDoListRef="cdkDropList"
+        <div
+          id="todoList"
+          class="box"
+          cdkDropList
+          #toDoListRef="cdkDropList"
           [cdkDropListData]="boardService.toDoList"
           [cdkDropListConnectedTo]="[inProgressListRef, awaitFeedbackListRef, doneListRef]"
-          (cdkDropListDropped)="drop($event)">
-
-          @if (boardService.toDoList.length > 0) {
-            @for (item of boardService.toDoList; track $index) {
-              <app-card-task [task]="item" class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
-            }
-          } @else {
-            <div class="no_tasks_card">
-              <p>No tasks in To do</p>
-            </div>
+          (cdkDropListDropped)="drop($event)"
+        >
+          @if (boardService.toDoList.length > 0) { @for (item of boardService.toDoList; track
+          $index) {
+          <app-card-task
+            [task]="item"
+            class="frame"
+            cdkDrag
+            (click)="openTaskDetail(item)"
+          ></app-card-task>
+          } } @else {
+          <div class="no_tasks_card">
+            <p>No tasks in To do</p>
+          </div>
           }
-
         </div>
       </div>
 
@@ -57,21 +63,28 @@
           <button class="plus_btn">+</button>
         </div>
 
-        <div id="inProgressList" class="box" cdkDropList #inProgressListRef="cdkDropList"
+        <div
+          id="inProgressList"
+          class="box"
+          cdkDropList
+          #inProgressListRef="cdkDropList"
           [cdkDropListData]="boardService.inProgressList"
           [cdkDropListConnectedTo]="[toDoListRef, awaitFeedbackListRef, doneListRef]"
-          (cdkDropListDropped)="drop($event)">
-
-          @if (boardService.inProgressList.length > 0) {
-            @for (item of boardService.inProgressList; track $index) {
-              <app-card-task [task]="item" class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
-            }
-          } @else {
-            <div class="no_tasks_card">
-              <p>No tasks in progress</p>
-            </div>
+          (cdkDropListDropped)="drop($event)"
+        >
+          @if (boardService.inProgressList.length > 0) { @for (item of boardService.inProgressList;
+          track $index) {
+          <app-card-task
+            [task]="item"
+            class="frame"
+            cdkDrag
+            (click)="openTaskDetail(item)"
+          ></app-card-task>
+          } } @else {
+          <div class="no_tasks_card">
+            <p>No tasks in progress</p>
+          </div>
           }
-
         </div>
       </div>
 
@@ -82,21 +95,28 @@
           <button class="plus_btn">+</button>
         </div>
 
-        <div id="awaitFeedbackList" class="box" cdkDropList #awaitFeedbackListRef="cdkDropList"
+        <div
+          id="awaitFeedbackList"
+          class="box"
+          cdkDropList
+          #awaitFeedbackListRef="cdkDropList"
           [cdkDropListData]="boardService.awaitFeedbackList"
           [cdkDropListConnectedTo]="[toDoListRef, inProgressListRef, doneListRef]"
-          (cdkDropListDropped)="drop($event)">
-
-          @if (boardService.awaitFeedbackList.length > 0) {
-            @for (item of boardService.awaitFeedbackList; track $index) {
-              <app-card-task [task]="item" class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
-            }
-          } @else {
-            <div class="no_tasks_card">
-              <p>No tasks in Await feedback</p>
-            </div>
+          (cdkDropListDropped)="drop($event)"
+        >
+          @if (boardService.awaitFeedbackList.length > 0) { @for (item of
+          boardService.awaitFeedbackList; track $index) {
+          <app-card-task
+            [task]="item"
+            class="frame"
+            cdkDrag
+            (click)="openTaskDetail(item)"
+          ></app-card-task>
+          } } @else {
+          <div class="no_tasks_card">
+            <p>No tasks in Await feedback</p>
+          </div>
           }
-
         </div>
       </div>
 
@@ -107,24 +127,30 @@
           <button class="plus_btn">+</button>
         </div>
 
-        <div id="DoneList" class="box" cdkDropList #doneListRef="cdkDropList"
+        <div
+          id="DoneList"
+          class="box"
+          cdkDropList
+          #doneListRef="cdkDropList"
           [cdkDropListData]="boardService.doneList"
           [cdkDropListConnectedTo]="[toDoListRef, inProgressListRef, awaitFeedbackListRef]"
-          (cdkDropListDropped)="drop($event)">
-
-          @if (boardService.doneList.length > 0) {
-            @for (item of boardService.doneList; track $index) {
-              <app-card-task [task]="item" class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
-            }
-          } @else {
-            <div class="no_tasks_card">
-              <p>No tasks in Done</p>
-            </div>
+          (cdkDropListDropped)="drop($event)"
+        >
+          @if (boardService.doneList.length > 0) { @for (item of boardService.doneList; track
+          $index) {
+          <app-card-task
+            [task]="item"
+            class="frame"
+            cdkDrag
+            (click)="openTaskDetail(item)"
+          ></app-card-task>
+          } } @else {
+          <div class="no_tasks_card">
+            <p>No tasks in Done</p>
+          </div>
           }
-
         </div>
       </div>
-
     </div>
   </div>
 </section>
