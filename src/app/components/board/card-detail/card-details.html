@@ -1,16 +1,9 @@
-<section
-  *ngIf="!editPageShow"
-  class="section_details"
-  [ngStyle]="{ display: !editPageShow ? 'flex' : 'none' }"
->
+<section *ngIf="!editPageShow" class="section_details" [ngStyle]="{ display: !editPageShow ? 'flex' : 'none' }">
   <div class="dialog_content">
     <div class="headline">
-      <p
-        class="category"
-        [ngStyle]="{
+      <p class="category" [ngStyle]="{
           background: this.task.taskCategory === 'Technical Task' ? '#1FD7C1' : '#0038FF'
-        }"
-      >
+        }">
         {{ this.task.taskCategory }}
       </p>
 
@@ -31,16 +24,13 @@
     <div class="date_prio_content">
       <p class="title2">
         Priority: <span [ngStyle]="{ 'margin-left': '25px' }">{{ this.task.priority }}</span>
-        <img
-          [src]="
+        <img [src]="
             this.task.priority === 'urgent'
               ? './assets/icons/board/Prio alta.svg'
               : this.task.priority === 'medium'
               ? './assets/icons/board/Prio media.svg'
               : './assets/icons/board/Prio baja.svg'
-          "
-          alt=""
-        />
+          " alt="" />
       </p>
     </div>
 
@@ -48,12 +38,16 @@
       <p class="title2">Assigned To:</p>
       <div class="members_content">
         <div class="assigned_to">
+          @for (contactId of task.assignedTo; track contactId) {
+          @let contact = getContactDetailsById(contactId);
+          @if (contact) {
           <div class="person_box">
-            <div class="color_icon">
-              <p>{{ this.task.assignedTo }}</p>
+            <div class="assigned_dropdown_avatar" [style.background-color]="contact.color" >
+              <p >{{ contact.initials }}</p>
             </div>
-            <p>{{ this.task.assignedTo }}</p>
+            <p>{{ contact.firstname + ' ' +  contact.lastname}}</p>
           </div>
+          }}
         </div>
       </div>
     </div>
@@ -65,11 +59,7 @@
       <div class="show_subtask">
         <label class="checkbox_content">
           <input type="checkbox" />
-          <img
-            class="unchecked"
-            src="./assets/icons/board/checkbox-unchecked.svg"
-            alt="unchecked"
-          />
+          <img class="unchecked" src="./assets/icons/board/checkbox-unchecked.svg" alt="unchecked" />
           <img class="checked" src="./assets/icons/board/checkbox-checked.svg" alt="checked" />
           <p>{{ this.task.subTasks }}</p>
         </label>
@@ -78,10 +68,7 @@
     </div>
 
     <div class="delete_edit_content">
-      <p
-        (click)="boardService.deleteTaskFromFirebase(this.task); closeTaskDetail()"
-        class="delete_box"
-      >
+      <p (click)="boardService.deleteTaskFromFirebase(this.task); closeTaskDetail()" class="delete_box">
         <img src="./assets/icons/board/delete.svg" alt="delete" /> Delete
       </p>
       <p (click)="editPageShow = true" class="edit_box">
@@ -91,18 +78,10 @@
   </div>
 </section>
 
-<section
-  *ngIf="editPageShow"
-  class="section_edit"
-  [ngStyle]="{ display: editPageShow ? 'flex' : 'none' }"
->
+<section *ngIf="editPageShow" class="section_edit" [ngStyle]="{ display: editPageShow ? 'flex' : 'none' }">
   <div class="close_btn" (click)="editPageShow = false">
     <img src="./assets/icons/contact/close.svg" alt="close" />
   </div>
-  <app-edit-dialog
-    [item]="task"
-    (closeDialogEvent)="editPageShow = false"
-    (saveChangesEvent)="onTaskSaved($event)"
-  >
+  <app-edit-dialog [item]="task" (closeDialogEvent)="editPageShow = false" (saveChangesEvent)="onTaskSaved($event)">
   </app-edit-dialog>
 </section>
