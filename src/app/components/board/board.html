@@ -17,7 +17,7 @@
           </button>
         </div>
 
-        <button class="add_btn">
+        <button class="add_btn" (click)="addTaskShow=true">
           Add task <img src="./assets/icons/board/add.svg" alt="add" />
         </button>
       </div>
@@ -28,26 +28,15 @@
       <div class="main_box">
         <div class="title_content">
           <h5 id="toDoSection">To do</h5>
-          <button class="plus_btn">+</button>
+          <button class="plus_btn" (click)="addTaskShow=true">+</button>
         </div>
 
-        <div
-          id="todoList"
-          class="box"
-          cdkDropList
-          #toDoListRef="cdkDropList"
-          [cdkDropListData]="boardService.toDoList"
+        <div id="todoList" class="box" cdkDropList #toDoListRef="cdkDropList" [cdkDropListData]="boardService.toDoList"
           [cdkDropListConnectedTo]="[inProgressListRef, awaitFeedbackListRef, doneListRef]"
-          (cdkDropListDropped)="drop($event)"
-        >
+          (cdkDropListDropped)="drop($event)">
           @if (boardService.toDoList.length > 0) { @for (item of boardService.toDoList; track
           $index) {
-          <app-card-task
-            [task]="item"
-            class="frame"
-            cdkDrag
-            (click)="openTaskDetail(item)"
-          ></app-card-task>
+          <app-card-task [task]="item" class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
           } } @else {
           <div class="no_tasks_card">
             <p>No tasks in To do</p>
@@ -60,26 +49,16 @@
       <div class="main_box">
         <div class="title_content">
           <h5 id="inProgressSection">In progress</h5>
-          <button class="plus_btn">+</button>
+          <button class="plus_btn" (click)="addTaskShow=true">+</button>
         </div>
 
-        <div
-          id="inProgressList"
-          class="box"
-          cdkDropList
-          #inProgressListRef="cdkDropList"
+        <div id="inProgressList" class="box" cdkDropList #inProgressListRef="cdkDropList"
           [cdkDropListData]="boardService.inProgressList"
           [cdkDropListConnectedTo]="[toDoListRef, awaitFeedbackListRef, doneListRef]"
-          (cdkDropListDropped)="drop($event)"
-        >
+          (cdkDropListDropped)="drop($event)">
           @if (boardService.inProgressList.length > 0) { @for (item of boardService.inProgressList;
           track $index) {
-          <app-card-task
-            [task]="item"
-            class="frame"
-            cdkDrag
-            (click)="openTaskDetail(item)"
-          ></app-card-task>
+          <app-card-task [task]="item" class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
           } } @else {
           <div class="no_tasks_card">
             <p>No tasks in progress</p>
@@ -92,26 +71,15 @@
       <div class="main_box">
         <div class="title_content">
           <h5 id="awaitFeedbackSection">Await feedback</h5>
-          <button class="plus_btn">+</button>
+          <button class="plus_btn" (click)="addTaskShow=true">+</button>
         </div>
 
-        <div
-          id="awaitFeedbackList"
-          class="box"
-          cdkDropList
-          #awaitFeedbackListRef="cdkDropList"
+        <div id="awaitFeedbackList" class="box" cdkDropList #awaitFeedbackListRef="cdkDropList"
           [cdkDropListData]="boardService.awaitFeedbackList"
-          [cdkDropListConnectedTo]="[toDoListRef, inProgressListRef, doneListRef]"
-          (cdkDropListDropped)="drop($event)"
-        >
+          [cdkDropListConnectedTo]="[toDoListRef, inProgressListRef, doneListRef]" (cdkDropListDropped)="drop($event)">
           @if (boardService.awaitFeedbackList.length > 0) { @for (item of
           boardService.awaitFeedbackList; track $index) {
-          <app-card-task
-            [task]="item"
-            class="frame"
-            cdkDrag
-            (click)="openTaskDetail(item)"
-          ></app-card-task>
+          <app-card-task [task]="item" class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
           } } @else {
           <div class="no_tasks_card">
             <p>No tasks in Await feedback</p>
@@ -124,26 +92,15 @@
       <div class="main_box">
         <div class="title_content">
           <h5 id="doneSection">Done</h5>
-          <button class="plus_btn">+</button>
+          <button class="plus_btn" (click)="addTaskShow=true">+</button>
         </div>
 
-        <div
-          id="DoneList"
-          class="box"
-          cdkDropList
-          #doneListRef="cdkDropList"
-          [cdkDropListData]="boardService.doneList"
+        <div id="DoneList" class="box" cdkDropList #doneListRef="cdkDropList" [cdkDropListData]="boardService.doneList"
           [cdkDropListConnectedTo]="[toDoListRef, inProgressListRef, awaitFeedbackListRef]"
-          (cdkDropListDropped)="drop($event)"
-        >
+          (cdkDropListDropped)="drop($event)">
           @if (boardService.doneList.length > 0) { @for (item of boardService.doneList; track
           $index) {
-          <app-card-task
-            [task]="item"
-            class="frame"
-            cdkDrag
-            (click)="openTaskDetail(item)"
-          ></app-card-task>
+          <app-card-task [task]="item" class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
           } } @else {
           <div class="no_tasks_card">
             <p>No tasks in Done</p>
@@ -156,3 +113,11 @@
 </section>
 
 <app-card-details></app-card-details>
+<div class="add_task1" [ngStyle]="{ display: addTaskShow ? 'flex' : 'none' }">
+  <div  class="add_task2">
+    <div class="close_btn" (click)="addTaskShow=false">
+      <img src="./assets/icons/contact/close.svg" alt="close" />
+    </div>
+    <app-add-task></app-add-task>
+  </div>
+</div>

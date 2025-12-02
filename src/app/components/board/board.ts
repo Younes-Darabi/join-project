@@ -11,10 +11,11 @@ import { BoardService } from '../../services/board/board-service';
 import { TaskInterface } from '../../interfaces/board/task.interface';
 import { CardDetails } from './card-detail/card-details';
 import { CardTask } from './card-task/card-task';
+import { AddTask } from "../add-task/add-task";
 
 @Component({
   selector: 'app-board',
-  imports: [CdkDropList, CdkDrag, CommonModule, CardDetails, CardTask],
+  imports: [CdkDropList, CdkDrag, CommonModule, CardDetails, CardTask, AddTask],
   templateUrl: './board.html',
   styleUrls: ['./board.scss'],
 })
@@ -24,6 +25,7 @@ export class Board {
   tasks: TaskInterface[] = [];
   filteredTasks: TaskInterface[] = [];
   @ViewChild(CardDetails) CardDetails!: CardDetails;
+  addTaskShow: boolean = false;
 
   openTaskDetail(task: TaskInterface) {
     this.CardDetails.showTaskDetail(task);
