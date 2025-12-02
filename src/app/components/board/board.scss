@@ -282,3 +282,36 @@ section {
     }
   }
 }
+
+.add_task1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.205);
+
+  .add_task2 {
+    position: relative;
+    padding: 30px;
+    border-radius: 30px;
+    background: #f5f6f7;
+    .close_btn {
+      img {
+        padding: 1px;
+        cursor: pointer;
+        position: absolute;
+        right: 30px;
+        top: 30px;
+      }
+      img:hover {
+        background-color: #00000013;
+        border-radius: 50%;
+      }
+    }
+    app-add-task {}
+  }
+}
