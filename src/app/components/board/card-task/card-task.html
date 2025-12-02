@@ -5,11 +5,17 @@
 <p class="frame_subtasks">1/{{task.subTasks.length}} Subtasks</p>
 <div class="priority_assignedTo">
 
-  @for (contact of task.assignedTo; track $index) {
-  <!-- <div class="short_name" [style.background-color]="ContactService.getColorForContact('JsuW0PKqRMQi92YMT5cR')">
-    KH
-  </div> -->
+  @for (contactId of task.assignedTo; track contactId) {
+  @let contact = getContactDetailsById(contactId);
+  @if (contact) {
+    <div class="short_name">
+      <span class="assigned_dropdown_avatar" [style.background-color]="contact.color">
+        {{ contact.initials }}
+      </span>
+      
+    </div>
   }
+}
   <img [src]="task.priority === 'urgent' ? './assets/icons/board/Prio alta.svg' :
          task.priority === 'medium' ? './assets/icons/board/Prio media.svg' :
          './assets/icons/board/Prio baja.svg'" [alt]="task.priority" class="frame_priority">

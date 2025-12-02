@@ -1,7 +1,9 @@
 import { CommonModule } from "@angular/common";
 import { Component, inject, Input } from "@angular/core";
 import { TaskInterface } from "../../../interfaces/board/task.interface";
+import { ContactInterface } from "../../../interfaces/contact/contact-list.interface";
 import { BoardService } from "../../../services/board/board-service";
+import { ContactService } from "../../../services/contact/contact-service";
 
 
 @Component({
@@ -14,6 +16,16 @@ import { BoardService } from "../../../services/board/board-service";
 
 export class CardTask {
   @Input() task!: TaskInterface;
-  BoardService = inject(BoardService);
+  boardService = inject(BoardService);
+  contactService = inject(ContactService);
 
+  async ngOnInit() {
+    if (!this.contactService.contactList || this.contactService.contactList.length === 0) {
+      await this.contactService.loadContactsFromFirebase();
+    }
+  }
+
+  getContactDetailsById(id: string): ContactInterface | undefined {
+    return this.contactService.contactList.find(contact => contact.id === id);
+  }
 }
