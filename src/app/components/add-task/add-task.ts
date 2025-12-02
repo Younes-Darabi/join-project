@@ -2,7 +2,6 @@ import { Component, inject, HostListener } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ContactService } from '../../services/contact/contact-service';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
-import { getDocs } from 'firebase/firestore';
 import { NgClass } from '@angular/common';
 import { TaskInterface } from '../../interfaces/board/task.interface';
 import { BoardService } from '../../services/board/board-service';
@@ -21,7 +20,11 @@ export class AddTask {
   search: string = '';
   open: boolean = false;
   selected: ContactInterface[] = [];
-
+  confirmationMessage: string = '';
+  errorMessage: string = '';
+  formSubmitted: boolean = false;
+  categoryDropdownOpen: boolean = false;
+  categoryOptions: TaskInterface['taskCategory'][] = ['User Story', 'Technical Task'];
   yourEmail: string = 'deine@email.de';
 
   newTask: TaskInterface = {
@@ -29,21 +32,21 @@ export class AddTask {
     title: '',
     description: '',
     assignedTo: [],
-    dueDate: new Date(),
+    dueDate: null,
     status: 'todo',
     priority: '',
     taskCategory: '',
     subTasks: []
   };
 
-  confirmationMessage: string = '';
-  errorMessage: string = '';
 
-  formSubmitted: boolean = false;
-
-  categoryDropdownOpen: boolean = false;
-  categoryOptions: TaskInterface['taskCategory'][] = ['User Story', 'Technical Task'];
-
+  // ich möchte dass meine Kontakte die ich ausgewählt habe gespeichert bleiben,  die Avatare der jeweiligen Kontakte werden unterhalt des Inputfeldes angezeigt und werden in dem neuen task auch mit gegeben. sie werden aber auch nur gespeichert wenn der task auch erstellt wurde
+  // die Prio muss ausgewählt werden können
+  // die subtasks müssen hinzugefügt werden
+  // der Button clear funktioniert noch nicht bei subtasks
+  // der button add task funktioniert nur wenn alle Pflichtfelder ausgefüllt sind
+  // das design muss noch angepasst werden
+  // responsive design muss noch gemacht werden
   async saveTask(task: TaskInterface) {
     this.formSubmitted = true;
     if (!task.title || !task.dueDate || !task.taskCategory) {
@@ -61,7 +64,7 @@ export class AddTask {
       title: '',
       description: '',
       assignedTo: [],
-      dueDate: new Date(),
+      dueDate: null,
       status: 'todo',
       priority: '',
       taskCategory: '',
@@ -85,7 +88,7 @@ export class AddTask {
       this.taskList = tasks;
     }
   }
-  
+
   async updateTask(task: TaskInterface) {
     await this.boardService.updateTaskInFirebase(task);
   }
