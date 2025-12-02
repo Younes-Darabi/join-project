@@ -1,4 +1,3 @@
-<p>Hi</p>
 <section *ngIf="task">
   <div class="dialog_content">
     <div class="headline">
@@ -14,9 +13,6 @@
         }"
       >
         {{ task.taskCategory }}
-      </div>
-      <div class="close_btn" (click)="closeDialog()">
-        <img src="./assets/icons/contact/Close.svg" alt="close" />
       </div>
     </div>
     <form #taskForm="ngForm">
@@ -178,7 +174,7 @@
       <!-- save btn -->
       <div class="save_edit_content">
         <div class="edit_box" (click)="saveChanges()">
-          <p>Ok</p>
+          <p>Speichern</p>
           <img src="./assets/icons/board/check.svg" alt="save" />
         </div>
       </div>

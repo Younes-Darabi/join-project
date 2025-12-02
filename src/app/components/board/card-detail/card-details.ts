@@ -44,14 +44,12 @@ export class CardDetails {
     this.hostElement.nativeElement.classList.add('show');
   }
 
-  
-onTaskSaved(updatedTask: TaskInterface) {  
-  this.task = { ...updatedTask };  
-  const index = this.boardService.taskList.findIndex(t => t.id === updatedTask.id);
-  if (index > -1) {
-    this.boardService.taskList[index] = updatedTask;
+  onTaskSaved(updatedTask: TaskInterface) {
+    this.task = { ...updatedTask };
+    const index = this.boardService.taskList.findIndex((t) => t.id === updatedTask.id);
+    if (index > -1) {
+      this.boardService.taskList[index] = updatedTask;
+    }
+    this.boardService.sortTasksByStatus();
   }
-  this.boardService.sortTasksByStatus();
-}
-
 }
