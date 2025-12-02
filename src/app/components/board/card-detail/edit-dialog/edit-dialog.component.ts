@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output, ChangeDetectorRef } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BoardService } from '../../../../services/board/board-service';
 import { TaskInterface } from '../../../../interfaces/board/task.interface';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-edit-dialog',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NgIf],
   templateUrl: './edit-dialog.component.html',
   styleUrl: './edit-dialog.component.scss',
 })

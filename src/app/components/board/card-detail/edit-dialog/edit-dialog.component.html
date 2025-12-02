@@ -1,4 +1,4 @@
-<section *ngIf="task">
+<section *ngIf="task as currentTask">
   <div class="dialog_content">
     <div class="headline">
       <div
@@ -174,8 +174,8 @@
       <!-- save btn -->
       <div class="save_edit_content">
         <div class="edit_box" (click)="saveChanges()">
-          <p>Speichern</p>
-          <img src="./assets/icons/board/check.svg" alt="save" />
+          <p>Save</p>
+          <img src="./assets/icons/contact/check.svg" alt="save" />
         </div>
       </div>
     </form>

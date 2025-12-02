@@ -25,7 +25,7 @@
     <div class="date_prio_content">
       <!-- <p class="title2">Due date:<span [ngStyle]="{'margin-left' : '9px'}">{{this.task.dueDate}}</span></p> -->
       <p class="title2">
-        Due date:<span [ngStyle]="{ 'margin-left': '9px' }">1{{ this.task.dueDate }}</span>
+        Due date:<span [ngStyle]="{ 'margin-left': '9px' }">{{ this.task.dueDate }}</span>
       </p>
     </div>
     <div class="date_prio_content">
@@ -50,9 +50,9 @@
         <div class="assigned_to">
           <div class="person_box">
             <div class="color_icon">
-              <p>MK</p>
+              <p>{{this.task.assignedTo}}</p>
             </div>
-            <p>Mario Keller</p>
+            <p>{{this.task.assignedTo}}</p>
           </div>
         </div>
       </div>
