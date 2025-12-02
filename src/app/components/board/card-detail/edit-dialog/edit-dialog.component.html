@@ -1,18 +1,27 @@
 <section *ngIf="task as currentTask">
   <div class="dialog_content">
     <div class="headline">
-      <div
-        class="category"
-        [ngStyle]="{
-          'background-color':
-            task.taskCategory === 'User Story'
-              ? 'blue'
-              : task.taskCategory === 'Technical Task'
-              ? '#1fd7c1'
-              : 'gray'
-        }"
-      >
-        {{ task.taskCategory }}
+      <div class="dropdown">
+        <label class="input_content">
+          <div
+            class="category"
+            [ngStyle]="{
+              'background-color':
+                task.taskCategory === 'User Story'
+                  ? 'blue'
+                  : task.taskCategory === 'Technical Task'
+                  ? '#1fd7c1'
+                  : 'gray'
+            }"
+          >
+            {{ task.taskCategory }}
+            <img
+              src="./assets/icons/board/dropdown_arrow.svg"
+              alt="little arrow"
+              [ngClass]="{ rotate: dropdownVisible }"
+            />
+          </div>
+        </label>
       </div>
     </div>
     <form #taskForm="ngForm">
@@ -135,6 +144,7 @@
           ></div>
         </div>
       </div>
+
       <!-- subtask -->
       <div class="subtasks_content">
         <p class="title2">Subtasks</p>
@@ -171,6 +181,7 @@
         <!-- Aktionen (Speichern/ Löschen) -->
         <div class="subtask-actions"></div>
       </div>
+
       <!-- save btn -->
       <div class="save_edit_content">
         <div class="edit_box" (click)="saveChanges()">
