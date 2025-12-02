@@ -11,9 +11,8 @@ import { ContactService } from "../../../services/contact/contact-service";
   standalone: true,
   imports: [CommonModule],
   templateUrl: './card-task.html',
-  styleUrl: './card-task.scss'
+  styleUrl: './card-task.scss',
 })
-
 export class CardTask {
   @Input() task!: TaskInterface;
   boardService = inject(BoardService);

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   CdkDrag,
@@ -10,7 +10,7 @@ import {
 import { BoardService } from '../../services/board/board-service';
 import { TaskInterface } from '../../interfaces/board/task.interface';
 import { CardDetails } from './card-detail/card-details';
-import { CardTask } from "./card-task/card-task";
+import { CardTask } from './card-task/card-task';
 
 @Component({
   selector: 'app-board',
@@ -36,8 +36,9 @@ export class Board {
       return;
     }
 
-    this.filteredTasks = this.tasks.filter(task =>
-      task.title.toLowerCase().includes(query) || task.description?.toLowerCase().includes(query)
+    this.filteredTasks = this.tasks.filter(
+      (task) =>
+        task.title.toLowerCase().includes(query) || task.description?.toLowerCase().includes(query)
     );
   }
 
@@ -45,7 +46,6 @@ export class Board {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-
       const movedItem = event.previousContainer.data[event.previousIndex];
       if (event.container.id === 'todoList') {
         movedItem.status = 'todo';
@@ -53,7 +53,7 @@ export class Board {
         movedItem.status = 'in-progress';
       } else if (event.container.id === 'awaitFeedbackList') {
         movedItem.status = 'await-feedback';
-      } else{
+      } else {
         movedItem.status = 'done';
       }
       this.boardService.updateTaskInFirebase(movedItem);

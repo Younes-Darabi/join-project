@@ -1,24 +1,25 @@
 .frame_category {
-    padding: 10px 20px;
-    border-radius: 15px;
-    font-size: 16px;
-    background: #0038FF;
-    color: #FFFFFF;
+  padding: 10px 20px;
+  border-radius: 15px;
+  font-size: 16px;
+  background: #0038ff;
+  color: #ffffff;
 }
 
 .frame_title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #2A3647;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2a3647;
 }
 
 .frame_description {
-    font-size: 16px;
-    font-weight: 400;
-    color: #A8A8A8;
+  font-size: 16px;
+  font-weight: 400;
+  color: #a8a8a8;
 }
 
-.frame_subtasks {}
+.frame_subtasks {
+}
 
 .priority_assignedTo {
   display: flex;
@@ -58,6 +59,8 @@
   }
 }
 
-.frame_assignedTo {}
+.frame_assignedTo {
+}
 
-.frame_priority {}
+.frame_priority {
+}
