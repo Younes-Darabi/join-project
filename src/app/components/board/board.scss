@@ -292,13 +292,14 @@ section {
   height: 100%;
   left: 0;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.205);
+  background-color: #00000062;
 
   .add_task2 {
     position: relative;
     padding: 30px;
     border-radius: 30px;
     background: #f5f6f7;
+
     .close_btn {
       img {
         padding: 1px;
@@ -312,6 +313,5 @@ section {
         border-radius: 50%;
       }
     }
-    app-add-task {}
   }
 }
