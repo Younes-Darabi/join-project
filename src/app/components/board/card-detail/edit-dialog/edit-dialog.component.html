@@ -1,10 +1,10 @@
 <p>Hi</p>
-<section *ngIf=item>
+<section *ngIf=task>
     <div class="dialog_content">
         <div class="headline">
             <div class="category"
-                [ngStyle]="{'background-color': item.taskCategory === 'User Story' ? 'blue' : item.taskCategory === 'Technical Task' ? '#1fd7c1' : 'gray'}">
-                {{ item.taskCategory }}
+                [ngStyle]="{'background-color': this.task.taskCategory === 'User Story' ? 'blue' : this.task.taskCategory === 'Technical Task' ? '#1fd7c1' : 'gray'}">
+                {{ this.task.taskCategory }}
             </div>
             <div class="close_btn" (click)="closeDialog()">
                 <img src="./assets/icons/contact/Close.svg" alt="close">
@@ -13,15 +13,15 @@
         <form #taskForm="ngForm">
             <p>Title</p>
             <label class="input_content">
-                <input type="text" name="title" placeholder="Enter a title" [(ngModel)]="item.title">
+                <input type="text" name="title" placeholder="Enter a title" [(ngModel)]="this.task.title">
             </label>
             <p>Description</p>
             <label class="input_content">
-                <input type="text" name="description" placeholder="Enter a description" [(ngModel)]="item.description">
+                <input type="text" name="description" placeholder="Enter a description" [(ngModel)]="this.task.description">
             </label>
             <div class="date_prio_content">
                 <label class="input_content" for="dueDate">Due date
-                    <input type="date" id="dueDate" [value]="item.dueDate" [(ngModel)]="item.dueDate" name="date">
+                    <input type="date" id="dueDate" [value]="task.dueDate" [(ngModel)]="task.dueDate" name="date">
                 </label>
             </div>
             <div class="date_prio_content">
