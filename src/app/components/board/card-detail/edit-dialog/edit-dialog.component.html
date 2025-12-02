@@ -1,6 +1,6 @@
 <section *ngIf="task as currentTask">
   <div class="dialog_content">
-    <div class="headline">
+    <!-- <div class="headline">
       <div class="dropdown">
         <label class="input_content">
           <div
@@ -23,7 +23,7 @@
           </div>
         </label>
       </div>
-    </div>
+    </div> -->
     <form #taskForm="ngForm">
       <p>Title</p>
       <label class="input_content">
@@ -31,12 +31,12 @@
       </label>
       <p>Description</p>
       <label class="input_content">
-        <input
+        <textarea
           type="text"
           name="description"
           placeholder="Enter a description"
           [(ngModel)]="task.description"
-        />
+        ></textarea>
       </label>
       <div class="date_prio_content">
         <label class="input_content" for="dueDate"
@@ -163,7 +163,6 @@
             [ngClass]="{ hidden: subtaskInputFocused, visible: !subtaskInputFocused }"
             (click)="focusSubtaskInput()"
           >
-            <img src="./assets/icons/board/add-black.svg" alt="Add" />
           </div>
           <div
             class="input-icons"
