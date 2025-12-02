@@ -52,6 +52,11 @@ export class AddTask {
     if (!task.title || !task.dueDate || !task.taskCategory) {
       return;
     }
+    // Nur Kontakte mit gültiger ID übernehmen
+    task.assignedTo = this.selected
+      .map(contact => contact.id)
+      .filter((id): id is string => typeof id === 'string' && !!id);
+
     await this.boardService.addTask(task);
     this.resetForm();
     this.showConfirmation('Task successfully created!');
@@ -164,4 +169,5 @@ export class AddTask {
     this.open = false;
     this.categoryDropdownOpen = false;
   }
+
 }
