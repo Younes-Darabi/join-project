@@ -15,7 +15,7 @@
 
         <div class="date_prio_content">
             <!-- <p class="title2">Due date:<span [ngStyle]="{'margin-left' : '9px'}">{{this.task.dueDate}}</span></p> -->
-            <p class="title2">Due date:<span [ngStyle]="{'margin-left' : '9px'}">11.30.2025</span></p>
+            <p class="title2">Due date:<span [ngStyle]="{'margin-left' : '9px'}">1{{this.task.dueDate}}</span></p>
         </div>
         <div class="date_prio_content">
             <p class="title2">Priority: <span [ngStyle]="{'margin-left' : '25px'}">{{this.task.priority}}</span> <img
@@ -50,7 +50,7 @@
                     <input type="checkbox">
                     <img class="unchecked" src="./assets/icons/board/checkbox-unchecked.svg" alt="unchecked">
                     <img class="checked" src="./assets/icons/board/checkbox-checked.svg" alt="checked">
-                    <p>{{subTask}}</p>
+                    <p>{{this.task.subTasks}}</p>
                 </label>
             </div>
             }
@@ -70,5 +70,5 @@
     <div class="close_btn" (click)="editPageShow = false">
         <img src="./assets/icons/contact/close.svg" alt="close">
     </div>
-    <app-edit-dialog></app-edit-dialog>
+    <app-edit-dialog [item]="task"></app-edit-dialog>
 </section>

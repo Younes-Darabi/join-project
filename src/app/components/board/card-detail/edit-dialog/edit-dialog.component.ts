@@ -28,15 +28,6 @@ export class EditDialogComponent {
   showEditDetail(task: TaskInterface) {
     this.task = task;
   }
-
-
-
-
-
-
-
-
-
   
   /**
    * @event closeDialogEvent
@@ -91,24 +82,25 @@ export class EditDialogComponent {
   }
 
   ngOnInit() {
-    this.editedItem = JSON.parse(JSON.stringify(this.item)) || {};
-    if (this.item?.priority) {
-      this.selectedPriority = this.item.priority;
-    }
+  
+}
+
+ngOnChanges() {
+  if (this.item) {
+    this.task = JSON.parse(JSON.stringify(this.item));
+    this.selectedPriority = this.task.priority || 'medium';
   }
+}
 
   saveChanges() {
-    this.saveChangesEvent.emit(this.editedItem);
-    this.closeDialog();
-  }
+  this.saveChangesEvent.emit(this.task);
+  this.closeDialog();
+}
 
   selectPriority(priority: string) {
-    this.selectedPriority = priority;
-    if (this.editedItem) {
-      this.editedItem.priority = priority;
-    }
-  }
-
+  this.selectedPriority = priority;
+  this.task.priority = priority;
+}
   closeDialog() {
     this.closeDialogEvent.emit();
   }
@@ -141,4 +133,9 @@ export class EditDialogComponent {
     }
     this.subtaskInputFocused = true;
   }
+
+  onSelectContactsClick(event: Event) {
+  event.stopPropagation();
+  this.toggleDropdown();
+}
 }
