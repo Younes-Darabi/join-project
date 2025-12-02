@@ -55,7 +55,19 @@
             <input id="assigned_dropdown_input" type="text" class="assigned_dropdown_input"
               placeholder="Select contacts to assign" [(ngModel)]="search" autocomplete="off" />
             <span class="assigned_dropdown_arrow">&#9662;</span>
+
+            @if (selected.length > 0) {
+            <!-- moved inside the wrapper and positioned absolute via CSS -->
+            <div class="assigned_selected_avatars">
+              @for (contact of selected; track contact.id) {
+              <span class="assigned_dropdown_avatar assigned_selected_avatar" [style.background-color]="contact.color">
+                {{ contact.initials }}
+              </span>
+              }
+            </div>
+            }
           </div>
+
           @if (open) {
           <ul class="assigned_dropdown_list" (click)="$event.stopPropagation()">
             @if (contactList.length === 0) {

@@ -40,7 +40,7 @@ export class AddTask {
   };
 
 
-  // ich möchte dass meine Kontakte die ich ausgewählt habe gespeichert bleiben,  die Avatare der jeweiligen Kontakte werden unterhalt des Inputfeldes angezeigt und werden in dem neuen task auch mit gegeben. sie werden aber auch nur gespeichert wenn der task auch erstellt wurde
+  
   // die Prio muss ausgewählt werden können
   // die subtasks müssen hinzugefügt werden
   // der Button clear funktioniert noch nicht bei subtasks
@@ -64,20 +64,20 @@ export class AddTask {
   }
 
   resetForm() {
-    this.newTask = {
-      id: '',
-      title: '',
-      description: '',
-      assignedTo: [],
-      dueDate: null,
-      status: 'todo',
-      priority: '',
-      taskCategory: '',
-      subTasks: []
-    };
-    this.selected = [];
-    this.search = '';
-  }
+		this.newTask = {
+			id: '',
+			title: '',
+			description: '',
+			assignedTo: [],
+			dueDate: null,
+			status: 'todo',
+			priority: '',
+			taskCategory: '',
+			subTasks: []
+		};
+		this.selected = [];
+		this.search = '';
+	}
 
   showConfirmation(message: string) {
     this.confirmationMessage = message;
