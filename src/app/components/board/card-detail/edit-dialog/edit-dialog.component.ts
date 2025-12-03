@@ -1,9 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  ChangeDetectorRef,
+  HostListener,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BoardService } from '../../../../services/board/board-service';
 import { TaskInterface } from '../../../../interfaces/board/task.interface';
 import { NgIf } from '@angular/common';
+import { ContactInterface } from '../../../../interfaces/contact/contact-list.interface';
+import { ContactService } from '../../../../services/contact/contact-service';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -14,6 +24,13 @@ import { NgIf } from '@angular/common';
 })
 export class EditDialogComponent {
   boardService = inject(BoardService);
+  contactService = inject(ContactService);
+  search: string = '';
+  selected: ContactInterface[] = [];
+  taskList: TaskInterface[] = [];
+  contactList: ContactInterface[] = [];
+  open: boolean = false;
+  confirmationMessage: string = '';
 
   task: TaskInterface = {
     id: '',
@@ -58,22 +75,33 @@ export class EditDialogComponent {
   dropdownVisible: boolean = false;
   isEditFormSubmitted: boolean = false;
   newDate: string = '';
+  categoryDropdownOpen: boolean = false;
+  yourEmail: string = 'deine@email.de';
 
-  toggleDropdown() {
-    this.dropdownVisible = !this.dropdownVisible;
+  async ngOnInit() {
+    if (!this.contactService.contactList || this.contactService.contactList.length === 0) {
+      await this.contactService.loadContactsFromFirebase(); // Diese Methode muss im Service existieren!
+    }
+    this.contactList = this.sortContactsAlphabetically(this.contactService.contactList);
+    this.setIsYouForContacts();
   }
-
-  ngOnInit() {}
 
   ngOnChanges() {
     if (this.item) {
       this.task = JSON.parse(JSON.stringify(this.item));
       this.selectedPriority = this.task.priority || 'medium';
+      this.selected = this.contactList.filter(
+        (contact) => contact.id !== undefined && this.task.assignedTo.includes(contact.id)
+      );
     }
   }
 
   saveChanges() {
     if (!this.task) return;
+    this.task.assignedTo = this.selected
+      .map((c) => c.id)
+      .filter((id): id is string => id !== undefined);
+
     this.boardService.updateTaskInFirebase(this.task);
     this.saveChangesEvent.emit(this.task);
     this.closeDialogEvent.emit();
@@ -117,8 +145,42 @@ export class EditDialogComponent {
     this.subtaskInputFocused = true;
   }
 
-  onSelectContactsClick(event: Event) {
+  setIsYouForContacts() {
+    this.contactList = this.contactList.map((contact) => ({
+      ...contact,
+      isYou: contact.email === this.yourEmail,
+    }));
+  }
+
+  sortContactsAlphabetically(contact: ContactInterface[]) {
+    return this.contactService.sortContacts(contact);
+  }
+
+  toggleDropdown(event: MouseEvent) {
     event.stopPropagation();
-    this.toggleDropdown();
+    this.open = !this.open;
+  }
+
+  toggleSelect(contact: ContactInterface) {
+    let exists = this.selected.some((u) => u.id === contact.id);
+    if (exists) {
+      this.selected = this.selected.filter((u) => u.id !== contact.id);
+    } else {
+      this.selected = [...this.selected, contact];
+    }
+  }
+
+  isContactSelected(contact: ContactInterface): boolean {
+    return this.selected.some((selectedContact) => selectedContact.id === contact.id);
+  }
+
+  getDropdownItemClass(contact: ContactInterface): string {
+    return this.isContactSelected(contact) ? 'assigned_dropdown_item_active' : '';
+  }
+
+  @HostListener('document:click')
+  closeDropdowns() {
+    this.open = false;
+    this.categoryDropdownOpen = false;
   }
 }
