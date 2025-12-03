@@ -177,16 +177,19 @@
       align-items: center;
       margin-left: 10px;
 
-      .color_icon {
-        background-color: rgb(12, 170, 117);
-        border-radius: 50px;
-        border: 1px solid #fff;
-        width: 34px;
-        height: 34px;
-        color: #fff;
+      .assigned_dropdown_avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid #fff;
         display: flex;
         align-items: center;
         justify-content: center;
+        font-size: 12px;
+        font-weight: 500;
+        color: #fff;
+        text-transform: uppercase;
+        flex-shrink: 0;
       }
     }
 
@@ -238,11 +241,11 @@
       display: none;
     }
 
-    .checkbox_content input:checked + .unchecked {
+    .checkbox_content input:checked+.unchecked {
       display: none;
     }
 
-    .checkbox_content input:checked ~ .checked {
+    .checkbox_content input:checked~.checked {
       display: block;
     }
   }

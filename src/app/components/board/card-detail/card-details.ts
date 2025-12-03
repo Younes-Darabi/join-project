@@ -3,6 +3,9 @@ import { Component, ElementRef, HostBinding, inject, ViewChild } from '@angular/
 import { TaskInterface } from '../../../interfaces/board/task.interface';
 import { BoardService } from '../../../services/board/board-service';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
+import { ContactService } from '../../../services/contact/contact-service';
+
 
 @Component({
   selector: 'app-card-details',
@@ -12,6 +15,7 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 })
 export class CardDetails {
   boardService = inject(BoardService);
+  contactService = inject(ContactService);
   @HostBinding('style.display') display = 'none';
   task: TaskInterface = {
     id: '',
@@ -51,5 +55,9 @@ export class CardDetails {
       this.boardService.taskList[index] = updatedTask;
     }
     this.boardService.sortTasksByStatus();
+  }
+
+  getContactDetailsById(id: string): ContactInterface | undefined {
+    return this.contactService.contactList.find(contact => contact.id === id);
   }
 }
