@@ -28,7 +28,7 @@
       <div class="main_box">
         <div class="title_content">
           <h5 id="toDoSection">To do</h5>
-          <button class="plus_btn" (click)="addTaskShow=true">+</button>
+          <button class="plus_btn" (click)="addTaskShow=true ; priorityFix('todo')">+</button>
         </div>
 
         <div id="todoList" class="box" cdkDropList #toDoListRef="cdkDropList" [cdkDropListData]="boardService.toDoList"
@@ -49,7 +49,7 @@
       <div class="main_box">
         <div class="title_content">
           <h5 id="inProgressSection">In progress</h5>
-          <button class="plus_btn" (click)="addTaskShow=true">+</button>
+          <button class="plus_btn" (click)="addTaskShow=true ; priorityFix('in-progress')">+</button>
         </div>
 
         <div id="inProgressList" class="box" cdkDropList #inProgressListRef="cdkDropList"
@@ -71,7 +71,7 @@
       <div class="main_box">
         <div class="title_content">
           <h5 id="awaitFeedbackSection">Await feedback</h5>
-          <button class="plus_btn" (click)="addTaskShow=true">+</button>
+          <button class="plus_btn" (click)="addTaskShow=true ; priorityFix('await-feedback')">+</button>
         </div>
 
         <div id="awaitFeedbackList" class="box" cdkDropList #awaitFeedbackListRef="cdkDropList"
@@ -92,7 +92,7 @@
       <div class="main_box">
         <div class="title_content">
           <h5 id="doneSection">Done</h5>
-          <button class="plus_btn" (click)="addTaskShow=true">+</button>
+          <button class="plus_btn" (click)="addTaskShow=true ; priorityFix('done')">+</button>
         </div>
 
         <div id="DoneList" class="box" cdkDropList #doneListRef="cdkDropList" [cdkDropListData]="boardService.doneList"
@@ -114,10 +114,10 @@
 
 <app-card-details></app-card-details>
 <div class="add_task1" [ngStyle]="{ display: addTaskShow ? 'flex' : 'none' }">
-  <div  class="add_task2">
+  <div class="add_task2">
     <div class="close_btn" (click)="addTaskShow=false">
       <img src="./assets/icons/contact/close.svg" alt="close" />
     </div>
-    <app-add-task></app-add-task>
+    <app-add-task [taskPriority]="taskPriority"></app-add-task>
   </div>
 </div>
