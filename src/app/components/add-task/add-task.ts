@@ -34,14 +34,19 @@ export class AddTask {
     assignedTo: [],
     dueDate: null,
     status: 'todo',
-    priority: '',
+    priority: 'medium',
     taskCategory: '',
     subTasks: []
   };
+<<<<<<< Updated upstream
 
 
   
   // die Prio muss ausgewählt werden können
+=======
+  // medium als default setzen
+  // nach task erstellen soll nach 3s zum board weitergeleitet werden
+>>>>>>> Stashed changes
   // die subtasks müssen hinzugefügt werden
   // der Button clear funktioniert noch nicht bei subtasks
   // der button add task funktioniert nur wenn alle Pflichtfelder ausgefüllt sind
@@ -52,7 +57,6 @@ export class AddTask {
     if (!task.title || !task.dueDate || !task.taskCategory) {
       return;
     }
-    // Nur Kontakte mit gültiger ID übernehmen
     task.assignedTo = this.selected
       .map(contact => contact.id)
       .filter((id): id is string => typeof id === 'string' && !!id);
