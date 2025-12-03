@@ -124,24 +124,67 @@
           </button>
         </div>
       </div>
+
       <div class="assigned_content">
         <div class="dropdown">
           <label for="assignedTo">Assigned to</label>
-          <div class="select_contacts" (click)="onSelectContactsClick($event)">
-            <span class="like_placeholder" [ngClass]="{ white: dropdownVisible }"
-              >Select contacts to assign</span
-            >
-            <img
-              src="./assets/icons/board/dropdown_arrow.svg"
-              alt="little arrow"
-              [ngClass]="{ rotate: dropdownVisible }"
+          <div class="select_contacts" (click)="toggleDropdown($event)">
+            <input
+              id="assigned_dropdown_input"
+              type="text"
+              class="assigned_dropdown_input"
+              placeholder="Select contacts to assign"
+              [(ngModel)]="search"
+              autocomplete="off"
             />
+            <span class="assigned_dropdown_arrow">&#9662;</span>
+           
           </div>
-          <div
-            class="dropdown_menu"
-            *ngIf="dropdownVisible"
-            (click)="$event.stopPropagation()"
-          ></div>
+          @if (selected.length > 0) {
+          <!-- moved inside the wrapper and positioned absolute via CSS -->
+          <div class="assigned_selected_avatars">
+            @for (contact of selected; track contact.id) {
+            <span
+              class="assigned_dropdown_avatar assigned_selected_avatar"
+              [style.background-color]="contact.color"
+            >
+              {{ contact.initials }}
+            </span>
+            }
+          </div>
+          }
+        </div>
+
+        @if (open) {
+        <ul class="assigned_dropdown_list" (click)="$event.stopPropagation()">
+          @if (contactList.length === 0) {
+          <li class="assigned_dropdown_item">No contacts available.</li>
+          } @for (singleContact of contactList; track singleContact.id) {
+          <li
+            class="assigned_dropdown_item"
+            [ngClass]="getDropdownItemClass(singleContact)"
+            (click)="toggleSelect(singleContact)"
+          >
+            <span class="assigned_dropdown_avatar" [style.background-color]="singleContact.color">
+              {{ singleContact.initials }}
+            </span>
+            <span class="assigned_dropdown_name">
+              {{ singleContact.firstname }} {{ singleContact.lastname }}
+              @if (singleContact.isYou) {
+              <span class="you">(You)</span>
+              }
+            </span>
+            <input
+              type="checkbox"
+              [checked]="isContactSelected(singleContact)"
+              class="assigned_dropdown_checkbox"
+            />
+          </li>
+          }
+        </ul>
+        }
+        <div>
+          <!-- <span class="assigned_dropdown_avatar" [style.background-color]="singleContact.color">{{ singleContact.initials }}</span> -->
         </div>
       </div>
 
@@ -162,8 +205,7 @@
             class="input-icon"
             [ngClass]="{ hidden: subtaskInputFocused, visible: !subtaskInputFocused }"
             (click)="focusSubtaskInput()"
-          >
-          </div>
+          ></div>
           <div
             class="input-icons"
             [ngClass]="{ visible: subtaskInputFocused, hidden: !subtaskInputFocused }"
