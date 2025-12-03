@@ -8,6 +8,32 @@ section {
   font-weight: 700;
 }
 
+.filter{
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  display: flex;
+  margin-left: 50px;
+  gap: 20px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: #29abe2;
+  width: 100%;
+  left: -50px;
+  top: 55px;
+  p{
+    font-size: 16px;
+    color: white;
+  }
+  .x{
+    transition: all 250ms ease-in-out;
+    &:hover{
+      cursor: pointer;
+      color: red;
+    }
+  }
+}
+
 .headline_content {
   display: flex;
   align-items: center;
@@ -34,6 +60,7 @@ section {
 }
 
 .search_container {
+  position: relative;
   display: flex;
   align-items: center;
   border: 1px solid #ccc;
