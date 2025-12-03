@@ -10,9 +10,17 @@
 
       <div class="find_task_content">
         <div class="search_container">
-          <input type="text" placeholder="Find Task" class="search_input" (input)="filterTasks()" />
+          <input [(ngModel)]="searchTerm" type="text" placeholder="Find Task" class="search_input" />
           <img src="./assets/icons/board/Vector 3.svg" alt="" />
-          <button class="search_button">
+
+          @if (isFilterenable) {
+          <div class="filter">
+            <p>filter : {{searchTerm}}</p>
+            <p class="x" (click)="clearFilter()">x</p>
+          </div>
+          }
+
+          <button class="search_button" (click)="filteredLists(searchTerm)">
             <img src="./assets/icons/board/search.svg" alt="search" />
           </button>
         </div>
@@ -21,6 +29,7 @@
           Add task <img src="./assets/icons/board/add.svg" alt="add" />
         </button>
       </div>
+
     </div>
 
     <div class="task_container">
@@ -98,10 +107,13 @@
         <div id="DoneList" class="box" cdkDropList #doneListRef="cdkDropList" [cdkDropListData]="boardService.doneList"
           [cdkDropListConnectedTo]="[toDoListRef, inProgressListRef, awaitFeedbackListRef]"
           (cdkDropListDropped)="drop($event)">
-          @if (boardService.doneList.length > 0) { @for (item of boardService.doneList; track
-          $index) {
+          @if (boardService.doneList.length > 0) {
+
+          @for (item of boardService.doneList; track $index) {
           <app-card-task [task]="item" class="frame" cdkDrag (click)="openTaskDetail(item)"></app-card-task>
-          } } @else {
+          }
+
+          } @else {
           <div class="no_tasks_card">
             <p>No tasks in Done</p>
           </div>

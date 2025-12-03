@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy, inject } from '@angular/core';
-import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, query, updateDoc,} from '@angular/fire/firestore';
+import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, query, updateDoc, } from '@angular/fire/firestore';
 import { TaskInterface } from '../../interfaces/board/task.interface';
 
 @Injectable({
@@ -14,6 +14,11 @@ export class BoardService implements OnDestroy {
   awaitFeedbackList: TaskInterface[] = [];
   doneList: TaskInterface[] = [];
 
+  originalToDoList: TaskInterface[] = [];
+  originalInProgressList: TaskInterface[] = [];
+  originalAwaitFeedbackList: TaskInterface[] = [];
+  originalDoneList: TaskInterface[] = [];
+
   constructor() {
     this.unsubTasks = this.getTasksFromFirebase();
   }
@@ -27,28 +32,51 @@ export class BoardService implements OnDestroy {
 
   sortTasksByStatus() {
     this.toDoList = [];
-      this.inProgressList = [];
-      this.awaitFeedbackList = [];
-      this.doneList = [];
+    this.inProgressList = [];
+    this.awaitFeedbackList = [];
+    this.doneList = [];
 
-      this.taskList.forEach(task => {        
-        switch (task.status) {
-          case 'todo':
-            this.toDoList.push(task);
-            break;
-          case 'in-progress':
-            this.inProgressList.push(task);
-            break;
-          case 'await-feedback':
-            this.awaitFeedbackList.push(task);
-            break;
-          case 'done':
-            this.doneList.push(task);
-            break;
-        }
-      });
-    }
-  
+    this.taskList.forEach(task => {
+      switch (task.status) {
+        case 'todo':
+          this.toDoList.push(task);
+          break;
+        case 'in-progress':
+          this.inProgressList.push(task);
+          break;
+        case 'await-feedback':
+          this.awaitFeedbackList.push(task);
+          break;
+        case 'done':
+          this.doneList.push(task);
+          break;
+      }
+    });
+
+    this.originalToDoList = [...this.toDoList];
+    this.originalInProgressList = [...this.inProgressList];
+    this.originalAwaitFeedbackList = [...this.awaitFeedbackList];
+    this.originalDoneList = [...this.doneList];
+  }
+
+
+  filteredLists(searchTerm: string) {
+    const term = searchTerm.toLowerCase();
+
+    this.toDoList = this.originalToDoList.filter(task =>
+      task.title?.toLowerCase().includes(term)
+    );
+    this.inProgressList = this.originalInProgressList.filter(task =>
+      task.title?.toLowerCase().includes(term)
+    );
+    this.awaitFeedbackList = this.originalAwaitFeedbackList.filter(task =>
+      task.title?.toLowerCase().includes(term)
+    );
+    this.doneList = this.originalDoneList.filter(task =>
+      task.title?.toLowerCase().includes(term)
+    );
+  }
+
   async addTask(task: TaskInterface) {
     let cleantask = this.getCleanTaskJson(task);
     await addDoc(this.getTaskRef(), cleantask)
@@ -95,7 +123,7 @@ export class BoardService implements OnDestroy {
   async deleteTaskFromFirebase(task: TaskInterface) {
     if (task.id) {
       await deleteDoc(this.getSingleTaskDocRef(this.getTaskCollectionId(task), task.id));
-    } 
+    }
   }
 
   setTasksObject(obj: any, id: string): TaskInterface {
