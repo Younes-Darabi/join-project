@@ -34,14 +34,19 @@ export class AddTask {
     assignedTo: [],
     dueDate: null,
     status: 'todo',
-    priority: '',
+    priority: 'medium',
     taskCategory: '',
     subTasks: []
   };
+<<<<<<< Updated upstream
 
 
-  // ich möchte dass meine Kontakte die ich ausgewählt habe gespeichert bleiben,  die Avatare der jeweiligen Kontakte werden unterhalt des Inputfeldes angezeigt und werden in dem neuen task auch mit gegeben. sie werden aber auch nur gespeichert wenn der task auch erstellt wurde
+  
   // die Prio muss ausgewählt werden können
+=======
+  // medium als default setzen
+  // nach task erstellen soll nach 3s zum board weitergeleitet werden
+>>>>>>> Stashed changes
   // die subtasks müssen hinzugefügt werden
   // der Button clear funktioniert noch nicht bei subtasks
   // der button add task funktioniert nur wenn alle Pflichtfelder ausgefüllt sind
@@ -52,7 +57,6 @@ export class AddTask {
     if (!task.title || !task.dueDate || !task.taskCategory) {
       return;
     }
-    // Nur Kontakte mit gültiger ID übernehmen
     task.assignedTo = this.selected
       .map(contact => contact.id)
       .filter((id): id is string => typeof id === 'string' && !!id);
@@ -64,20 +68,20 @@ export class AddTask {
   }
 
   resetForm() {
-    this.newTask = {
-      id: '',
-      title: '',
-      description: '',
-      assignedTo: [],
-      dueDate: null,
-      status: 'todo',
-      priority: '',
-      taskCategory: '',
-      subTasks: []
-    };
-    this.selected = [];
-    this.search = '';
-  }
+		this.newTask = {
+			id: '',
+			title: '',
+			description: '',
+			assignedTo: [],
+			dueDate: null,
+			status: 'todo',
+			priority: '',
+			taskCategory: '',
+			subTasks: []
+		};
+		this.selected = [];
+		this.search = '';
+	}
 
   showConfirmation(message: string) {
     this.confirmationMessage = message;

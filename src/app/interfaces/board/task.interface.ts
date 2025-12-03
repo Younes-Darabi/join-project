@@ -7,5 +7,5 @@ export interface TaskInterface {
   status: 'todo' | 'in-progress' | 'await-feedback' | 'done';
   priority: string;
   taskCategory: 'Technical Task' | 'User Story' | '';
-  subTasks: string[];
+  subTasks: { title: string; completed: boolean }[];
 }
