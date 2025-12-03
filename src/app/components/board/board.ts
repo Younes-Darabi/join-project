@@ -26,14 +26,14 @@ export class Board {
   filteredTasks: TaskInterface[] = [];
   @ViewChild(CardDetails) CardDetails!: CardDetails;
   addTaskShow: boolean = false;
-  taskPriority: string = 'todo';
+  status: string = 'todo';
 
   openTaskDetail(task: TaskInterface) {
     this.CardDetails.showTaskDetail(task);
   }
 
-  priorityFix(priority: string) {
-    this.taskPriority = priority;
+  taskStatus(status: string) {
+    this.status = status;
   }
 
   filterTasks() {

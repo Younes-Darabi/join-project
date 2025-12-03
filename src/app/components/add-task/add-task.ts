@@ -1,4 +1,4 @@
-import { Component, inject, HostListener } from '@angular/core';
+import { Component, inject, HostListener, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ContactService } from '../../services/contact/contact-service';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
@@ -13,6 +13,8 @@ import { BoardService } from '../../services/board/board-service';
   styleUrls: ['./add-task.scss'],
 })
 export class AddTask {
+  @Input() status!:string;
+
   boardService = inject(BoardService);
   contactService = inject(ContactService);
   taskList: TaskInterface[] = [];
@@ -38,15 +40,10 @@ export class AddTask {
     taskCategory: '',
     subTasks: []
   };
-<<<<<<< Updated upstream
 
 
   
   // die Prio muss ausgewählt werden können
-=======
-  // medium als default setzen
-  // nach task erstellen soll nach 3s zum board weitergeleitet werden
->>>>>>> Stashed changes
   // die subtasks müssen hinzugefügt werden
   // der Button clear funktioniert noch nicht bei subtasks
   // der button add task funktioniert nur wenn alle Pflichtfelder ausgefüllt sind
