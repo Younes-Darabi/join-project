@@ -1,4 +1,4 @@
-import { Component, inject, HostListener } from '@angular/core';
+import { Component, inject, HostListener, input, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ContactService } from '../../services/contact/contact-service';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
@@ -13,6 +13,8 @@ import { BoardService } from '../../services/board/board-service';
   styleUrls: ['./add-task.scss'],
 })
 export class AddTask {
+  @Input() taskStatus!:string;
+
   boardService = inject(BoardService);
   contactService = inject(ContactService);
   taskList: TaskInterface[] = [];
@@ -38,7 +40,6 @@ export class AddTask {
     taskCategory: '',
     subTasks: []
   };
-
 
   // ich möchte dass meine Kontakte die ich ausgewählt habe gespeichert bleiben,  die Avatare der jeweiligen Kontakte werden unterhalt des Inputfeldes angezeigt und werden in dem neuen task auch mit gegeben. sie werden aber auch nur gespeichert wenn der task auch erstellt wurde
   // die Prio muss ausgewählt werden können
