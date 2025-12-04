@@ -2,7 +2,14 @@
   {{task.taskCategory}}</p>
 <p class="frame_title">{{task.title}}</p>
 <p class="frame_description">{{task.description}}</p>
-<p class="frame_subtasks">1/{{task.subTasks.length}} Subtasks</p>
+
+
+<div class="frame_subtasks">
+  <span>{{ taskcompleted }}/{{ task.subTasks.length }} Subtasks</span>
+  <progress max="{{ task.subTasks.length }}" [value]="taskcompleted" class="native-progress"></progress>
+</div>
+
+
 <div class="priority_assignedTo">
 
   @for (contactId of task.assignedTo; track contactId; let i = $index) {

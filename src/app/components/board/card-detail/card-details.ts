@@ -2,14 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostBinding, inject, ViewChild } from '@angular/core';
 import { TaskInterface } from '../../../interfaces/board/task.interface';
 import { BoardService } from '../../../services/board/board-service';
-import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
 import { ContactService } from '../../../services/contact/contact-service';
-
+import { CardEdit } from './card-edit/card-edit';
 
 @Component({
   selector: 'app-card-details',
-  imports: [CommonModule, EditDialogComponent],
+  imports: [CommonModule, CardEdit],
   templateUrl: './card-details.html',
   styleUrls: ['./card-details.scss'],
 })
@@ -29,8 +28,9 @@ export class CardDetails {
     subTasks: [],
   };
   editPageShow: boolean = false;
+  editSubtasks: TaskInterface['subTasks'] = [];
   hostElement = inject(ElementRef);
-  @ViewChild(EditDialogComponent) EditDialogComponent!: EditDialogComponent;
+  @ViewChild(CardEdit) CardEdit!: CardEdit;
 
   closeTaskDetail() {
     this.display = 'none';
@@ -39,11 +39,12 @@ export class CardDetails {
 
   openEditDetail(task: TaskInterface) {
     this.editPageShow = true;
-    this.EditDialogComponent.showEditDetail(task);
+    this.CardEdit.showEditDetail(task);
   }
 
   showTaskDetail(task: TaskInterface) {
     this.task = task;
+    this.editSubtasks = task.subTasks.map((sub) => ({ ...sub }));
     this.display = 'flex';
     this.hostElement.nativeElement.classList.add('show');
   }
@@ -58,6 +59,11 @@ export class CardDetails {
   }
 
   getContactDetailsById(id: string): ContactInterface | undefined {
-    return this.contactService.contactList.find(contact => contact.id === id);
+    return this.contactService.contactList.find((contact) => contact.id === id);
+  }
+
+  toggleSubTask(task: TaskInterface , index:number) {
+    task.subTasks[index].completed = !task.subTasks[index].completed;
+    this.boardService.updateTaskInFirebase(this.task);
   }
 }

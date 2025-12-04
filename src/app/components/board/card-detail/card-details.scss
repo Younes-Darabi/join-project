@@ -19,7 +19,7 @@
       cursor: pointer;
       position: absolute;
       right: 20px;
-      top: 25px;
+      top: 15px;
     }
 
     img:hover {
@@ -45,10 +45,10 @@
       display: flex;
       flex-direction: column;
       align-items: start;
-      gap: 15px;
+      gap: 10px;
 
       h1 {
-        font-size: 55px;
+        font-size: 45px;
         font-weight: 700;
         color: #000000;
         width: 440px;
@@ -59,7 +59,7 @@
       h4 {
         color: #000000;
         font-weight: 440;
-        font-size: 18px;
+        font-size: 16px;
         width: 430px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -119,9 +119,9 @@
 
     .category {
       font-weight: 400;
-      font-size: 20px;
+      font-size: 18px;
       color: #fff;
-      padding: 3px 20px;
+      padding: 3px 15px;
       border-radius: 8px;
     }
 
@@ -142,7 +142,7 @@
       display: flex;
       align-items: center;
       color: #2a3647;
-      font-size: 18px;
+      font-size: 16px;
       margin-bottom: 5px;
 
       span {
@@ -159,7 +159,6 @@
     // .assigned_content
     .assigned_content {
       width: 100%;
-      padding-top: 10px;
     }
 
     .members_content {
@@ -202,6 +201,9 @@
     // subtasks_content
     .subtasks_content {
       width: 100%;
+      height: 150px;
+      overflow-y: auto;
+      margin-top: -10px;
 
       .show_subtask {
         display: flex;
@@ -239,21 +241,21 @@
       display: none;
     }
 
-    .checkbox_content .unchecked {
-      display: block;
-    }
+    // .checkbox_content .unchecked {
+    //   display: block;
+    // }
 
-    .checkbox_content .checked {
-      display: none;
-    }
+    // .checkbox_content .checked {
+    //   display: none;
+    // }
 
-    .checkbox_content input:checked+.unchecked {
-      display: none;
-    }
+    // .checkbox_content input:checked+.unchecked {
+    //   display: none;
+    // }
 
-    .checkbox_content input:checked~.checked {
-      display: block;
-    }
+    // .checkbox_content input:checked~.checked {
+    //   display: block;
+    // }
   }
 
   .section_edit {
