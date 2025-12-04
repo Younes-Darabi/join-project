@@ -19,10 +19,10 @@ import { ContactService } from '../../../../services/contact/contact-service';
   selector: 'app-edit-dialog',
   standalone: true,
   imports: [CommonModule, FormsModule, NgIf],
-  templateUrl: './edit-dialog.component.html',
-  styleUrl: './edit-dialog.component.scss',
+  templateUrl: './card-edit.html',
+  styleUrl: './card-edit.scss',
 })
-export class EditDialogComponent {
+export class CardEdit {
   boardService = inject(BoardService);
   contactService = inject(ContactService);
   search: string = '';
@@ -48,6 +48,11 @@ export class EditDialogComponent {
 
   showEditDetail(task: TaskInterface) {
     this.task = task;
+  }
+
+  toggleSubTask(task: TaskInterface, index: number) {
+    task.subTasks[index].completed = !task.subTasks[index].completed;
+    this.boardService.updateTaskInFirebase(this.task);
   }
 
   /**

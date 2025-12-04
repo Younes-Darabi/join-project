@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostBinding, inject, ViewChild } from '@angular/core';
 import { TaskInterface } from '../../../interfaces/board/task.interface';
 import { BoardService } from '../../../services/board/board-service';
-import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
 import { ContactService } from '../../../services/contact/contact-service';
+import { CardEdit } from './card-edit/card-edit';
 
 @Component({
   selector: 'app-card-details',
-  imports: [CommonModule, EditDialogComponent],
+  imports: [CommonModule, CardEdit],
   templateUrl: './card-details.html',
   styleUrls: ['./card-details.scss'],
 })
@@ -30,7 +30,7 @@ export class CardDetails {
   editPageShow: boolean = false;
   editSubtasks: TaskInterface['subTasks'] = [];
   hostElement = inject(ElementRef);
-  @ViewChild(EditDialogComponent) EditDialogComponent!: EditDialogComponent;
+  @ViewChild(CardEdit) CardEdit!: CardEdit;
 
   closeTaskDetail() {
     this.display = 'none';
@@ -39,7 +39,7 @@ export class CardDetails {
 
   openEditDetail(task: TaskInterface) {
     this.editPageShow = true;
-    this.EditDialogComponent.showEditDetail(task);
+    this.CardEdit.showEditDetail(task);
   }
 
   showTaskDetail(task: TaskInterface) {
@@ -60,17 +60,6 @@ export class CardDetails {
 
   getContactDetailsById(id: string): ContactInterface | undefined {
     return this.contactService.contactList.find((contact) => contact.id === id);
-  }
-
-  toggleSubtask(i: number) {
-    if (!this.task.subTasks[i]) return;
-    this.task.subTasks[i].completed = !this.task.subTasks[i].completed;
-    const index = this.boardService.taskList.findIndex((t) => t.id === this.task.id);
-    if (index > -1) {
-      this.boardService.taskList[index] = { ...this.task };
-    }
-    this.boardService.sortTasksByStatus();
-    this.boardService.updateTaskInFirebase(this.task);
   }
 
   toggleSubTask(task: TaskInterface , index:number) {
