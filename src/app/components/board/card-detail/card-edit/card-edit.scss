@@ -189,10 +189,21 @@ form {
 
 // .assigned_content
 .assigned_content {
+  position: relative;
   width: 100%;
   padding-top: 10px;
   display: flex;
   flex-direction: column;
+
+  .assigned_dropdown_list {
+    position: absolute;
+    left: 0;
+    top: 50px;
+    background-color: white;
+    height: auto;
+    border: 1px solid #dad9d9;
+    border-radius:0 0 10px 10px;
+  }
 }
 
 .members_content {
@@ -334,7 +345,7 @@ form {
 .assigned_dropdown_item {
   display: flex;
   align-items: center;
-  padding: 10px 16px;
+  padding: 5px 10px;
   gap: 12px;
   border-radius: 12px;
   margin-bottom: 1px;
@@ -361,20 +372,19 @@ form {
 }
 
 .assigned_dropdown_avatar {
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   border: 2px solid white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 12px;
   color: #fff;
-  margin-right: 8px;
 }
 
 .assigned_dropdown_name {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #2a3647;
   flex: 1;
@@ -385,13 +395,15 @@ form {
   .you {
     color: #000000;
     margin-left: 4px;
+    font-size: 12px;
   }
 }
 
 .assigned_dropdown_checkbox {
+  margin-top: 8px;
   margin-left: auto;
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   accent-color: #007cee;
   cursor: pointer;
 }
@@ -453,6 +465,32 @@ form {
     width: 100%;
     overflow-y: auto;
     height: 150px;
+
+    .show_subtask {
+      display: flex;
+      justify-content: space-between;
+
+      &:hover {
+        background-color: #0000000e;
+        border-radius: 5px;
+        cursor: pointer;
+
+        .x {
+          display: unset;
+        }
+      }
+
+      .x {
+        display: none;
+        margin-right: 20px;
+        transition: all 250ms ease-in-out;
+
+        &:hover {
+          color: red;
+          cursor: pointer;
+        }
+      }
+    }
   }
 
   .checkbox_content {
@@ -462,8 +500,6 @@ form {
     padding: 2px 15px 2px 10px;
 
     &:hover {
-      background-color: #0000000e;
-      border-radius: 5px;
       cursor: pointer;
     }
   }
@@ -522,7 +558,7 @@ form {
 ul {
   padding: 0;
   width: 100%;
-  max-height: 4em;
+  max-height: 300px;
   overflow: auto;
   overflow-x: hidden;
   -webkit-line-clamp: 2;

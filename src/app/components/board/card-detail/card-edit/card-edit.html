@@ -92,16 +92,6 @@
               placeholder="Select contacts to assign" [(ngModel)]="search" autocomplete="off" />
             <span class="assigned_dropdown_arrow">&#9662;</span>
           </div>
-          @if (selected.length > 0) {
-          <!-- moved inside the wrapper and positioned absolute via CSS -->
-          <div class="assigned_selected_avatars">
-            @for (contact of selected; track contact.id) {
-            <span class="assigned_dropdown_avatar assigned_selected_avatar" [style.background-color]="contact.color">
-              {{ contact.initials }}
-            </span>
-            }
-          </div>
-          }
         </div>
 
         @if (open) {
@@ -157,6 +147,7 @@
               <img class="unchecked" *ngIf="!subTask.completed" src="./assets/icons/board/checkbox-unchecked.svg" />
               <p>{{ subTask.title }}</p>
             </label>
+            <p class="x" (click)="deleteSubtask($index)">x</p>
           </div>
           }
         </div>
