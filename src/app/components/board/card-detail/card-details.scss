@@ -202,6 +202,8 @@
     // subtasks_content
     .subtasks_content {
       width: 100%;
+      height: 150px;
+      overflow-y: auto;
 
       .show_subtask {
         display: flex;
@@ -239,21 +241,21 @@
       display: none;
     }
 
-    .checkbox_content .unchecked {
-      display: block;
-    }
+    // .checkbox_content .unchecked {
+    //   display: block;
+    // }
 
-    .checkbox_content .checked {
-      display: none;
-    }
+    // .checkbox_content .checked {
+    //   display: none;
+    // }
 
-    .checkbox_content input:checked+.unchecked {
-      display: none;
-    }
+    // .checkbox_content input:checked+.unchecked {
+    //   display: none;
+    // }
 
-    .checkbox_content input:checked~.checked {
-      display: block;
-    }
+    // .checkbox_content input:checked~.checked {
+    //   display: block;
+    // }
   }
 
   .section_edit {

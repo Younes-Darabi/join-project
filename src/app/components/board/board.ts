@@ -32,7 +32,7 @@ export class Board {
   isFilterenable: boolean = false;
 
   filteredLists(searchTerm: string) {
-    if (searchTerm.length >= 5) {
+    if (searchTerm.length >= 3) {
       this.boardService.filteredLists(searchTerm);
       this.isFilterenable = true;
     }

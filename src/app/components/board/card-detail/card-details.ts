@@ -72,4 +72,9 @@ export class CardDetails {
     this.boardService.sortTasksByStatus();
     this.boardService.updateTaskInFirebase(this.task);
   }
+
+  toggleSubTask(task: TaskInterface , index:number) {
+    task.subTasks[index].completed = !task.subTasks[index].completed;
+    this.boardService.updateTaskInFirebase(this.task);
+  }
 }

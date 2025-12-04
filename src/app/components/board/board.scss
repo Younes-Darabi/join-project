@@ -8,7 +8,7 @@ section {
   font-weight: 700;
 }
 
-.filter{
+.filter {
   display: flex;
   justify-content: space-between;
   position: absolute;
@@ -21,13 +21,16 @@ section {
   width: 100%;
   left: -50px;
   top: 55px;
-  p{
+
+  p {
     font-size: 16px;
     color: white;
   }
-  .x{
+
+  .x {
     transition: all 250ms ease-in-out;
-    &:hover{
+
+    &:hover {
       cursor: pointer;
       color: red;
     }
@@ -86,17 +89,15 @@ section {
   }
 
   .search_button {
-    background: none;
+    width: 32px;
+    height: 32px;
+    background: url('/assets/icons/board/search.svg') no-repeat center;
     border: none;
     cursor: pointer;
+    transition: all 250ms ease-in-out;
 
-    img {
-      padding: 8px;
-    }
-
-    img:hover {
-      background-color: rgba(0, 0, 0, 0.342);
-      border-radius: 12px;
+    &:hover {
+      background-image: url('/assets/icons/board/search-blue.svg');
     }
   }
 }
@@ -214,6 +215,7 @@ section {
   gap: 20px;
   overflow-y: auto;
   margin-bottom: 10px;
+  padding-right: 10px;
 }
 
 .frame {
