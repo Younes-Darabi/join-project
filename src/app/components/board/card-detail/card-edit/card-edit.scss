@@ -202,7 +202,7 @@ form {
     background-color: white;
     height: auto;
     border: 1px solid #dad9d9;
-    border-radius:0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
   }
 }
 
@@ -372,15 +372,19 @@ form {
 }
 
 .assigned_dropdown_avatar {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border: 2px solid white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
   color: #fff;
+
+  p {
+    font-size: 12px;
+    color: white;
+  }
 }
 
 .assigned_dropdown_name {
