@@ -1,9 +1,11 @@
 <div class="add_task_wrapper">
-  <h1 class="add_task_title">Add Task</h1>
+  <h1>Add Task</h1>
   <div>
     @if (confirmationMessage) {
-    <div class="add_task_confirmation">
-      {{ confirmationMessage }}
+    <div class="add_task_confirmation_overlay">
+      <div class="add_task_confirmation">
+        <p>{{ confirmationMessage }}<img src="./assets/icons/board/board_icon.svg" alt="Success"></p>
+      </div>
     </div>
     }
     @if (errorMessage) {
@@ -52,7 +54,7 @@
         </div>
 
 
-        <div class="assigned_dropdown">
+        <div class="assigned_dropdown" [ngClass]="getAssignedDropdownClass()">
           <label for="assigned_dropdown_input" class="assigned_dropdown_label">Assigned to</label>
           <div class="assigned_dropdown_input_wrapper" (click)="toggleDropdown($event)">
             <input id="assigned_dropdown_input" type="text" class="assigned_dropdown_input"
@@ -98,7 +100,7 @@
           </div>
         </div>
 
-        <div class="assigned_dropdown">
+        <div class="assigned_dropdown" [ngClass]="getCategoryDropdownClass()">
           <label for="assigned_dropdown_input" class="assigned_dropdown_label">Category <span>*</span></label>
           <div class="assigned_dropdown_input_wrapper" (click)="toggleCategoryDropdown($event)">
             <input id="category_dropdown_input" type="text" class="assigned_dropdown_input"
@@ -123,29 +125,30 @@
         <label class="subtasks_input">
           Subtask
         </label>
-        <div class="subtask_row">
-          <input
-            type="text"
-            class="subtask_input_field"
-            [(ngModel)]="subtaskInput"
-            placeholder="Add new subtask"
-            (keydown.enter)="addSubtask()"
-          />
-          <button class="subtask_btn_check" (click)="addSubtask()" [title]="subtaskEditIndex !== null ? 'Save' : 'Add'">&#10003;</button>
-          <button class="subtask_btn_clear" (click)="clearSubtaskInput()" title="Clear">✕</button>
+        <div class="subtask_row" [class.has_input]="hasSubtaskInput()">
+          <input type="text" class="subtask_input_field" placeholder="Add new subtask" [(ngModel)]="subtaskInput" />
+          <button class="subtask_btn_check" (click)="addSubtask()"
+            [title]="subtaskEditIndex !== null ? 'Save' : 'Add'"><img src="./assets/icons/board/check-black.svg"
+              alt="Check"></button>
+          <div class="small_separator"></div>
+          <button class="subtask_btn_clear" (click)="clearSubtaskInput()" title="Clear"><img
+              src="./assets/icons/board/close-black.svg" alt="Clear"></button>
         </div>
 
         @if (newTask.subTasks.length > 0) {
         <ul class="subtask_list">
           @for (subtask of newTask.subTasks; track $index) {
           <li class="subtask_item">
-            <input type="checkbox" [(ngModel)]="subtask.completed" />
-            <span class="subtask_title" [ngClass]="{ 'completed': subtask.completed }">
+            <span class="subtask_bullet">•</span>
+            <span class="subtask_title">
               {{ subtask.title }}
             </span>
             <div class="subtask_actions">
-              <button class="subtask_edit" (click)="startEditSubtask($index)" title="Edit">✎</button>
-              <button class="subtask_delete" (click)="removeSubtask($index)" title="Delete">✕</button>
+              <button class="subtask_edit" (click)="startEditSubtask($index)" title="Edit"><img
+                  src="./assets/icons/board/edit.svg" alt=""></button>
+              <div class="small_separator"></div>
+              <button class="subtask_delete" (click)="removeSubtask($index)" title="Delete"><img
+                  src="./assets/icons/board/delete.svg" alt=""></button>
             </div>
           </li>
           }
@@ -157,6 +160,7 @@
       <p class="add_task_info"><span>*</span>This field is required.</p>
       <div>
         <button class="add_task_btn_cancel" (click)="resetForm()">Clear</button>
+
         <button class="add_task_btn_submit" (click)="saveTask(newTask)">Add Task</button>
       </div>
     </div>

@@ -1,3 +1,4 @@
+// Mixins
 @mixin flexbox($direction: row, $align: stretch, $justify: flex-start, $gap: 0) {
     display: flex;
     flex-direction: $direction;
@@ -6,20 +7,31 @@
     gap: $gap;
 }
 
-span {
-    color: #FF8190;
-    // text-align: start;
+@mixin custom_scrollbar {
+    scroll-behavior: smooth;
 
-    // aus span sub machen, erst vorher googlen
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #d1d1d1;
+        border-radius: 4px;
+
+        &:hover {
+            background: #a8a8a8;
+        }
+    }
 }
 
-.separator {
-    width: 2px;
-    background: #D1D1D1;
-    margin: 0 24px;
-    border-radius: 2px;
-    align-self: stretch;
-    display: block;
+// Global Elements
+span {
+    color: #FF8190;
 }
 
 label {
@@ -32,27 +44,65 @@ label {
     }
 }
 
+.separator {
+    width: 2px;
+    background: #D1D1D1;
+    margin: 0 24px;
+    border-radius: 2px;
+    align-self: stretch;
+    display: block;
+}
+
+.small_separator {
+        height: 16px;
+        width: 1px;
+        background: #a1a1a173;
+    }
+
+// Add Task Component
 .add_task_wrapper {
     @include flexbox(column, stretch, flex-start, 0);
     background: #f5f6f7;
-    height: calc(100vh - 96px);
+    height: auto;
+    min-height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+    padding-top: 80px;
+    padding-left: 80px;
+    padding-right: 160px;
+    padding-bottom: 40px;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     h1 {
         font-size: 61px;
         font-weight: 700;
+
     }
 }
 
-.add_task_title {
-    font-size: 40px;
-    font-weight: 700;
-    margin-bottom: 32px;
+.add_task_confirmation_overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: 50%;
+    bottom: 50%;
+    width: 330px;
+    height: 75px;
+    border-radius: 20px;
+    background-color: #2A3647;
+    
+    z-index: 2000;
 }
 
 .add_task_confirmation {
-    color: #388e3c;
+    color : #ffffff;
     font-size: 16px;
     margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 8px;
 }
 
 .add_task_error {
@@ -61,26 +111,27 @@ label {
     margin-bottom: 8px;
 }
 
-.add_task_container {
-    @include flexbox(row, stretch, flex-start, 48px);
-    padding: 40px 32px;
-
-    margin: 0 auto;
+.add_task_error_field {
+    color: #ff3b3b;
+    font-size: 13px;
+    margin-top: 2px;
+    display: block;
 }
 
-// Formular
+.add_task_container {
+    @include flexbox(row, stretch, flex-start, 48px);
+    margin-top: 20px
+}
+
+// Form
 .add_task_form {
-    @include flexbox(column, stretch, flex-start, 24px);
+    @include flexbox(column, stretch, flex-start, 8px);
     flex: 1;
 
     label {
         font-size: 16px;
         font-weight: 500;
         margin-bottom: 8px;
-
-        input {
-            margin-top: 8px;
-        }
     }
 
     input,
@@ -92,7 +143,6 @@ label {
         border-radius: 8px;
         background: #fff;
         font-size: 16px;
-        margin-bottom: 8px;
         outline: none;
         transition: border 0.2s;
 
@@ -106,7 +156,6 @@ label {
         resize: vertical;
     }
 
-    // Datum
     .date_input {
         position: relative;
 
@@ -121,15 +170,6 @@ label {
             transform: translateY(-50%);
             width: 20px;
             height: 20px;
-        }
-    }
-
-    // Subtasks
-    .subtasks_input {
-        margin-top: 8px;
-
-        input {
-            width: 100%;
         }
     }
 }
@@ -161,7 +201,6 @@ label {
             color: #d32f2f;
             background: #fff;
 
-            &:hover,
             &.active {
                 background: #d32f2f;
                 color: #fff;
@@ -176,7 +215,6 @@ label {
             color: #ffa800;
             background: #fff;
 
-            &:hover,
             &.active {
                 background: #ffa800;
                 color: #fff;
@@ -191,7 +229,6 @@ label {
             color: #388e3c;
             background: #fff;
 
-            &:hover,
             &.active {
                 background: #388e3c;
                 color: #fff;
@@ -204,9 +241,24 @@ label {
     }
 }
 
-//Dropdown
+// Assigned Dropdown
 .assigned_dropdown {
     position: relative;
+    margin-bottom: 8px;
+
+    &.has_dropdown_open {
+        margin-bottom: 240px;
+    }
+
+    &.has_selected_avatars {
+        margin-bottom: 48px;
+    }
+
+    &.category_dropdown {
+        &.has_dropdown_open {
+            margin-bottom: 120px;
+        }
+    }
 
     .assigned_dropdown_label {
         font-size: 16px;
@@ -220,7 +272,7 @@ label {
         position: relative;
         display: flex;
         align-items: center;
-        padding-bottom: 30px;
+        padding-bottom: 0;
     }
 
     .assigned_dropdown_input {
@@ -248,37 +300,33 @@ label {
 
     .assigned_selected_avatars {
         position: absolute;
-        left: 60px; 
-        top: 40px; 
+        left: 0;
+        top: calc(100%);
         display: flex;
         align-items: center;
         gap: 5px;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        border: 2px solid #fff;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        font-weight: 600;
-        color: #fff;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+        width: auto;
+        height: auto;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
     }
-    
+
     .assigned_dropdown_list {
         position: absolute;
-        top: 70px;
+        top: calc(100%);
         left: 0;
         width: 100%;
         max-height: 220px;
         background: #fff;
         border: 1px solid #e7e7e7;
-        border-radius: 8px;
+        border-radius: 0 0 8px 8px;
+        border-top: none;
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
         overflow-y: auto;
         list-style: none;
         z-index: 1000;
+        @include custom_scrollbar;
     }
 
     .assigned_dropdown_item {
@@ -290,10 +338,6 @@ label {
         margin-bottom: 1px;
         cursor: pointer;
         transition: background 0.2s;
-
-        &:hover {
-            background: #f5f6f7;
-        }
 
         &.assigned_dropdown_item_active {
             background: #2a3647;
@@ -345,22 +389,9 @@ label {
         accent-color: #007cee;
         cursor: pointer;
     }
-
-    @media (max-width: 480px) {
-        .assigned_selected_avatar {
-            width: 28px;
-            height: 28px;
-            font-size: 11px;
-            margin-left: -8px;
-        }
-
-        .assigned_dropdown_list {
-            top: calc(100% + 4px);
-        }
-    }
 }
 
-
+// Selected Avatars (standalone)
 .assigned_selected_avatars {
     display: flex;
     align-items: center;
@@ -368,6 +399,10 @@ label {
     padding-left: 4px;
     position: relative;
     z-index: 1;
+
+    >.assigned_selected_avatar:first-child {
+        margin-left: 0;
+    }
 }
 
 .assigned_selected_avatar {
@@ -387,36 +422,141 @@ label {
     flex-shrink: 0;
 }
 
-
-.assigned_selected_avatars>.assigned_selected_avatar:first-child {
-    margin-left: 0;
-}
-
 .assigned_dropdown_list {
     position: absolute;
     z-index: 60;
 }
 
-@media (max-width: 480px) {
-    .assigned_selected_avatar {
-        width: 28px;
-        height: 28px;
-        font-size: 11px;
-        margin-left: -8px;
+.subtasks_input {
+    margin-top: 0;
+
+    input {
+        width: 100%;
     }
 }
 
-// Fehlernachricht
-.add_task_error_field {
-    color: #ff3b3b;
-    font-size: 13px;
-    margin-top: 2px;
-    display: block;
+// Subtasks
+.subtask_row {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    position: relative;
 }
 
+.subtask_input_field {
+    flex: 1;
+    padding: 8px 50px 8px 10px;
+    border: 1px solid #d1d1d1;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #fff;
+    outline: none;
+
+    &:focus {
+        border-color: #007cee;
+    }
+}
+
+.subtask_btn_check,
+.subtask_btn_clear {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 6px;
+    line-height: 1;
+    color: #2a3647;
+    display: none;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    img{
+        width: 13px;
+        height: 13px;
+    }
+}
+
+.subtask_btn_clear {
+    right: 32px;
+}
+
+.subtask_row.has_input {
+
+    .subtask_btn_check,
+    .subtask_btn_clear {
+        display: block;
+    }
+}
+
+.subtask_list {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 75px;
+    overflow-y: auto;
+    @include custom_scrollbar;
+}
+
+.subtask_item {
+    @include flexbox(row, center, space-between, 8px);
+    padding: 0px 10px;
+    align-items: center;
+
+    &:hover {
+        border-radius:  8px;
+        background-color: #d1d1d1b9;
+        .subtask_actions {
+            display: flex;
+            
+        }
+    }
+}
+
+.subtask_bullet {
+    font-size: 20px;
+    color: #2a3647;
+    line-height: 1;
+    margin-right: 4px;
+}
+
+.subtask_title {
+    flex: 1;
+    margin-left: 4px;
+    font-size: 14px;
+    color: #2a3647;
+
+    &.completed {
+        text-decoration: line-through;
+        color: #9aa3ad;
+    }
+
+}
+
+.subtask_actions {
+    display: none;
+    gap: 6px;
+
+    button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        color: #2a3647;
+
+        img {
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
+// Actions & Buttons
 .add_task_actions {
     @include flexbox(row, center, space-between, 12px);
-    padding: 24px 32px;
+    margin-top: 40px;
+    padding: 24px 0;
 
     div {
         @include flexbox(row, center, flex-start, 12px);
@@ -433,11 +573,6 @@ label {
     font-weight: 500;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
-
-    &:hover {
-        border-color: #29ABE2;
-        color: #29ABE2;
-    }
 }
 
 .add_task_btn_submit {
@@ -450,127 +585,503 @@ label {
     font-weight: 500;
     cursor: pointer;
     transition: background 0.2s;
-
-    &:hover {
-        background: #29ABE2;
-    }
 }
 
 // Media Queries
+@media (max-width: 1200px) {
+    .add_task_wrapper {
+        padding-left: 60px;
+        padding-right: 100px;
+
+        h1 {
+            font-size: 52px;
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .add_task_wrapper {
+        padding-left: 40px;
+        padding-right: 60px;
+
+        h1 {
+            font-size: 48px;
+        }
+    }
+}
 
 @media (max-width: 900px) {
+    .add_task_wrapper {
+        padding: 60px 40px 40px;
+        max-height: calc(100vh - 200px);
+
+        h1 {
+            font-size: 42px;
+        }
+    }
+
     .add_task_container {
         flex-direction: column;
         gap: 24px;
-        padding: 24px 8px;
-    }
-
-    .add_task_title {
-        font-size: 32px;
-        margin-bottom: 24px;
+        margin-top: 20px;
     }
 
     .separator {
-        /* Bei mobilem Layout ausblenden */
         display: none;
+    }
+
+    .add_task_actions {
+        margin-top: 30px;
+        padding: 20px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .add_task_wrapper {
+        padding: 40px 30px 30px;
+        max-height: calc(100vh - 96px);
+
+        h1 {
+            font-size: 36px;
+        }
+    }
+
+    .add_task_form {
+        gap: 10px;
+
+        label {
+            font-size: 15px;
+        }
+
+        input,
+        textarea {
+            font-size: 15px;
+            padding: 10px 12px;
+        }
+    }
+
+    .add_task_priority {
+        gap: 10px;
+
+        .priority_btn {
+            padding: 8px 16px;
+            font-size: 15px;
+        }
+    }
+
+    .assigned_dropdown {
+        &.has_dropdown_open {
+            margin-bottom: 200px;
+        }
+
+        &.category_dropdown.has_dropdown_open {
+            margin-bottom: 110px;
+        }
     }
 }
 
 @media (max-width: 600px) {
-    .add_task_container {
-        padding: 8px 2px;
-        border-radius: 0;
+    .add_task_wrapper {
+        padding: 30px 20px 30px;
+        max-height: calc(100vh - 96px);
+
+        h1 {
+            font-size: 32px;
+        }
     }
 
-    .add_task_title {
-        font-size: 24px;
-        margin-bottom: 16px;
+    .add_task_container {
+        margin-top: 16px;
+        gap: 16px;
     }
 
     .add_task_form {
+        gap: 10px;
+
         label {
             font-size: 14px;
         }
 
         input,
-        textarea,
-        select {
+        textarea {
             font-size: 14px;
-            padding: 8px 10px;
+            padding: 10px 12px;
+            box-sizing: border-box;
         }
+
+        textarea {
+            min-height: 60px;
+        }
+    }
+
+    .add_task_priority {
+        flex-wrap: wrap;
+        gap: 8px;
+
+        .priority_btn {
+            flex: 1;
+            min-width: calc(33.333% - 6px);
+            justify-content: center;
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+    }
+
+    .assigned_dropdown {
+        &.has_dropdown_open {
+            margin-bottom: 180px;
+        }
+
+        &.has_selected_avatars {
+            margin-bottom: 40px;
+        }
+
+        &.category_dropdown.has_dropdown_open {
+            margin-bottom: 100px;
+        }
+
+        .assigned_dropdown_input {
+            font-size: 14px;
+            padding: 10px 36px 10px 12px;
+        }
+
+        .assigned_dropdown_list {
+            max-height: 160px;
+        }
+
+        .assigned_dropdown_avatar {
+            width: 32px;
+            height: 32px;
+            font-size: 12px;
+        }
+    }
+
+    .subtask_input_field {
+        font-size: 13px;
+    }
+
+    .add_task_actions {
+        flex-direction: column-reverse;
+        gap: 12px;
+        margin-top: 25px;
+        padding: 20px 0;
+
+        div {
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+    }
+
+    .add_task_btn_cancel,
+    .add_task_btn_submit {
+        width: 100%;
+        padding: 10px 20px;
+        font-size: 14px;
     }
 }
 
-.subtask_row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 8px;
+@media (max-width: 480px) {
+    .add_task_wrapper {
+        padding: 25px 16px 25px;
+        max-height: calc(100vh - 96px);
+
+        h1 {
+            font-size: 28px;
+        }
+    }
+
+    .add_task_container {
+        margin-top: 12px;
+    }
+
+    .add_task_form {
+        gap: 8px;
+
+        label {
+            font-size: 13px;
+        }
+
+        input,
+        textarea {
+            font-size: 13px;
+            padding: 8px 10px;
+        }
+    }
+
+    .add_task_priority {
+        .priority_btn {
+            flex: 1 1 100%;
+            min-width: 100%;
+            font-size: 12px;
+            padding: 7px 10px;
+
+            img {
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
+
+    .assigned_dropdown {
+        &.has_dropdown_open {
+            margin-bottom: 160px;
+        }
+
+        &.has_selected_avatars {
+            margin-bottom: 35px;
+        }
+
+        &.category_dropdown.has_dropdown_open {
+            margin-bottom: 90px;
+        }
+
+        .assigned_dropdown_input {
+            font-size: 13px;
+            padding: 8px 32px 8px 10px;
+        }
+
+        .assigned_dropdown_avatar {
+            width: 28px;
+            height: 28px;
+            font-size: 11px;
+        }
+    }
+
+    .assigned_selected_avatar {
+        width: 28px;
+        height: 28px;
+        font-size: 11px;
+        margin-left: -8px;
+    }
+
+    .subtask_input_field {
+        font-size: 12px;
+        padding: 7px 48px 7px 9px;
+    }
+
+    .subtask_btn_check,
+    .subtask_btn_clear {
+        padding: 5px;
+
+        img {
+            width: 12px;
+            height: 12px;
+        }
+    }
+
+    .subtask_btn_clear {
+        right: 30px;
+    }
+
+    .subtask_row .small_separator {
+        right: 36px;
+    }
+
+    .subtask_actions {
+        display: flex;
+
+        button img {
+            width: 14px;
+            height: 14px;
+        }
+    }
+
+    .add_task_actions {
+        margin-top: 20px;
+        padding: 15px 0;
+    }
 }
 
-.subtask_input_field {
-  flex: 1;
-  padding: 8px 10px;
-  border: 1px solid #d1d1d1;
-  border-radius: 8px;
-  font-size: 14px;
-  background: #fff;
-  outline: none;
-  &:focus {
-    border-color: #007cee;
-  }
+@media (max-width: 375px) {
+    .add_task_wrapper {
+        padding: 20px 12px 20px;
+        max-height: calc(100vh - 100px);
+
+        h1 {
+            font-size: 24px;
+        }
+    }
+
+    .add_task_form {
+        label {
+            font-size: 12px;
+        }
+
+        input,
+        textarea {
+            font-size: 12px;
+            padding: 7px 9px;
+        }
+    }
+
+    .add_task_priority {
+        gap: 6px;
+
+        .priority_btn {
+            font-size: 11px;
+            padding: 6px 8px;
+
+            img {
+                width: 12px;
+                height: 12px;
+            }
+        }
+    }
+
+    .assigned_dropdown {
+        .assigned_dropdown_input {
+            font-size: 12px;
+            padding: 7px 30px 7px 9px;
+        }
+
+        .assigned_dropdown_arrow {
+            right: 12px;
+            font-size: 16px;
+        }
+    }
+
+    .subtask_input_field {
+        font-size: 11px;
+        padding: 6px 45px 6px 8px;
+    }
+
+    .add_task_btn_cancel,
+    .add_task_btn_submit {
+        font-size: 13px;
+        padding: 9px 16px;
+    }
 }
 
-.subtask_btn_check,
-.subtask_btn_clear {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 6px;
-  line-height: 1;
-  color: #2a3647;
-}
-.subtask_btn_check { color: #388e3c; }
-.subtask_btn_clear { color: #d32f2f; }
+@media (max-width: 320px) {
+    .add_task_wrapper {
+        padding: 16px 10px 16px;
+        max-height: calc(100vh - 100px);
 
-.subtask_list {
-  margin: 8px 0 0 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+        h1 {
+            font-size: 22px;
+        }
+    }
 
-.subtask_item {
-  @include flexbox(row, center, space-between, 8px);
-  padding: 8px 10px;
-  border-radius: 8px;
-  background: #fff;
-  border: 1px solid #eef0f2;
-  align-items: center;
-}
+    .add_task_container {
+        margin-top: 10px;
+        gap: 12px;
+    }
 
-.subtask_title {
-  flex: 1;
-  margin-left: 8px;
-  font-size: 14px;
-  color: #2a3647;
-  &.completed {
-    text-decoration: line-through;
-    color: #9aa3ad;
-  }
-}
+    .add_task_form {
+        gap: 6px;
 
-.subtask_actions {
-  display: flex;
-  gap: 6px;
-  button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    color: #2a3647;
-  }
+        label {
+            font-size: 11px;
+        }
+
+        input,
+        textarea {
+            font-size: 11px;
+            padding: 6px 8px;
+        }
+    }
+
+    .add_task_priority {
+        gap: 5px;
+
+        .priority_btn {
+            font-size: 10px;
+            padding: 5px 6px;
+
+            img {
+                width: 10px;
+                height: 10px;
+            }
+        }
+    }
+
+    .assigned_dropdown {
+        &.has_dropdown_open {
+            margin-bottom: 140px;
+        }
+
+        &.has_selected_avatars {
+            margin-bottom: 30px;
+        }
+
+        &.category_dropdown.has_dropdown_open {
+            margin-bottom: 80px;
+        }
+
+        .assigned_dropdown_input {
+            font-size: 11px;
+            padding: 6px 28px 6px 8px;
+        }
+
+        .assigned_dropdown_arrow {
+            right: 10px;
+            font-size: 14px;
+        }
+
+        .assigned_dropdown_list {
+            max-height: 120px;
+        }
+
+        .assigned_dropdown_avatar {
+            width: 24px;
+            height: 24px;
+            font-size: 10px;
+        }
+
+        .assigned_selected_avatar {
+            width: 24px;
+            height: 24px;
+            font-size: 9px;
+        }
+    }
+
+    .assigned_selected_avatar {
+        width: 24px;
+        height: 24px;
+        font-size: 9px;
+    }
+
+    .subtask_input_field {
+        font-size: 10px;
+        padding: 5px 42px 5px 7px;
+    }
+
+    .subtask_btn_check,
+    .subtask_btn_clear {
+        padding: 4px;
+
+        img {
+            width: 10px;
+            height: 10px;
+        }
+    }
+
+    .subtask_btn_clear {
+        right: 26px;
+    }
+
+    .subtask_row .small_separator {
+        right: 32px;
+    }
+
+    .subtask_list {
+        max-height: 60px;
+    }
+
+    .subtask_actions button img {
+        width: 12px;
+        height: 12px;
+    }
+
+    .add_task_actions {
+        margin-top: 15px;
+        padding: 12px 0;
+    }
+
+    .add_task_btn_cancel,
+    .add_task_btn_submit {
+        font-size: 12px;
+        padding: 8px 14px;
+    }
 }

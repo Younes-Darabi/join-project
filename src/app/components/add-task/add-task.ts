@@ -44,10 +44,29 @@ export class AddTask {
   };
   subtaskInput: string = '';
   subtaskEditIndex: number | null = null;
-  // die subtasks müssen hinzugefügt werden
-  // der Button clear funktioniert noch nicht bei subtasks
-  // das design muss noch angepasst werden
-  // responsive design muss noch gemacht werden
+  
+  hasSubtaskInput(): boolean {
+    return this.subtaskInput.trim().length > 0;
+  }
+
+  getAssignedDropdownClass(): string {
+    if (this.open) {
+      return 'has_dropdown_open';
+    }
+    if (this.selected.length > 0) {
+      return 'has_selected_avatars';
+    }
+    return '';
+  }
+
+  getCategoryDropdownClass(): string {
+    let classes = 'category_dropdown';
+    if (this.categoryDropdownOpen) {
+      classes += ' has_dropdown_open';
+    }
+    return classes;
+  }
+
   async saveTask(task: TaskInterface) {
     this.formSubmitted = true;
     if (!task.title || !task.dueDate || !task.taskCategory) {
@@ -59,7 +78,7 @@ export class AddTask {
 
     await this.boardService.addTask(task);
     this.resetForm();
-    this.showConfirmation('Task successfully created!');
+    this.showConfirmation('Task added to board');
     this.changeToBoard();
     this.formSubmitted = false;
   }
@@ -172,11 +191,10 @@ export class AddTask {
   }
 
   addSubtask() {
-    const title = this.subtaskInput.trim();
+    let title = this.subtaskInput.trim();
     if (!title) {
       return;
     }
-    // Wenn im Edit-Modus, ersetzen
     if (this.subtaskEditIndex !== null && this.subtaskEditIndex >= 0) {
       this.newTask.subTasks[this.subtaskEditIndex].title = title;
       this.subtaskEditIndex = null;
