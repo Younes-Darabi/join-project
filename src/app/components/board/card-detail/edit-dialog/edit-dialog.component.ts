@@ -31,6 +31,8 @@ export class EditDialogComponent {
   contactList: ContactInterface[] = [];
   open: boolean = false;
   confirmationMessage: string = '';
+  subtaskInput: string = '';
+  editedSubtasks: { title: string; completed: boolean }[] = [];
 
   task: TaskInterface = {
     id: '',
@@ -70,7 +72,6 @@ export class EditDialogComponent {
   selectedPriority: string = 'medium';
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
   subtaskInputFocused: boolean = false;
-  subtaskInput: string = '';
   subtasks: { name: string; isEditing: boolean }[] = [];
   dropdownVisible: boolean = false;
   isEditFormSubmitted: boolean = false;
@@ -89,6 +90,7 @@ export class EditDialogComponent {
   ngOnChanges() {
     if (this.item) {
       this.task = JSON.parse(JSON.stringify(this.item));
+      this.editedSubtasks = [...this.task.subTasks];
       this.selectedPriority = this.task.priority || 'medium';
       this.selected = this.contactList.filter(
         (contact) => contact.id !== undefined && this.task.assignedTo.includes(contact.id)
@@ -102,6 +104,7 @@ export class EditDialogComponent {
       .map((c) => c.id)
       .filter((id): id is string => id !== undefined);
 
+    this.task.subTasks = [...this.editedSubtasks];
     this.boardService.updateTaskInFirebase(this.task);
     this.saveChangesEvent.emit(this.task);
     this.closeDialogEvent.emit();
@@ -182,5 +185,32 @@ export class EditDialogComponent {
   closeDropdowns() {
     this.open = false;
     this.categoryDropdownOpen = false;
+  }
+
+  private saveSubtasksInstantly() {
+    this.task.subTasks = [...this.editedSubtasks];
+    this.boardService.updateTaskInFirebase(this.task);
+  }
+
+  addSubtask() {
+    if (!this.subtaskInput.trim()) return;
+
+    this.editedSubtasks.push({
+      title: this.subtaskInput.trim(),
+      completed: false,
+    });
+
+    this.subtaskInput = '';
+    this.saveSubtasksInstantly();
+  }
+
+  toggleSubtask(index: number) {
+    this.editedSubtasks[index].completed = !this.editedSubtasks[index].completed;
+    this.saveSubtasksInstantly();
+  }
+
+  deleteSubtask(index: number) {
+    this.editedSubtasks.splice(index, 1);
+    this.saveSubtasksInstantly();
   }
 }
