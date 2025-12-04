@@ -40,12 +40,15 @@
           Priority
         </label>
         <div class="add_task_priority">
-          <button class="priority_btn urgent" (click)="newTask.priority='urgent'" [ngClass]="{'active': newTask.priority === 'urgent'}">Urgent <img
-              src="./assets/icons/board/arrow_up.svg" alt="Urgent"></button>
-          <button class="priority_btn medium" (click)="newTask.priority='medium'" [ngClass]="{'active': newTask.priority === 'medium'}">Medium <img
+          <button class="priority_btn urgent" (click)="newTask.priority='urgent'"
+            [ngClass]="{'active': newTask.priority === 'urgent'}">Urgent <img src="./assets/icons/board/arrow_up.svg"
+              alt="Urgent"></button>
+          <button class="priority_btn medium" (click)="newTask.priority='medium'"
+            [ngClass]="{'active': newTask.priority === 'medium'}">Medium <img
               src="./assets/icons/board/arrow_straight.svg" alt="Medium"></button>
-          <button class="priority_btn low" (click)="newTask.priority='low'" [ngClass]="{'active': newTask.priority === 'low'}">Low <img
-              src="./assets/icons/board/arrow_down.svg" alt="Low"></button>
+          <button class="priority_btn low" (click)="newTask.priority='low'"
+            [ngClass]="{'active': newTask.priority === 'low'}">Low <img src="./assets/icons/board/arrow_down.svg"
+              alt="Low"></button>
         </div>
 
 
@@ -119,8 +122,35 @@
 
         <label class="subtasks_input">
           Subtask
-          <input type="text" />
         </label>
+        <div class="subtask_row">
+          <input
+            type="text"
+            class="subtask_input_field"
+            [(ngModel)]="subtaskInput"
+            placeholder="Add new subtask"
+            (keydown.enter)="addSubtask()"
+          />
+          <button class="subtask_btn_check" (click)="addSubtask()" [title]="subtaskEditIndex !== null ? 'Save' : 'Add'">&#10003;</button>
+          <button class="subtask_btn_clear" (click)="clearSubtaskInput()" title="Clear">✕</button>
+        </div>
+
+        @if (newTask.subTasks.length > 0) {
+        <ul class="subtask_list">
+          @for (subtask of newTask.subTasks; track $index) {
+          <li class="subtask_item">
+            <input type="checkbox" [(ngModel)]="subtask.completed" />
+            <span class="subtask_title" [ngClass]="{ 'completed': subtask.completed }">
+              {{ subtask.title }}
+            </span>
+            <div class="subtask_actions">
+              <button class="subtask_edit" (click)="startEditSubtask($index)" title="Edit">✎</button>
+              <button class="subtask_delete" (click)="removeSubtask($index)" title="Delete">✕</button>
+            </div>
+          </li>
+          }
+        </ul>
+        }
       </div>
     </div>
     <div class="add_task_actions">

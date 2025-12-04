@@ -156,3 +156,12 @@
 </section>
 
 <app-card-details></app-card-details>
+<div class="add_task1" [ngStyle]="{ display: addTaskShow ? 'flex' : 'none' }">
+  <div class="add_task2">
+    <div class="close_btn" (click)="addTaskShow=false">
+      <img src="./assets/icons/contact/close.svg" alt="close" />
+    </div>
+    <app-add-task></app-add-task>
+    <!-- <app-add-task [taskPriority]="taskPriority"></app-add-task> -->
+  </div>
+</div>

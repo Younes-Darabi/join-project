@@ -500,3 +500,77 @@ label {
         }
     }
 }
+
+.subtask_row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.subtask_input_field {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  outline: none;
+  &:focus {
+    border-color: #007cee;
+  }
+}
+
+.subtask_btn_check,
+.subtask_btn_clear {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 6px;
+  line-height: 1;
+  color: #2a3647;
+}
+.subtask_btn_check { color: #388e3c; }
+.subtask_btn_clear { color: #d32f2f; }
+
+.subtask_list {
+  margin: 8px 0 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.subtask_item {
+  @include flexbox(row, center, space-between, 8px);
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #eef0f2;
+  align-items: center;
+}
+
+.subtask_title {
+  flex: 1;
+  margin-left: 8px;
+  font-size: 14px;
+  color: #2a3647;
+  &.completed {
+    text-decoration: line-through;
+    color: #9aa3ad;
+  }
+}
+
+.subtask_actions {
+  display: flex;
+  gap: 6px;
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #2a3647;
+  }
+}

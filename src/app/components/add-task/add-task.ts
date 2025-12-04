@@ -5,6 +5,8 @@ import { ContactInterface } from '../../interfaces/contact/contact-list.interfac
 import { NgClass } from '@angular/common';
 import { TaskInterface } from '../../interfaces/board/task.interface';
 import { BoardService } from '../../services/board/board-service';
+import { Router } from '@angular/router';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-add-task',
@@ -13,6 +15,7 @@ import { BoardService } from '../../services/board/board-service';
   styleUrls: ['./add-task.scss'],
 })
 export class AddTask {
+  router: Router = inject(Router);
   boardService = inject(BoardService);
   contactService = inject(ContactService);
   taskList: TaskInterface[] = [];
@@ -36,20 +39,12 @@ export class AddTask {
     status: 'todo',
     priority: 'medium',
     taskCategory: '',
-    subTasks: []
+    subTasks: [] as { title: string; completed: boolean }[]
   };
-<<<<<<< Updated upstream
-
-
-  
-  // die Prio muss ausgewählt werden können
-=======
-  // medium als default setzen
-  // nach task erstellen soll nach 3s zum board weitergeleitet werden
->>>>>>> Stashed changes
+  subtaskInput: string = '';
+  subtaskEditIndex: number | null = null;
   // die subtasks müssen hinzugefügt werden
   // der Button clear funktioniert noch nicht bei subtasks
-  // der button add task funktioniert nur wenn alle Pflichtfelder ausgefüllt sind
   // das design muss noch angepasst werden
   // responsive design muss noch gemacht werden
   async saveTask(task: TaskInterface) {
@@ -64,24 +59,31 @@ export class AddTask {
     await this.boardService.addTask(task);
     this.resetForm();
     this.showConfirmation('Task successfully created!');
+    this.changeToBoard();
     this.formSubmitted = false;
   }
 
   resetForm() {
-		this.newTask = {
-			id: '',
-			title: '',
-			description: '',
-			assignedTo: [],
-			dueDate: null,
-			status: 'todo',
-			priority: '',
-			taskCategory: '',
-			subTasks: []
-		};
-		this.selected = [];
-		this.search = '';
-	}
+    this.newTask = {
+      id: '',
+      title: '',
+      description: '',
+      assignedTo: [],
+      dueDate: null,
+      status: 'todo',
+      priority: 'medium',
+      taskCategory: '',
+      subTasks: [] as { title: string; completed: boolean }[]
+    };
+    this.selected = [];
+    this.search = '';
+  }
+
+  changeToBoard() {
+    timer(3000).subscribe(() => {
+      this.router.navigate(['/Board']);
+    });
+  }
 
   showConfirmation(message: string) {
     this.confirmationMessage = message;
@@ -166,6 +168,51 @@ export class AddTask {
   selectCategory(category: TaskInterface['taskCategory']) {
     this.newTask.taskCategory = category;
     this.categoryDropdownOpen = false;
+  }
+
+  addSubtask() {
+    const title = this.subtaskInput.trim();
+    if (!title) {
+      return;
+    }
+    // Wenn im Edit-Modus, ersetzen
+    if (this.subtaskEditIndex !== null && this.subtaskEditIndex >= 0) {
+      this.newTask.subTasks[this.subtaskEditIndex].title = title;
+      this.subtaskEditIndex = null;
+    } else {
+      this.newTask.subTasks = [
+        ...this.newTask.subTasks,
+        { title, completed: false }
+      ];
+    }
+    this.clearSubtaskInput();
+  }
+
+  startEditSubtask(index: number) {
+    this.subtaskEditIndex = index;
+    this.subtaskInput = this.newTask.subTasks[index].title;
+    // open input focus handled by template if needed
+  }
+
+  saveSubtaskEdit() {
+    this.addSubtask();
+  }
+
+  removeSubtask(index: number) {
+    this.newTask.subTasks = this.newTask.subTasks.filter((_, i) => i !== index);
+    // If we removed the edited item, reset edit state
+    if (this.subtaskEditIndex !== null && this.subtaskEditIndex === index) {
+      this.clearSubtaskInput();
+      this.subtaskEditIndex = null;
+    } else if (this.subtaskEditIndex !== null && this.subtaskEditIndex! > index) {
+      // shift edit index if an earlier item removed
+      this.subtaskEditIndex!--;
+    }
+  }
+
+  clearSubtaskInput() {
+    this.subtaskInput = '';
+    this.subtaskEditIndex = null;
   }
 
   @HostListener('document:click')
