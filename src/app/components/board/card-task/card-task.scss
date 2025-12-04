@@ -10,16 +10,21 @@
   font-size: 16px;
   font-weight: 700;
   color: #2a3647;
+  width: 210px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .frame_description {
   font-size: 16px;
   font-weight: 400;
   color: #a8a8a8;
+  width: 210px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.frame_subtasks {
-}
+.frame_subtasks {}
 
 .priority_assignedTo {
   display: flex;
@@ -30,8 +35,8 @@
   .short_name {
     display: flex;
     align-items: center;
-    margin-left: -8px;
-    
+    margin-left: -16px;
+
     &:first-child {
       margin-left: 0;
     }
@@ -59,8 +64,6 @@
   }
 }
 
-.frame_assignedTo {
-}
+.frame_assignedTo {}
 
-.frame_priority {
-}
+.frame_priority {}

@@ -8,6 +8,32 @@ section {
   font-weight: 700;
 }
 
+.filter{
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  display: flex;
+  margin-left: 50px;
+  gap: 20px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: #29abe2;
+  width: 100%;
+  left: -50px;
+  top: 55px;
+  p{
+    font-size: 16px;
+    color: white;
+  }
+  .x{
+    transition: all 250ms ease-in-out;
+    &:hover{
+      cursor: pointer;
+      color: red;
+    }
+  }
+}
+
 .headline_content {
   display: flex;
   align-items: center;
@@ -34,6 +60,7 @@ section {
 }
 
 .search_container {
+  position: relative;
   display: flex;
   align-items: center;
   border: 1px solid #ccc;
@@ -192,7 +219,8 @@ section {
 .frame {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
+  // min-width: 250px;
+  max-width: 250px;
   background: rgb(255, 255, 255);
   border-radius: 24px;
   padding: 16px;
@@ -208,19 +236,32 @@ section {
 }
 
 @media (max-width: 1370px) {
+
+  section {
+    width: calc(100vw - 232px);
+    overflow-y: auto;
+    padding-bottom: 50px;
+  }
+
+  .frame {
+    min-width: 250px;
+  }
+
   .main_box {
     width: 100%;
+  }
+
+  .box {
+    flex-direction: row;
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 20px;
   }
 
   .task_container {
     flex-direction: column;
     max-height: unset;
     margin: 0 50px;
-  }
-
-  section {
-    overflow-y: scroll;
-    padding-bottom: 50px;
   }
 
   .title_content {
@@ -231,6 +272,7 @@ section {
 @media (max-width: 1000px) {
   section {
     height: calc(100vh - 160px);
+    width: 100vw;
   }
 }
 
@@ -279,6 +321,40 @@ section {
     &:hover {
       cursor: pointer;
       background: #29abe2;
+    }
+  }
+}
+
+.add_task1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: #00000062;
+
+  .add_task2 {
+    position: relative;
+    padding: 30px;
+    border-radius: 30px;
+    background: #f5f6f7;
+
+    .close_btn {
+      img {
+        padding: 1px;
+        cursor: pointer;
+        position: absolute;
+        right: 30px;
+        top: 30px;
+      }
+
+      img:hover {
+        background-color: #00000013;
+        border-radius: 50%;
+      }
     }
   }
 }

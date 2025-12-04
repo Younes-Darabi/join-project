@@ -11,10 +11,12 @@ import { BoardService } from '../../services/board/board-service';
 import { TaskInterface } from '../../interfaces/board/task.interface';
 import { CardDetails } from './card-detail/card-details';
 import { CardTask } from './card-task/card-task';
+import { AddTask } from "../add-task/add-task";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-board',
-  imports: [CdkDropList, CdkDrag, CommonModule, CardDetails, CardTask],
+  imports: [CdkDropList, CdkDrag, CommonModule, CardDetails, CardTask, AddTask, FormsModule],
   templateUrl: './board.html',
   styleUrls: ['./board.scss'],
 })
@@ -24,9 +26,30 @@ export class Board {
   tasks: TaskInterface[] = [];
   filteredTasks: TaskInterface[] = [];
   @ViewChild(CardDetails) CardDetails!: CardDetails;
+  addTaskShow: boolean = false;
+  status: string = 'todo';
+  searchTerm: string = '';
+  isFilterenable: boolean = false;
+
+  filteredLists(searchTerm: string) {
+    if (searchTerm.length >= 5) {
+      this.boardService.filteredLists(searchTerm);
+      this.isFilterenable = true;
+    }
+  }
+
+  clearFilter() {
+    this.searchTerm = '';
+    this.isFilterenable = false;
+    this.boardService.filteredLists('');
+  }
 
   openTaskDetail(task: TaskInterface) {
     this.CardDetails.showTaskDetail(task);
+  }
+
+  taskStatus(status: string) {
+    this.status = status;
   }
 
   filterTasks() {

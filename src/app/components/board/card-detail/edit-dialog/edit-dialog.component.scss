@@ -40,12 +40,12 @@ form {
   gap: 5px;
 
   p {
-    color: #2A3647;
+    color: #2a3647;
     font-size: 18px;
   }
 
   label {
-    color: #2A3647;
+    color: #2a3647;
     font-size: 18px;
   }
 
@@ -61,7 +61,7 @@ form {
     margin-bottom: 10px;
 
     &:focus {
-      border: 1px solid #29ABE2;
+      border: 1px solid #29abe2;
       box-shadow: 0px 0px 5px rgba(42, 171, 226, 0.151);
     }
   }
@@ -84,7 +84,7 @@ form {
     margin-bottom: 10px;
 
     &:focus {
-      border: 1px solid #29ABE2;
+      border: 1px solid #29abe2;
       box-shadow: 0px 0px 5px rgba(42, 171, 226, 0.151);
     }
   }
@@ -96,7 +96,7 @@ form {
   font-family: 'Inter';
   gap: 16px;
 
-  >button {
+  > button {
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -122,7 +122,7 @@ form {
   color: white;
   font-size: 18px;
 
-  >svg path {
+  > svg path {
     fill: white;
   }
 }
@@ -132,7 +132,7 @@ form {
   color: white;
   font-size: 18px;
 
-  >svg path {
+  > svg path {
     fill: white;
   }
 }
@@ -142,7 +142,7 @@ form {
   color: white;
   font-size: 18px;
 
-  >svg path {
+  > svg path {
     fill: white;
   }
 }
@@ -256,6 +256,143 @@ form {
   border-radius: 8px;
 }
 
+.assigned_dropdown_input {
+  width: 100%;
+  margin: 0;
+  border: 1px solid #e7e7e7;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.2s;
+
+  &:focus {
+    border-color: #007cee;
+  }
+}
+
+.assigned_dropdown_label {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.assigned_dropdown_input_wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-bottom: 30px;
+}
+
+.assigned_dropdown_input {
+  width: 100%;
+  margin: 0;
+  border: 1px solid #e7e7e7;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.2s;
+
+  &:focus {
+    border-color: #007cee;
+  }
+}
+
+.assigned_dropdown_arrow {
+  position: absolute;
+  right: 18px;
+  pointer-events: none;
+  font-size: 18px;
+  color: #000000;
+}
+
+.assigned_selected_avatars {
+  position: absolute;
+  left: 60px;
+  top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.assigned_dropdown_item {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  gap: 12px;
+  border-radius: 12px;
+  margin-bottom: 1px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #f5f6f7;
+  }
+
+  &.assigned_dropdown_item_active {
+    background: #2a3647;
+    color: #fff;
+
+    .assigned_dropdown_name {
+      color: #fff;
+    }
+
+    .assigned_dropdown_checkbox {
+      accent-color: #fff;
+      border-color: #fff;
+    }
+  }
+}
+
+.assigned_dropdown_avatar {
+  width: 36px;
+  height: 36px;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #fff;
+  margin-right: 8px;
+}
+
+.assigned_dropdown_name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2a3647;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  .you {
+    color: #000000;
+    margin-left: 4px;
+  }
+}
+
+.assigned_dropdown_checkbox {
+  margin-left: auto;
+  width: 18px;
+  height: 18px;
+  accent-color: #007cee;
+  cursor: pointer;
+}
+
 .one_contact {
   display: flex;
   justify-content: space-between;
@@ -270,7 +407,7 @@ form {
     border-radius: 10px;
   }
 
-  >.contact_info {
+  > .contact_info {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -295,7 +432,7 @@ form {
   box-sizing: border-box;
 
   &:hover {
-    >img {
+    > img {
       content: url(/assets/icons/board/close_blue.svg);
     }
   }
@@ -468,7 +605,7 @@ li {
     align-items: center;
     justify-content: center;
     gap: 5px;
-    background-color: #2A3647;
+    background-color: #2a3647;
     border: none;
     border-radius: 7px;
     color: #fff;
@@ -482,8 +619,7 @@ li {
     }
 
     &:hover {
-      background-color: #29ABE2;
-      ;
+      background-color: #29abe2;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.178);
     }
   }

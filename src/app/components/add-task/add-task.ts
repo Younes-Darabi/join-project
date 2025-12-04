@@ -1,4 +1,4 @@
-import { Component, inject, HostListener } from '@angular/core';
+import { Component, inject, HostListener, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ContactService } from '../../services/contact/contact-service';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
@@ -15,6 +15,7 @@ import { timer } from 'rxjs';
   styleUrls: ['./add-task.scss'],
 })
 export class AddTask {
+    @Input() status!:string;
   router: Router = inject(Router);
   boardService = inject(BoardService);
   contactService = inject(ContactService);
