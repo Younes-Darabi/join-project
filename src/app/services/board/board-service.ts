@@ -60,22 +60,18 @@ export class BoardService implements OnDestroy {
   }
 
 
-  filteredLists(searchTerm: string) {
-    const term = searchTerm.toLowerCase();
+filteredLists(searchTerm: string) {
+  const term = searchTerm.toLowerCase();
 
-    this.toDoList = this.originalToDoList.filter(task =>
-      task.title?.toLowerCase().includes(term)
-    );
-    this.inProgressList = this.originalInProgressList.filter(task =>
-      task.title?.toLowerCase().includes(term)
-    );
-    this.awaitFeedbackList = this.originalAwaitFeedbackList.filter(task =>
-      task.title?.toLowerCase().includes(term)
-    );
-    this.doneList = this.originalDoneList.filter(task =>
-      task.title?.toLowerCase().includes(term)
-    );
-  }
+  const matches = (task: TaskInterface) =>
+    task.title?.toLowerCase().includes(term) ||
+    task.description?.toLowerCase().includes(term);
+
+  this.toDoList = this.originalToDoList.filter(matches);
+  this.inProgressList = this.originalInProgressList.filter(matches);
+  this.awaitFeedbackList = this.originalAwaitFeedbackList.filter(matches);
+  this.doneList = this.originalDoneList.filter(matches);
+}
 
   async addTask(task: TaskInterface) {
     let cleantask = this.getCleanTaskJson(task);
