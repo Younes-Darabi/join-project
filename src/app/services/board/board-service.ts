@@ -14,6 +14,8 @@ export class BoardService implements OnDestroy {
   awaitFeedbackList: TaskInterface[] = [];
   doneList: TaskInterface[] = [];
 
+   selectedTask?: TaskInterface;
+
   originalToDoList: TaskInterface[] = [];
   originalInProgressList: TaskInterface[] = [];
   originalAwaitFeedbackList: TaskInterface[] = [];
