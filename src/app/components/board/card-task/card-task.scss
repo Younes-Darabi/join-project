@@ -24,7 +24,35 @@
   text-overflow: ellipsis;
 }
 
-.frame_subtasks {}
+.frame_subtasks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  gap: 5px;
+  .native-progress {
+    width: 100%;
+    height: 10px;
+    appearance: none;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .native-progress::-webkit-progress-bar {
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 999px;
+  }
+
+  .native-progress::-webkit-progress-value {
+    background: linear-gradient(90deg, #4589FF, #1FD7C1);
+
+
+    border-radius: 999px;
+    transition: width 350ms ease;
+  }
+}
 
 .priority_assignedTo {
   display: flex;

@@ -5,7 +5,6 @@ import { ContactInterface } from "../../../interfaces/contact/contact-list.inter
 import { BoardService } from "../../../services/board/board-service";
 import { ContactService } from "../../../services/contact/contact-service";
 
-
 @Component({
   selector: 'app-card-task',
   standalone: true,
@@ -17,11 +16,19 @@ export class CardTask {
   @Input() task!: TaskInterface;
   boardService = inject(BoardService);
   contactService = inject(ContactService);
+  taskcompleted: number = 0;
 
   async ngOnInit() {
     if (!this.contactService.contactList || this.contactService.contactList.length === 0) {
       await this.contactService.loadContactsFromFirebase();
     }
+  }
+
+  ngOnChanges() {
+    this.taskcompleted = 0;
+    this.task.subTasks.forEach(subTask => {
+      if (subTask.completed) this.taskcompleted++;
+    });
   }
 
   getContactDetailsById(id: string): ContactInterface | undefined {
