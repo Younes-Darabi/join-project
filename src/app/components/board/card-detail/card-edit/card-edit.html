@@ -92,6 +92,23 @@
               placeholder="Select contacts to assign" [(ngModel)]="search" autocomplete="off" />
             <span class="assigned_dropdown_arrow">&#9662;</span>
           </div>
+    
+
+      <div class="members_content">
+        <div class="assigned_to">
+          @for (contactId of task.assignedTo; track contactId) {
+          @let contact = getContactDetailsById(contactId);
+          @if (contact) {
+          <div class="person_box">
+            <div class="assigned_dropdown_avatar" [style.background-color]="contact.color">
+              <p>{{ contact.initials }}</p>
+            </div>
+          </div>
+          }}
+        </div>
+      </div>
+
+
         </div>
 
         @if (open) {

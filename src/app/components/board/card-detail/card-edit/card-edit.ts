@@ -218,4 +218,8 @@ export class CardEdit {
     this.editedSubtasks.splice(index, 1);
     this.saveSubtasksInstantly();
   }
+
+  getContactDetailsById(id: string): ContactInterface | undefined {
+    return this.contactService.contactList.find((contact) => contact.id === id);
+  }
 }
