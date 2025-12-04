@@ -42,10 +42,10 @@
           @let contact = getContactDetailsById(contactId);
           @if (contact) {
           <div class="person_box">
-            <div class="assigned_dropdown_avatar" [style.background-color]="contact.color" >
-              <p >{{ contact.initials }}</p>
+            <div class="assigned_dropdown_avatar" [style.background-color]="contact.color">
+              <p>{{ contact.initials }}</p>
             </div>
-            <p>{{ contact.firstname + ' ' +  contact.lastname}}</p>
+            <p>{{ contact.firstname + ' ' + contact.lastname}}</p>
           </div>
           }}
         </div>
@@ -55,13 +55,16 @@
     <div class="subtasks_content">
       <p class="title2">Subtasks</p>
 
-      @for (subTask of this.task.subTasks; track $index) {
+      @for (subTask of task.subTasks; track $index) {
       <div class="show_subtask">
         <label class="checkbox_content">
-          <input type="checkbox" />
-          <img class="unchecked" src="./assets/icons/board/checkbox-unchecked.svg" alt="unchecked" />
-          <img class="checked" src="./assets/icons/board/checkbox-checked.svg" alt="checked" />
-          <p>{{ this.task.subTasks }}</p>
+          <input type="checkbox" [checked]="subTask.completed" (change)="toggleSubTask(task,$index)" />
+
+          <img class="checked" *ngIf="subTask.completed" src="./assets/icons/board/checkbox-checked.svg" />
+
+          <img class="unchecked" *ngIf="!subTask.completed" src="./assets/icons/board/checkbox-unchecked.svg" />
+
+          <p>{{ subTask.title }}</p>
         </label>
       </div>
       }

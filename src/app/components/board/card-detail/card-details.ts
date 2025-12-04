@@ -60,4 +60,9 @@ export class CardDetails {
   getContactDetailsById(id: string): ContactInterface | undefined {
     return this.contactService.contactList.find(contact => contact.id === id);
   }
+
+  toggleSubTask(task: TaskInterface , index:number) {
+    task.subTasks[index].completed = !task.subTasks[index].completed;
+    this.boardService.updateTaskInFirebase(this.task);
+  }
 }
