@@ -22,7 +22,7 @@
                     <input ngModel #fisrtName="ngModel" [(ngModel)]="user.firstname"
                         [ngClass]="{'error': fisrtName.invalid && fisrtName.touched}" name="fisrtName" type="text"
                         minlength="3"
-                        [placeholder]="fisrtName.invalid && fisrtName.touched ? 'Enter first name' : 'First name'"
+                        [placeholder]="fisrtName.invalid && fisrtName.touched ? 'Enter firstname' : 'Firstname'"
                         required>
                 </div>
                 <div>
@@ -30,7 +30,7 @@
                     <input ngModel #lastName="ngModel" [(ngModel)]="user.lastname"
                         [ngClass]="{'error': lastName.invalid && lastName.touched}" name="lastName" type="text"
                         minlength="3"
-                        [placeholder]="lastName.invalid && lastName.touched ? 'Enter last name' : 'Last name'" required>
+                        [placeholder]="lastName.invalid && lastName.touched ? 'Enter lastname' : 'Lastname'" required>
                 </div>
             </div>
             <div>
