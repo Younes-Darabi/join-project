@@ -80,10 +80,29 @@ label {
     }
 }
 
+.add_task_confirmation_overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: 50%;
+    bottom: 50%;
+    width: 330px;
+    height: 75px;
+    border-radius: 20px;
+    background-color: #2A3647;
+    
+    z-index: 2000;
+}
+
 .add_task_confirmation {
-    color: #388e3c;
+    color : #ffffff;
     font-size: 16px;
     margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 8px;
 }
 
 .add_task_error {

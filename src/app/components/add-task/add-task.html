@@ -2,8 +2,10 @@
   <h1>Add Task</h1>
   <div>
     @if (confirmationMessage) {
-    <div class="add_task_confirmation">
-      {{ confirmationMessage }}
+    <div class="add_task_confirmation_overlay">
+      <div class="add_task_confirmation">
+        <p>{{ confirmationMessage }}<img src="./assets/icons/board/board_icon.svg" alt="Success"></p>
+      </div>
     </div>
     }
     @if (errorMessage) {
@@ -124,15 +126,13 @@
           Subtask
         </label>
         <div class="subtask_row" [class.has_input]="hasSubtaskInput()">
-          <input
-            type="text"
-            class="subtask_input_field"
-            placeholder="Add new subtask"
-            [(ngModel)]="subtaskInput"
-          />
-          <button class="subtask_btn_check" (click)="addSubtask()" [title]="subtaskEditIndex !== null ? 'Save' : 'Add'"><img src="./assets/icons/board/check-black.svg" alt="Check"></button>
+          <input type="text" class="subtask_input_field" placeholder="Add new subtask" [(ngModel)]="subtaskInput" />
+          <button class="subtask_btn_check" (click)="addSubtask()"
+            [title]="subtaskEditIndex !== null ? 'Save' : 'Add'"><img src="./assets/icons/board/check-black.svg"
+              alt="Check"></button>
           <div class="small_separator"></div>
-          <button class="subtask_btn_clear" (click)="clearSubtaskInput()" title="Clear"><img src="./assets/icons/board/close-black.svg" alt="Clear"></button>
+          <button class="subtask_btn_clear" (click)="clearSubtaskInput()" title="Clear"><img
+              src="./assets/icons/board/close-black.svg" alt="Clear"></button>
         </div>
 
         @if (newTask.subTasks.length > 0) {
@@ -144,9 +144,11 @@
               {{ subtask.title }}
             </span>
             <div class="subtask_actions">
-              <button class="subtask_edit" (click)="startEditSubtask($index)" title="Edit"><img src="./assets/icons/board/edit.svg" alt=""></button>
+              <button class="subtask_edit" (click)="startEditSubtask($index)" title="Edit"><img
+                  src="./assets/icons/board/edit.svg" alt=""></button>
               <div class="small_separator"></div>
-              <button class="subtask_delete" (click)="removeSubtask($index)" title="Delete"><img src="./assets/icons/board/delete.svg" alt=""></button>
+              <button class="subtask_delete" (click)="removeSubtask($index)" title="Delete"><img
+                  src="./assets/icons/board/delete.svg" alt=""></button>
             </div>
           </li>
           }
@@ -158,7 +160,7 @@
       <p class="add_task_info"><span>*</span>This field is required.</p>
       <div>
         <button class="add_task_btn_cancel" (click)="resetForm()">Clear</button>
-        
+
         <button class="add_task_btn_submit" (click)="saveTask(newTask)">Add Task</button>
       </div>
     </div>

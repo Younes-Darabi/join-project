@@ -67,10 +67,6 @@ export class AddTask {
     return classes;
   }
 
-  // die subtasks müssen hinzugefügt werden
-  // der Button clear funktioniert noch nicht bei subtasks
-  // das design muss noch angepasst werden
-  // responsive design muss noch gemacht werden
   async saveTask(task: TaskInterface) {
     this.formSubmitted = true;
     if (!task.title || !task.dueDate || !task.taskCategory) {
@@ -82,7 +78,7 @@ export class AddTask {
 
     await this.boardService.addTask(task);
     this.resetForm();
-    this.showConfirmation('Task successfully created!');
+    this.showConfirmation('Task added to board');
     this.changeToBoard();
     this.formSubmitted = false;
   }
