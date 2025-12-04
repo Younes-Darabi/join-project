@@ -62,17 +62,6 @@ export class CardDetails {
     return this.contactService.contactList.find((contact) => contact.id === id);
   }
 
-  toggleSubtask(i: number) {
-    if (!this.task.subTasks[i]) return;
-    this.task.subTasks[i].completed = !this.task.subTasks[i].completed;
-    const index = this.boardService.taskList.findIndex((t) => t.id === this.task.id);
-    if (index > -1) {
-      this.boardService.taskList[index] = { ...this.task };
-    }
-    this.boardService.sortTasksByStatus();
-    this.boardService.updateTaskInFirebase(this.task);
-  }
-
   toggleSubTask(task: TaskInterface , index:number) {
     task.subTasks[index].completed = !task.subTasks[index].completed;
     this.boardService.updateTaskInFirebase(this.task);

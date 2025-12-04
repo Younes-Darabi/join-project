@@ -3,7 +3,7 @@ section {
   width: 100vw;
   max-width: 480px;
   display: flex;
-  padding: 20px;
+  padding: 10px 15px;
   border-radius: 15px;
 
   .dialog_content {
@@ -14,9 +14,13 @@ section {
     flex-direction: column;
     align-items: start;
     gap: 10px;
-    height: 659px;
-    margin-top: 50px;
+    margin-top: 20px;
+    margin-bottom: 10px;
   }
+}
+
+.checkbox_content input {
+  display: none;
 }
 
 .more_contacts p {
@@ -37,25 +41,25 @@ form {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
 
   p {
     color: #2a3647;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   label {
     color: #2a3647;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   textarea {
     padding: 8px;
     width: 100%;
-    height: 120px;
+    height: 60px;
     border-radius: 7px;
     border: 1px solid #00000036;
-    font-size: 18px;
+    font-size: 16px;
     outline: none;
     transition: border 125ms ease;
     margin-bottom: 10px;
@@ -74,14 +78,15 @@ form {
   justify-content: center;
 
   input {
-    padding: 8px;
+    padding: 5px 10px;
     width: 100%;
     border-radius: 7px;
     border: 1px solid #00000036;
-    font-size: 18px;
+    font-size: 16px;
     outline: none;
     transition: border 125ms ease;
     margin-bottom: 10px;
+    cursor: pointer;
 
     &:focus {
       border: 1px solid #29abe2;
@@ -93,10 +98,9 @@ form {
 .prio_btns {
   display: flex;
   align-items: center;
-  font-family: 'Inter';
   gap: 16px;
 
-  > button {
+  >button {
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -109,7 +113,7 @@ form {
     width: 100%;
     color: black;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
 
     &:hover {
       box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
@@ -120,9 +124,9 @@ form {
 .prio.selected.urgent {
   background-color: #ff3d00;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
 
-  > svg path {
+  >svg path {
     fill: white;
   }
 }
@@ -130,9 +134,9 @@ form {
 .prio.selected.medium {
   background-color: #fea800;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
 
-  > svg path {
+  >svg path {
     fill: white;
   }
 }
@@ -140,9 +144,9 @@ form {
 .prio.selected.low {
   background-color: #7be129;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
 
-  > svg path {
+  >svg path {
     fill: white;
   }
 }
@@ -175,7 +179,6 @@ form {
 .title2 {
   width: 100px;
   color: black;
-  margin-top: 10px;
 }
 
 .priority {
@@ -304,7 +307,7 @@ form {
   position: absolute;
   right: 18px;
   pointer-events: none;
-  font-size: 18px;
+  font-size: 16px;
   color: #000000;
 }
 
@@ -407,7 +410,7 @@ form {
     border-radius: 10px;
   }
 
-  > .contact_info {
+  >.contact_info {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -432,7 +435,7 @@ form {
   box-sizing: border-box;
 
   &:hover {
-    > img {
+    >img {
       content: url(/assets/icons/board/close_blue.svg);
     }
   }
@@ -446,19 +449,26 @@ form {
 .subtasks_content {
   width: 100%;
 
+  .subtasks_list {
+    width: 100%;
+    overflow-y: auto;
+    height: 150px;
+  }
+
   .checkbox_content {
     display: flex;
     flex-direction: row;
     gap: 10px;
-    margin: 0px 0px 0px 10px;
     padding: 2px 15px 2px 10px;
 
     &:hover {
       background-color: #0000000e;
       border-radius: 5px;
+      cursor: pointer;
     }
   }
 }
+
 
 .subtask-input {
   width: 100%;
@@ -484,8 +494,8 @@ form {
   align-items: center;
   cursor: pointer;
   position: absolute;
-  right: 35px;
-  margin-left: 10px;
+  right: 25px;
+  margin-top: -3px;
 
   div {
     img {
@@ -584,9 +594,9 @@ li {
 }
 
 .subtask-input-edit {
-  padding: 6px;
+  padding: 5px 10px;
   width: 100%;
-  font-size: 18px;
+  font-size: 16px;
   border: none;
   outline: none;
   transition: border 125ms ease;
@@ -609,7 +619,7 @@ li {
     border: none;
     border-radius: 7px;
     color: #fff;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     padding: 7px 7px 7px 10px;
     transition: all 250ms ease-in-out;
@@ -650,7 +660,7 @@ input,
 
   .prio_btns button {
     padding: 5px;
-    font-size: 18px;
+    font-size: 16px;
 
     svg {
       width: 15px;
@@ -658,15 +668,15 @@ input,
   }
 
   .prio.selected.low {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .prio.selected.medium {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .prio.selected.urgent {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .dropdown_menu {

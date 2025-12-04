@@ -50,6 +50,11 @@ export class CardEdit {
     this.task = task;
   }
 
+  toggleSubTask(task: TaskInterface, index: number) {
+    task.subTasks[index].completed = !task.subTasks[index].completed;
+    this.boardService.updateTaskInFirebase(this.task);
+  }
+
   /**
    * @event closeDialogEvent
    * Emits an event when the edit dialog should be closed.
