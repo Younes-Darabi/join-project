@@ -32,3 +32,27 @@
          task.priority === 'medium' ? './assets/icons/board/Prio media.svg' :
          './assets/icons/board/Prio baja.svg'" [alt]="task.priority" class="frame_priority">
 </div>
+
+<div class="subtasks_preview" *ngIf="task.subTasks?.length">
+  <p>
+    {{ completedSubtaskCount }} / {{ totalSubtaskCount }} Subtasks
+
+  </p>
+</div>
+
+<div class="progress_bar_wrapper" *ngIf="task.subTasks?.length">
+  <div
+    class="progress_bar"
+    [style.width]="progressPercent + '%'"
+  ></div>
+</div>
+
+<ul class="subtask_list" *ngIf="task.subTasks?.length">
+  <li *ngFor="let sub of task.subTasks">
+    <input type="checkbox" [(ngModel)]="sub.completed" disabled />
+    <span [class.completed]="sub.completed">{{ sub.title }}</span>
+  </li>
+</ul>
+
+
+

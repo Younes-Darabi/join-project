@@ -6,7 +6,6 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
 import { ContactService } from '../../../services/contact/contact-service';
 
-
 @Component({
   selector: 'app-card-details',
   imports: [CommonModule, EditDialogComponent],
@@ -29,6 +28,7 @@ export class CardDetails {
     subTasks: [],
   };
   editPageShow: boolean = false;
+  editSubtasks: TaskInterface['subTasks'] = [];
   hostElement = inject(ElementRef);
   @ViewChild(EditDialogComponent) EditDialogComponent!: EditDialogComponent;
 
@@ -44,6 +44,7 @@ export class CardDetails {
 
   showTaskDetail(task: TaskInterface) {
     this.task = task;
+    this.editSubtasks = task.subTasks.map((sub) => ({ ...sub }));
     this.display = 'flex';
     this.hostElement.nativeElement.classList.add('show');
   }
@@ -58,7 +59,18 @@ export class CardDetails {
   }
 
   getContactDetailsById(id: string): ContactInterface | undefined {
-    return this.contactService.contactList.find(contact => contact.id === id);
+    return this.contactService.contactList.find((contact) => contact.id === id);
+  }
+
+  toggleSubtask(i: number) {
+    if (!this.task.subTasks[i]) return;
+    this.task.subTasks[i].completed = !this.task.subTasks[i].completed;
+    const index = this.boardService.taskList.findIndex((t) => t.id === this.task.id);
+    if (index > -1) {
+      this.boardService.taskList[index] = { ...this.task };
+    }
+    this.boardService.sortTasksByStatus();
+    this.boardService.updateTaskInFirebase(this.task);
   }
 
   toggleSubTask(task: TaskInterface , index:number) {

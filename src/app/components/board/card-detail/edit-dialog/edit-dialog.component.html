@@ -138,7 +138,6 @@
               autocomplete="off"
             />
             <span class="assigned_dropdown_arrow">&#9662;</span>
-           
           </div>
           @if (selected.length > 0) {
           <!-- moved inside the wrapper and positioned absolute via CSS -->
@@ -211,11 +210,28 @@
             [ngClass]="{ visible: subtaskInputFocused, hidden: !subtaskInputFocused }"
           >
             <div (click)="clearSubtaskInput()">
-              <img src="./assets/icons/board/close-black.svg" alt="Close" />
+              <img
+                src="./assets/icons/board/close-black.svg"
+                alt="Close"
+                (click)="subtaskInput = ''"
+              />
             </div>
             <div>
-              <img src="./assets/icons/board/check-black.svg" alt="Check" />
+              <img src="./assets/icons/board/check-black.svg" alt="Check" (click)="addSubtask()" />
             </div>
+          </div>
+        </div>
+
+        <div class="subtask-list">
+          <div class="subtask-item" *ngFor="let sub of editedSubtasks; let i = index">
+            <label class="checkbox_content">
+              <input type="checkbox" [checked]="sub.completed" (change)="toggleSubtask(i)" />
+
+              <img class="unchecked" src="./assets/icons/board/checkbox-unchecked.svg" />
+              <img class="checked" src="./assets/icons/board/checkbox-checked.svg" />
+
+              <p>{{ sub.title }}</p>
+            </label>
           </div>
         </div>
 
