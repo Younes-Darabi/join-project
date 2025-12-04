@@ -4,12 +4,11 @@ import { TaskInterface } from "../../../interfaces/board/task.interface";
 import { ContactInterface } from "../../../interfaces/contact/contact-list.interface";
 import { BoardService } from "../../../services/board/board-service";
 import { ContactService } from "../../../services/contact/contact-service";
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-card-task',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule],
   templateUrl: './card-task.html',
   styleUrl: './card-task.scss',
 })
@@ -35,25 +34,4 @@ export class CardTask {
   getContactDetailsById(id: string): ContactInterface | undefined {
     return this.contactService.contactList.find(contact => contact.id === id);
   }
-
-  get completedSubtaskCount(): number {
-  return this.task.subTasks?.filter(s => s.completed).length ?? 0;
-}
-
-get totalSubtaskCount(): number {
-  return this.task.subTasks?.length ?? 0;
-}
-
-get progressPercent(): number {
-  if (!this.task.subTasks || this.task.subTasks.length === 0) return 0;
-  const completed = this.task.subTasks.filter(s => s.completed).length;
-  return (completed / this.task.subTasks.length) * 100;
-}
-
-openTaskDetail(task: TaskInterface) {
-  this.boardService.selectedTask = task;
-  this.showTaskDetail = true;
-}
-
-
 }
