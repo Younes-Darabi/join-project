@@ -10,10 +10,10 @@
 
       <div class="find_task_content">
         <div class="search_container">
-          <input [(ngModel)]="searchTerm" type="text" placeholder="Find Task" class="search_input" />
+          <input [(ngModel)]="searchTerm" type="text" placeholder="Find Task" class="search_input" (input)="filteredLists(searchTerm)"/>
           <img src="./assets/icons/board/Vector 3.svg" alt="" />
 
-          @if (isFilterenable) {
+          @if (isFilterenable && searchTerm !== '') {
           <div class="filter">
             <p>filter : {{searchTerm}}</p>
             <p class="x" (click)="clearFilter()">x</p>
