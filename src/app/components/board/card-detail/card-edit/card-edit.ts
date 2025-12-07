@@ -100,7 +100,6 @@ export class CardEdit {
 
   ngOnChanges() {
     if (this.item) {
-      
       this.task = JSON.parse(JSON.stringify(this.item));
       this.editedSubtasks = [...this.task.subTasks];
       this.selected = this.contactList.filter(
@@ -217,9 +216,8 @@ export class CardEdit {
   }
 
   toggleSubtask(index: number) {
-  this.editedSubtasks[index].completed = !this.editedSubtasks[index].completed;
-}
-
+    this.editedSubtasks[index].completed = !this.editedSubtasks[index].completed;
+  }
 
   deleteSubtask(index: number) {
     this.editedSubtasks.splice(index, 1);
