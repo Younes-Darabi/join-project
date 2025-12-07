@@ -33,6 +33,7 @@ export class CardEdit {
   confirmationMessage: string = '';
   subtaskInput: string = '';
   editedSubtasks: { title: string; completed: boolean }[] = [];
+  cdr = inject(ChangeDetectorRef);
 
   task: TaskInterface = {
     id: '',
@@ -86,17 +87,21 @@ export class CardEdit {
 
   async ngOnInit() {
     if (!this.contactService.contactList || this.contactService.contactList.length === 0) {
-      await this.contactService.loadContactsFromFirebase(); // Diese Methode muss im Service existieren!
+      await this.contactService.loadContactsFromFirebase();
     }
     this.contactList = this.sortContactsAlphabetically(this.contactService.contactList);
     this.setIsYouForContacts();
+    if (this.item) {
+      this.selected = this.contactList.filter(
+        (contact) => contact.id !== undefined && this.item!.assignedTo.includes(contact.id)
+      );
+    }
   }
 
   ngOnChanges() {
     if (this.item) {
       this.task = JSON.parse(JSON.stringify(this.item));
       this.editedSubtasks = [...this.task.subTasks];
-      this.selectedPriority = this.task.priority || 'medium';
       this.selected = this.contactList.filter(
         (contact) => contact.id !== undefined && this.task.assignedTo.includes(contact.id)
       );
@@ -105,6 +110,7 @@ export class CardEdit {
 
   saveChanges() {
     if (!this.task) return;
+
     this.task.assignedTo = this.selected
       .map((c) => c.id)
       .filter((id): id is string => id !== undefined);
@@ -176,6 +182,7 @@ export class CardEdit {
     } else {
       this.selected = [...this.selected, contact];
     }
+    this.cdr.detectChanges();
   }
 
   isContactSelected(contact: ContactInterface): boolean {
@@ -206,12 +213,10 @@ export class CardEdit {
     });
 
     this.subtaskInput = '';
-    this.saveSubtasksInstantly();
   }
 
   toggleSubtask(index: number) {
     this.editedSubtasks[index].completed = !this.editedSubtasks[index].completed;
-    this.saveSubtasksInstantly();
   }
 
   deleteSubtask(index: number) {
