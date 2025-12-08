@@ -62,7 +62,6 @@
             <span class="assigned_dropdown_arrow">&#9662;</span>
 
             @if (selected.length > 0) {
-            <!-- moved inside the wrapper and positioned absolute via CSS -->
             <div class="assigned_selected_avatars">
               @for (contact of selected; track contact.id) {
               <span class="assigned_dropdown_avatar assigned_selected_avatar" [style.background-color]="contact.color">
@@ -96,7 +95,6 @@
           </ul>
           }
           <div>
-            <!-- <span class="assigned_dropdown_avatar" [style.background-color]="singleContact.color">{{ singleContact.initials }}</span> -->
           </div>
         </div>
 
