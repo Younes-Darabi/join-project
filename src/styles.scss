@@ -13,7 +13,7 @@ html {
       density: 0,
     ));
 
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 
@@ -40,10 +40,27 @@ html {
 body {
   font-family: Inter;
   background-color: #F6F7F8;
-  ;
 
   .contact_open {
     overflow: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #eeeeee;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #d7d8d8;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #cdcece;
   }
 }
 

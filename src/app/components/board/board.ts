@@ -32,10 +32,10 @@ export class Board {
   isFilterenable: boolean = false;
 
   filteredLists(searchTerm: string) {
-    if (searchTerm.length >= 3) {
+    // if (searchTerm.length >= 3) {
       this.boardService.filteredLists(searchTerm);
       this.isFilterenable = true;
-    }
+    // }
   }
 
   clearFilter() {
@@ -52,18 +52,18 @@ export class Board {
     this.status = status;
   }
 
-  filterTasks() {
-    const query = this.searchQuery.toLowerCase().trim();
-    if (!query) {
-      this.filteredTasks = [...this.tasks];
-      return;
-    }
+  // filterTasks() {
+  //   const query = this.searchQuery.toLowerCase().trim();
+  //   if (!query) {
+  //     this.filteredTasks = [...this.tasks];
+  //     return;
+  //   }
 
-    this.filteredTasks = this.tasks.filter(
-      (task) =>
-        task.title.toLowerCase().includes(query) || task.description?.toLowerCase().includes(query)
-    );
-  }
+  //   this.filteredTasks = this.tasks.filter(
+  //     (task) =>
+  //       task.title.toLowerCase().includes(query) || task.description?.toLowerCase().includes(query)
+  //   );
+  // }
 
   drop(event: CdkDragDrop<TaskInterface[]>) {
     if (event.previousContainer === event.container) {
