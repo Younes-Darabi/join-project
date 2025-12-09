@@ -1,1 +1,43 @@
-<p>sign-up works!</p>
+<div class="div_top">
+    <img src="./assets/icons/favicon.svg">
+</div>
+
+<form>
+    <img class="arrow" src="./assets/icons/contact/arrow.svg" alt="back">
+    <h1>Sign up</h1>
+    <span></span>
+    <div class="name">
+        <label>
+            <input type="text" alt="First name" placeholder="First name">
+        </label>
+        <label>
+            <input type="text" alt="Last name" placeholder="Last name">
+            <img src="./assets/icons/contact/person.svg" alt="Last name">
+        </label>
+    </div>
+    <label>
+        <input type="text" alt="Email" placeholder="Email">
+        <img src="./assets/icons/contact/mail.svg" alt="Email">
+    </label>
+    <label>
+        <input type="text" alt="Password" placeholder="Password">
+        <img src="./assets/icons/contact/lock.svg" alt="Password">
+    </label>
+    <label>
+        <input type="text" alt="Confirm Password" placeholder="Confirm Password">
+        <img src="./assets/icons/contact/lock.svg" alt="Password">
+    </label>
+    <div class="div_privacy" (click)="privacy=!privacy">
+        <img [src]="privacy ? './assets/icons/board/checkbox-checked.svg':'./assets/icons/board/checkbox-unchecked.svg'">
+        <p>I accept the</p>
+        <a>Privacy policy</a>
+    </div>
+    <div class="div_signup">
+        <button class="btn_signup">Sign up</button>
+    </div>
+</form>
+
+<div class="div_bottom">
+    <a>Privacy Policy</a>
+    <a>Legal notice</a>
+</div>

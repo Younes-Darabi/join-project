@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './sign-up.scss',
 })
 export class SignUp {
+  privacy : boolean = false;
 
 }
