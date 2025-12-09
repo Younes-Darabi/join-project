@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-page-one',
@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './page-one.scss',
 })
 export class PageOne {
-
+  isMobile = window.innerWidth <= 480;
+  @HostListener('window:resize')
+  onResize() {
+    this.isMobile = window.innerWidth <= 480;
+  }
 }
