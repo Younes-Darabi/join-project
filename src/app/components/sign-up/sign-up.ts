@@ -26,12 +26,12 @@ export class SignUp {
     password: '',
     confirmPassword: '',
   }
+  success : boolean = false;
 
   onSubmit(signupForm: NgForm) {
     this.checkMatchPassword = this.checkMatchPasswords();
     if (!signupForm.invalid && !this.checkMatchPassword && this.privacy) {
-      console.log('Hi');
-      
+      this.success = true;
     }
   }
 

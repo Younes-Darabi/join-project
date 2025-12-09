@@ -9,27 +9,27 @@
     <div class="name">
         <label>
             <input ngModel #firstName="ngModel" [(ngModel)]="signUp.firstName"
-                [ngStyle]="{'border-color' : firstName.invalid && (firstName.touched || signupForm.submitted) ? 'red' : ''}" required
-                name="firstName" type="text" alt="First name" placeholder="First name" minlength="3">
+                [ngStyle]="{'border-color' : firstName.invalid && (firstName.touched || signupForm.submitted) ? 'red' : ''}"
+                required name="firstName" type="text" alt="First name" placeholder="First name" minlength="3">
         </label>
         <label>
             <input ngModel #lastName="ngModel" [(ngModel)]="signUp.lastName"
-                [ngStyle]="{'border-color' : lastName.invalid && (lastName.touched || signupForm.submitted) ? 'red' : ''}" required
-                name="lastName" type="text" alt="Last name" placeholder="Last name" minlength="3">
+                [ngStyle]="{'border-color' : lastName.invalid && (lastName.touched || signupForm.submitted) ? 'red' : ''}"
+                required name="lastName" type="text" alt="Last name" placeholder="Last name" minlength="3">
             <img src="./assets/icons/contact/person.svg" alt="Last name">
         </label>
     </div>
     <label>
         <input ngModel #email="ngModel" [(ngModel)]="signUp.email"
-            [ngStyle]="{'border-color' : email.invalid && (email.touched || signupForm.submitted) ? 'red' : ''}" required
-            name="email" type="text" alt="Email" placeholder="Email"
+            [ngStyle]="{'border-color' : email.invalid && (email.touched || signupForm.submitted) ? 'red' : ''}"
+            required name="email" type="text" alt="Email" placeholder="Email"
             pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
         <img src="./assets/icons/contact/mail.svg" alt="Email">
     </label>
     <label>
         <input ngModel #password="ngModel" [(ngModel)]="signUp.password"
-            [ngStyle]="{'border-color' : checkMatchPassword || password.invalid && password.touched ? 'red' : ''}" required
-            name="password" type="password" placeholder="Password" minlength="6">
+            [ngStyle]="{'border-color' : checkMatchPassword || password.invalid && password.touched ? 'red' : ''}"
+            required name="password" type="password" placeholder="Password" minlength="6">
         <img src="./assets/icons/contact/lock.svg" alt="Password">
     </label>
     <label>
@@ -38,13 +38,13 @@
             required name="confirmPassword" type="password" placeholder="Confirm Password" minlength="6">
         <img src="./assets/icons/contact/lock.svg" alt="Password">
         <div class="div_error">
-            <p [ngStyle]="{'display' : checkMatchPassword ? 'block' : 'none'}" class="error">Your passwords don't match. Please try again.</p>
+            <p [ngStyle]="{'display' : checkMatchPassword ? 'block' : 'none'}" class="error">Your passwords don't match.
+                Please try again.</p>
         </div>
     </label>
     <div class="div_privacy" (click)="privacy=!privacy">
-        <img
-        [ngStyle]="{'outline': !privacy && signupForm.submitted ? '1px solid red' : 'none'}"
-        [src]="privacy ? './assets/icons/board/checkbox-checked.svg':'./assets/icons/board/checkbox-unchecked.svg'">
+        <img [ngStyle]="{'outline': !privacy && signupForm.submitted ? '1px solid red' : 'none'}"
+            [src]="privacy ? './assets/icons/board/checkbox-checked.svg':'./assets/icons/board/checkbox-unchecked.svg'">
         <p [ngStyle]="{'color': !privacy && signupForm.submitted ? 'red' : '#A8A8A8'}">I accept the</p>
         <a>Privacy policy</a>
     </div>
@@ -56,4 +56,7 @@
 <div class="div_bottom">
     <a>Privacy Policy</a>
     <a>Legal notice</a>
+</div>
+<div class="success" [ngStyle]="{'display': success ? 'flex' : 'none'}">
+    <p>You Signed Up successfully</p>
 </div>
