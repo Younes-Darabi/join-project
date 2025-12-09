@@ -71,7 +71,7 @@ label {
     background: #f5f6f7;
     min-height: calc(100vh - 96px);
     max-width: 1920px;
-    padding: 80px 160px 40px 80px;
+    padding: 80px 80px 20px;
     overflow-x: hidden;
 
     h1 {
@@ -102,7 +102,7 @@ label {
 }
 
 .add_task_confirmation {
-    @include flexbox(row, center, space-between, 0);
+    @include flexbox(row, center, center, 20px);
     padding: 20px;
     color: #ffffff;
     font-size: 16px;
@@ -131,8 +131,10 @@ label {
 .add_task_form {
     @include flexbox(column, stretch, flex-start, 8px);
     flex: 1;
+    min-width: 350px;
 
     label {
+        flex: 1;
         width: 100%;
         font-size: 16px;
         font-weight: 500;
@@ -167,14 +169,17 @@ label {
 .add_task_priority {
     @include flexbox(row, center, flex-start, 12px);
     margin-bottom: 16px;
+    width: 100%;
 }
 
 .priority_btn {
     @include flexbox(row, center, center, 8px);
     padding: 10px 24px;
+    height: 56px;
+    width: 136px;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 21px;
     font-weight: 500;
     cursor: pointer;
     background: #fff;
@@ -304,6 +309,7 @@ label {
     cursor: pointer;
     transition: background 0.2s;
 
+
     &.assigned_dropdown_item_active {
         background: #2a3647;
         color: #fff;
@@ -333,7 +339,6 @@ label {
 }
 
 .assigned_dropdown_name {
-    width: 200px;
     flex: 1;
     font-size: 16px;
     font-weight: 500;
@@ -347,8 +352,7 @@ label {
     }
 }
 
-.assigned_dropdown_checkbox {
-    width: 80px;
+.add_task_form input.assigned_dropdown_checkbox {
     width: 18px;
     height: 18px;
     accent-color: #007cee;
@@ -401,6 +405,7 @@ label {
     align-items: center;
 
     &.has_input {
+
         .subtask_btn_check,
         .subtask_btn_clear,
         .small_separator {
@@ -537,7 +542,7 @@ label {
 
 .add_task_btn_cancel {
     padding: 12px 24px;
-    background: transparent;
+    background: #f5f6f7;
     color: #2a3647;
     border: 1px solid #2a3647;
     border-radius: 8px;
@@ -562,13 +567,42 @@ label {
 // ============================================
 // Responsive Design
 // ============================================
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
     .add_task_wrapper {
-        padding: 80px 100px 40px 60px;
+        padding: 80px 40px 20px;
 
         h1 {
-            font-size: 52px;
+            font-size: 56px;
         }
+    }
+}
+
+@media (max-width: 1250px) {
+    .separator {
+        margin: 0px 10px;
+    }
+
+    input {
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 1200px) {
+    .add_task_container {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .add_task_wrapper {
+        height: calc(100vh - 100px);
+        overflow-y: scroll;
+    }
+
+    .add_task_buttons {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        z-index: 2000;
     }
 }
 
@@ -584,39 +618,20 @@ label {
 
 @media (max-width: 900px) {
     .add_task_wrapper {
-        padding: 60px 40px 120px;
-
         h1 {
             font-size: 42px;
         }
-    }
-
-    .add_task_container {
-        flex-direction: column;
-        gap: 24px;
     }
 
     .separator {
         display: none;
     }
 
-    .add_task_actions {
-        position: fixed;
-        bottom: 56px;
-        left: 0;
-        right: 0;
-        margin-top: 0;
-        padding: 16px 40px;
-        background: #fff;
-        border-top: 1px solid #e7e7e7;
-        z-index: 100;
-    }
+
 }
 
 @media (max-width: 768px) {
     .add_task_wrapper {
-        padding: 40px 30px 120px;
-
         h1 {
             font-size: 36px;
         }
@@ -642,7 +657,7 @@ label {
 
     .priority_btn {
         padding: 8px 16px;
-        font-size: 16px;
+        font-size: 21px;
     }
 
     .assigned_dropdown {
@@ -662,8 +677,6 @@ label {
 
 @media (max-width: 600px) {
     .add_task_wrapper {
-        padding: 30px 20px 120px;
-
         h1 {
             font-size: 32px;
         }
@@ -686,20 +699,15 @@ label {
             font-size: 16px;
             padding: 10px 12px;
         }
-
-        textarea {
-            display: none;
-        }
     }
 
     .add_task_priority {
-        flex-wrap: wrap;
         gap: 8px;
     }
 
     .priority_btn {
-        flex: 1;
         min-width: calc(33.333% - 6px);
+        height: 40px;
         padding: 8px 12px;
         font-size: 16px;
     }
@@ -740,12 +748,6 @@ label {
     .add_task_actions {
         padding: 16px 20px;
         gap: 12px;
-
-        div {
-            gap: 12px;
-            width: 100%;
-            justify-content: center;
-        }
     }
 
     .add_task_btn_cancel,
@@ -757,7 +759,7 @@ label {
 
 @media (max-width: 480px) {
     .add_task_wrapper {
-        padding: 25px 16px 120px;
+        padding: 80px 20px;
 
         h1 {
             font-size: 28px;
@@ -765,6 +767,7 @@ label {
     }
 
     .add_task_form {
+        min-width: 200px;
         gap: 12px;
 
         label {
@@ -779,8 +782,6 @@ label {
     }
 
     .priority_btn {
-        flex: 1 1 100%;
-        min-width: 100%;
         font-size: 16px;
         padding: 8px 12px;
 
@@ -864,7 +865,7 @@ label {
 
 @media (max-width: 375px) {
     .add_task_wrapper {
-        padding: 20px 12px 120px;
+        padding: 80px 16px;
 
         h1 {
             font-size: 24px;
@@ -915,127 +916,6 @@ label {
     .add_task_btn_cancel,
     .add_task_btn_submit {
         padding: 10px 16px;
-        font-size: 16px;
-    }
-}
-
-@media (max-width: 320px) {
-    .add_task_wrapper {
-        padding: 16px 10px 120px;
-
-        h1 {
-            font-size: 22px;
-        }
-    }
-
-    .add_task_container {
-        margin-top: 10px;
-        gap: 12px;
-    }
-
-    .add_task_form {
-        gap: 12px;
-
-        label {
-            font-size: 16px;
-        }
-
-        input,
-        textarea {
-            font-size: 16px;
-            padding: 10px 12px;
-        }
-    }
-
-    .priority_btn {
-        font-size: 16px;
-        padding: 8px 8px;
-
-        img {
-            width: 10px;
-            height: 10px;
-        }
-    }
-
-    .assigned_dropdown {
-        &.has_dropdown_open {
-            margin-bottom: 140px;
-        }
-
-        &.has_selected_avatars {
-            margin-bottom: 30px;
-        }
-
-        &.category_dropdown.has_dropdown_open {
-            margin-bottom: 80px;
-        }
-    }
-
-    .assigned_dropdown_input {
-        font-size: 16px;
-        padding: 10px 36px 10px 12px;
-    }
-
-    .assigned_dropdown_arrow {
-        right: 10px;
-        font-size: 16px;
-    }
-
-    .assigned_dropdown_list {
-        max-height: 120px;
-    }
-
-    .assigned_dropdown_avatar {
-        width: 24px;
-        height: 24px;
-        font-size: 16px;
-    }
-
-    .assigned_selected_avatar {
-        width: 24px;
-        height: 24px;
-        font-size: 16px;
-    }
-
-    .subtask_input_field {
-        font-size: 16px;
-        padding: 10px 42px 10px 12px;
-    }
-
-    .subtask_btn_check,
-    .subtask_btn_clear {
-        padding: 4px;
-
-        img {
-            width: 10px;
-            height: 10px;
-        }
-    }
-
-    .subtask_btn_clear {
-        right: 28px;
-    }
-
-    .subtask_row .small_separator {
-        right: 34px;
-    }
-
-    .subtask_list {
-        max-height: 60px;
-    }
-
-    .subtask_actions button img {
-        width: 12px;
-        height: 12px;
-    }
-
-    .add_task_actions {
-        padding: 10px;
-    }
-
-    .add_task_btn_cancel,
-    .add_task_btn_submit {
-        padding: 8px 14px;
         font-size: 16px;
     }
 }
