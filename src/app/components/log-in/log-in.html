@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<form>
+<form (ngSubmit)="onSubmit()" #contactForm="ngForm">
     <h1>Log in</h1>
     <span></span>
     <label>
@@ -16,6 +16,7 @@
     <label>
         <input type="text" alt="Password" placeholder="Password">
         <img src="./assets/icons/contact/lock.svg" alt="Password">
+        <p class="error">Check your email and password. Please try again.</p>
     </label>
     <div>
         <button class="btn_login">Log in</button>
