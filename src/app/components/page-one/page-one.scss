@@ -5,9 +5,19 @@
     align-items: center;
     justify-content: center;
     background: #F6F7F8;
-    
-    img{
+
+    img {
         width: 274px;
         height: 335px;
+    }
+}
+
+@media(max-width:480px) {
+    :host {
+        background: #2A3647;
+        img {
+            width: 100px;
+            height: 121px;
+        }
     }
 }
