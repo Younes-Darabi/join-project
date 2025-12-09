@@ -94,10 +94,17 @@
                 right: 20px;
             }
 
-            .error{
+            .div_error {
+                display: flex;
+                justify-content: flex-start;
+                height: 10px;
                 margin-top: 10px;
-                color: #E60026;
-                font-size: 15px;
+
+                .error {
+                    display: none;
+                    color: #E60026;
+                    font-size: 15px;
+                }
             }
         }
 

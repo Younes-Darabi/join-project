@@ -37,6 +37,10 @@
             position: absolute;
             left: 60px;
             top: 60px;
+            &:hover{
+                cursor: pointer;
+                scale: 1.05;
+            }
         }
 
         h1 {
@@ -79,6 +83,19 @@
                 top: 16px;
                 right: 20px;
             }
+
+            .div_error {
+                display: flex;
+                justify-content: flex-start;
+                height: 10px;
+                margin: 10px 0 15px 0;
+
+                .error {
+                    display: none;
+                    color: #E60026;
+                    font-size: 15px;
+                }
+            }
         }
 
         .div_privacy {
@@ -86,7 +103,10 @@
             gap: 5px;
 
             img {
-                width: 17px;
+                width: 20px;
+                height: 23px;
+                padding: 1px 2px;
+                border-radius: 3px;
             }
 
             &:hover {
