@@ -1,6 +1,0 @@
-Contactlist/Details
-
-änderungen sollten nicht auf details 
-zusehen sein, erst nach dem speichern.
-bei delete sollte die details seite akutalisiert 
-werden damit der Kontakt nicht mehr angezeigt wird.
