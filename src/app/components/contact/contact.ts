@@ -37,6 +37,6 @@ export class Contact {
   }
 
   closeView() {
-    this.selectedContact.set(null);
+    this.selectedContactOpen.set(false);
   }
 }

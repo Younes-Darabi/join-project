@@ -21,7 +21,7 @@
                 <div>
                     <input ngModel #firstName="ngModel" [(ngModel)]="user.firstname"
                         [ngClass]="{'error': firstName.invalid && firstName.touched}" name="firstName" type="text"
-                        minlength="3"
+                        minlength="2"
                         [placeholder]="firstName.invalid && firstName.touched ? 'Enter firstname' : 'Firstname'"
                         required>
                     <p class="error_text" *ngIf="firstName.touched && firstName.invalid">This field is required</p>
@@ -48,7 +48,7 @@
                 <input ngModel #phone="ngModel" [(ngModel)]="user.phone"
                     [ngClass]="{'error': phone.invalid && phone.touched}" name="phone" type="tel" minlength="5"
                     [placeholder]="phone.invalid && phone.touched ? 'Enter your phone number' : 'Phone'"
-                    pattern="^[0-9+]+$" required>
+                    pattern="^[0-9+ ]+$" required>
                 <p class="error_text" *ngIf="phone.touched && phone.invalid">This field is required</p>
             </div>
             <div class="button">

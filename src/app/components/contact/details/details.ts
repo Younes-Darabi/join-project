@@ -15,15 +15,12 @@ export class Details {
   firebaseService = inject(ContactService);
   isClicked: boolean = false;
   menuOpen = signal(false);
-  isClickedByEdit: boolean = false;
-  // Input vom Parent
   @Input() contact!: ContactInterface;
   @Input() contactClicked: boolean = false;
   @Output() close = new EventEmitter<void>();
   showDetail: boolean = false;
- 
   contactTitleShow: boolean = false;
-  // Getter für Initialen
+
   get shortName(): string {
     return this.contact
       ? (this.contact.firstname?.charAt(0) || '') +
@@ -42,14 +39,11 @@ export class Details {
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent) {
     const target = event.target as HTMLElement;
-
-    // Prüfen ob der Klick innerhalb des Components war
     if (!this.elementRef.nativeElement.contains(target)) {
-      this.menuOpen.set(false); // Menü schließen
+      this.menuOpen.set(false);
     }
   }
 
-  // Delete
   deleteContact() {
     if (!this.contact?.id) return;
     this.firebaseService.deleteContact(this.contact);
@@ -59,10 +53,6 @@ export class Details {
   // Edit
   showEdit() {
     this.isClicked = true;
-  }
-
-  closeByEdit() {
-    this.isClickedByEdit = false;
   }
 
   handleClose() {
