@@ -47,12 +47,12 @@
                 <input ngModel #phone="ngModel" [(ngModel)]="editUser.phone"
                     [ngClass]="{'error': phone.invalid && phone.touched}" name="phone" type="tel" minlength="5"
                     [placeholder]="phone.invalid && phone.touched ? 'Enter your phone number' : 'Phone'"
-                    pattern="^[0-9+]+$" required>
+                    pattern="^[0-9+ ]+$" required>
                 <p class="error_text" *ngIf="phone.touched && phone.invalid">This field is required</p>
             </div>
             <div class="button">
                 <button class="delete" (click)="deleteContact()">Delete</button>
-                <button type="submit" name="submit" (click)="''" class="save" [disabled]="!editForm.valid">Save<img
+                <button type="submit" name="submit" class="save" [disabled]="!editForm.valid">Save<img
                         src="./assets/icons/contact/check.svg" alt="icon check"></button>
             </div>
         </form>
