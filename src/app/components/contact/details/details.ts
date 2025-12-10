@@ -15,6 +15,7 @@ export class Details {
   firebaseService = inject(ContactService);
   isClicked: boolean = false;
   menuOpen = signal(false);
+  isClickedByEdit: boolean = false;
   // Input vom Parent
   @Input() contact!: ContactInterface;
   @Input() contactClicked: boolean = false;
@@ -60,16 +61,8 @@ export class Details {
     this.isClicked = true;
   }
 
-  // Optional: Clear, falls du Details zurücksetzen willst
-  clear() {
-    this.contact = {
-      id: '',
-      firstname: '',
-      lastname: '',
-      email: '',
-      phone: '',
-      type: '',
-    };
+  closeByEdit() {
+    this.isClickedByEdit = false;
   }
 
   handleClose() {

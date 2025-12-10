@@ -16,9 +16,9 @@ export class Edit {
 
   // WICHTIG: Input für die Daten vom Parent
   @Input() user!: ContactInterface;
-  @Output() closeing = new EventEmitter<void>();
-  @Output() closeEditContact = new EventEmitter<void>();
-  @Output() clearRequest = new EventEmitter<void>();
+  @Output() closeing = new EventEmitter();
+  @Output() closeEditContact = new EventEmitter();
+  @Output() backRequest  = new EventEmitter();
   shortName: string = '';
   editUser!: ContactInterface;
 
@@ -38,7 +38,7 @@ export class Edit {
 
   deleteContact() {
     this.firebaseService.deleteContact(this.user);
-    this.clearRequest.emit();
+    this.backRequest.emit()
     this.closeing.emit();
   }
 
