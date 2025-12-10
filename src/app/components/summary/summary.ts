@@ -186,13 +186,6 @@ export class Summary {
     else return 'Good night';
   }
 
-  navigateToBoardView() {
-    this.router.navigate(['/board'], { fragment: 'boardUpstairs' });
-  }
-
-   navigateToDetailWithFragment(sectionId: string) {
-    this.router.navigate(['/board'], { fragment: sectionId });
-  }
-
+  
 
 }
