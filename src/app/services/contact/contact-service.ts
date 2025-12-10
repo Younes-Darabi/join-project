@@ -107,7 +107,7 @@ export class ContactService implements OnDestroy {
     if (obj.firstname && obj.lastname) {
       initials = `${obj.firstname.charAt(0)}${obj.lastname.charAt(0)}`.toUpperCase();
     }
-    let color = this.getColorForContact(obj);
+    let color = this.getColorForContact({ ...obj, id });
     return {
       id: id || '',
       email: obj.email || '',
@@ -120,8 +120,8 @@ export class ContactService implements OnDestroy {
     };
   }
 
-  getColorForContact(contact: ContactInterface): string {
-    const key = (contact.firstname + contact.lastname);
+  getColorForContact(contact: ContactInterface | any): string {
+    const key = contact.id 
     let hash = 0;
 
     for (let i = 0; i < key.length; i++) {

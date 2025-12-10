@@ -1,14 +1,14 @@
 import { Component, EventEmitter, HostBinding, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ContactService } from '../../../services/contact/contact-service';
-import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
+import { ContactService } from '../../../../services/contact/contact-service';
+import { ContactInterface } from '../../../../interfaces/contact/contact-list.interface';
 
 @Component({
   selector: 'app-edit',
   imports: [FormsModule, CommonModule],
   templateUrl: './edit.html',
-  styleUrl: './edit.scss',
+  styleUrls: ['./edit.scss'],
 })
 
 export class Edit {
@@ -18,25 +18,27 @@ export class Edit {
   @Input() user!: ContactInterface;
   @Output() closeing = new EventEmitter<void>();
   @Output() closeEditContact = new EventEmitter<void>();
-
+  @Output() clearRequest = new EventEmitter<void>();
   shortName: string = '';
-
+  editUser!: ContactInterface;
 
   ngOnChanges() {
     if (this.user) {
+      this.editUser = { ...this.user }; // Kopie erstellen
       this.shortName =
-        (this.user.firstname?.substring(0, 1) || '') +
-        (this.user.lastname?.substring(0, 1) || '');
+        (this.editUser.firstname?.substring(0, 1) || '') +
+        (this.editUser.lastname?.substring(0, 1) || '');
     }
   }
 
   editContact() {
-    this.firebaseService.updateContact(this.user);
+    this.firebaseService.updateContact(this.editUser); // nur hier übernehmen
     this.close();
   }
 
   deleteContact() {
     this.firebaseService.deleteContact(this.user);
+    this.clearRequest.emit();
     this.closeing.emit();
   }
 

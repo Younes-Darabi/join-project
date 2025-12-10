@@ -1,7 +1,8 @@
 import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output, inject, signal } from '@angular/core';
 import { ContactService } from '../../../services/contact/contact-service';
 import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
-import { Edit } from '../edit/edit';
+import { Edit } from './edit/edit';
+
 
 @Component({
   selector: 'app-details',

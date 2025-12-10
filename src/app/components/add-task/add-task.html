@@ -1,10 +1,11 @@
 <div class="add_task_wrapper">
   <h1>Add Task</h1>
   <div>
+    
     @if (confirmationMessage) {
     <div class="add_task_confirmation_overlay">
       <div class="add_task_confirmation">
-        <p>{{ confirmationMessage }}<img src="./assets/icons/board/board_icon.svg" alt="Success"></p>
+        <p>{{ confirmationMessage }}</p><img src="./assets/icons/board/board_icon.svg" alt="Success">
       </div>
     </div>
     }
@@ -156,10 +157,10 @@
     </div>
     <div class="add_task_actions">
       <p class="add_task_info"><span>*</span>This field is required.</p>
-      <div>
+      <div class="add_task_buttons">
         <button class="add_task_btn_cancel" (click)="resetForm()">Clear</button>
 
-        <button class="add_task_btn_submit" (click)="saveTask(newTask)">Add Task</button>
+        <button class="add_task_btn_submit" (click)="saveTask(newTask)">Create Task</button>
       </div>
     </div>
   </div>

@@ -19,11 +19,12 @@
         <form (ngSubmit)="addForm.valid && addUser()" #addForm="ngForm">
             <div class="div_name">
                 <div>
-                    <input ngModel #fisrtName="ngModel" [(ngModel)]="user.firstname"
-                        [ngClass]="{'error': fisrtName.invalid && fisrtName.touched}" name="fisrtName" type="text"
+                    <input ngModel #firstName="ngModel" [(ngModel)]="user.firstname"
+                        [ngClass]="{'error': firstName.invalid && firstName.touched}" name="firstName" type="text"
                         minlength="3"
-                        [placeholder]="fisrtName.invalid && fisrtName.touched ? 'Enter firstname' : 'Firstname'"
+                        [placeholder]="firstName.invalid && firstName.touched ? 'Enter firstname' : 'Firstname'"
                         required>
+                    <p class="error_text" *ngIf="firstName.touched && firstName.invalid">This field is required</p>
                 </div>
                 <div>
                     <img src="./assets/icons/contact/person.svg" class="icon_name" alt="icon name">
@@ -31,6 +32,7 @@
                         [ngClass]="{'error': lastName.invalid && lastName.touched}" name="lastName" type="text"
                         minlength="3"
                         [placeholder]="lastName.invalid && lastName.touched ? 'Enter lastname' : 'Lastname'" required>
+                    <p class="error_text" *ngIf="lastName.touched && lastName.invalid">This field is required</p>
                 </div>
             </div>
             <div>
@@ -39,13 +41,15 @@
                     [ngClass]="{'error': email.invalid && email.touched}" name="email" type="text" placeholder="Email"
                     [placeholder]="email.invalid && email.touched ? 'Enter your email address' : 'Email'"
                     pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required>
+                <p class="error_text" *ngIf="email.touched && email.invalid">This field is required</p>
             </div>
             <div>
                 <img src="./assets/icons/contact/call.svg" class="icon_phone" alt="icon phone">
                 <input ngModel #phone="ngModel" [(ngModel)]="user.phone"
                     [ngClass]="{'error': phone.invalid && phone.touched}" name="phone" type="tel" minlength="5"
                     [placeholder]="phone.invalid && phone.touched ? 'Enter your phone number' : 'Phone'"
-                    placeholder="Phone" required>
+                    pattern="^[0-9+]+$" required>
+                <p class="error_text" *ngIf="phone.touched && phone.invalid">This field is required</p>
             </div>
             <div class="button">
                 <button class="cancel" type="button" (click)="close()">Cancel<img src="./assets/icons/contact/close.svg"

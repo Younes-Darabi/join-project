@@ -1,14 +1,32 @@
 :host {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100vh;
     background-color: #ffffff2a;
-    z-index: 30;
+
+    .success {
+        display: none;
+        position: absolute;
+        right: 50px;
+        bottom: 50px;
+        font-size: 20px;
+        color: #FFFFFF;
+        background: #2A3647;
+        padding: 25px 30px;
+        border-radius: 20px;
+    }
+
+    .error_text {
+        color: #ff3b3b;
+        font-size: 13px;
+        margin-top: 2px;
+        display: block;
+    }
 
     .error {
         outline: 1px solid red;
@@ -38,14 +56,23 @@
                 height: 66px;
             }
 
-            p {
+            h2 {
                 font-weight: 700;
                 font-style: Bold;
                 font-size: 61px;
                 color: #ffffff;
+                margin: 10px 0;
+            }
+
+            h3 {
+                font-weight: 400;
+                font-size: 27px;
+                color: #ffffff;
+                margin: 10px 0;
             }
 
             span {
+                padding-bottom: 10px;
                 border-bottom: 3px solid #29ABE2;
             }
         }
@@ -66,13 +93,14 @@
             align-items: center;
             width: 120px;
             height: 120px;
+            background-color: #D1D1D1;
             border: 3px solid #ffffff;
             outline: 1px solid #efeff0;
             border-radius: 50%;
 
-            p {
-                color: #ffffff;
-                font-size: 47px;
+            img {
+                width: 43px;
+                height: 43px;
             }
         }
 
@@ -144,10 +172,19 @@
                             outline: 1px solid #29ABE2;
                         }
                     }
+
+
                 }
+
 
                 div {
                     position: relative;
+
+                    .icon_name {
+                        position: absolute;
+                        right: 20px;
+                        top: 20px;
+                    }
 
                     .icon_email {
                         position: absolute;
@@ -186,8 +223,11 @@
                     gap: 20px;
                     margin-top: 20px;
 
-                    .delete {
-                        width: 113px;
+                    .cancel {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 126px;
                         height: 55px;
                         border-radius: 8px;
                         border: 1px solid #2A3647;
@@ -201,14 +241,20 @@
                             color: #29ABE2;
                             cursor: pointer;
                         }
+
+                        img {
+                            width: 30px;
+                            height: 30px;
+                        }
                     }
 
-                    .save {
+                    .create {
                         display: flex;
                         justify-content: center;
                         align-items: center;
+                        font-weight: 700;
                         gap: 10px;
-                        width: 111px;
+                        width: 214px;
                         height: 57px;
                         opacity: 1;
                         border-radius: 10px;
@@ -229,8 +275,8 @@
                         }
 
                         img {
-                            width: 15px;
-                            height: 15px;
+                            width: 20px;
+                            height: 20px;
                         }
                     }
                 }
@@ -254,8 +300,10 @@
 @media(max-width:1000px) {
     :host {
         flex-direction: column;
-        width: 100%;
-        height: 100vh;
+
+        .success {
+            font-size: 16px;
+        }
 
         .title {
             align-items: flex-start;
@@ -283,15 +331,20 @@
                     display: none;
                 }
 
-                p {
+                h2 {
                     font-size: 47px;
                 }
 
+                h3 {
+                    font-size: 20px;
+                }
+
+                //  
             }
         }
 
         .detail {
-            flex-direction: column;
+            flex-direction: column; // Nur hier für kleine Bildschirme überschreiben
             justify-content: space-between;
             background-color: #ffffff;
             width: 500px;
@@ -337,8 +390,16 @@
                     }
 
                     .button {
-                        justify-content: center;
                         margin-top: 0;
+                        justify-content: center;
+
+                        .cancel {
+                            display: none;
+                        }
+
+                        .create {
+                            width: 202px;
+                        }
                     }
                 }
             }
@@ -354,6 +415,11 @@
 
         .detail {
             width: 95%;
+        }
+
+        .success {
+            right: 25px;
+            bottom: 50px;
         }
     }
 }

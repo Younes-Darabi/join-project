@@ -1,8 +1,8 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ContactService } from '../../../services/contact/contact-service';
-import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
+import { ContactService } from '../../../../services/contact/contact-service';
+import { ContactInterface } from '../../../../interfaces/contact/contact-list.interface';
 
 @Component({
   selector: 'app-add',

@@ -128,7 +128,7 @@
       <div class="assigned_content">
         <div class="dropdown">
           <label for="assignedTo">Assigned to</label>
-          <div class="select_contacts" (click)="toggleDropdown($event)">
+          <div (click)="toggleDropdown($event)">
             <input
               id="assigned_dropdown_input"
               type="text"
@@ -183,7 +183,6 @@
         </ul>
         }
         <div>
-          <!-- <span class="assigned_dropdown_avatar" [style.background-color]="singleContact.color">{{ singleContact.initials }}</span> -->
         </div>
       </div>
 
