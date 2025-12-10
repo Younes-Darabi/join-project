@@ -259,15 +259,6 @@ form {
   scrollbar-color: rgba(165, 164, 164, 0.404) transparent;
 }
 
-.select_contacts {
-  border: 1px solid #d1d1d1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px;
-  border-radius: 8px;
-}
-
 .assigned_dropdown_input {
   width: 100%;
   margin: 0;
@@ -275,6 +266,8 @@ form {
   border-radius: 8px;
   background: #fff;
   font-size: 16px;
+  padding: 6px;
+  border-radius: 8px;
   outline: none;
   transition: border 0.2s;
 

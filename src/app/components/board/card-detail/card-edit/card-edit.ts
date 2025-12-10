@@ -8,7 +8,7 @@ import {
   ChangeDetectorRef,
   HostListener,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule} from '@angular/forms';
 import { BoardService } from '../../../../services/board/board-service';
 import { TaskInterface } from '../../../../interfaces/board/task.interface';
 import { NgIf } from '@angular/common';

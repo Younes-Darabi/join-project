@@ -2,7 +2,8 @@ import { Component, DOCUMENT, EventEmitter, Inject, OnInit, Output, Renderer2 } 
 import { CommonModule } from '@angular/common';
 import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
 import { ContactService } from '../../../services/contact/contact-service';
-import { Add } from '../add/add';
+import { Add } from './add/add';
+
 
 @Component({
   selector: 'app-contact-list',
