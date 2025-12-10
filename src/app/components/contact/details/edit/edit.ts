@@ -18,7 +18,6 @@ export class Edit {
   @Input() user!: ContactInterface;
   @Output() closeing = new EventEmitter();
   @Output() closeEditContact = new EventEmitter();
-  @Output() backRequest  = new EventEmitter();
   shortName: string = '';
   editUser!: ContactInterface;
 
@@ -38,7 +37,6 @@ export class Edit {
 
   deleteContact() {
     this.firebaseService.deleteContact(this.user);
-    this.backRequest.emit()
     this.closeing.emit();
   }
 
