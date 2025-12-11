@@ -3,6 +3,7 @@ export interface ContactInterface {
     email: string;
     firstname: string;
     lastname: string;
+    password : string;
     phone: string;
     type: string;
     initials?: string; // Add this line

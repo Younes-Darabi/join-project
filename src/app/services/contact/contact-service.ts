@@ -114,6 +114,7 @@ export class ContactService implements OnDestroy {
       firstname: obj.firstname || '',
       lastname: obj.lastname || '',
       phone: obj.phone || '',
+      password : obj.password || '',
       type: obj.type || 'contact',
       initials: initials,
       color: color

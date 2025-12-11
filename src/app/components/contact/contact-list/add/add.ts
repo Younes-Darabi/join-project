@@ -20,6 +20,7 @@ export class Add {
     lastname: '',
     email: '',
     phone: '',
+    password : '',
     type: ''
   };
 

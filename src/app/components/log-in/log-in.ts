@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from "@angular/router";
+import { RouterModule } from '@angular/router';
 
 interface Login {
   email: string;
@@ -10,7 +11,7 @@ interface Login {
 
 @Component({
   selector: 'app-log-in',
-  imports: [FormsModule, CommonModule, RouterLink],
+  imports: [FormsModule, CommonModule, RouterLink, RouterModule],
   templateUrl: './log-in.html',
   styleUrl: './log-in.scss',
 })
@@ -28,7 +29,7 @@ export class LogIn {
       this.loginError = false;
     } else {
       this.loginError = true;
-      this.router.navigate(['main-page']);
+      // this.router.navigate(['main-page']);
     }
   }
 }
