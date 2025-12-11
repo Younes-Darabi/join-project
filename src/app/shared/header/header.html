@@ -1,6 +1,15 @@
 <p class="title">Kanban Project Management Tool</p>
-<div>
+<div (click)="menu = !menu">
     <img class="logo" src="./assets/icons/header/logo_b.svg">
     <img src="./assets/icons/header/help.svg">
-    <div class="name"><p>TW</p></div>
+    <div class="name">
+        <p>TW</p>
+    </div>
 </div>
+<nav [ngStyle]="{'display' : menu ? 'block' : 'none' }">
+    <ul>
+        <li>Legal Notice</li>
+        <li>Privacy Policy</li>
+        <li routerLink="/log-in">Log out</li>
+    </ul>
+</nav>
