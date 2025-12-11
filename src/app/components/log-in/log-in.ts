@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router, RouterLink } from "@angular/router";
 
 interface Login {
   email: string;
@@ -9,7 +10,7 @@ interface Login {
 
 @Component({
   selector: 'app-log-in',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './log-in.html',
   styleUrl: './log-in.scss',
 })
@@ -20,12 +21,14 @@ export class LogIn {
     password: '',
   };
 
+  constructor(private router: Router) { }
 
   onSubmit() {
     if (this.login.email && this.login.password) {
       this.loginError = false;
     } else {
       this.loginError = true;
+      this.router.navigate(['main-page']);
     }
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from "@angular/router";
 
 interface Signup {
   firstName: string;
@@ -12,7 +13,7 @@ interface Signup {
 
 @Component({
   selector: 'app-sign-up',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './sign-up.html',
   styleUrl: './sign-up.scss',
 })
@@ -26,7 +27,7 @@ export class SignUp {
     password: '',
     confirmPassword: '',
   }
-  success : boolean = false;
+  success: boolean = false;
 
   onSubmit(signupForm: NgForm) {
     this.checkMatchPassword = this.checkMatchPasswords();

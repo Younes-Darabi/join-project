@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-page-one',
@@ -8,6 +9,13 @@ import { Component, HostListener } from '@angular/core';
 })
 export class PageOne {
   isMobile = window.innerWidth <= 480;
+
+  constructor(private router: Router) {
+    setTimeout(() => {
+      this.router.navigate(['log-in']);
+    }, 3000);
+  }
+
   @HostListener('window:resize')
   onResize() {
     this.isMobile = window.innerWidth <= 480;
