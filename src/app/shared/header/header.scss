@@ -81,10 +81,10 @@
 
             li {
                 font-size: 16px;
-                padding:7px 10px;
+                padding: 7px 10px;
                 transition: all 250ms ease-in-out;
 
-                &:hover{
+                &:hover {
                     cursor: pointer;
                     background: #091931;
                     border-radius: 5px;
@@ -129,6 +129,11 @@
                 width: 45px;
                 height: 45px;
             }
+        }
+
+        nav {
+            right: 10px;
+            top: 80px;
         }
     }
 }
