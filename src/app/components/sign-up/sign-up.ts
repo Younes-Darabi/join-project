@@ -15,35 +15,43 @@ export class SignUp {
   firebaseService = inject(ContactService);
   privacy: boolean = false;
   checkMatchPassword: boolean = false;
+  checkEmail: boolean = false;
   user: ContactInterface = {
     id: '',
     firstname: '',
     lastname: '',
     email: '',
-    phone: '',
     password: '',
-    type: ''
+    phone: '',
+    type: '',
   };
   confirmPassword: string = '';
   success: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
-  onSubmit(signupForm: NgForm) {
+  async onSubmit(signupForm: NgForm) {
     this.checkMatchPassword = this.checkMatchPasswords();
+
     if (!signupForm.invalid && !this.checkMatchPassword && this.privacy) {
-      this.success = true;
 
-      this.firebaseService.addContact(this.user);
-      this.firebaseService.contactList.push(JSON.parse(JSON.stringify(this.user)));
+      const emailExists = await this.firebaseService.checkEmail(this.user);
 
-      setTimeout(() => {
-        this.success = false;
-        this.router.navigate(['log-in']);
-      }, 3000);
+      if (!emailExists) {
+        this.success = true;
+        this.firebaseService.addContact(this.user);
 
+        setTimeout(() => {
+          this.success = false;
+          this.router.navigate(['log-in']);
+        }, 3000);
+
+      } else {
+        this.checkEmail = true;
+      }
     }
   }
+
 
   checkMatchPasswords() {
     if (this.user.password.length < 6 || this.user.password !== this.confirmPassword) {

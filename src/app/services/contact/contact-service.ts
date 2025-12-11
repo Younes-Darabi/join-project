@@ -1,5 +1,5 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { collection, deleteDoc, doc, Firestore, getDocs, onSnapshot, query, addDoc, updateDoc } from '@angular/fire/firestore';
+import { collection, deleteDoc, doc, Firestore, getDocs, onSnapshot, query, addDoc, updateDoc, where } from '@angular/fire/firestore';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
 
 
@@ -49,7 +49,7 @@ export class ContactService implements OnDestroy {
           this.contactList.push(this.setContactObject(element.data(), element.id));
         });
       },
-      (error) => {console.error(error);}
+      (error) => { console.error(error); }
     );
   }
 
@@ -84,6 +84,7 @@ export class ContactService implements OnDestroy {
       firstname: contact.firstname,
       lastname: contact.lastname,
       phone: contact.phone,
+      password: contact.password,
       type: contact.type
     }
   }
@@ -114,7 +115,7 @@ export class ContactService implements OnDestroy {
       firstname: obj.firstname || '',
       lastname: obj.lastname || '',
       phone: obj.phone || '',
-      password : obj.password || '',
+      password: obj.password || '',
       type: obj.type || 'contact',
       initials: initials,
       color: color
@@ -122,7 +123,7 @@ export class ContactService implements OnDestroy {
   }
 
   getColorForContact(contact: ContactInterface | any): string {
-    const key = contact.id 
+    const key = contact.id
     let hash = 0;
 
     for (let i = 0; i < key.length; i++) {
@@ -177,5 +178,15 @@ export class ContactService implements OnDestroy {
     this.contactList = snapshot.docs.map(doc =>
       this.setContactObject(doc.data(), doc.id)
     );
+  }
+
+  async checkEmail(user: ContactInterface): Promise<boolean> {
+    if (!user.email) return false;
+    const q = query(
+      this.getContactsRef(),
+      where('email', '==', user.email)
+    );
+    const snapshot = await getDocs(q);
+    return !snapshot.empty;
   }
 }

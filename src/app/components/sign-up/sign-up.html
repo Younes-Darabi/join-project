@@ -40,6 +40,7 @@
         <div class="div_error">
             <p [ngStyle]="{'display' : checkMatchPassword ? 'block' : 'none'}" class="error">Your passwords don't match.
                 Please try again.</p>
+            <p [ngStyle]="{'display' : checkEmail ? 'block' : 'none'}" class="error">This email is already in use. Please try a different one.</p>
         </div>
     </label>
     <div class="div_privacy" (click)="privacy=!privacy">
