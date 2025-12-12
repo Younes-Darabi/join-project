@@ -27,7 +27,7 @@
     </label>
     <div>
         <button class="btn_login">Log in</button>
-        <a routerLink="/main-page" class="btn_gastlogin">Guest Log in</a>
+        <a routerLink="/main-page" (click)="authService.isLogin = false" class="btn_gastlogin" >Guest Log in</a>
     </div>
 </form>
 

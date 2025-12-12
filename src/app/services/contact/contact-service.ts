@@ -2,7 +2,6 @@ import { inject, Injectable, OnDestroy } from '@angular/core';
 import { collection, deleteDoc, doc, Firestore, getDocs, onSnapshot, query, addDoc, updateDoc, where } from '@angular/fire/firestore';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -84,7 +83,6 @@ export class ContactService implements OnDestroy {
       firstname: contact.firstname,
       lastname: contact.lastname,
       phone: contact.phone,
-      password: contact.password,
       type: contact.type
     }
   }
@@ -101,8 +99,6 @@ export class ContactService implements OnDestroy {
     return doc(collection(this.firestore, colId), docId);
   }
 
-
-
   setContactObject(obj: any, id: string): ContactInterface {
     let initials = '';
     if (obj.firstname && obj.lastname) {
@@ -115,7 +111,6 @@ export class ContactService implements OnDestroy {
       firstname: obj.firstname || '',
       lastname: obj.lastname || '',
       phone: obj.phone || '',
-      password: obj.password || '',
       type: obj.type || 'contact',
       initials: initials,
       color: color
@@ -178,15 +173,5 @@ export class ContactService implements OnDestroy {
     this.contactList = snapshot.docs.map(doc =>
       this.setContactObject(doc.data(), doc.id)
     );
-  }
-
-  async checkEmail(user: ContactInterface): Promise<boolean> {
-    if (!user.email) return false;
-    const q = query(
-      this.getContactsRef(),
-      where('email', '==', user.email)
-    );
-    const snapshot = await getDocs(q);
-    return !snapshot.empty;
   }
 }

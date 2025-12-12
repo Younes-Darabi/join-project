@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from "@angular/router";
-import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
-import { ContactService } from '../../services/contact/contact-service';
+import { SignUpInterface } from '../../interfaces/sign-up/sign-up.interface';
+import { AuthService } from '../../services/auth/auth-service';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,19 +12,16 @@ import { ContactService } from '../../services/contact/contact-service';
   styleUrl: './sign-up.scss',
 })
 export class SignUp {
-  firebaseService = inject(ContactService);
-  privacy: boolean = false;
-  checkMatchPassword: boolean = false;
-  checkEmail: boolean = false;
-  user: ContactInterface = {
-    id: '',
+  authService = inject(AuthService);
+  user: SignUpInterface = {
     firstname: '',
     lastname: '',
     email: '',
     password: '',
-    phone: '',
-    type: '',
   };
+  privacy: boolean = false;
+  checkMatchPassword: boolean = false;
+  checkEmail: boolean = false;
   confirmPassword: string = '';
   success: boolean = false;
 
@@ -33,25 +30,24 @@ export class SignUp {
   async onSubmit(signupForm: NgForm) {
     this.checkMatchPassword = this.checkMatchPasswords();
 
-    if (!signupForm.invalid && !this.checkMatchPassword && this.privacy) {
+    // if (!signupForm.invalid && !this.checkMatchPassword && this.privacy) {
 
-      const emailExists = await this.firebaseService.checkEmail(this.user);
+    //   const emailExists = await this.firebaseService.checkEmail(this.user);
 
-      if (!emailExists) {
-        this.success = true;
-        this.firebaseService.addContact(this.user);
+    //   if (!emailExists) {
+    //     this.success = true;
+    //     this.firebaseService.addContact(this.user);
 
-        setTimeout(() => {
-          this.success = false;
-          this.router.navigate(['log-in']);
-        }, 3000);
+    //     setTimeout(() => {
+    //       this.success = false;
+    //       this.router.navigate(['log-in']);
+    //     }, 3000);
 
-      } else {
-        this.checkEmail = true;
-      }
-    }
+    //   } else {
+    //     this.checkEmail = true;
+    //   }
+    // }
   }
-
 
   checkMatchPasswords() {
     if (this.user.password.length < 6 || this.user.password !== this.confirmPassword) {
@@ -60,5 +56,4 @@ export class SignUp {
       return false;
     }
   }
-
 }

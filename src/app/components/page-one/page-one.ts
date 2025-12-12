@@ -20,4 +20,5 @@ export class PageOne {
   onResize() {
     this.isMobile = window.innerWidth <= 480;
   }
+
 }
