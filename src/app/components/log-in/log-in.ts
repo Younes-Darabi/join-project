@@ -30,8 +30,6 @@ export class LogIn {
         await this.authService.signIn(this.login);
         this.router.navigate(['main-page']);
         this.authService.isLogin = true;
-
-
       } catch (error: any) {
         this.error = this.getErrorMessage(error.code);
       }
