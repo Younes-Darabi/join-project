@@ -2,6 +2,8 @@ import { inject, Injectable, OnDestroy } from "@angular/core";
 import { Auth, createUserWithEmailAndPassword, User } from '@angular/fire/auth';
 import { SignUpInterface } from "../../interfaces/sign-up/sign-up.interface";
 import { doc, Firestore, setDoc } from "@angular/fire/firestore";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { LogInInterface } from "../../interfaces/log-in/log-in.interface";
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +20,18 @@ export class AuthService implements OnDestroy {
       this.currentUser = user;
       this.isLogin = !!user;
     });
+  }
+
+  signIn(loginData: LogInInterface): Promise<User> {
+    const { email, password } = loginData;
+    return signInWithEmailAndPassword(this.auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        return user;
+      })
+      .catch((error) => {
+        throw error;
+      });
   }
 
   async signUp(userData: SignUpInterface): Promise<User | any> {
