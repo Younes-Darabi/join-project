@@ -1,6 +1,7 @@
 import { NgStyle } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { AuthService } from '../../services/auth/auth-service';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,8 @@ import { RouterLink } from "@angular/router";
   styleUrl: './header.scss',
 })
 export class Header {
-  menu : boolean = false ;
+  authService = inject(AuthService);
+
+  menu: boolean = false;
 
 }

@@ -10,6 +10,6 @@
     <ul>
         <li>Legal Notice</li>
         <li>Privacy Policy</li>
-        <li routerLink="/log-in">Log out</li>
+        <li routerLink="/log-in" (click)="authService.isLogin=false">Log out</li>
     </ul>
 </nav>

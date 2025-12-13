@@ -1,57 +1,51 @@
-import { inject, Injectable, OnDestroy } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
-import { Auth, createUserWithEmailAndPassword, UserCredential, signOut } from '@angular/fire/auth';
-import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
-import { from } from 'rxjs';
+import { inject, Injectable, OnDestroy } from "@angular/core";
+import { Auth, createUserWithEmailAndPassword, User } from '@angular/fire/auth';
+import { SignUpInterface } from "../../interfaces/sign-up/sign-up.interface";
+import { doc, Firestore, setDoc } from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class AuthService implements OnDestroy {
+  firestore: Firestore = inject(Firestore);
   isLogin = false;
-  // currentUser?: ContactInterface;
-  // auth: Auth = inject(Auth);
+  currentUser: User | null = null;
   unsubContacts: any;
+
+  constructor(private auth: Auth) {
+    this.auth.onAuthStateChanged((user) => {
+      this.currentUser = user;
+      this.isLogin = !!user;
+    });
+  }
+
+  async signUp(userData: SignUpInterface): Promise<User | any> {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        this.auth,
+        userData.email,
+        userData.password
+      );
+      const user = userCredential.user;
+      if (user && user.uid) {
+        await setDoc(doc(this.firestore, 'users', user.uid), {
+          firstname: userData.firstname,
+          lastname: userData.lastname,
+          email: userData.email,
+          createdAt: new Date()
+        });
+      }
+
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   ngOnDestroy(): void {
     if (this.unsubContacts) {
       this.unsubContacts();
     }
   }
-
-  // signup(email: string, password: string) {
-  //   const promise = createUserWithEmailAndPassword(this.auth, email, password)
-  //     .then((userCredential: UserCredential) => {
-  //       const user = userCredential.user;
-  //       console.log("User signed up successfully:", user.uid);
-  //       return userCredential;
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       console.error("Signup Error:", errorCode, errorMessage);
-  //       throw error;
-  //     });
-
-  //   return from(promise);
-  // }
-
-  // logout() {
-  //   return from(signOut(this.auth).then(() => {
-  //     this.isLogin = false;
-  //     this.currentUser = undefined;
-  //     console.log("User signed out.");
-  //   }));
-  // }
-
-  // async checkEmail(user: ContactInterface): Promise<boolean> {
-  //   if (!user.email) return false;
-  //   const q = query(
-  //     this.getContactsRef(),
-  //     where('email', '==', user.email)
-  //   );
-  //   const snapshot = await getDocs(q);
-  //   return !snapshot.empty;
-  // }
 }
