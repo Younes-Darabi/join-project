@@ -1,3 +1,5 @@
-<p>{{authService.currentUser?.email}}</p>
-
-
+@if (userName){
+<p>Good morning, {{userName}}</p>
+}@else {
+<p>Good morning!</p>
+}

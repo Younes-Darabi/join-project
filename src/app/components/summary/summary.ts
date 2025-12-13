@@ -9,5 +9,18 @@ import { AuthService } from '../../services/auth/auth-service';
 })
 export class Summary {
   authService = inject(AuthService);
+  userName: string = '';
 
+  ngOnInit() {
+    this.loadUserData();
+  }
+
+  async loadUserData() {
+    const fullName = await this.authService.getCurrentFullName();
+    if (fullName && this.authService.isLogin) {
+      this.userName = fullName.firstName + ' ' + fullName.lastName;
+    } else {
+      this.userName = '';
+    }
+  }
 }

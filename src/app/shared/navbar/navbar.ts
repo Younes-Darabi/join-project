@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './navbar.scss',
 })
 export class Navbar {
-  activeSection: string = '';
+  activeSection: string = 'summary';
 
   setActive(section: string) {
     this.activeSection = section;
