@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BoardService } from '../../services/board/board-service';
 import { TaskInterface } from '../../interfaces/board/task.interface';
@@ -15,37 +15,41 @@ import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
   styleUrl: './summary.scss',
 })
 export class Summary {
-   nowDate = new Date;
-   currentHour = this.nowDate.getHours();
-   tasks: TaskInterface[] = [];
+  boardService = inject(BoardService);
+  nowDate = new Date();
+  currentHour = this.nowDate.getHours();
+  tasks: TaskInterface[] = [];
 
-   todo: TaskInterface[] = []; 
-   inProgress: TaskInterface[] = [];
-   awaitFeedback: TaskInterface[] = [];
-   done: TaskInterface[] = [];
-   urgent: TaskInterface[] = [];
-   filteredTasks: TaskInterface[] = [];
+  todo: TaskInterface[] = [];
+  inProgress: TaskInterface[] = [];
+  awaitFeedback: TaskInterface[] = [];
+  done: TaskInterface[] = [];
+  urgent: TaskInterface[] = [];
+  filteredTasks: TaskInterface[] = [];
 
-   usersFullName: string = '';
+  usersFullName: string = '';
 
-   showGreeting: boolean = false;
-   showMainContent: boolean = false;
-   greetingShown: boolean = false;
+  showGreeting: boolean = false;
+  showMainContent: boolean = false;
+  greetingShown: boolean = false;
 
-   constructor( private boardService: BoardService,
-     private firestore: Firestore,
-     private router: Router,
-     private route: ActivatedRoute) {     }
+  constructor(
+    private firestore: Firestore,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.tasks = this.boardService.taskList;
+    this.filteredTasks = this.tasks;
+    this.sortTasks();
+    const auth = getAuth();
+  }
 
-   
-   ngOnInit() {
-    
+  ngOnInit() {
     if (this.getGreetingShownFromSessionStorage() == 'true') {
       this.greetingShown = true;
     }
     this.showGreetingOnce();
   }
-
 
   showGreetingOnce() {
     if (window.innerWidth <= 900 && !this.greetingShown) {
@@ -56,12 +60,10 @@ export class Summary {
         this.greetingShown = true;
         this.setGreetingShownInSessionStorage();
       }, 5000);
-    }
-    else if (window.innerWidth <= 900 && this.getGreetingShownFromSessionStorage() == 'true') {
+    } else if (window.innerWidth <= 900 && this.getGreetingShownFromSessionStorage() == 'true') {
       this.showGreeting = false;
       this.showMainContent = true;
-    }
-    else {
+    } else {
       this.showGreeting = true;
       this.showMainContent = true;
     }
@@ -71,7 +73,6 @@ export class Summary {
     if (this.greetingShown) {
       sessionStorage.setItem('greetingShown', 'true');
     }
-
   }
 
   getGreetingShownFromSessionStorage() {
@@ -112,10 +113,10 @@ export class Summary {
     this.urgent = [];
 
     this.filteredTasks.forEach((task) => {
-      if (task.priority === "urgent") {
+      if (task.priority === 'urgent') {
         this.urgent.push(task);
       }
-    })
+    });
   }
 
   transformUrgentTaskDate(task: TaskInterface): string {
@@ -133,13 +134,13 @@ export class Summary {
   }
 
   categorizeTask(task: TaskInterface) {
-    if (task.status === "todo") {
+    if (task.status === 'todo') {
       this.todo.push(task);
-    } else if (task.status === "await-feedback") {
+    } else if (task.status === 'await-feedback') {
       this.awaitFeedback.push(task);
-    } else if (task.status === "in-progress") {
+    } else if (task.status === 'in-progress') {
       this.inProgress.push(task);
-    } else if (task.status === "done") {
+    } else if (task.status === 'done') {
       this.done.push(task);
     }
   }
@@ -182,10 +183,10 @@ export class Summary {
     }
     if (this.currentHour >= 18 && this.currentHour <= 19) {
       return 'Good evening';
-    }
-    else return 'Good night';
+    } else return 'Good night';
   }
-
+  navigateToBoardView(){
+    this.router.navigate(['/board']);
+  }
   
-
 }
