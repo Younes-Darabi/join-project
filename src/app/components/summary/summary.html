@@ -1,4 +1,4 @@
-<!-- <section class="section_wrapper">
+<section class="section_wrapper">
   <div id="summaryUpstairs" class="summary_title">
     <h1>Join 360</h1>
     <img src="./assets/icons/board/line.svg" alt="blue line" />
@@ -8,14 +8,18 @@
   <div class="main_content">
     <div class="task_table" *ngIf="showMainContent">
       <div class="first_line">
-        <div class="table_cell more_padding" >
-          <img class="todo_icon" src="./assets/icons/summary/to_do_icon.svg" alt="to do task icon" />
+        <div class="table_cell more_padding">
+          <img
+            class="todo_icon"
+            src="./assets/icons/summary/to_do_icon.svg"
+            alt="to do task icon"
+          />
           <div>
             <span class="count">{{ getTodoTaskCount() }}</span>
             <p>To-do</p>
           </div>
         </div>
-        <div class="table_cell more_padding" >
+        <div class="table_cell more_padding">
           <img class="done_icon" src="./assets/icons/summary/done_icon.svg" alt="done task icon" />
           <div>
             <span class="count">{{ getDoneTasksCount() }}</span>
@@ -24,9 +28,13 @@
         </div>
       </div>
 
-      <div class="urgent_task" >
+      <div class="urgent_task">
         <div class="task_count">
-          <img class="urgent_icon" src="./assets/icons/summary/urgent_icon.svg" alt="urgent task icon" />
+          <img
+            class="urgent_icon"
+            src="./assets/icons/summary/urgent_icon.svg"
+            alt="urgent task icon"
+          />
           <div>
             <span class="count">{{ getUrgentTaskCount() }}</span>
             <p>Urgent</p>
@@ -40,19 +48,19 @@
       </div>
 
       <div class="third_line">
-        <div class="table_cell" >
+        <div class="table_cell">
           <div>
             <span class="count">{{ getAllTaskCount() }}</span>
             <p>Tasks in<br />Board</p>
           </div>
         </div>
-        <div class="table_cell" >
+        <div class="table_cell">
           <div>
             <span class="count">{{ getInProgressTaskCount() }}</span>
             <p>Tasks in<br />Progress</p>
           </div>
         </div>
-        <div class="table_cell" >
+        <div class="table_cell">
           <div>
             <span class="count">{{ getAwaitFeedbackTaskCount() }}</span>
             <p>Awaiting<br />Feedback</p>
@@ -60,93 +68,15 @@
         </div>
       </div>
     </div>
-    
-   <div class="welcome">
+
+    <div class="welcome">
       <span class="greeting" id="guestGreeting">{{ getGreeting() }}</span>
-    </div> -->
-    
-    <!-- <div class="welcome">
+    </div>
+
+    <div class="welcome">
       <span class="greeting">{{ getGreeting() }},</span>
       <span class="user_name">{{ usersFullName | titlecase }}</span>
     </div>
-    
   </div>
 </section>
-<button class="go_to_board_button" (click)="navigateToBoardView()">Go to Board</button> -->
-
-
-<section class="section_wrapper">
-    <div id="summaryUpstairs"class="summary_title" *ngIf="showMainContent">
-        <h1>Join 360</h1>
-        <img src="./assets/contact/line.svg" alt="blue line">
-        <h3>Key Metrics at a Glance</h3>
-    </div>
-    <div class="main_content">
-        <div class="task_table" *ngIf="showMainContent">
-            <div class="first_line">
-                <div class="table_cell more_padding" (click)="navigateToDetailWithFragment('toDoSection')">
-                    <img class="todo_icon" src="./assets/summary/to_do_icon.svg" alt="to do task icon">
-                    <div>
-                        <span class="count">{{ getTodoTaskCount() }}</span>
-                        <p>To-do</p>
-                    </div>
-                    
-                </div>
-                <div class="table_cell more_padding" (click)="navigateToDetailWithFragment('doneSection')">
-                    <img class="done_icon" src="./assets/summary/done_icon.svg" alt="done task icon">
-                    <div>
-                        <span class="count">{{ getDoneTasksCount() }}</span>
-                        <p>Done</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="urgent_task" (click)="navigateToBoardView()">
-                <div class="task_count">
-                    <img class="urgent_icon" src="./assets/summary/urgent_icon.svg" alt="urgent task icon">
-                    <div>
-                        <span class="count">{{ getUrgentTaskCount() }}</span>
-                        <p>Urgent</p>
-                    </div>
-                </div>
-                <img class="divider" src="./assets/summary/grey_dividing_line.svg" alt="grey line">
-                <div class="due_date">
-                    <p class="task_date">{{ getUrgentTaskWithLowestDate() }}</p>
-                    <p>Upcoming Deadline</p>
-                </div>
-            </div>
-
-            <div class="third_line">
-                <div class="table_cell" (click)="navigateToBoardView()">
-                    <div>
-                        <span class="count">{{ getAllTaskCount() }}</span>
-                        <p>Tasks in<br>Board</p>
-                    </div>
-                </div>
-                <div class="table_cell" (click)="navigateToDetailWithFragment('inProgressSection')">
-                    <div>
-                        <span class="count">{{ getInProgressTaskCount() }}</span>
-                        <p>Tasks in<br>Progress</p>
-                    </div>
-                </div>
-                <div class="table_cell" (click)="navigateToDetailWithFragment('awaitFeedbackSection')">
-                    <div>
-                        <span class="count">{{ getAwaitFeedbackTaskCount() }}</span>
-                        <p>Awaiting<br>Feedback</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @if (currentUser?.displayName == 'guest' && showGreeting) {
-            <div class="welcome">
-                <span class="greeting" id="guestGreeting">{{ getGreeting() }}</span>
-            </div>
-        }
-        @else if (showGreeting && currentUser?.displayName !== 'guest' && showGreeting) {
-            <div class="welcome">
-                <span class="greeting">{{ getGreeting() }},</span>
-                <span class="user_name">{{ usersFullName | titlecase}}</span>
-            </div>
-        }
-    </div>
-</section>
+<button class="go_to_board_button" (click)="navigateToBoardView()">Go to Board</button>
