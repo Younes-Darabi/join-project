@@ -1,19 +1,19 @@
 <img src="./assets/img/logo1.svg">
 <nav>
     <ul>
-        <li routerLink="summary" (click)="setActive('summary')" [class.active]="activeSection === 'summary'">
+        <li routerLink="/main-page/summary" routerLinkActive="active-link">
             <img src="./assets/icons/navbar/summary.svg">
             <p>Summary</p>
         </li>
-        <li routerLink="add-task" (click)="setActive('add-task')" [class.active]="activeSection === 'add-task'">
+        <li routerLink="/main-page/add-task" routerLinkActive="active-link">
             <img src="./assets/icons/navbar/add-task.svg">
             <p>Add Task</p>
         </li>
-        <li routerLink="board" (click)="setActive('board')" [class.active]="activeSection === 'board'">
+        <li routerLink="/main-page/board" routerLinkActive="active-link">
             <img src="./assets/icons/navbar/board.svg">
             <p>Board</p>
         </li>
-        <li routerLink="contact" (click)="setActive('contact')" [class.active]="activeSection === 'contact'">
+        <li routerLink="/main-page/contact" routerLinkActive="active-link">
             <img src="./assets/icons/navbar/contacts.svg">
             <p>Contacts</p>
         </li>

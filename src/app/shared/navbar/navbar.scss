@@ -6,7 +6,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
+    .active-link {
+        background-color: #091931;
+    }
+
     img {
         width: 100px;
         height: 122px;
@@ -40,10 +44,6 @@
                 gap: 10px;
                 width: 100%;
                 transition: all 0.3s ease-in-out;
-
-                &.active {
-                    background-color: #091931;
-                }
 
                 &:hover {
                     background-color: #2A3D59;

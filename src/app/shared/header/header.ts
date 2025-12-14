@@ -19,7 +19,7 @@ export class Header {
   }
 
   logOut(){
-    this.authService.isLogin = false;
+    this.authService.logout()
     this.userShort = 'GA';
   }
 

@@ -1,8 +1,8 @@
 <p class="title">Kanban Project Management Tool</p>
-<div (click)="menu = !menu">
+<div>
     <img class="logo" src="./assets/icons/header/logo_b.svg">
     <img src="./assets/icons/header/help.svg">
-    <div class="name">
+    <div class="name" (click)="menu = !menu">
         <p>{{userShort}}</p>
     </div>
 </div>
@@ -10,6 +10,10 @@
     <ul>
         <li>Legal Notice</li>
         <li>Privacy Policy</li>
+        @if (this.authService.isLogin) {
         <li routerLink="/log-in" (click)="logOut()">Log out</li>
+        }@else {
+        <li routerLink="/log-in" (click)="logOut()">Log in</li>
+        }
     </ul>
 </nav>

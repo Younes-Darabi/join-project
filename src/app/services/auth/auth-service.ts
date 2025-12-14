@@ -4,6 +4,7 @@ import { SignUpInterface } from "../../interfaces/sign-up/sign-up.interface";
 import { doc, Firestore, getDoc, setDoc } from "@angular/fire/firestore";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { LogInInterface } from "../../interfaces/log-in/log-in.interface";
+import { signOut } from 'firebase/auth';
 
 export interface FullName {
   firstName: string;
@@ -24,6 +25,15 @@ export class AuthService implements OnDestroy {
     this.auth.onAuthStateChanged((user) => {
       this.currentUser = user;
       this.isLogin = !!user;
+    });
+  }
+
+  logout() {
+    signOut(this.auth).then(() => {
+      this.currentUser = null;
+      this.isLogin = false;
+    }).catch((error) => {
+      console.error(error);
     });
   }
 
