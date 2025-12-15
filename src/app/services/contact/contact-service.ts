@@ -1,5 +1,5 @@
-import { inject, Injectable, OnDestroy } from '@angular/core';
-import { collection, deleteDoc, doc, Firestore, getDocs, onSnapshot, query, addDoc, updateDoc } from '@angular/fire/firestore';
+import { inject, Injectable, OnDestroy, NgZone } from '@angular/core';
+import { collection, deleteDoc, doc, Firestore, getDocs, onSnapshot, addDoc, updateDoc} from '@angular/fire/firestore';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
 
 
@@ -29,6 +29,7 @@ export class ContactService implements OnDestroy {
     '#FFC701',
     '#0038FF'
   ];
+  ngZone: any;
 
   constructor() {
     this.unsubContacts = this.subContactsList();
@@ -41,15 +42,15 @@ export class ContactService implements OnDestroy {
   }
 
   subContactsList() {
-    const q = query(this.getContactsRef());
-    return onSnapshot(q,
-      (list) => {
+    return onSnapshot(this.getContactsRef(), (list) => {
+      this.ngZone.run(() => {
         this.contactList = [];
         list.forEach(element => {
           this.contactList.push(this.setContactObject(element.data(), element.id));
         });
-      },
-      (error) => {console.error(error);}
+      });
+    },
+      (error) => { console.error(error); }
     );
   }
 
