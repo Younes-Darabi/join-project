@@ -1,6 +1,14 @@
 <p class="title">Kanban Project Management Tool</p>
 <div>
     <img class="logo" src="./assets/icons/header/logo_b.svg">
-    <img src="./assets/icons/header/help.svg">
-    <div class="name"><p>TW</p></div>
+    <a routerLink="Help"><img src="./assets/icons/header/help.svg"></a>
+    <div class="name">
+        <p (click)="toggleMenu()">TW</p>
+        <div class="burgermenu">
+            <a routerLink="Help">Help</a>
+            <a routerLink="LegalNotice">Legal Notice</a>
+            <a routerLink="PrivacyPolicy">Privacy Policy</a>
+            <a routerLink="Logout">Log out</a>
+        </div>
+    </div>
 </div>
