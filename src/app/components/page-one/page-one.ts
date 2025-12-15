@@ -8,9 +8,13 @@ import { Router } from '@angular/router';
   styleUrl: './page-one.scss',
 })
 export class PageOne {
-  isMobile = window.innerWidth <= 480;
+  isMobile = window.innerWidth <= 700;
+  animation: boolean = false;
 
   constructor(private router: Router) {
+    setTimeout(() => {
+      this.animation = true;
+    }, 2000);
     setTimeout(() => {
       this.router.navigate(['log-in']);
     }, 3000);
