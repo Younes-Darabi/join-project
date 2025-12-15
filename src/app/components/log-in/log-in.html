@@ -2,7 +2,7 @@
     <img src="./assets/icons/favicon.svg">
     <div>
         <p>Not a Join user?</p>
-        <a>Sign up</a>
+        <a routerLink="/sign-up">Sign up</a>
     </div>
 </div>
 
@@ -11,29 +11,28 @@
     <span></span>
     <label>
         <input ngModel #email="ngModel" [(ngModel)]="login.email"
-            [ngStyle]="{'border-color' : loginError || email.invalid && email.touched ? 'red' : ''}" name="email" type="email"
+            [ngStyle]="{'border-color' : error || email.invalid && email.touched ? 'red' : ''}" name="email" type="email"
             required placeholder="Email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
         <img src="./assets/icons/contact/mail.svg" alt="Email">
     </label>
     <label>
         <input ngModel #password="ngModel" [(ngModel)]="login.password"
-            [ngStyle]="{'border-color' : loginError || password.invalid && password.touched ? 'red' : ''}" name="password"
+            [ngStyle]="{'border-color' : error || password.invalid && password.touched ? 'red' : ''}" name="password"
             type="password" required placeholder="Password">
         <img src="./assets/icons/contact/lock.svg" alt="Password">
         <div class="div_error">
-            <p [ngStyle]="{'display' : loginError ? 'block' : 'none'}" class="error">Check your email and
-                password. Please try again.</p>
+            <p [ngStyle]="{'display' : error ? 'block' : 'none'}" class="error">{{error}}</p>
         </div>
     </label>
     <div>
         <button class="btn_login">Log in</button>
-        <a class="btn_hastlogin">Guest Log in</a>
+        <a routerLink="/main-page" (click)="authService.isLogin = false" class="btn_gastlogin" >Guest Log in</a>
     </div>
 </form>
 
 <div class="div_notuser_res">
     <p>Not a Join user?</p>
-    <a>Sign up</a>
+    <a routerLink="/sign-up">Sign up</a>
 </div>
 
 <div class="div_bottom">

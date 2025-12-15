@@ -1,14 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Header } from "./shared/header/header";
-import { Navbar } from "./shared/navbar/navbar";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Navbar],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('Join');
 }

@@ -5,30 +5,31 @@ import { BoardService } from '../../services/board/board-service';
 import { TaskInterface } from '../../interfaces/board/task.interface';
 import { collectionData, Firestore, collection } from '@angular/fire/firestore';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-
 import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
+import { AuthService } from '../../services/auth/auth-service';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-summary',
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, RouterOutlet],
   templateUrl: './summary.html',
   styleUrl: './summary.scss',
 })
 export class Summary {
+  authService = inject(AuthService);
+  userName: string = '';
+
   boardService = inject(BoardService);
   nowDate = new Date();
   currentHour = this.nowDate.getHours();
   tasks: TaskInterface[] = [];
-
   todo: TaskInterface[] = [];
   inProgress: TaskInterface[] = [];
   awaitFeedback: TaskInterface[] = [];
   done: TaskInterface[] = [];
   urgent: TaskInterface[] = [];
   filteredTasks: TaskInterface[] = [];
-
   usersFullName: string = '';
-
   showGreeting: boolean = false;
   showMainContent: boolean = false;
   greetingShown: boolean = false;
@@ -49,6 +50,16 @@ export class Summary {
       this.greetingShown = true;
     }
     this.showGreetingOnce();
+    this.loadUserData();
+  }
+
+  async loadUserData() {
+    const fullName = await this.authService.getCurrentFullName();
+    if (fullName && this.authService.isLogin) {
+      this.userName = fullName.firstName + ' ' + fullName.lastName;
+    } else {
+      this.userName = '';
+    }
   }
 
   showGreetingOnce() {
@@ -185,8 +196,4 @@ export class Summary {
       return 'Good evening';
     } else return 'Good night';
   }
-  navigateToBoardView(){
-    this.router.navigate(['/board']);
-  }
-  
 }

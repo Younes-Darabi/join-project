@@ -1,82 +1,74 @@
 <section class="section_wrapper">
-  <div id="summaryUpstairs" class="summary_title">
-    <h1>Join 360</h1>
-    <img src="./assets/icons/board/line.svg" alt="blue line" />
-    <h3>Key Metrics at a Glance</h3>
-  </div>
-
-  <div class="main_content">
-    <div class="task_table" *ngIf="showMainContent">
-      <div class="first_line">
-        <div class="table_cell more_padding">
-          <img
-            class="todo_icon"
-            src="./assets/icons/summary/to_do_icon.svg"
-            alt="to do task icon"
-          />
-          <div>
-            <span class="count">{{ getTodoTaskCount() }}</span>
-            <p>To-do</p>
-          </div>
-        </div>
-        <div class="table_cell more_padding">
-          <img class="done_icon" src="./assets/icons/summary/done_icon.svg" alt="done task icon" />
-          <div>
-            <span class="count">{{ getDoneTasksCount() }}</span>
-            <p>Done</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="urgent_task">
-        <div class="task_count">
-          <img
-            class="urgent_icon"
-            src="./assets/icons/summary/urgent_icon.svg"
-            alt="urgent task icon"
-          />
-          <div>
-            <span class="count">{{ getUrgentTaskCount() }}</span>
-            <p>Urgent</p>
-          </div>
-        </div>
-        <img class="divider" src="./assets/icons/summary/grey_dividing_line.svg" alt="grey line" />
-        <div class="due_date">
-          <p class="task_date">{{ getUrgentTaskWithLowestDate() }}</p>
-          <p>Upcoming Deadline</p>
-        </div>
-      </div>
-
-      <div class="third_line">
-        <div class="table_cell">
-          <div>
-            <span class="count">{{ getAllTaskCount() }}</span>
-            <p>Tasks in<br />Board</p>
-          </div>
-        </div>
-        <div class="table_cell">
-          <div>
-            <span class="count">{{ getInProgressTaskCount() }}</span>
-            <p>Tasks in<br />Progress</p>
-          </div>
-        </div>
-        <div class="table_cell">
-          <div>
-            <span class="count">{{ getAwaitFeedbackTaskCount() }}</span>
-            <p>Awaiting<br />Feedback</p>
-          </div>
-        </div>
-      </div>
+    <div id="summaryUpstairs" class="summary_title">
+        <h1>Join 360</h1>
+        <h3>Key Metrics at a Glance</h3>
     </div>
 
-    <div class="welcome">
-      <span class="greeting" id="guestGreeting">{{ getGreeting() }}</span>
-    </div>
+    <div class="main_content">
+        <div class="task_table" *ngIf="showMainContent">
+            <div class="first_line">
+                <div class="table_cell_todo" routerLink="/main-page/board">
+                    <div class="todo_icon" alt="to do task icon" ></div>
+                    <div>
+                        <span class="count">{{ getTodoTaskCount() }}</span>
+                        <p>To-do</p>
+                    </div>
+                </div>
+                <div class="table_cell_done"  routerLink="/main-page/board">
+                    <div class="done_icon" alt="done task icon"></div>
+                    <div>
+                        <span class="count">{{ getDoneTasksCount() }}</span>
+                        <p>Done</p>
+                    </div>
+                </div>
+            </div>
 
-    <div class="welcome">
-      <span class="greeting">{{ getGreeting() }},</span>
-      <span class="user_name">{{ usersFullName | titlecase }}</span>
+            <div class="urgent_task"  routerLink="/main-page/board">
+                <div class="task_count">
+                    <img class="urgent_icon" src="./assets/icons/summary/urgent_icon.svg" alt="urgent task icon" />
+                    <div>
+                        <span class="count">{{ getUrgentTaskCount() }}</span>
+                        <p>Urgent</p>
+                    </div>
+                </div>
+                <img class="divider" src="./assets/icons/summary/grey_dividing_line.svg" alt="grey line" />
+                <div class="due_date">
+                    <p class="task_date">{{ getUrgentTaskWithLowestDate() }}</p>
+                    <p>Upcoming Deadline</p>
+                </div>
+            </div>
+
+            <div class="third_line">
+                <div class="table_cell_bottom" routerLink="/main-page/board">
+                    <div>
+                        <span class="count">{{ getAllTaskCount() }}</span>
+                        <p>Tasks in<br />Board</p>
+                    </div>
+                </div>
+                <div class="table_cell_bottom" routerLink="/main-page/board">
+                    <div>
+                        <span class="count">{{ getInProgressTaskCount() }}</span>
+                        <p>Tasks in<br />Progress</p>
+                    </div>
+                </div>
+                <div class="table_cell_bottom" routerLink="/main-page/board">
+                    <div>
+                        <span class="count">{{ getAwaitFeedbackTaskCount() }}</span>
+                        <p>Awaiting<br />Feedback</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (userName){
+        <div class="welcome">
+            <span class="greeting" id="guestGreeting">{{ getGreeting() }},</span>
+            <p class="username">{{userName}}</p>
+        </div>
+        }@else {
+        <div class="welcome">
+            <span class="greeting">{{ getGreeting() }}!</span>
+        </div>
+        }
     </div>
-  </div>
 </section>
-<button class="go_to_board_button" (click)="navigateToBoardView()">Go to Board</button>
