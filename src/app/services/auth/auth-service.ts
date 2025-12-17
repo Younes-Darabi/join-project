@@ -17,21 +17,27 @@ export interface FullName {
 
 export class AuthService implements OnDestroy {
   firestore: Firestore = inject(Firestore);
-  isLogin = false;
+  isAuthenticated : boolean = false;
   currentUser: User | null = null;
   unsubContacts: any;
 
   constructor(private auth: Auth) {
     this.auth.onAuthStateChanged((user) => {
       this.currentUser = user;
-      this.isLogin = !!user;
+      this.isAuthenticated = !!user;
     });
   }
+
+  isLoggedIn(): boolean { return this.isAuthenticated; }
+
+
+
+
 
   logout() {
     signOut(this.auth).then(() => {
       this.currentUser = null;
-      this.isLogin = false;
+      this.isAuthenticated = false;
     }).catch((error) => {
       console.error(error);
     });
@@ -65,16 +71,16 @@ export class AuthService implements OnDestroy {
     }
   }
 
-  signIn(loginData: LogInInterface): Promise<User> {
+  async signIn(loginData: LogInInterface): Promise<User> {
     const { email, password } = loginData;
-    return signInWithEmailAndPassword(this.auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        return user;
-      })
-      .catch((error) => {
-        throw error;
-      });
+    try {
+      const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+      const user = userCredential.user;
+      this.isAuthenticated = true;
+      return user;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async signUp(userData: SignUpInterface): Promise<User | any> {
