@@ -76,12 +76,16 @@
             position: relative;
 
             input {
+                display: flex;
+                align-items: center;
                 width: 422px;
                 height: 48px;
                 border-radius: 10px;
-                padding: 12px 21px;
                 border: 1px solid #D1D1D1;
                 font-size: 20px;
+                padding-top: 5px;
+                padding-left: 21px;
+                padding-right: 40px;
 
                 &:focus {
                     outline: none;
@@ -91,7 +95,7 @@
 
             img {
                 position: absolute;
-                top: 16px;
+                top: 14px;
                 right: 20px;
             }
 

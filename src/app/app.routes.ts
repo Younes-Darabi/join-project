@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { PageOne } from './components/page-one/page-one';
 import { LogIn } from './components/log-in/log-in';
 import { SignUp } from './components/sign-up/sign-up';
-import { MainPage } from './components/main-page';
 
 export const routes: Routes = [
   { path: '', component: PageOne },

@@ -55,7 +55,7 @@ export class Summary {
 
   async loadUserData() {
     const fullName = await this.authService.getCurrentFullName();
-    if (fullName && this.authService.isLogin) {
+    if (fullName && this.authService.isAuthenticated) {
       this.userName = fullName.firstName + ' ' + fullName.lastName;
     } else {
       this.userName = '';
