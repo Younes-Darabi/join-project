@@ -260,6 +260,19 @@
         align-items: center;
 
         .section_wrapper {
+            padding: 30px;
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    :host {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+
+        .section_wrapper {
             height: calc(100vh - 160px);
             display: flex;
             flex-direction: column;
