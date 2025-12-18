@@ -11,7 +11,7 @@
         <li routerLink="help" class="d_none">Help</li>
         <li routerLink="legal_notice">Legal Notice</li>
         <li routerLink="privacy_policy">Privacy Policy</li>
-        @if (this.authService.isLogin) {
+        @if (authService.isAuthenticated) {
         <li routerLink="/log-in" (click)="logOut()">Log out</li>
         }@else {
         <li routerLink="/log-in" (click)="logOut()">Log in</li>

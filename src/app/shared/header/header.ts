@@ -33,7 +33,7 @@ export class Header implements OnInit {
 
   async loadUserData() {
     const fullName = await this.authService.getCurrentFullName();
-    if (fullName && this.authService.isLogin) {
+    if (fullName && this.authService.isAuthenticated) {
       this.userShort = fullName.firstName[0] + fullName.lastName[0];
     } else {
       this.userShort = 'GA';

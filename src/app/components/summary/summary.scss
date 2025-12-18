@@ -32,6 +32,7 @@
 .first_line {
     display: flex;
     justify-content: space-between;
+    gap: 18px;
 }
 
 .task_table {
@@ -179,6 +180,17 @@
     }
 }
 
+.task_table,
+.urgent_task,
+.table_cell_todo,
+.table_cell_done,
+.table_cell_bottom {
+    width: 100%;
+    max-width: 560px;
+    box-sizing: border-box;
+    padding: 16px;
+    gap: 18px;
+}
 
 
 .count {
@@ -204,9 +216,8 @@
 .third_line {
     display: flex;
     justify-content: space-between;
+    gap: 18px;
 }
-
-
 
 .welcome {
     display: flex;
@@ -233,4 +244,167 @@
     font-size: 64px;
     font-weight: 700;
     color: #29abe2;
+}
+
+@media (max-width: 1300px) {
+    .welcome {
+        display: none;
+    }
+}
+
+@media (max-width: 1000px) {
+    :host {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+
+        .section_wrapper {
+            padding: 30px;
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    :host {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+
+        .section_wrapper {
+            height: calc(100vh - 160px);
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .summary_title {
+            width: 100%;
+            align-items: flex-start;
+            flex-direction: column;
+            padding-left: 10px;
+
+            h1 {
+                font-size: 47px;
+                border-right: unset;
+                padding-right: 0;
+                margin-right: 0;
+            }
+
+            h3 {
+                font-size: 20px;
+
+                span {
+                    border-bottom: 2px solid #29ABE2;
+                    padding-bottom: 10px;
+                }
+            }
+        }
+
+        .task_table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .first_line {
+            width: 100%;
+            gap: 10px;
+        }
+
+        .table_cell_todo,
+        .table_cell_done {
+            width: 186px;
+            height: 110px;
+            gap: 10px;
+            border-radius: 20px;
+
+            span {
+                font-size: 47px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
+
+        .todo_icon,
+        .done_icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .third_line {
+            width: 100%;
+        }
+
+        .table_cell_bottom {
+            width: 116px;
+            height: 116px;
+            border-radius: 20px;
+
+            span {
+                font-size: 47px;
+                font-weight: 600;
+            }
+
+            p {
+                font-size: 14px;
+                font-weight: 400;
+            }
+
+            &:hover {
+                background-color: #293647;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                scale: (1.08);
+                color: white;
+            }
+        }
+
+        .urgent_task {
+            width: 100%;
+            height: 110px;
+            margin: 20px 0;
+            border-radius: 20px;
+
+            .urgent_icon {
+                height: 40px;
+                width: 40px;
+            }
+
+            span {
+                font-size: 47px;
+                font-weight: 600;
+            }
+
+            p {
+                font-size: 15px;
+            }
+        }
+
+        .task_table,
+        .urgent_task,
+        .table_cell_todo,
+        .table_cell_done,
+        .table_cell_bottom {
+            width: 100%;
+            max-width: 320px;
+            padding: 10px;
+            gap: 10px;
+        }
+
+        .due_date {
+            gap: 15px;
+
+            .task_date {
+                font-size: 16px;
+            }
+        }
+
+        .third_line {
+            gap: 10px;
+        }
+    }
 }
