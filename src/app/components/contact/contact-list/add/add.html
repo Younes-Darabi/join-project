@@ -41,7 +41,7 @@
                     [ngClass]="{'error': email.invalid && email.touched}" name="email" type="text" placeholder="Email"
                     [placeholder]="email.invalid && email.touched ? 'Enter your email address' : 'Email'"
                     pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required>
-                <p class="error_text" *ngIf="email.touched && email.invalid">This field is required</p>
+                <p class="error_text" *ngIf="email.touched && email.invalid">Your Email is invalid</p>
             </div>
             <div>
                 <img src="./assets/icons/contact/call.svg" class="icon_phone" alt="icon phone">
@@ -49,7 +49,7 @@
                     [ngClass]="{'error': phone.invalid && phone.touched}" name="phone" type="tel" minlength="5"
                     [placeholder]="phone.invalid && phone.touched ? 'Enter your phone number' : 'Phone'"
                     pattern="^[0-9+ ]+$" required>
-                <p class="error_text" *ngIf="phone.touched && phone.invalid">This field is required</p>
+                <p class="error_text" *ngIf="phone.touched && phone.invalid">Your phone number is invalid</p>
             </div>
             <div class="button">
                 <button class="cancel" type="button" (click)="close()">Cancel<img src="./assets/icons/contact/close.svg"
