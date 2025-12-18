@@ -7,14 +7,14 @@
     <div class="main_content">
         <div class="task_table" *ngIf="showMainContent">
             <div class="first_line">
-                <div class="table_cell_todo" routerLink="/main-page/board">
+                <div class="table_cell_todo" routerLink="/board">
                     <div class="todo_icon" alt="to do task icon" ></div>
                     <div>
                         <span class="count">{{ getTodoTaskCount() }}</span>
                         <p>To-do</p>
                     </div>
                 </div>
-                <div class="table_cell_done"  routerLink="/main-page/board">
+                <div class="table_cell_done"  routerLink="/board">
                     <div class="done_icon" alt="done task icon"></div>
                     <div>
                         <span class="count">{{ getDoneTasksCount() }}</span>
@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <div class="urgent_task"  routerLink="/main-page/board">
+            <div class="urgent_task"  routerLink="/board">
                 <div class="task_count">
                     <img class="urgent_icon" src="./assets/icons/summary/urgent_icon.svg" alt="urgent task icon" />
                     <div>
@@ -39,19 +39,19 @@
             </div>
 
             <div class="third_line">
-                <div class="table_cell_bottom" routerLink="/main-page/board">
+                <div class="table_cell_bottom" routerLink="/board">
                     <div>
                         <span class="count">{{ getAllTaskCount() }}</span>
                         <p>Tasks in<br />Board</p>
                     </div>
                 </div>
-                <div class="table_cell_bottom" routerLink="/main-page/board">
+                <div class="table_cell_bottom" routerLink="/board">
                     <div>
                         <span class="count">{{ getInProgressTaskCount() }}</span>
                         <p>Tasks in<br />Progress</p>
                     </div>
                 </div>
-                <div class="table_cell_bottom" routerLink="/main-page/board">
+                <div class="table_cell_bottom" routerLink="/board">
                     <div>
                         <span class="count">{{ getAwaitFeedbackTaskCount() }}</span>
                         <p>Awaiting<br />Feedback</p>

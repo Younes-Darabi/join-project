@@ -1,5 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, HostListener, ElementRef } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { AuthService } from '../../services/auth/auth-service';
 import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
@@ -12,6 +12,7 @@ import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 })
 export class Header implements OnInit {
   authService = inject(AuthService);
+  private elementRef = inject(ElementRef);
   menu: boolean = false;
   userShort: string = 'GA';
 
@@ -24,6 +25,14 @@ export class Header implements OnInit {
         this.userShort = 'GA';
       }
     });
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    let clickedInside = this.elementRef.nativeElement.contains(event.target);
+    if (this.menu && !clickedInside) {
+      this.menu = false;
+    }
   }
 
   logOut() {

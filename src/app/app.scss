@@ -1,0 +1,23 @@
+:host {
+    display: flex;
+
+    div {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media(max-width:1000px) {
+    :host {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        height: 100vh;
+
+        div {
+            display: flex;
+            flex-direction: column;
+            margin-top: 96px;
+        }
+    }
+}

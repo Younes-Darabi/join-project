@@ -1,7 +1,12 @@
 <main aria-label="Imprint">
+
+	@if(!authService.isAuthenticated){
+	<a routerLink="/log-in" class="close_btn_loggedout"><img src="./assets/icons/contact/close.svg" alt=""></a>
+}
+
 	<header aria-label="Imprint Header">
 		<h1>Legal Notice</h1>
-		<img routerLink="/Summary" src="./assets/icons/contact/arrow.svg" alt="">
+		<img routerLink="/summary" src="./assets/icons/contact/arrow.svg" alt="">
 	</header>
 
 	<article aria-label="Imprint Content">

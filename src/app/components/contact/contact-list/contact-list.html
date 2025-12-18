@@ -27,5 +27,5 @@
 <button class="btn_add_responsive" (click)="openAddContact()"><img src="./assets/icons/contact/person_add_two.svg"
         alt=""></button>
 @if (isClicked) {
-<app-add (closeAddContact)="handleClose()"></app-add>
+<app-add (contactCreated)="showDetails($event)" (closeAddContact)="handleClose()"></app-add>
 }

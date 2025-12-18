@@ -55,7 +55,7 @@
             &:hover {
                 cursor: pointer;
                 background: #E1E6EC;
-            
+
             }
         }
     }
@@ -66,8 +66,8 @@
         height: 158px;
         border-radius: 20px 0 20px 20px;
         padding: 10px;
-        right: 30px;
-        top: 75px;
+        right: 20px;
+        top: 80px;
         background: #2A3647;
         color: white;
 
@@ -94,6 +94,7 @@
         }
     }
 }
+
 .d_none {
     display: none;
 }
@@ -137,8 +138,12 @@
 
         nav {
             height: 200px;
-            top: 60px;
+            right: 10px;
+            top: 65px;
         }
+    }
+    .d_none {
+        display: flex;
     }
     .d_none {
         display: flex;

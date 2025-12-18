@@ -1,7 +1,12 @@
 <main aria-label="Privacy Policy">
+@if(!authService.isAuthenticated){
+	<a routerLink="/log-in" class="close_btn_loggedout"><img src="./assets/icons/contact/close.svg" alt=""></a>
+}
+
+
 	<header>
 		<h1>Privacy Policy</h1>
-		<img routerLink="/Summary" src="./assets/icons/contact/arrow.svg" alt="">
+		<img routerLink="/summary" src="./assets/icons/contact/arrow.svg" alt="">
 	</header>
 	<p>Last updated: 10 December 2025</p>
 
