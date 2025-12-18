@@ -7,6 +7,7 @@ import { Contact } from './contact/contact';
 import { PrivacyPolicy } from './privacy-policy/privacy-policy';
 import { LegalNotice } from './legal-notice/legal-notice';
 import { AuthGuard } from '../services/auth/auth-guard';
+import { HelpComponent } from './help-component/help-component';
 
 export const MainRoutes: Routes = [
   {
@@ -18,8 +19,9 @@ export const MainRoutes: Routes = [
       { path: 'add-task', component: AddTask, canActivate: [AuthGuard] },
       { path: 'board', component: Board, canActivate: [AuthGuard] },
       { path: 'contact', component: Contact, canActivate: [AuthGuard] },
-      { path: 'privacy-policy', component: PrivacyPolicy },
-      { path: 'legal-notice', component: LegalNotice },
+      { path: 'privacy_policy', component: PrivacyPolicy },
+      { path: 'legal_notice', component: LegalNotice },
+      { path: 'help', component: HelpComponent }
     ]
   }
 ];
