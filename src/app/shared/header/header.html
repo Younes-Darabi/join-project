@@ -1,15 +1,16 @@
 <p class="title">Kanban Project Management Tool</p>
 <div>
     <img class="logo" src="./assets/icons/header/logo_b.svg">
-    <img src="./assets/icons/header/help.svg">
+    <img routerLink="/help" src="./assets/icons/header/help.svg">
     <div class="name" (click)="menu = !menu">
         <p>{{userShort}}</p>
     </div>
 </div>
 <nav [ngStyle]="{'display' : menu ? 'block' : 'none' }">
     <ul>
-        <li>Legal Notice</li>
-        <li>Privacy Policy</li>
+        <li routerLink="/help" class="d_none">Help</li>
+        <li routerLink="/legal-notice">Legal Notice</li>
+        <li routerLink="/privacy-policy">Privacy Policy</li>
         @if (authService.isAuthenticated) {
         <li routerLink="/log-in" (click)="logOut()">Log out</li>
         }@else {

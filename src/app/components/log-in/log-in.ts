@@ -30,7 +30,7 @@ export class LogIn {
         console.log('Hi');
         
         await this.authService.signIn(this.login);
-        this.router.navigate(['main-page']);
+        this.router.navigate(['summary']);
       } catch (error: any) {
         this.error = this.getErrorMessage(error.code);
       }

@@ -55,33 +55,7 @@
             &:hover {
                 cursor: pointer;
                 background: #E1E6EC;
-            
-            }
 
-            .burgermenu {
-                display: none;
-                position: absolute;
-                top: 60px;
-                right: 10px;
-                background: #2A3647;
-                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-                border-radius: 8px 0px 8px 8px;
-                padding: 10px 0;
-                flex-direction: column;
-                width: 150px;
-                z-index: 1000;
-
-                a {
-                    display: block;
-                    padding: 10px 20px;
-                    color: #CDCDCD;
-                    text-decoration: none;
-                    font-size: 16px;
-
-                    &:hover {
-                        background-color: #F5F5F5;
-                    }
-                }
             }
         }
     }
@@ -93,7 +67,7 @@
         border-radius: 20px 0 20px 20px;
         padding: 10px;
         right: 20px;
-        top: 96px;
+        top: 80px;
         background: #2A3647;
         color: white;
 
@@ -119,6 +93,10 @@
             }
         }
     }
+}
+
+.d_none {
+    display: none;
 }
 
 @media(max-width:1000px) {
@@ -159,8 +137,12 @@
         }
 
         nav {
+            height: 200px;
             right: 10px;
-            top: 80px;
+            top: 65px;
         }
+    }
+    .d_none {
+        display: flex;
     }
 }

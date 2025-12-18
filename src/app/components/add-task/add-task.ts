@@ -101,7 +101,7 @@ export class AddTask {
 
   changeToBoard() {
     timer(3000).subscribe(() => {
-      this.router.navigate(['/Board']);
+      this.router.navigate(['/board']);
     });
   }
 

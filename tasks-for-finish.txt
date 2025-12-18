@@ -1,0 +1,3 @@
+add-task dropdown anpassen, dass keine scrollbar kommt beim ausklappen
+problem mit firebase warum daten manchmal nicht geladen werden??? ticket erstellt
+fixes vom feedback

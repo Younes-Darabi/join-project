@@ -10,7 +10,7 @@
         <label>
             <input ngModel #firstName="ngModel" [(ngModel)]="user.firstname"
                 [ngStyle]="{'border-color' : firstName.invalid && (firstName.touched || signupForm.submitted) ? 'red' : ''}"
-                required name="firstName" type="text" alt="First name" placeholder="First name" minlength="3">
+                required name="firstName" type="text" alt="First name" placeholder="First name" minlength="2">
         </label>
         <label>
             <input ngModel #lastName="ngModel" [(ngModel)]="user.lastname"
@@ -46,7 +46,7 @@
         <img [ngStyle]="{'outline': !privacy && signupForm.submitted ? '1px solid red' : 'none'}"
             [src]="privacy ? './assets/icons/board/checkbox-checked.svg':'./assets/icons/board/checkbox-unchecked.svg'">
         <p [ngStyle]="{'color': !privacy && signupForm.submitted ? 'red' : '#A8A8A8'}">I accept the</p>
-        <a>Privacy policy</a>
+        <a routerLink="/privacy-policy">Privacy policy</a>
     </div>
     <div class="div_signup">
         <button class="btn_signup">Sign up</button>
@@ -54,8 +54,8 @@
 </form>
 
 <div class="div_bottom">
-    <a routerLink="/main-page/privacy-policy">Privacy Policy</a>
-    <a routerLink="/main-page/legal-notice">Legal notice</a>
+    <a routerLink="/privacy-policy">Privacy Policy</a>
+    <a routerLink="/legal-notice">Legal notice</a>
 </div>
 <div class="success" [ngStyle]="{'display': success ? 'flex' : 'none'}">
     <p>You Signed Up successfully</p>
