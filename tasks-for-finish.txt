@@ -1,0 +1,5 @@
+add-task dropdown anpassen, dass keine scrollbar kommt beim ausklappen
+header, burgermenu anpassen dass help bei 1000px angezeigt wird
+approutes schauen dass es ohne child funktioniert
+problem mit firebase warum daten manchmal nicht geladen werden??? ticket erstellt
+fixes vom feedback
