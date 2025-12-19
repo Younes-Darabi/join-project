@@ -12,7 +12,7 @@ import { Add } from './add/add';
   templateUrl: './contact-list.html',
   styleUrls: ['./contact-list.scss'],
 })
-export class ContactList implements OnInit {
+export class ContactList {
 
   @Output() detailClicked = new EventEmitter<ContactInterface>();
 
@@ -28,9 +28,9 @@ export class ContactList implements OnInit {
     @Inject(DOCUMENT) private document: Document
   ) { }
 
-  ngOnInit() {
-    this.contactService.subContactsList();
-  }
+  // ngOnInit() {
+  //   this.contactService.subContactsList();
+  // }
 
   ngDoCheck() {
     this.groupedContacts = this.contactService.getGroupedContacts();
