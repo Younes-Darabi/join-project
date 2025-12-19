@@ -1,1 +1,69 @@
-<p>legal-notice works!</p>
+<main aria-label="Imprint">
+
+	@if(!authService.isAuthenticated){
+	<a routerLink="/log-in" class="close_btn_loggedout"><img src="./assets/icons/contact/close.svg" alt=""></a>
+}
+
+	<header aria-label="Imprint Header">
+		<h1>Legal Notice</h1>
+		<img routerLink="/summary" src="./assets/icons/contact/arrow.svg" alt="">
+	</header>
+
+	<article aria-label="Imprint Content">
+		<section aria-label="Project and contributors">
+			<h2>Imprint</h2>
+			<p>Kevin Hase</p>
+            <p>Younes Darabi</p>
+            <p>Anastasia Tsypkaykina</p>
+            <p>Developer Akademie GmbH</p>
+			<p>Tassiloplatz 25</p>
+			<p>81541 München</p>
+		</section>
+
+		<section aria-label="Exploring the board">
+			<h2>Exploring the Board</h2>
+			<p>Email: <a href="mailto:hasekevin21@gmail.com">hasekevin21@gmail.com</a></p>
+		</section>
+
+		<section aria-label="Acceptance of terms">
+			<h2>Acceptance of terms</h2>
+			<p>By accessing and using <span>Join</span> , you acknowledge and agree to the following terms and conditions, and any policies, guidelines, or amendments thereof that may be presented to you from time to time. The listed students may update or change the terms and conditions from time to time without notice.</p>
+		</section>
+
+		<section aria-label="Scope and ownership">
+			<h2>Scope and ownership of the product</h2>
+			<p><span>Join</span> has been developed as part of a student group project in a web development bootcamp at the <span>Developer Akademie GmbH</span>. It has an educational purpose and is not intended for extensive personal & business usage. As such, we cannot guarantee consistent availability, reliability, accuracy, or any other aspect of quality regarding this Product.</p>
+			<p>The design and intellectual property of <span>Join</span> are owned by the <span>Developer Akademie GmbH</span>. Unauthorized use, reproduction, modification, distribution, or replication of the design is strictly prohibited.</p>
+		</section>
+
+		<section aria-label="Proprietary rights">
+			<h2>Proprietary rights</h2>
+			<p>Aside from the design owned by <span>Developer Akademie GmbH</span>, the listed students retain all proprietary rights in <span>Join</span>, including any associated copyrighted material, trademarks, and other proprietary information.</p>
+		</section>
+
+		<section aria-label="Use of the product">
+			<h2>Use of the product</h2>
+			<p><span>Join</span> is intended to be used for lawful purposes only, in accordance with all applicable laws and regulations. Any use of <span>Join</span> for illegal activities, or to harass, harm, threaten, or intimidate another person, is strictly prohibited. You are solely responsible for your interactions with other users of <span>Join</span>.</p>
+		</section>
+
+		<section aria-label="Disclaimer of warranties">
+			<h2>Disclaimer of warranties and limitation of liability</h2>
+			<p><span>Join</span> is provided "as is" without warranty of any kind, whether express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event will the listed students, or the <span>Developer Akademie GmbH</span>, be liable for any direct, indirect, incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data, or other intangible losses, even if we have been advised of the possibility of such damages, arising out of or in connection with the use or performance of <span>Join</span>.</p>
+		</section>
+
+		<section aria-label="Indemnity">
+			<h2>Indemnity</h2>
+			<p>You agree to indemnify, defend and hold harmless the listed students, the <span>Developer Akademie GmbH</span>, and our affiliates, partners, officers, directors, agents, and employees, from and against any claim, demand, loss, damage, cost, or liability (including reasonable legal fees) arising out of or relating to your use of <span>Join</span> and/or your breach of this Imprint.</p>
+		</section>
+
+		<section aria-label="Contact for notices">
+			<h2>Contact</h2>
+			<p>For any questions or notices, please contact us at: <a href="mailto:hasekevin21@gmail.com">hasekevin21@gmail.com</a></p>
+		</section>
+
+		<footer aria-label="Imprint Footer">
+			<p>Date: 12.12.2025</p>
+		</footer>
+	</article>
+</main>
+

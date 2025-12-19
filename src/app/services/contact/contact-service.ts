@@ -1,7 +1,6 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { collection, deleteDoc, doc, Firestore, getDocs, onSnapshot, query, addDoc, updateDoc } from '@angular/fire/firestore';
+import { collection, deleteDoc, doc, Firestore, getDocs, onSnapshot, query, addDoc, updateDoc, where } from '@angular/fire/firestore';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
-
 
 @Injectable({
   providedIn: 'root',
@@ -49,7 +48,7 @@ export class ContactService implements OnDestroy {
           this.contactList.push(this.setContactObject(element.data(), element.id));
         });
       },
-      (error) => {console.error(error);}
+      (error) => { console.error(error); }
     );
   }
 
@@ -100,8 +99,6 @@ export class ContactService implements OnDestroy {
     return doc(collection(this.firestore, colId), docId);
   }
 
-
-
   setContactObject(obj: any, id: string): ContactInterface {
     let initials = '';
     if (obj.firstname && obj.lastname) {
@@ -121,7 +118,7 @@ export class ContactService implements OnDestroy {
   }
 
   getColorForContact(contact: ContactInterface | any): string {
-    const key = contact.id 
+    const key = contact.id
     let hash = 0;
 
     for (let i = 0; i < key.length; i++) {

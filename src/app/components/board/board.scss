@@ -1,4 +1,4 @@
-.board_wrapper{
+.board_wrapper {
   max-width: 1920px;
 }
 
@@ -346,8 +346,8 @@ section {
 
   .add_task2 {
     position: relative;
-    padding: 30px;
-    border-radius: 30px;
+    padding: 5px;
+    border-radius: 10px;
     background: #f5f6f7;
 
     .close_btn {
@@ -363,6 +363,15 @@ section {
         background-color: #00000013;
         border-radius: 50%;
       }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .add_task1 {
+
+    .add_task2 {
+      width: 95%;
     }
   }
 }

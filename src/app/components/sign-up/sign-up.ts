@@ -1,11 +1,66 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Router, RouterLink } from "@angular/router";
+import { SignUpInterface } from '../../interfaces/sign-up/sign-up.interface';
+import { AuthService } from '../../services/auth/auth-service';
 
 @Component({
   selector: 'app-sign-up',
-  imports: [],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './sign-up.html',
   styleUrl: './sign-up.scss',
 })
 export class SignUp {
+  authService = inject(AuthService);
+  user: SignUpInterface = {
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
+  };
+  privacy: boolean = false;
+  checkMatchPassword: boolean = false;
+  confirmPassword: string = '';
+  success: boolean = false;
+  error: string = '';
 
+  constructor(private router: Router) { }
+
+  async onSubmit(signupForm: NgForm) {
+    this.checkMatchPassword = this.checkMatchPasswords();
+    this.error = '';
+
+    if (!signupForm.invalid && !this.checkMatchPassword && this.privacy) {
+      try {
+        await this.authService.signUp(this.user);
+        this.success = true;
+        setTimeout(() => {
+          this.success = false;
+          this.router.navigate(['/log-in']);
+        }, 3000);
+
+      } catch (error: any) {
+        const errorCode = error.code;
+        this.error = this.getErrorMessage(errorCode);
+      }
+    }
+  }
+
+  checkMatchPasswords() {
+    return (this.user.password.length < 6 || this.user.password !== this.confirmPassword);
+  }
+
+  getErrorMessage(errorCode: string): string {
+    switch (errorCode) {
+      case 'auth/email-already-in-use':
+        return 'This email address is already in use.';
+      case 'auth/invalid-email':
+        return 'The email address is not valid.';
+      case 'auth/weak-password':
+        return 'The password must be at least 6 characters long.';
+      default:
+        return 'Unknown error: ' + errorCode;
+    }
+  }
 }

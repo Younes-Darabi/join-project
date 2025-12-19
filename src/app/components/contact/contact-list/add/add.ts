@@ -23,11 +23,14 @@ export class Add {
     type: ''
   };
 
+  @Output() contactCreated = new EventEmitter<ContactInterface>();
+
   addUser() {
     this.firebaseService.addContact(this.user);
     this.firebaseService.contactList.push(JSON.parse(JSON.stringify(this.user)));
 
     this.success = true;
+    this.contactCreated.emit(this.user);
     setTimeout(() => {
       this.close();
       this.success = false;

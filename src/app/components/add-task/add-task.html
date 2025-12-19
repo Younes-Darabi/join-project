@@ -65,9 +65,14 @@
             @if (selected.length > 0) {
             <div class="assigned_selected_avatars">
               @for (contact of selected; track contact.id) {
-              <span class="assigned_dropdown_avatar assigned_selected_avatar" [style.background-color]="contact.color">
-                {{ contact.initials }}
-              </span>
+                @if (selected.indexOf(contact) < 4) {
+                <span class="assigned_dropdown_avatar assigned_selected_avatar" [style.background-color]="contact.color">
+                  {{ contact.initials }}
+                </span>
+                }
+              }
+              @if (selected.length > 4) {
+              <div class="more_count">+ {{ selected.length - 4 }}</div>
               }
             </div>
             }

@@ -1,1 +1,62 @@
-<p>sign-up works!</p>
+<div class="div_top">
+    <img src="./assets/icons/favicon.svg">
+</div>
+
+<form (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm">
+    <img routerLink="/log-in" class="arrow" src="./assets/icons/contact/arrow.svg" alt="back">
+    <h1>Sign up</h1>
+    <span></span>
+    <div class="name">
+        <label>
+            <input ngModel #firstName="ngModel" [(ngModel)]="user.firstname"
+                [ngStyle]="{'border-color' : firstName.invalid && (firstName.touched || signupForm.submitted) ? 'red' : ''}"
+                required name="firstName" type="text" alt="First name" placeholder="First name" minlength="2">
+        </label>
+        <label>
+            <input ngModel #lastName="ngModel" [(ngModel)]="user.lastname"
+                [ngStyle]="{'border-color' : lastName.invalid && (lastName.touched || signupForm.submitted) ? 'red' : ''}"
+                required name="lastName" type="text" alt="Last name" placeholder="Last name" minlength="3">
+            <img src="./assets/icons/contact/person.svg" alt="Last name">
+        </label>
+    </div>
+    <label>
+        <input ngModel #email="ngModel" [(ngModel)]="user.email"
+            [ngStyle]="{'border-color' :error|| email.invalid && (email.touched || signupForm.submitted) ? 'red' : ''}"
+            required name="email" type="text" alt="Email" placeholder="Email">
+        <img src="./assets/icons/contact/mail.svg" alt="Email">
+    </label>
+    <label>
+        <input ngModel #password="ngModel" [(ngModel)]="user.password"
+            [ngStyle]="{'border-color' : checkMatchPassword || password.invalid && password.touched ? 'red' : ''}"
+            required name="password" type="password" placeholder="Password" minlength="6">
+        <img src="./assets/icons/contact/lock.svg" alt="Password">
+    </label>
+    <label>
+        <input ngModel #confirmPassword="ngModel" [(ngModel)]="this.confirmPassword"
+            [ngStyle]="{'border-color' : checkMatchPassword || confirmPassword.invalid && confirmPassword.touched ? 'red' : ''}"
+            required name="confirmPassword" type="password" placeholder="Confirm Password" minlength="6">
+        <img src="./assets/icons/contact/lock.svg" alt="Password">
+        <div class="div_error">
+            <p [ngStyle]="{'display' : checkMatchPassword ? 'block' : 'none'}" class="error">Your passwords don't match.
+                Please try again.</p>
+            <p [ngStyle]="{'display' : error ? 'block' : 'none'}" class="error">{{error}}</p>
+        </div>
+    </label>
+    <div class="div_privacy" (click)="privacy=!privacy">
+        <img [ngStyle]="{'outline': !privacy && signupForm.submitted ? '1px solid red' : 'none'}"
+            [src]="privacy ? './assets/icons/board/checkbox-checked.svg':'./assets/icons/board/checkbox-unchecked.svg'">
+        <p [ngStyle]="{'color': !privacy && signupForm.submitted ? 'red' : '#A8A8A8'}">I accept the</p>
+        <a routerLink="/privacy-policy">Privacy policy</a>
+    </div>
+    <div class="div_signup">
+        <button class="btn_signup">Sign up</button>
+    </div>
+</form>
+
+<div class="div_bottom">
+    <a routerLink="/privacy-policy">Privacy Policy</a>
+    <a routerLink="/legal-notice">Legal notice</a>
+</div>
+<div class="success" [ngStyle]="{'display': success ? 'flex' : 'none'}">
+    <p>You Signed Up successfully</p>
+</div>

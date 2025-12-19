@@ -1,0 +1,288 @@
+section {
+    height: calc(100vh - 140px);
+    padding: 60px 80px 20px;
+    max-width: 1960px;
+    overflow-y: scroll;
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    img {
+        display: none;
+        border: none;
+        background: none;
+    }
+
+    h1 {
+        font-size: 61px;
+        font-weight: 700;
+        margin-bottom: 30px;
+    }
+
+    h2 {
+        font-size: 27px;
+        font-weight: 700;
+        margin: 20px 0;
+    }
+
+    h3 {
+        font-size: 25px;
+        font-weight: 700;
+        margin-top: 50px;
+    }
+
+    span {
+        color: #29ABE2;
+    }
+
+    a {
+        color: #29ABE2;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    ul {
+        padding-left: 30px;
+        margin: 20px 0;
+    }
+
+    li {
+        list-style: decimal;
+        list-style-position: outside;
+        padding-left: 20px;
+
+        &::marker {
+            font-size: 27px;
+            font-weight: bold;
+        }
+    }
+}
+
+/* Responsive adjustments: only padding, margin and font-size */
+@media (max-width: 1000px) {
+    section {
+        padding: 50px 60px 18px;
+
+        img {
+            display: block;
+        }
+
+        h1 {
+            font-size: 52px;
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            margin: 18px 0;
+        }
+
+        h3 {
+            font-size: 22px;
+            margin-top: 42px;
+        }
+
+        ul {
+            margin: 18px 0;
+            padding-left: 28px;
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    section {
+        padding: 44px 48px 16px;
+
+
+        h1 {
+            font-size: 46px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin: 16px 0;
+        }
+
+        h3 {
+            font-size: 20px;
+            margin-top: 38px;
+        }
+
+        ul {
+            margin: 16px 0;
+            padding-left: 26px;
+        }
+
+    }
+}
+
+@media (max-width: 800px) {
+    section {
+        padding: 40px 40px 14px;
+
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 18px;
+        }
+
+        h2 {
+            margin: 14px 0;
+        }
+
+        h3 {
+
+            margin-top: 36px;
+        }
+
+        ul {
+            margin: 14px 0;
+            padding-left: 24px;
+        }
+
+    }
+}
+
+@media (max-width: 720px) {
+    section {
+        padding: 36px 32px 12px;
+
+        h1 {
+            font-size: 38px;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+
+            margin: 12px 0;
+        }
+
+        h3 {
+
+            margin-top: 34px;
+        }
+
+        ul {
+            margin: 12px 0;
+            padding-left: 22px;
+        }
+
+
+    }
+}
+
+@media (max-width: 600px) {
+    section {
+        padding: 30px 25px 10px;
+
+
+        h1 {
+            font-size: 34px;
+            margin-bottom: 14px;
+        }
+
+        h2 {
+
+            margin: 10px 0;
+        }
+
+        h3 {
+
+            margin-top: 30px;
+        }
+
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+    }
+}
+
+@media (max-width: 480px) {
+    section {
+        padding: 30px 25px 6px;
+
+
+
+        h1 {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+
+            margin: 9px 0;
+        }
+
+        h3 {
+
+            margin-top: 26px;
+        }
+
+        ul {
+            margin: 9px 0;
+            padding-left: 18px;
+        }
+    }
+}
+
+@media (max-width: 375px) {
+    section {
+        padding: 30px 25px 6px;
+
+
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+
+            margin: 8px 0;
+        }
+
+        h3 {
+
+            margin-top: 24px;
+        }
+
+        ul {
+            margin: 8px 0;
+            padding-left: 16px;
+        }
+
+    }
+}
+
+@media (max-width: 320px) {
+    section {
+        padding: 30px 25px 6px;
+
+
+        h1 {
+            font-size: 24px;
+
+        }
+
+        h2 {
+
+            margin: 24px 0;
+        }
+
+        h3 {
+            margin-top: 20px;
+        }
+
+        ul {
+            margin: 6px 0;
+            padding-left: 14px;
+        }
+
+    }
+}
