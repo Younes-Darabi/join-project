@@ -8,9 +8,9 @@
 </div>
 <nav [ngStyle]="{'display' : menu ? 'block' : 'none' }">
     <ul>
-        <li routerLink="/help" class="d_none">Help</li>
-        <li routerLink="/legal-notice">Legal Notice</li>
-        <li routerLink="/privacy-policy">Privacy Policy</li>
+        <li routerLink="/help" (click)="menu = false" class="d_none">Help</li>
+        <li routerLink="/legal-notice" (click)="menu = false">Legal Notice</li>
+        <li routerLink="/privacy-policy" (click)="menu = false">Privacy Policy</li>
         @if (authService.isAuthenticated) {
         <li routerLink="/log-in" (click)="logOut()">Log out</li>
         }@else {
