@@ -3,15 +3,14 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BoardService } from '../../services/board/board-service';
 import { TaskInterface } from '../../interfaces/board/task.interface';
-import { collectionData, Firestore, collection } from '@angular/fire/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
+import { getAuth } from '@angular/fire/auth';
 import { AuthService } from '../../services/auth/auth-service';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-summary',
-  imports: [CommonModule, FormsModule, RouterModule, RouterOutlet],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './summary.html',
   styleUrl: './summary.scss',
 })
@@ -27,7 +26,6 @@ export class Summary {
   inProgress: TaskInterface[] = [];
   awaitFeedback: TaskInterface[] = [];
   done: TaskInterface[] = [];
-  urgent: TaskInterface[] = [];
   filteredTasks: TaskInterface[] = [];
   usersFullName: string = '';
   showGreeting: boolean = false;
@@ -43,6 +41,7 @@ export class Summary {
     this.filteredTasks = this.tasks;
     this.sortTasks();
     const auth = getAuth();
+
   }
 
   ngOnInit() {
@@ -101,49 +100,6 @@ export class Summary {
     });
   }
 
-  getUrgentTaskWithLowestDate(): string {
-    this.sortTasksByPriority();
-    if (this.urgent.length === 0) {
-      return 'No urgent Tasks';
-    } else {
-      let taskWithLowestDate: TaskInterface = this.urgent[0];
-      this.urgent.forEach((urgentTask) => {
-        if (urgentTask.dueDate) {
-          const currentDate = new Date(urgentTask.dueDate);
-          const lowestDate = new Date(taskWithLowestDate.dueDate || '');
-          if (currentDate < lowestDate) {
-            taskWithLowestDate = urgentTask;
-          }
-        }
-      });
-      return this.transformUrgentTaskDate(taskWithLowestDate);
-    }
-  }
-
-  sortTasksByPriority() {
-    this.urgent = [];
-
-    this.filteredTasks.forEach((task) => {
-      if (task.priority === 'urgent') {
-        this.urgent.push(task);
-      }
-    });
-  }
-
-  transformUrgentTaskDate(task: TaskInterface): string {
-    if (task.dueDate) {
-      const date = new Date(task.dueDate);
-      const formattedDate = new Intl.DateTimeFormat('en-US', {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
-      }).format(date);
-      return formattedDate;
-    } else {
-      return 'No date found';
-    }
-  }
-
   categorizeTask(task: TaskInterface) {
     if (task.status === 'todo') {
       this.todo.push(task);
@@ -178,11 +134,6 @@ export class Summary {
 
   getAllTaskCount() {
     return this.filteredTasks.length;
-  }
-
-  getUrgentTaskCount() {
-    this.sortTasksByPriority();
-    return this.urgent.length;
   }
 
   getGreeting() {
