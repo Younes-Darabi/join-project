@@ -10,14 +10,14 @@
                 <div class="table_cell_todo" routerLink="/board">
                     <div class="todo_icon" alt="to do task icon" ></div>
                     <div>
-                        <span class="count">{{ getTodoTaskCount() }}</span>
+                        <span class="count">{{ this.boardService.toDoList.length }}</span>
                         <p>To-do</p>
                     </div>
                 </div>
                 <div class="table_cell_done"  routerLink="/board">
                     <div class="done_icon" alt="done task icon"></div>
                     <div>
-                        <span class="count">{{ getDoneTasksCount() }}</span>
+                        <span class="count">{{ this.boardService.doneList.length }}</span>
                         <p>Done</p>
                     </div>
                 </div>
@@ -27,13 +27,13 @@
                 <div class="task_count">
                     <img class="urgent_icon" src="./assets/icons/summary/urgent_icon.svg" alt="urgent task icon" />
                     <div>
-                        <span class="count">{{ getUrgentTaskCount() }}</span>
+                        <span class="count">{{ this.boardService.urgentTaskCount }}</span>
                         <p>Urgent</p>
                     </div>
                 </div>
                 <img class="divider" src="./assets/icons/summary/grey_dividing_line.svg" alt="grey line" />
                 <div class="due_date">
-                    <p class="task_date">{{ getUrgentTaskWithLowestDate() }}</p>
+                    <p class="task_date">{{ this.boardService.nextUrgentDeadline }}</p>
                     <p>Upcoming Deadline</p>
                 </div>
             </div>
@@ -41,19 +41,19 @@
             <div class="third_line">
                 <div class="table_cell_bottom" routerLink="/board">
                     <div>
-                        <span class="count">{{ getAllTaskCount() }}</span>
+                        <span class="count">{{ this.boardService.taskList.length }}</span>
                         <p>Tasks in<br />Board</p>
                     </div>
                 </div>
                 <div class="table_cell_bottom" routerLink="/board">
                     <div>
-                        <span class="count">{{ getInProgressTaskCount() }}</span>
+                        <span class="count">{{ this.boardService.inProgressList.length }}</span>
                         <p>Tasks in<br />Progress</p>
                     </div>
                 </div>
                 <div class="table_cell_bottom" routerLink="/board">
                     <div>
-                        <span class="count">{{ getAwaitFeedbackTaskCount() }}</span>
+                        <span class="count">{{ this.boardService.awaitFeedbackList.length }}</span>
                         <p>Awaiting<br />Feedback</p>
                     </div>
                 </div>

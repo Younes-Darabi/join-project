@@ -30,26 +30,20 @@ export class ContactService implements OnDestroy {
   ];
 
   constructor() {
-    this.unsubContacts = this.subContactsList();
-  }
-
-  ngOnDestroy() {
-    if (this.unsubContacts) {
-      this.unsubContacts();
-    }
-  }
-
-  subContactsList() {
-    const q = query(this.getContactsRef());
-    return onSnapshot(q,
-      (list) => {
+    this.unsubContacts = onSnapshot(collection(this.firestore, 'users'), (list) => {
         this.contactList = [];
         list.forEach(element => {
           this.contactList.push(this.setContactObject(element.data(), element.id));
         });
       },
       (error) => { console.error(error); }
-    );
+    );;
+  }
+
+  ngOnDestroy() {
+    if (this.unsubContacts) {
+      this.unsubContacts();
+    }
   }
 
   async addContact(user: ContactInterface) {

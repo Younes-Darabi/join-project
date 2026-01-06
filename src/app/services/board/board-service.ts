@@ -13,9 +13,7 @@ export class BoardService implements OnDestroy {
   inProgressList: TaskInterface[] = [];
   awaitFeedbackList: TaskInterface[] = [];
   doneList: TaskInterface[] = [];
-
-   selectedTask?: TaskInterface;
-
+  selectedTask?: TaskInterface;
   originalToDoList: TaskInterface[] = [];
   originalInProgressList: TaskInterface[] = [];
   originalAwaitFeedbackList: TaskInterface[] = [];
@@ -77,13 +75,50 @@ filteredLists(searchTerm: string) {
 
   async addTask(task: TaskInterface) {
     let cleantask = this.getCleanTaskJson(task);
-    await addDoc(this.getTaskRef(), cleantask)
-      .catch((err) => {
-        console.error(err);
-      })
-      .then((docRef) => {
-        console.log('Task successfully added', docRef?.id);
-      });
+    try {
+      let docRef = await addDoc(this.getTaskRef(), cleantask);
+      console.log('Task successfully added', docRef?.id);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  get urgentTaskCount(): number {
+    return this.taskList.filter(task => task.priority === 'urgent').length;
+  }
+
+  get nextUrgentDeadline(): string {
+    let urgentTasks = this.taskList.filter(task => task.priority === 'urgent');
+
+    if (urgentTasks.length === 0) {
+      return 'No urgent tasks';
+    }
+
+    let taskWithLowestDate = urgentTasks[0];
+    urgentTasks.forEach((urgentTask) => {
+      if (urgentTask.dueDate) {
+        let currentDate = new Date(urgentTask.dueDate);
+        let lowestDate = new Date(taskWithLowestDate.dueDate || '');
+        if (currentDate < lowestDate) {
+          taskWithLowestDate = urgentTask;
+        }
+      }
+    });
+
+    return this.formatTaskDate(taskWithLowestDate);
+  }
+
+  formatTaskDate(task: TaskInterface): string {
+    if (task.dueDate) {
+      let date = new Date(task.dueDate);
+      let formattedDate = new Intl.DateTimeFormat('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      }).format(date);
+      return formattedDate;
+    }
+    return 'No date found';
   }
 
   getTasksFromFirebase() {
