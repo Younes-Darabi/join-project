@@ -73,6 +73,9 @@ main {
             margin: 14px 0;
         }
     }
+    .close_btn_loggedout{
+        display: none;
+    }
 }
 
 @media (max-width: 900px) {
