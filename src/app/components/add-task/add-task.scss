@@ -522,7 +522,7 @@ label {
 // ============================================
 .add_task_actions {
     @include flexbox(row, center, space-between, 12px);
-    margin-top: 40px;
+    margin-top: 10px;
     padding: 24px 0;
 
     div {
@@ -596,7 +596,7 @@ label {
 
     .add_task_buttons {
         position: absolute;
-        bottom: 90px;
+        bottom: 20px;
         right: 20px;
         z-index: 2000;
     }
@@ -829,7 +829,9 @@ label {
 
     .subtask_input_field {
         font-size: 16px;
-        padding: 10px 48px 10px 12px;
+        padding: 10px 12px 10px 12px;
+        margin-left: 38px;
+        width: 100%;
     }
 
     .subtask_btn_check,
@@ -844,7 +846,7 @@ label {
         right: 30px;
     }
 
-    .subtask_row .small_separator {
+    .subtask_row  {
         right: 36px;
     }
 
@@ -854,6 +856,9 @@ label {
 
     .add_task_actions {
         padding: 12px 16px;
+        margin-top: 0;
+        margin-bottom: 10px;
+        
 
         div {
             gap: 8px;
@@ -864,6 +869,9 @@ label {
     .add_task_btn_submit {
         padding: 10px 20px;
         font-size: 16px;
+    }
+    .add_task_buttons{
+        bottom: 10px;
     }
 }
 
