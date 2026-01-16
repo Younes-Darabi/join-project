@@ -21,8 +21,7 @@
     </div>
     <label>
         <input ngModel #email="ngModel" [(ngModel)]="user.email"
-            [ngStyle]="{'border-color' :email.invalid && (email.touched || signupForm.submitted) ? 'red' : ''}"
-            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            [ngStyle]="{'border-color' :error|| email.invalid && (email.touched || signupForm.submitted) ? 'red' : ''}"
             required name="email" type="text" alt="Email" placeholder="Email">
         <img src="./assets/icons/contact/mail.svg" alt="Email">
     </label>
@@ -38,8 +37,8 @@
             required name="confirmPassword" type="password" placeholder="Confirm Password" minlength="6">
         <img src="./assets/icons/contact/lock.svg" alt="Password">
         <div class="div_error">
-            <!-- <p [ngStyle]="{'display' : checkMatchPassword ? 'block' : 'none'}" class="error">Your passwords don't match.
-                Please try again.</p> -->
+            <p [ngStyle]="{'display' : checkMatchPassword ? 'block' : 'none'}" class="error">Your passwords don't match.
+                Please try again.</p>
             <p [ngStyle]="{'display' : error ? 'block' : 'none'}" class="error">{{error}}</p>
         </div>
     </label>
@@ -58,6 +57,6 @@
     <a routerLink="/privacy-policy">Privacy Policy</a>
     <a routerLink="/legal-notice">Legal notice</a>
 </div>
-<!-- <div class="success" [ngStyle]="{'display': success ? 'flex' : 'none'}">
+<div class="success" [ngStyle]="{'display': success ? 'flex' : 'none'}">
     <p>You Signed Up successfully</p>
-</div> -->
+</div>
