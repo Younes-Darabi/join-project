@@ -1,9 +1,16 @@
-import { Component, DOCUMENT, EventEmitter, Inject, OnInit, Output, Renderer2 } from '@angular/core';
+import {
+  Component,
+  DOCUMENT,
+  EventEmitter,
+  Inject,
+  OnInit,
+  Output,
+  Renderer2,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
 import { ContactService } from '../../../services/contact/contact-service';
 import { Add } from './add/add';
-
 
 @Component({
   selector: 'app-contact-list',
@@ -13,7 +20,6 @@ import { Add } from './add/add';
   styleUrls: ['./contact-list.scss'],
 })
 export class ContactList {
-
   @Output() detailClicked = new EventEmitter<ContactInterface>();
 
   groupedContacts: Record<string, ContactInterface[]> = {};
@@ -26,7 +32,7 @@ export class ContactList {
     public contactService: ContactService,
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document
-  ) { }
+  ) {}
 
   // ngOnInit() {
   //   this.contactService.subContactsList();
@@ -36,7 +42,6 @@ export class ContactList {
     this.groupedContacts = this.contactService.getGroupedContacts();
     this.groupedKeys = Object.keys(this.groupedContacts);
   }
-
 
   openAddContact() {
     this.isClicked = true;
@@ -51,6 +56,18 @@ export class ContactList {
   showDetails(item: ContactInterface) {
     this.detailClicked.emit(item);
     this.activeSection = item.id;
-    
+  }
+
+  selectNextContact(deletedId: string) {
+    const allContacts = Object.values(this.groupedContacts).flat();
+
+    if (allContacts.length === 0) {
+      this.activeSection = null;
+      return;
+    }
+
+    const nextContact = allContacts[0];
+    this.activeSection = nextContact.id;
+    this.detailClicked.emit(nextContact);
   }
 }

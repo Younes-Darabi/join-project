@@ -10,7 +10,6 @@ import { ContactInterface } from '../../../../interfaces/contact/contact-list.in
   templateUrl: './edit.html',
   styleUrls: ['./edit.scss'],
 })
-
 export class Edit {
   firebaseService = inject(ContactService);
 
@@ -18,6 +17,8 @@ export class Edit {
   @Input() user!: ContactInterface;
   @Output() closeing = new EventEmitter();
   @Output() closeEditContact = new EventEmitter();
+  @Output() contactDeleted = new EventEmitter<ContactInterface>();
+
   shortName: string = '';
   editUser!: ContactInterface;
 
@@ -37,7 +38,8 @@ export class Edit {
 
   deleteContact() {
     this.firebaseService.deleteContact(this.user);
-    this.closeing.emit();
+    this.contactDeleted.emit(this.user);
+    this.close();
   }
 
   close() {
