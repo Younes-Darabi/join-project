@@ -1,8 +1,17 @@
-import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output, inject, signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+  inject,
+  signal,
+} from '@angular/core';
 import { ContactService } from '../../../services/contact/contact-service';
 import { ContactInterface } from '../../../interfaces/contact/contact-list.interface';
 import { Edit } from './edit/edit';
-
 
 @Component({
   selector: 'app-details',
@@ -18,22 +27,21 @@ export class Details {
   @Input() contact!: ContactInterface;
   @Input() contactClicked: boolean = false;
   @Output() close = new EventEmitter<void>();
+  @Output() contactDeleted = new EventEmitter<ContactInterface>();
+
   showDetail: boolean = false;
   contactTitleShow: boolean = false;
 
   get shortName(): string {
     return this.contact
-      ? (this.contact.firstname?.charAt(0) || '') +
-      (this.contact.lastname?.charAt(0) || '')
+      ? (this.contact.firstname?.charAt(0) || '') + (this.contact.lastname?.charAt(0) || '')
       : '';
   }
 
-  constructor(private elementRef: ElementRef) {
-
-  }
+  constructor(private elementRef: ElementRef) {}
 
   toggleMenu() {
-    this.menuOpen.update(v => !v);
+    this.menuOpen.update((v) => !v);
   }
 
   @HostListener('document:click', ['$event'])
@@ -67,5 +75,16 @@ export class Details {
   back() {
     this.close.emit();
     this.contactTitleShow = false;
+  }
+
+  deleteContactFromParent(contact: ContactInterface) {
+    // Weiterleiten an Parent
+    this.contactDeleted.emit(contact);
+
+    // Details-Fenster schließen
+    this.close.emit();
+
+    // Edit schließen
+    this.handleClose();
   }
 }

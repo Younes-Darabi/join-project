@@ -4,13 +4,14 @@ import { Details } from './details/details';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
+import { ContactService } from '../../services/contact/contact-service';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
   imports: [ContactList, Details, FormsModule, NgClass],
   templateUrl: './contact.html',
-  styleUrls: ['./contact.scss']
+  styleUrls: ['./contact.scss'],
 })
 export class Contact {
   @ViewChild(Details) Details!: Details;
@@ -22,10 +23,14 @@ export class Contact {
   selectedContact = signal<ContactInterface | null>(null);
   selectedContactOpen = signal<boolean>(false);
 
-  constructor() {
+  // Optional: flache Liste aller Kontakte
+  allContacts: ContactInterface[] = [];
+
+  constructor(private contactService: ContactService) {
     window.addEventListener('resize', () => {
       this.isMobile.set(window.innerWidth <= 800);
     });
+    this.allContacts = contactService.getAllContacts();
   }
 
   showDetail(contact: ContactInterface) {
@@ -38,5 +43,17 @@ export class Contact {
 
   closeView() {
     this.selectedContactOpen.set(false);
+  }
+
+  onContactDeleted(contact: ContactInterface) {
+    this.contactService.deleteContact(contact);
+    const allContacts = this.contactService.getAllContacts(); // flaches Array
+    const index = allContacts.findIndex((c) => c.id === contact.id);
+    const nextContact = allContacts[index] || allContacts[index - 1] || null;
+    this.selectedContact.set(nextContact);
+    this.selectedContactOpen.set(!!nextContact);
+    if (!nextContact && this.Details) {
+      this.Details.contact = null as any;
+    }
   }
 }
