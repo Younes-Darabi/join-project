@@ -5,6 +5,7 @@ import { ContactInterface } from '../../interfaces/contact/contact-list.interfac
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { ContactService } from '../../services/contact/contact-service';
+import { ContactService } from '../../services/contact/contact-service';
 
 @Component({
   selector: 'app-contact',
@@ -22,9 +23,6 @@ export class Contact {
   // Aktuell ausgewählter Kontakt
   selectedContact = signal<ContactInterface | null>(null);
   selectedContactOpen = signal<boolean>(false);
-
-  // Optional: flache Liste aller Kontakte
-  allContacts: ContactInterface[] = [];
 
   constructor(private contactService: ContactService) {
     window.addEventListener('resize', () => {
@@ -47,7 +45,7 @@ export class Contact {
 
   onContactDeleted(contact: ContactInterface) {
     this.contactService.deleteContact(contact);
-    const allContacts = this.contactService.getAllContacts(); // flaches Array
+    const allContacts = this.contactService.contactList; // flaches Array
     const index = allContacts.findIndex((c) => c.id === contact.id);
     const nextContact = allContacts[index] || allContacts[index - 1] || null;
     this.selectedContact.set(nextContact);
