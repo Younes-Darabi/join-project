@@ -17,22 +17,24 @@ export interface FullName {
 
 export class AuthService implements OnDestroy {
   firestore: Firestore = inject(Firestore);
-  isAuthenticated : boolean = false;
+  isAuthenticated: boolean = false;
   currentUser: User | null = null;
   unsubContacts: any;
+  isSigningUp = false;
+  authReady = false;
+
 
   constructor(private auth: Auth) {
     this.auth.onAuthStateChanged((user) => {
+      if (this.isSigningUp) return;
+
       this.currentUser = user;
       this.isAuthenticated = !!user;
+      this.authReady = true;
     });
   }
 
   isLoggedIn(): boolean { return this.isAuthenticated; }
-
-
-
-
 
   logout() {
     signOut(this.auth).then(() => {
@@ -83,28 +85,33 @@ export class AuthService implements OnDestroy {
     }
   }
 
-  async signUp(userData: SignUpInterface): Promise<User | any> {
+  async signUp(userData: SignUpInterface): Promise<User> {
     try {
+      this.isSigningUp = true;
+
       const userCredential = await createUserWithEmailAndPassword(
         this.auth,
         userData.email,
         userData.password
       );
+
       const user = userCredential.user;
-      if (user && user.uid) {
-        await setDoc(doc(this.firestore, 'users', user.uid), {
-          firstname: userData.firstname,
-          lastname: userData.lastname,
-          email: userData.email,
-          createdAt: new Date()
-        });
-      }
+
+      await setDoc(doc(this.firestore, 'users', user.uid), {
+        firstname: userData.firstname,
+        lastname: userData.lastname,
+        email: userData.email,
+        createdAt: new Date()
+      });
+
+      await signOut(this.auth);
 
       return user;
-    } catch (error) {
-      throw error;
+    } finally {
+      this.isSigningUp = false;
     }
   }
+
 
   ngOnDestroy(): void {
     if (this.unsubContacts) {

@@ -6,17 +6,28 @@ import { AuthService } from '../../services/auth/auth-service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
-  canActivate(): boolean | UrlTree {
-    if (this.authService.isLoggedIn()) {
-      return true;
-    }
+  canActivate(): Promise<boolean | UrlTree> {
+    return new Promise(resolve => {
+      const waitForAuth = () => {
+        if (!this.authService.authReady) {
+          setTimeout(waitForAuth, 10);
+          return;
+        }
 
-    return this.router.createUrlTree(['/log-in']);
+        if (this.authService.isLoggedIn()) {
+          resolve(true);
+        } else {
+          resolve(this.router.createUrlTree(['/log-in']));
+        }
+      };
+
+      waitForAuth();
+    });
   }
+
 }
