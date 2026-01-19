@@ -5,7 +5,6 @@ import { ContactInterface } from '../../interfaces/contact/contact-list.interfac
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { ContactService } from '../../services/contact/contact-service';
-import { ContactService } from '../../services/contact/contact-service';
 
 @Component({
   selector: 'app-contact',
@@ -16,7 +15,7 @@ import { ContactService } from '../../services/contact/contact-service';
 })
 export class Contact {
   @ViewChild(Details) Details!: Details;
-
+  allContacts: ContactInterface[];
   // Responsive Signal
   isMobile = signal(window.innerWidth <= 800);
 
@@ -28,9 +27,10 @@ export class Contact {
     window.addEventListener('resize', () => {
       this.isMobile.set(window.innerWidth <= 800);
     });
-    this.allContacts = contactService.getAllContacts();
+    this.allContacts = contactService.contactList;
   }
 
+  
   showDetail(contact: ContactInterface) {
     this.selectedContact.set(contact);
     this.selectedContactOpen.set(true);
