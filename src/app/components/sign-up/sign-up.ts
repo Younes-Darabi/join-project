@@ -28,9 +28,10 @@ export class SignUp {
   constructor(private router: Router) { }
 
   async onSubmit(signupForm: NgForm) {
-    this.checkMatchPassword = this.checkMatchPasswords();
     this.error = '';
-
+    this.checkMatchPassword = this.checkMatchPasswords();
+    if (this.checkMatchPassword) this.error = "Your passwords don't match. Please try again.";
+    if (this.user.password.length < 6) this.error = 'The password must be at least 6 characters long.';
     if (!signupForm.invalid && !this.checkMatchPassword && this.privacy) {
       try {
         await this.authService.signUp(this.user);
@@ -48,7 +49,7 @@ export class SignUp {
   }
 
   checkMatchPasswords() {
-    return (this.user.password.length < 6 || this.user.password !== this.confirmPassword);
+    return (this.user.password !== this.confirmPassword);
   }
 
   getErrorMessage(errorCode: string): string {

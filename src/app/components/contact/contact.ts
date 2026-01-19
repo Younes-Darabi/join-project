@@ -5,13 +5,14 @@ import { ContactInterface } from '../../interfaces/contact/contact-list.interfac
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { ContactService } from '../../services/contact/contact-service';
+import { ContactService } from '../../services/contact/contact-service';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
   imports: [ContactList, Details, FormsModule, NgClass],
   templateUrl: './contact.html',
-  styleUrls: ['./contact.scss']
+  styleUrls: ['./contact.scss'],
 })
 export class Contact {
   @ViewChild(Details) Details!: Details;
@@ -27,6 +28,7 @@ export class Contact {
     window.addEventListener('resize', () => {
       this.isMobile.set(window.innerWidth <= 800);
     });
+    this.allContacts = contactService.getAllContacts();
   }
 
   showDetail(contact: ContactInterface) {

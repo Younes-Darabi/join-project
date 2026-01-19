@@ -25,18 +25,22 @@ export class ContactService implements OnDestroy {
     '#FF745E',
     '#FFA35E',
     '#FFC701',
-    '#0038FF'
+    '#0038FF',
   ];
 
   constructor() {
-    this.unsubContacts = onSnapshot(collection(this.firestore, 'users'), (list) => {
+    this.unsubContacts = onSnapshot(
+      collection(this.firestore, 'users'),
+      (list) => {
         this.contactList = [];
-        list.forEach(element => {
+        list.forEach((element) => {
           this.contactList.push(this.setContactObject(element.data(), element.id));
         });
       },
-      (error) => { console.error(error); }
-    );;
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   ngOnDestroy() {
@@ -51,7 +55,9 @@ export class ContactService implements OnDestroy {
       .catch((err) => {
         console.error(err);
       })
-      .then((docRef) => { console.log('Contact successfully added', docRef?.id); })
+      .then((docRef) => {
+        console.log('Contact successfully added', docRef?.id);
+      });
   }
 
   async updateContact(contact: ContactInterface) {
@@ -59,14 +65,18 @@ export class ContactService implements OnDestroy {
       const docRef = this.getSingleDocRef(this.getCollectionId(contact), contact.id);
       const cleanContact = this.getCleanContactJson(contact);
       await updateDoc(docRef, cleanContact)
-        .then(() => { console.log('Contact successfully updated'); })
-        .catch((err) => { console.error(err); });
+        .then(() => {
+          console.log('Contact successfully updated');
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
   }
 
   async deleteContact(user: ContactInterface) {
     if (user.id) {
-      await deleteDoc(doc(this.firestore, "users", user.id));
+      await deleteDoc(doc(this.firestore, 'users', user.id));
     }
   }
 
@@ -76,8 +86,8 @@ export class ContactService implements OnDestroy {
       firstname: contact.firstname,
       lastname: contact.lastname,
       phone: contact.phone,
-      type: contact.type
-    }
+      type: contact.type,
+    };
   }
 
   getCollectionId(contact: ContactInterface): string {
@@ -106,12 +116,12 @@ export class ContactService implements OnDestroy {
       phone: obj.phone || '',
       type: obj.type || 'contact',
       initials: initials,
-      color: color
+      color: color,
     };
   }
 
   getColorForContact(contact: ContactInterface | any): string {
-    const key = contact.id
+    const key = contact.id;
     let hash = 0;
     for (let i = 0; i < key.length; i++) {
       hash = key.charCodeAt(i) + ((hash << 5) - hash);
