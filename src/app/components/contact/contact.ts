@@ -26,6 +26,7 @@ export class Contact {
     window.addEventListener('resize', () => {
       this.isMobile.set(window.innerWidth <= 800);
     });
+    this.allContacts = contactService.contactList;
   }
 
   showDetail(contact: ContactInterface) {
@@ -38,5 +39,17 @@ export class Contact {
 
   closeView() {
     this.selectedContactOpen.set(false);
+  }
+
+  onContactDeleted(contact: ContactInterface) {
+    this.contactService.deleteContact(contact);
+    const allContacts = this.contactService.contactList; // flaches Array
+    const index = allContacts.findIndex((c) => c.id === contact.id);
+    const nextContact = allContacts[index] || allContacts[index - 1] || null;
+    this.selectedContact.set(nextContact);
+    this.selectedContactOpen.set(!!nextContact);
+    if (!nextContact && this.Details) {
+      this.Details.contact = null as any;
+    }
   }
 }
