@@ -22,7 +22,7 @@ export class SignUp {
   privacy: boolean = false;
   checkMatchPassword: boolean = false;
   confirmPassword: string = '';
-  // success: boolean = false;
+  success: boolean = false;
   error: string = '';
 
   constructor(private router: Router) { }
@@ -35,11 +35,11 @@ export class SignUp {
     if (!signupForm.invalid && !this.checkMatchPassword && this.privacy) {
       try {
         await this.authService.signUp(this.user);
-        // this.success = true;
-        this.router.navigate(['/summary']);
-        // setTimeout(() => {
-        //   this.success = false;
-        // }, 3000);
+        this.success = true;
+        setTimeout(() => {
+          this.success = false;
+          this.router.navigate(['/log-in']);
+        }, 3000);
 
       } catch (error: any) {
         const errorCode = error.code;
