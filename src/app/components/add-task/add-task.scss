@@ -612,6 +612,12 @@ label {
     }
 }
 
+@media (max-width: 1000px) {
+    .add_task_buttons{
+        bottom: 90px;
+    }
+}
+
 @media (max-width: 900px) {
     .add_task_wrapper {
         h1 {
