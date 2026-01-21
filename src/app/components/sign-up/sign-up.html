@@ -22,8 +22,8 @@
     <label>
         <input ngModel #email="ngModel" [(ngModel)]="user.email"
             [ngStyle]="{'border-color' :email.invalid && (email.touched || signupForm.submitted) ? 'red' : ''}"
-            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-            required name="email" type="text" alt="Email" placeholder="Email">
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required name="email" type="text" alt="Email"
+            placeholder="Email">
         <img src="./assets/icons/contact/mail.svg" alt="Email">
     </label>
     <label>
@@ -50,7 +50,7 @@
         <a routerLink="/privacy-policy">Privacy policy</a>
     </div>
     <div class="div_signup">
-        <button routerLink="/log-in" class="btn_signup">Sign up</button>
+        <button class="btn_signup">Sign up</button>
     </div>
 </form>
 
