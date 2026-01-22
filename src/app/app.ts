@@ -5,6 +5,13 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from './services/auth/auth-service';
 import { Navbar } from "./shared/navbar/navbar";
 
+/**
+ * Root application component
+ * Main entry point for the Angular application
+ * Manages authentication state and layout structure
+ * 
+ * @author Kevin Hase
+ */
 @Component({
   selector: 'app-root',
   imports: [CommonModule, RouterOutlet, Header, Navbar],
@@ -12,5 +19,6 @@ import { Navbar } from "./shared/navbar/navbar";
   styleUrl: './app.scss',
 })
 export class App {
+  /** Authentication service for user management */
   authService = inject(AuthService);
 }

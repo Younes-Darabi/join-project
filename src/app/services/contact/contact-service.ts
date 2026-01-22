@@ -2,13 +2,27 @@ import { inject, Injectable, OnDestroy } from '@angular/core';
 import { collection, deleteDoc, doc, Firestore, getDocs, onSnapshot, addDoc, updateDoc} from '@angular/fire/firestore';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
 
+/**
+ * Service for managing contacts in Firebase
+ * Handles CRUD operations, contact grouping, and color assignment
+ * Maintains real-time synchronization with Firestore
+ * 
+ * @author Kevin Hase
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class ContactService implements OnDestroy {
+  /** Array of all contacts */
   contactList: ContactInterface[] = [];
+  
+  /** Firestore database instance */
   firestore: Firestore = inject(Firestore);
+  
+  /** Unsubscribe function for Firestore listener */
   unsubContacts;
+  
+  /** Predefined color palette for contact avatars */
   readonly colors = [
     '#FF7A00',
     '#FF5EB3',
@@ -28,6 +42,10 @@ export class ContactService implements OnDestroy {
     '#0038FF',
   ];
 
+  /**
+   * Creates an instance of ContactService
+   * Sets up real-time Firestore listener for contacts
+   */
   constructor() {
     this.unsubContacts = onSnapshot(
       collection(this.firestore, 'users'),
@@ -43,12 +61,20 @@ export class ContactService implements OnDestroy {
     );
   }
 
+  /**
+   * Cleanup on service destruction
+   * Unsubscribes from Firestore listener
+   */
   ngOnDestroy() {
     if (this.unsubContacts) {
       this.unsubContacts();
     }
   }
 
+  /**
+   * Adds a new contact to Firestore
+   * @param user - Contact object to add
+   */
   async addContact(user: ContactInterface) {
     const cleanContact = this.getCleanContactJson(user);
     await addDoc(this.getContactsRef(), cleanContact)
@@ -60,6 +86,10 @@ export class ContactService implements OnDestroy {
       });
   }
 
+  /**
+   * Updates an existing contact in Firestore
+   * @param contact - Contact object with updated data
+   */
   async updateContact(contact: ContactInterface) {
     if (contact.id) {
       const docRef = this.getSingleDocRef(this.getCollectionId(contact), contact.id);
@@ -74,12 +104,22 @@ export class ContactService implements OnDestroy {
     }
   }
 
+  /**
+   * Deletes a contact from Firestore
+   * @param user - Contact object to delete
+   */
   async deleteContact(user: ContactInterface) {
     if (user.id) {
       await deleteDoc(doc(this.firestore, 'users', user.id));
     }
   }
 
+  /**
+   * Creates a clean JSON object from contact data
+   * Removes additional properties like id, initials, and color
+   * @param contact - Contact object to clean
+   * @returns Clean contact object for Firestore
+   */
   getCleanContactJson(contact: ContactInterface): {} {
     return {
       email: contact.email,
@@ -90,18 +130,40 @@ export class ContactService implements OnDestroy {
     };
   }
 
+  /**
+   * Gets the Firestore collection ID for a contact
+   * @param contact - Contact object
+   * @returns Collection ID string
+   */
   getCollectionId(contact: ContactInterface): string {
     return 'users';
   }
 
+  /**
+   * Gets reference to the contacts collection in Firestore
+   * @returns Firestore collection reference
+   */
   getContactsRef() {
     return collection(this.firestore, 'users');
   }
 
+  /**
+   * Gets reference to a single document in Firestore
+   * @param colId - Collection ID
+   * @param docId - Document ID
+   * @returns Firestore document reference
+   */
   getSingleDocRef(colId: string, docId: string) {
     return doc(collection(this.firestore, colId), docId);
   }
 
+  /**
+   * Converts Firestore data object to ContactInterface
+   * Generates initials and assigns color
+   * @param obj - Raw Firestore data object
+   * @param id - Document ID
+   * @returns Contact object with all properties
+   */
   setContactObject(obj: any, id: string): ContactInterface {
     let initials = '';
     if (obj.firstname && obj.lastname) {
@@ -120,6 +182,12 @@ export class ContactService implements OnDestroy {
     };
   }
 
+  /**
+   * Generates a consistent color for a contact based on ID
+   * Uses hash function to select from predefined color palette
+   * @param contact - Contact object or data with ID
+   * @returns Hex color code
+   */
   getColorForContact(contact: ContactInterface | any): string {
     const key = contact.id;
     let hash = 0;
@@ -130,12 +198,22 @@ export class ContactService implements OnDestroy {
     return this.colors[index];
   }
 
+  /**
+   * Generates initials from first and last name
+   * @param firstName - First name of the contact
+   * @param lastName - Last name of the contact
+   * @returns Two-letter initials string
+   */
   getInitials(firstName: string, lastName: string): string {
     let firstInitial = firstName?.charAt(0).toUpperCase() || '';
     let lastInitial = lastName?.charAt(0).toUpperCase() || '';
     return `${firstInitial}${lastInitial}`;
   }
 
+  /**
+   * Groups contacts alphabetically by first letter of firstname
+   * @returns Record of letter keys with sorted contact arrays
+   */
   getGroupedContacts(): Record<string, ContactInterface[]> {
     const grouped = new Map<string, ContactInterface[]>();
     for (const contact of this.contactList) {
@@ -151,14 +229,29 @@ export class ContactService implements OnDestroy {
     return this.sortKeys(grouped);
   }
 
+  /**
+   * Gets the grouping key (first letter) for a contact
+   * @param contact - Contact object
+   * @returns First letter of firstname in uppercase
+   */
   getGroupKey(contact: ContactInterface): string {
     return contact.firstname?.charAt(0).toUpperCase() || '';
   }
 
+  /**
+   * Sorts contacts alphabetically by firstname
+   * @param list - Array of contacts to sort
+   * @returns Sorted contact array
+   */
   sortContacts(list: ContactInterface[]): ContactInterface[] {
     return list.sort((a, b) => a.firstname.localeCompare(b.firstname));
   }
 
+  /**
+   * Sorts map keys alphabetically and converts to record
+   * @param map - Map with string keys and arrays
+   * @returns Sorted record object
+   */
   sortKeys<T>(map: Map<string, T[]>): Record<string, T[]> {
     return Array.from(map.entries())
       .sort(([a], [b]) => a.localeCompare(b))
@@ -168,6 +261,10 @@ export class ContactService implements OnDestroy {
       }, {} as Record<string, T[]>);
   }
 
+  /**
+   * Loads all contacts from Firestore
+   * Updates contactList with fetched data
+   */
   async loadContactsFromFirebase() {
     let collectionRef = this.getContactsRef();
     let snapshot = await getDocs(collectionRef);
