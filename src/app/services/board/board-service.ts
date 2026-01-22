@@ -126,7 +126,7 @@ export class BoardService implements OnDestroy {
     let cleantask = this.getCleanTaskJson(task);
     try {
       let docRef = await addDoc(this.getTaskRef(), cleantask);
-      console.log('Task successfully added', docRef?.id);
+      // console.log('Task successfully added', docRef?.id);
     } catch (err) {
       console.error(err);
     }
@@ -216,7 +216,7 @@ export class BoardService implements OnDestroy {
       const cleanTask = this.getCleanTaskJson(task);
       await updateDoc(docRef, cleanTask)
         .then(() => {
-          console.log('Task successfully updated');
+          // console.log('Task successfully updated');
         })
         .catch((err) => {
           console.error(err);

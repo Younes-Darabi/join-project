@@ -1,9 +1,7 @@
 <main aria-label="Privacy Policy">
-@if(!authService.isAuthenticated){
+	@if(!authService.isAuthenticated){
 	<a routerLink="/log-in" class="close_btn_loggedout"><img src="./assets/icons/contact/arrow.svg" alt=""></a>
-}
-
-
+	}
 	<header>
 		<h1>Privacy Policy</h1>
 		<img routerLink="/summary" src="./assets/icons/contact/arrow.svg" alt="">
@@ -13,7 +11,8 @@
 	<article>
 		<section aria-label="Scope">
 			<h2>Scope</h2>
-			<p>This privacy policy explains which personal data we collect, how we use it, and what rights users have.</p>
+			<p>This privacy policy explains which personal data we collect, how we use it, and what rights users have.
+			</p>
 		</section>
 
 		<section aria-label="What data we process">
@@ -23,7 +22,8 @@
 				<dd>Name, email, phone number — if provided voluntarily by the user.</dd>
 
 				<dt>Usage data</dt>
-				<dd>Technical information such as IP address, device type, and access times for troubleshooting and improving the service.</dd>
+				<dd>Technical information such as IP address, device type, and access times for troubleshooting and
+					improving the service.</dd>
 			</dl>
 		</section>
 
@@ -38,22 +38,26 @@
 
 		<section aria-label="Legal basis">
 			<h2>Legal basis</h2>
-			<p>Processing is carried out based on applicable legal grounds (e.g., consent, contract performance, legitimate interest).</p>
+			<p>Processing is carried out based on applicable legal grounds (e.g., consent, contract performance,
+				legitimate interest).</p>
 		</section>
 
 		<section aria-label="Retention period">
 			<h2>Retention period</h2>
-			<p>Data is retained only as long as necessary for the purposes or as required by statutory retention periods.</p>
+			<p>Data is retained only as long as necessary for the purposes or as required by statutory retention
+				periods.</p>
 		</section>
 
 		<section aria-label="Disclosure to third parties">
 			<h2>Disclosure to third parties</h2>
-			<p>Disclosure to third parties occurs only when necessary for contract fulfillment, to comply with legal obligations, or with prior consent.</p>
+			<p>Disclosure to third parties occurs only when necessary for contract fulfillment, to comply with legal
+				obligations, or with prior consent.</p>
 		</section>
 
 		<section aria-label="Cookies and similar technologies">
 			<h2>Cookies and similar technologies</h2>
-			<p>We use cookies to ensure functionality and to improve the user experience. Users can adjust cookie settings in their browser.</p>
+			<p>We use cookies to ensure functionality and to improve the user experience. Users can adjust cookie
+				settings in their browser.</p>
 		</section>
 
 		<section aria-label="Security">
@@ -75,50 +79,64 @@
 
 		<section aria-label="Firebase and third party services">
 			<h2>Use of Firebase and third-party services</h2>
-			<p>We use Google Firebase services to provide core app functionality. This may include Authentication, Cloud Firestore, Cloud Storage, Analytics and Crash Reporting. These services are operated by Google LLC as a data processor.</p>
+			<p>We use Google Firebase services to provide core app functionality. This may include Authentication, Cloud
+				Firestore, Cloud Storage, Analytics and Crash Reporting. These services are operated by Google LLC as a
+				data processor.</p>
 		</section>
 
 		<section aria-label="Authentication">
 			<h2>Authentication</h2>
-			<p>If you sign up or log in via Firebase Authentication we store identifiers (e.g., UID), email and any profile data you provide to authenticate and manage your account.</p>
-			<p>Purpose: account management and secure access. Legal basis: contract performance / user consent where applicable.</p>
+			<p>If you sign up or log in via Firebase Authentication we store identifiers (e.g., UID), email and any
+				profile data you provide to authenticate and manage your account.</p>
+			<p>Purpose: account management and secure access. Legal basis: contract performance / user consent where
+				applicable.</p>
 		</section>
 
 		<section aria-label="Analytics and crash reporting">
 			<h2>Analytics and crash reporting</h2>
-			<p>We use Firebase Analytics and Crashlytics to improve the app. Collected data may include usage events, device information and crash traces (no persistent personal content unless you provide it).</p>
+			<p>We use Firebase Analytics and Crashlytics to improve the app. Collected data may include usage events,
+				device information and crash traces (no persistent personal content unless you provide it).</p>
 			<p>You can opt out of analytics by disabling analytics collection in your device or browser settings.</p>
 		</section>
 
 		<section aria-label="Firestore and storage">
 			<h2>Cloud Firestore / Cloud Storage</h2>
-			<p>User content and app data may be stored in Cloud Firestore or Cloud Storage. Access is restricted to authorized app services and administrators.</p>
+			<p>User content and app data may be stored in Cloud Firestore or Cloud Storage. Access is restricted to
+				authorized app services and administrators.</p>
 		</section>
 
 		<section aria-label="Data transfers and location">
 			<h2>Data transfers and location</h2>
-			<p>Firebase services may transfer and store data outside the EU/EEA (e.g., United States). We rely on Google's transfer mechanisms and safeguards. For details see Google's data processing terms and location information.</p>
+			<p>Firebase services may transfer and store data outside the EU/EEA (e.g., United States). We rely on
+				Google's transfer mechanisms and safeguards. For details see Google's data processing terms and location
+				information.</p>
 		</section>
 
 		<section aria-label="Third party processors">
 			<h2>Third-party processors</h2>
-			<p>Google is a main processor for Firebase services. We may also use other processors; contracts require appropriate technical and organizational measures.</p>
+			<p>Google is a main processor for Firebase services. We may also use other processors; contracts require
+				appropriate technical and organizational measures.</p>
 		</section>
 
 		<section aria-label="Retention and deletion">
 			<h2>Data retention and deletion</h2>
-			<p>Data stored in Firebase is kept only as long as necessary. To request deletion of your data, contact us; we will remove personal data from our Firebase projects subject to backup and propagation delays.</p>
+			<p>Data stored in Firebase is kept only as long as necessary. To request deletion of your data, contact us;
+				we will remove personal data from our Firebase projects subject to backup and propagation delays.</p>
 		</section>
 
 		<section aria-label="How to control data and opt out">
 			<h2>How to control data and opt out</h2>
-			<p>To manage or delete your data, contact us. For analytics opt-out and cookie controls, use your browser/device settings. See also Google's privacy controls for Firebase and Google accounts.</p>
-			<p>Useful links: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>, <a href="https://firebase.google.com/terms" target="_blank" rel="noopener">Firebase Terms</a>.</p>
+			<p>To manage or delete your data, contact us. For analytics opt-out and cookie controls, use your
+				browser/device settings. See also Google's privacy controls for Firebase and Google accounts.</p>
+			<p>Useful links: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy
+					Policy</a>, <a href="https://firebase.google.com/terms" target="_blank" rel="noopener">Firebase
+					Terms</a>.</p>
 		</section>
 
 		<section aria-label="Contact">
 			<h2>Contact</h2>
-			<p>For privacy questions please contact: <a href="mailto:hasekevin21@gmail.com">hasekevin21@gmail.com</a></p>
+			<p>For privacy questions please contact: <a href="mailto:hasekevin21@gmail.com">hasekevin21@gmail.com</a>
+			</p>
 		</section>
 
 		<footer>

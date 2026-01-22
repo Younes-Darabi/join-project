@@ -47,9 +47,7 @@ export class LogIn {
     this.error = '';
 
     if (this.login.email && this.login.password) {
-      try {
-        console.log('Hi');
-        
+      try {        
         await this.authService.signIn(this.login);
         this.router.navigate(['summary']);
       } catch (error: any) {
