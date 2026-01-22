@@ -6,6 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { ContactService } from '../../services/contact/contact-service';
 
+/**
+ * Main contact component managing contact list and details view
+ * Handles responsive behavior and contact selection
+ * Coordinates between contact list and detail components
+ *
+ * @author Kevin Hase
+ */
 @Component({
   selector: 'app-contact',
   standalone: true,
@@ -14,15 +21,26 @@ import { ContactService } from '../../services/contact/contact-service';
   styleUrls: ['./contact.scss'],
 })
 export class Contact {
+  /** Reference to Details child component */
   @ViewChild(Details) Details!: Details;
+
+  /** Array of all contacts */
   allContacts: ContactInterface[];
-  // Responsive Signal
+
+  /** Signal indicating if viewport is mobile size */
   isMobile = signal(window.innerWidth <= 800);
 
-  // Aktuell ausgewählter Kontakt
+  /** Signal holding currently selected contact */
   selectedContact = signal<ContactInterface | null>(null);
+
+  /** Signal indicating if contact details are open */
   selectedContactOpen = signal<boolean>(false);
 
+  /**
+   * Creates an instance of Contact
+   * Sets up resize listener for responsive behavior
+   * @param contactService - Service for contact operations
+   */
   constructor(private contactService: ContactService) {
     window.addEventListener('resize', () => {
       this.isMobile.set(window.innerWidth <= 800);
@@ -30,7 +48,11 @@ export class Contact {
     this.allContacts = contactService.contactList;
   }
 
-  
+  /**
+   * Shows contact details for selected contact
+   * Handles responsive view switching for mobile devices
+   * @param contact - Contact to display details for
+   */
   showDetail(contact: ContactInterface) {
     this.selectedContact.set(contact);
     this.selectedContactOpen.set(true);
@@ -39,10 +61,18 @@ export class Contact {
     }
   }
 
+  /**
+   * Closes the contact details view
+   */
   closeView() {
     this.selectedContactOpen.set(false);
   }
 
+  /**
+   * Handles contact deletion event
+   * Deletes contact and selects next available contact
+   * @param contact - Contact that was deleted
+   */
   onContactDeleted(contact: ContactInterface) {
     this.contactService.deleteContact(contact);
     const allContacts = this.contactService.contactList; // flaches Array

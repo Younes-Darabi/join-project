@@ -1,0 +1,39 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./src"],
+  "entryPointStrategy": "expand",
+  "out": "./docs",
+  "exclude": [
+    "**/*.spec.ts",
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/*.module.ts",
+    "**/.Github/**"
+  ],
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeExternals": true,
+  "includeVersion": true,
+  "readme": "./README.md",
+  "name": "Join Project Documentation",
+  "plugin": ["typedoc-plugin-markdown"],
+  "tsconfig": "./tsconfig.json",
+  "categorizeByGroup": true,
+  "defaultCategory": "Other",
+  "categoryOrder": [
+    "Components",
+    "Services",
+    "Models",
+    "Interfaces",
+    "Guards",
+    "Interceptors",
+    "*"
+  ],
+  "sort": ["source-order"],
+  "skipErrorChecking": false,
+  "validation": {
+    "notExported": true,
+    "invalidLink": true,
+    "notDocumented": false
+  }
+}

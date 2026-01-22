@@ -2,6 +2,12 @@ import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth-service';
 
+/**
+ * Component for displaying privacy policy information
+ * Shows data protection and privacy information for the application
+ * 
+ * @author Kevin Hase
+ */
 @Component({
   selector: 'app-privacy-policy',
   imports: [RouterLink],
@@ -9,5 +15,6 @@ import { AuthService } from '../../services/auth/auth-service';
   styleUrl: './privacy-policy.scss',
 })
 export class PrivacyPolicy {
-authService = inject(AuthService);
+  /** Authentication service for user state */
+  authService = inject(AuthService);
 }
