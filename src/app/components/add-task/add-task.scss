@@ -75,6 +75,13 @@ label {
     }
 }
 
+.add_task_buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px
+}
+
 .add_task_container {
     @include flexbox(row, stretch, flex-start, 48px);
     margin-top: 20px;
@@ -566,7 +573,9 @@ label {
 @media (max-width: 1400px) {
     .add_task_wrapper {
         padding: 80px 40px 20px;
+    }
 
+    .div_main {
         h1 {
             font-size: 56px;
         }
@@ -593,13 +602,6 @@ label {
         height: calc(100vh - 100px);
         overflow-y: scroll;
     }
-
-    .add_task_buttons {
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
-        z-index: 2000;
-    }
 }
 
 @media (max-width: 1024px) {
@@ -613,8 +615,13 @@ label {
 }
 
 @media (max-width: 1000px) {
-    .add_task_buttons{
-        bottom: 90px;
+
+    .add_task_wrapper {
+        padding: 80px 20px 20px 20px;
+    }
+
+    .div_main {
+        overflow-y: auto;
     }
 }
 
@@ -672,9 +679,9 @@ label {
         }
     }
 
-    .add_task_actions {
-        padding: 16px 30px;
-    }
+    // .add_task_actions {
+    //     padding: 16px 30px;
+    // }
 }
 
 @media (max-width: 600px) {
@@ -769,8 +776,6 @@ label {
 
 @media (max-width: 480px) {
     .add_task_wrapper {
-        padding: 90px 20px 30px 20px;
-
         h1 {
             font-size: 28px;
         }
@@ -852,7 +857,7 @@ label {
         right: 30px;
     }
 
-    .subtask_row  {
+    .subtask_row {
         right: 36px;
     }
 
@@ -864,7 +869,7 @@ label {
         padding: 12px 16px;
         margin-top: 0;
         margin-bottom: 10px;
-        
+
 
         div {
             gap: 8px;
@@ -876,15 +881,10 @@ label {
         padding: 10px 20px;
         font-size: 16px;
     }
-    .add_task_buttons{
-        bottom: 10px;
-    }
 }
 
 @media (max-width: 375px) {
     .add_task_wrapper {
-        padding: 80px 16px;
-
         h1 {
             font-size: 24px;
         }

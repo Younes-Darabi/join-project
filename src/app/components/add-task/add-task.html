@@ -1,7 +1,7 @@
 <div class="add_task_wrapper">
-  <h1>Add Task</h1>
-  <div>
-    
+  <div class="div_main">
+    <h1>Add Task</h1>
+
     @if (confirmationMessage) {
     <div class="add_task_confirmation_overlay">
       <div class="add_task_confirmation">
@@ -65,15 +65,15 @@
             @if (selected.length > 0) {
             <div class="assigned_selected_avatars">
               @for (contact of selected; track contact.id) {
-                @if (selected.indexOf(contact) < 4) {
-                <span class="assigned_dropdown_avatar assigned_selected_avatar" [style.background-color]="contact.color">
-                  {{ contact.initials }}
+              @if (selected.indexOf(contact) < 4) { <span class="assigned_dropdown_avatar assigned_selected_avatar"
+                [style.background-color]="contact.color">
+                {{ contact.initials }}
                 </span>
                 }
-              }
-              @if (selected.length > 4) {
-              <div class="more_count">+ {{ selected.length - 4 }}</div>
-              }
+                }
+                @if (selected.length > 4) {
+                <div class="more_count">+ {{ selected.length - 4 }}</div>
+                }
             </div>
             }
           </div>
@@ -162,11 +162,10 @@
     </div>
     <div class="add_task_actions">
       <p class="add_task_info"><span>*</span>This field is required.</p>
-      <div class="add_task_buttons">
-        <button class="add_task_btn_cancel" (click)="resetForm()">Clear</button>
-
-        <button class="add_task_btn_submit" (click)="saveTask(newTask)">Create Task</button>
-      </div>
     </div>
+  </div>
+  <div class="add_task_buttons">
+    <button class="add_task_btn_cancel" (click)="resetForm()">Clear</button>
+    <button class="add_task_btn_submit" (click)="saveTask(newTask)">Create Task</button>
   </div>
 </div>

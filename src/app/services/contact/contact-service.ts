@@ -56,7 +56,7 @@ export class ContactService implements OnDestroy {
         });
       },
       (error) => {
-        console.error(error);
+        // console.error(error);
       }
     );
   }
@@ -79,10 +79,10 @@ export class ContactService implements OnDestroy {
     const cleanContact = this.getCleanContactJson(user);
     await addDoc(this.getContactsRef(), cleanContact)
       .catch((err) => {
-        console.error(err);
+        // console.error(err);
       })
       .then((docRef) => {
-        console.log('Contact successfully added', docRef?.id);
+        // console.log('Contact successfully added', docRef?.id);
       });
   }
 
@@ -96,10 +96,10 @@ export class ContactService implements OnDestroy {
       const cleanContact = this.getCleanContactJson(contact);
       await updateDoc(docRef, cleanContact)
         .then(() => {
-          console.log('Contact successfully updated');
+          // console.log('Contact successfully updated');
         })
         .catch((err) => {
-          console.error(err);
+          // console.error(err);
         });
     }
   }

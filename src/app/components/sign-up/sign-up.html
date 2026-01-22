@@ -47,10 +47,10 @@
         <img [ngStyle]="{'outline': !privacy && signupForm.submitted ? '1px solid red' : 'none'}"
             [src]="privacy ? './assets/icons/board/checkbox-checked.svg':'./assets/icons/board/checkbox-unchecked.svg'">
         <p [ngStyle]="{'color': !privacy && signupForm.submitted ? 'red' : '#A8A8A8'}">I accept the</p>
-        <a routerLink="/privacy-policy">Privacy policy</a>
+        <a routerLink="/privacy-policy" target="_blank">Privacy policy</a>
     </div>
     <div class="div_signup">
-        <button routerLink="/log-in" class="btn_signup">Sign up</button>
+        <button class="btn_signup">Sign up</button>
     </div>
 </form>
 
