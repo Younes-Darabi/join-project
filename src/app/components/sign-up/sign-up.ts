@@ -15,8 +15,9 @@ import { AuthService } from '../../services/auth/auth-service';
 @Component({
   selector: 'app-sign-up',
   imports: [FormsModule, CommonModule, RouterLink],
+  standalone: true,
   templateUrl: './sign-up.html',
-  styleUrl: './sign-up.scss',
+  styleUrls: ['./sign-up.scss'],
 })
 export class SignUp {
   /** Authentication service for user registration */
@@ -60,17 +61,24 @@ export class SignUp {
   async onSubmit(signupForm: NgForm) {
     this.error = '';
     this.checkMatchPassword = this.checkMatchPasswords();
-    if (this.checkMatchPassword) this.error = "Your passwords don't match. Please try again.";
-    if (this.user.password.length < 6) this.error = 'The password must be at least 6 characters long.';
+
+    if (this.checkMatchPassword) {
+      this.error = "Your passwords don't match. Please try again.";
+      return;
+    }
+
+    if (this.user.password.length < 6) {
+      this.error = 'The password must be at least 6 characters long.';
+      return;
+    }
+
     if (!signupForm.invalid && !this.checkMatchPassword && this.privacy) {
       try {
         await this.authService.signUp(this.user);
         this.success = true;
-        setTimeout(() => {
-          this.success = false;
-          this.router.navigate(['/log-in']);
-        }, 3000);
-
+        // optional: kurze Nutzerinfo anzeigen, dann weiterleiten
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        await this.router.navigate(['/log-in']);
       } catch (error: any) {
         const errorCode = error.code;
         this.error = this.getErrorMessage(errorCode);
