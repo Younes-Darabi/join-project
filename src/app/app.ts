@@ -21,4 +21,18 @@ import { Navbar } from "./shared/navbar/navbar";
 export class App {
   /** Authentication service for user management */
   authService = inject(AuthService);
+  /** Router to detect current URL */
+  router = inject(Router);
+
+  /** Returns true when current route is log-in or sign-up */
+  isOnAuthPages(): boolean {
+    const url = this.router.url.split('?')[0] || '';
+    return url === '/log-in' || url === '/sign-up' ||url === '/';
+  }
+
+  /** Returns true when current route is privacy-policy or legal-notice */
+  isPrivacyOrLegal(): boolean {
+    const url = this.router.url.split('?')[0] || '';
+    return url === '/privacy-policy' || url === '/legal-notice';
+  }
 }

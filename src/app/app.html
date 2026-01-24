@@ -1,9 +1,9 @@
-@if(authService.isAuthenticated){
-<app-navbar></app-navbar>
+@if(!authService.isAuthenticated && isOnAuthPages()){
+    <router-outlet></router-outlet>
+} @else {
+    <app-navbar [showOnlyLogin]="!authService.isAuthenticated"></app-navbar>
     <div>
         <app-header></app-header>
         <router-outlet></router-outlet>
     </div>
-}@else{
-<router-outlet></router-outlet>
 }
