@@ -1,22 +1,29 @@
 <img src="./assets/img/logo1.svg">
 <nav>
     <ul>
-        <li routerLink="/summary" routerLinkActive="active-link">
-            <img src="./assets/icons/navbar/summary.svg">
-            <p>Summary</p>
-        </li>
-        <li routerLink="/add-task" routerLinkActive="active-link">
-            <img src="./assets/icons/navbar/add-task.svg">
-            <p>Add Task</p>
-        </li>
-        <li routerLink="/board" routerLinkActive="active-link">
-            <img src="./assets/icons/navbar/board.svg">
-            <p>Board</p>
-        </li>
-        <li routerLink="/contact" routerLinkActive="active-link">
-            <img src="./assets/icons/navbar/contacts.svg">
-            <p>Contacts</p>
-        </li>
+        @if(showOnlyLogin){
+            <li routerLink="/log-in" routerLinkActive="active-link">
+                <img src="./assets/icons/navbar/login.svg">
+                <p>Log In</p>
+            </li>
+        } @else {
+            <li routerLink="/summary" routerLinkActive="active-link">
+                <img src="./assets/icons/navbar/summary.svg">
+                <p>Summary</p>
+            </li>
+            <li routerLink="/add-task" routerLinkActive="active-link">
+                <img src="./assets/icons/navbar/add-task.svg">
+                <p>Add Task</p>
+            </li>
+            <li routerLink="/board" routerLinkActive="active-link">
+                <img src="./assets/icons/navbar/board.svg">
+                <p>Board</p>
+            </li>
+            <li routerLink="/contact" routerLinkActive="active-link">
+                <img src="./assets/icons/navbar/contacts.svg">
+                <p>Contacts</p>
+            </li>
+        }
     </ul>
 </nav>
 <div>
