@@ -5,6 +5,7 @@ import { doc, Firestore, getDoc, setDoc } from "@angular/fire/firestore";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { LogInInterface } from "../../interfaces/log-in/log-in.interface";
 import { signOut } from 'firebase/auth';
+import { ContactInterface } from "../../interfaces/contact/contact-list.interface";
 
 /**
  * Interface representing a user's full name
@@ -14,7 +15,7 @@ import { signOut } from 'firebase/auth';
 export interface FullName {
   /** First name of the user */
   firstName: string;
-  
+
   /** Last name of the user */
   lastName: string;
 }
@@ -33,19 +34,19 @@ export interface FullName {
 export class AuthService implements OnDestroy {
   /** Firestore database instance */
   firestore: Firestore = inject(Firestore);
-  
+
   /** Flag indicating if user is authenticated */
   isAuthenticated: boolean = false;
-  
+
   /** Currently logged in user object */
   currentUser: User | null = null;
-  
+
   /** Unsubscribe function for contacts listener */
   unsubContacts: any;
-  
+
   /** Flag indicating if sign-up process is in progress */
   isSigningUp = false;
-  
+
   /** Flag indicating if authentication state is ready */
   authReady = false;
 
@@ -63,6 +64,24 @@ export class AuthService implements OnDestroy {
       this.authReady = true;
     });
   }
+
+
+
+
+  async DeleteAccount(DeleteUser : ContactInterface) {
+    try {
+      const user = this.auth.currentUser;
+      if (user && user.uid === DeleteUser.id) {
+        await user.delete();
+        // console.log('Account deleted successfully');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
+
 
   /**
    * Checks if user is currently logged in
