@@ -1,6 +1,7 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { collection, deleteDoc, doc, Firestore, getDocs, onSnapshot, addDoc, updateDoc} from '@angular/fire/firestore';
 import { ContactInterface } from '../../interfaces/contact/contact-list.interface';
+import { AuthService } from '../auth/auth-service';
 
 /**
  * Service for managing contacts in Firebase
@@ -18,6 +19,9 @@ export class ContactService implements OnDestroy {
   
   /** Firestore database instance */
   firestore: Firestore = inject(Firestore);
+
+  authService = inject(AuthService);
+  
   
   /** Unsubscribe function for Firestore listener */
   unsubContacts;
@@ -111,6 +115,7 @@ export class ContactService implements OnDestroy {
   async deleteContact(user: ContactInterface) {
     if (user.id) {
       await deleteDoc(doc(this.firestore, 'users', user.id));
+      await this.authService.DeleteAccount(user);
     }
   }
 
