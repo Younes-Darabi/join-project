@@ -21,6 +21,8 @@ export class Edit {
   /** Contact service for Firebase operations */
   firebaseService = inject(ContactService);
 
+  @Output() detailClicked = new EventEmitter<ContactInterface>();
+
   /** Contact object to edit from parent component */
   @Input() user!: ContactInterface;
 
@@ -58,6 +60,7 @@ export class Edit {
    */
   editContact() {
     this.firebaseService.updateContact(this.editUser);
+    this.detailClicked.emit(this.editUser);
     this.close();
   }
 
