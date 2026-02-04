@@ -47,7 +47,7 @@ export class Add {
     this.firebaseService.contactList.push(JSON.parse(JSON.stringify(this.user)));
 
     this.success = true;
-    this.contactCreated.emit(this.user);
+    // this.contactCreated.emit(this.user);
     setTimeout(() => {
       this.close();
       this.success = false;
