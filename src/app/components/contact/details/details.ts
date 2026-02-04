@@ -69,7 +69,7 @@ export class Details {
    * Creates an instance of Details
    * @param elementRef - Reference to component element for click detection
    */
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef) { }
 
   /**
    * Toggles menu visibility state
@@ -145,5 +145,9 @@ export class Details {
 
     // Edit schließen
     this.handleClose();
+  }
+
+  updateContact(contact: ContactInterface) {
+    this.contact = contact;
   }
 }

@@ -44,6 +44,7 @@
 <a class="phone" href="tel:{{ contact.phone }}">{{ contact.phone }}</a>
 @if (isClicked && contact) {
 <app-edit
+  (detailClicked)="updateContact($event)"
   [user]="contact"
   (closeEditContact)="handleClose()"
   (contactDeleted)="deleteContactFromParent($event)"
