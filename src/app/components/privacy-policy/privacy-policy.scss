@@ -1,5 +1,6 @@
 :host{
     width: 100%;
+    overflow-y: auto;
 }
 
 main {
@@ -9,7 +10,6 @@ main {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     color: #000000;
-    overflow-y: scroll;
 
     .close_btn_loggedout {
         position: absolute;
